@@ -2,6 +2,9 @@
 
 Graph memory for Product Owner behavior. Read before work, follow after work.
 
+CLI (portabel — dijalankan dari root repo):
+ATLAS="$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs"   # atau: npm run atlas -- <cmd>
+
 ## Skill — load otomatis
 Kalau skill "atlas-owner" tersedia, load dulu (skill({ name: "atlas-owner" }))
 sebelum pakai atlas — itu berisi aturan lengkap PO behavior + protocol.
@@ -9,20 +12,20 @@ sebelum pakai atlas — itu berisi aturan lengkap PO behavior + protocol.
 ## Pertama kali di project — scan dulu
 Kalau atlas/ baru dibuat (atau query kosong), jalankan scan sekali buat peta
 struktur repo, baru kerja:
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs scan [--depth 2] [--symbols]
+node "$ATLAS" scan [--depth 2] [--symbols]
 
 ## Retrieval — pakai MCP tools kalau ada (atlas_query/atlas_get/...), selain itu CLI:
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs query "keywords" [--tags a,b] [--limit N] [--compact] [--all] [--since N] [--feature F] [--features]
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs recent [--limit 10]    # node terbaru
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs get ID
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs context <filepath>     # infer feature from file, list nodes
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs feature <nama> --paths a,b,c   # map path-prefix -> feature
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs cluster                # group active nodes by topic
-# /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs diisi path absolut ke atlas.mjs oleh installer — jangan diganti manual.
+node "$ATLAS" query "keywords" [--tags a,b] [--limit N] [--compact] [--all] [--since N] [--feature F] [--features]
+node "$ATLAS" recent [--limit 10]    # node terbaru
+node "$ATLAS" get ID
+node "$ATLAS" context <filepath>     # infer feature from file, list nodes
+node "$ATLAS" feature <nama> --paths a,b,c   # map path-prefix -> feature
+node "$ATLAS" cluster                # group active nodes by topic
+# ATLAS menunjuk symlink yang dibuat `npm run setup` (lihat scripts/setup.sh).
 
 ## Record — tiap kerja signifikan, langsung di command yang sama.
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs record --id TASK-003 --type task --status done --tags a,b --summary "max 140 char" --conn "BUG-001:fixes,DEC-002:led_to" [--loc file:line] [--commit hash]
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs record --id REQ-001 --type requirement --status active --tags core --summary "..." --conn "FEAT-001:relates" --file nodes/REQ-001.md
+node "$ATLAS" record --id TASK-003 --type task --status done --tags a,b --summary "max 140 char" --conn "BUG-001:fixes,DEC-002:led_to" [--loc file:line] [--commit hash]
+node "$ATLAS" record --id REQ-001 --type requirement --status active --tags core --summary "..." --conn "FEAT-001:relates" --file nodes/REQ-001.md
 
 ## Auto-record minimal — WAJIB setelah kerja signifikan
 Selesai implement/analisa/fix? Record MINIMAL 1 node di command yang sama.
@@ -34,15 +37,15 @@ Ragu antara 2 tipe -> tanya user, jangan nebak.
 # jadi tipe/summary yang tepat lewat update.
 
 ## Bisnis — Atlas paham produknya juga. Track perubahan bisnis.
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs record --id BUS-001 --type business --status active --tags biz,model --summary "keadaan bisnis sekarang" --conn "DEC-002:relates"
+node "$ATLAS" record --id BUS-001 --type business --status active --tags biz,model --summary "keadaan bisnis sekarang" --conn "DEC-002:relates"
 # bisnis berubah? archive yang lama, record yang baru (chain led_to = timeline)
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs update BUS-001 --status archived
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs record --id BUS-002 --type business --status active --tags biz,model --summary "keadaan baru" --conn "BUS-001:led_to"
+node "$ATLAS" update BUS-001 --status archived
+node "$ATLAS" record --id BUS-002 --type business --status active --tags biz,model --summary "keadaan baru" --conn "BUS-001:led_to"
 
 ## Maintenance — bulk, prune, schema
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs update|delete --filter "type=task&status=done&tags=auto" [--dry-run]  # bulk by filter
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs prune [--days N] [--dry-run] [--force]    # archive old/done/auto noise
-node /Users/vanviakingali/.local/share/fnm/node-versions/v24.16.0/installation/lib/node_modules/atlas-owner/skill/scripts/atlas.mjs migrate | edit ID | export --stats | verify   # schema / edit / dump / integrity
+node "$ATLAS" update|delete --filter "type=task&status=done&tags=auto" [--dry-run]  # bulk by filter
+node "$ATLAS" prune [--days N] [--dry-run] [--force]    # archive old/done/auto noise
+node "$ATLAS" migrate | edit ID | export --stats | verify   # schema / edit / dump / integrity
 
 ## Limits (dienforce oleh check)
 - summary <= 140 chars (auto-truncate ke nodes/{ID}.md kalau lebih panjang — gak ada yang hilang)

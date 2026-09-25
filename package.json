@@ -12,7 +12,11 @@
     "preview": "vite preview",
     "scan": "node scripts/surface-scan.mjs",
     "scan:test": "node scripts/surface-scan.test.mjs",
-    "browser:gate": "node scripts/browser-gate.mjs"
+    "browser:gate": "node scripts/browser-gate.mjs",
+    "docs:serve": "node scripts/serve-docs.mjs",
+    "setup": "bash scripts/setup.sh",
+    "prepare": "bash scripts/setup.sh",
+    "atlas": "node \"$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

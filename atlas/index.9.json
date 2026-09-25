@@ -2214,6 +2214,166 @@
         }
       ],
       "loc": "src/pages/CourierOnboarding.tsx:1"
+    },
+    {
+      "id": "TASK-9181",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "19:49:00",
+      "tags": [
+        "setup",
+        "atlas",
+        "archify",
+        "docs"
+      ],
+      "summary": "Setup repo: hooks .githooks, skill archify+atlas global, 22 diagram flow regenerate 22/22 PASS, npm run docs:serve",
+      "conn": [
+        {
+          "id": "DEC-1350",
+          "type": "relates",
+          "raw": "DEC-1350:relates"
+        }
+      ],
+      "loc": "scripts/flows-gate.sh:13"
+    },
+    {
+      "id": "FEAT-9182",
+      "type": "feature",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": ".githooks",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "FEAT-9183",
+      "type": "feature",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": "anti-slop",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "FEAT-9184",
+      "type": "feature",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": "docs",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "FEAT-9185",
+      "type": "feature",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": "scripts",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9186",
+      "type": "task",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": ".rules.json",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9187",
+      "type": "task",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": "opencode.json",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9188",
+      "type": "task",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "19:55:11",
+      "tags": [
+        "scan"
+      ],
+      "summary": "vercel.json",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9189",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "19:56:14",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: echo \"=== lint ===\" && npm run lint 2>&1 | tail -8; echo \"=== build ===\" && npm run build 2>&1 | tail -8 passed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

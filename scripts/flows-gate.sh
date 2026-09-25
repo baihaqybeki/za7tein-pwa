@@ -10,7 +10,7 @@
 # jadi tidak perlu diingat-ingat lagi.
 set -uo pipefail
 
-ARCHIFY="${ARCHIFY:-/Users/vanviakingali/.agents/skills/archify/bin/archify.mjs}"
+ARCHIFY="${ARCHIFY:-$HOME/.agents/skills/archify/bin/archify.mjs}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 FLOWS="$ROOT/docs/design/flows"
 
