@@ -17,7 +17,7 @@ import {
 } from '../data/zones'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { revalidateAddress } from '../store/slices/cartSlice'
-import { resetZone, saveZone } from '../store/slices/superAdminSlice'
+import { resetZone, saveZone, updateZoneMeta } from '../store/slices/superAdminSlice'
 import type { GeoPoint, ZoneGeometry, ZoneId } from '../types'
 
 type Vertex = GeoPoint
@@ -45,6 +45,7 @@ export default function SaZones() {
   const [draft, setDraft] = useState<Partial<Record<ZoneId, Vertex[]>>>({})
   const [selected, setSelected] = useState<{ zoneId: ZoneId; index: number } | null>(null)
   const [dragging, setDragging] = useState<{ zoneId: ZoneId; index: number } | null>(null)
+  const [meta, setMeta] = useState<Partial<Record<ZoneId, { label: string; note: string }>>>({})
 
   /** Poligon yang sedang tampil: hasil geser kalau ada, kalau tidak yang tersimpan. */
   const effectiveZones: ZoneGeometry[] = zones.map((zone) =>
@@ -219,10 +220,47 @@ export default function SaZones() {
             return (
               <article key={zone.id} className="sa-card">
                 <div className="sa-card-head">
-                  <div>
+                  <div className="sa-meta-edit">
                     <p className="sa-card-label">Zona {zoneIndex + 1}</p>
-                    <p className="sa-card-title">{zone.label}</p>
-                    <p className="sa-card-sub">{zone.note}</p>
+                    <label className="sa-field">
+                      <span>Label</span>
+                      <input
+                        type="text"
+                        value={meta[zone.id]?.label ?? zone.label}
+                        onChange={(e) =>
+                          setMeta((p) => ({ ...p, [zone.id]: { label: e.target.value, note: p[zone.id]?.note ?? zone.note } }))
+                        }
+                      />
+                    </label>
+                    <label className="sa-field">
+                      <span>Catatan</span>
+                      <input
+                        type="text"
+                        value={meta[zone.id]?.note ?? zone.note}
+                        onChange={(e) =>
+                          setMeta((p) => ({ ...p, [zone.id]: { label: p[zone.id]?.label ?? zone.label, note: e.target.value } }))
+                        }
+                      />
+                    </label>
+                    {meta[zone.id] ? (
+                      <button
+                        type="button"
+                        className="sa-btn sa-btn--small sa-btn--primary"
+                        onClick={() => {
+                          const m = meta[zone.id]
+                          if (!m) return
+                          dispatch(updateZoneMeta({ id: zone.id, label: m.label, note: m.note }))
+                          setMeta((p) => {
+                            const next = { ...p }
+                            delete next[zone.id]
+                            return next
+                          })
+                          toast.success('Zona disimpan')
+                        }}
+                      >
+                        Simpan
+                      </button>
+                    ) : null}
                   </div>
                   {dirty ? <span className="sa-chip is-off">Belum disimpan</span> : null}
                 </div>

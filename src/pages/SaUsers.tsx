@@ -2,14 +2,12 @@ import { ChevronRight, Search } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { SuperAdminShell } from '../components/layout/SuperAdminShell'
 import { MoneyPair } from '../components/ui/MoneyPair'
 import { tenantStatusLabel } from '../data/admin'
 import { courierTasks } from '../data/courier'
 import { jodToIdr } from '../data/currency'
-import { couriers } from '../data/merchant'
 import { merchantOrders } from '../data/merchantOrders'
-import { customerStatusLabel, customers } from '../data/people'
+import { customerStatusLabel } from '../data/people'
 import {
   courierCountFor,
   disputeCountAsMerchant,
@@ -19,7 +17,11 @@ import {
   merchantNameFor,
   orderCountFor,
 } from '../data/registry'
-import { useAppSelector } from '../hooks/useAppStore'
+import { SuperAdminShell } from '../components/layout/SuperAdminShell'
+import { BottomSheet } from '../components/ui/BottomSheet'
+import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
+import { updateCourier, updateCustomer, updateMerchant } from '../store/slices/adminSlice'
+import toast from 'react-hot-toast'
 
 type UserTab = 'customer' | 'merchant' | 'courier'
 
@@ -44,6 +46,9 @@ type UserTab = 'customer' | 'merchant' | 'courier'
  */
 export default function SaUsers() {
   const merchants = useAppSelector((s) => s.admin.merchants)
+  const customers = useAppSelector((s) => s.admin.customers)
+  const couriers = useAppSelector((s) => s.admin.couriers)
+  const [edit, setEdit] = useState<{ tab: UserTab; id: string; form: Record<string, string> } | null>(null)
   const disputes = useAppSelector((s) => s.admin.disputes)
   const ledger = useAppSelector((s) => s.admin.ledger)
   const riskFlags = useAppSelector((s) => s.admin.customerRiskFlags)
@@ -139,6 +144,13 @@ export default function SaUsers() {
                         <td>
                           {customer.name}
                           <span className="sa-table-sub">{customer.id}</span>
+                          <button
+                            type="button"
+                            className="sa-btn sa-btn--small"
+                            onClick={() => setEdit({ tab: 'customer', id: customer.id, form: { name: customer.name, phone: customer.phone } })}
+                          >
+                            Edit
+                          </button>
                         </td>
                         <td className="sa-nowrap">
                           {customer.phone}
@@ -221,6 +233,13 @@ export default function SaUsers() {
                             </span>
                             <ChevronRight size={16} strokeWidth={1.75} aria-hidden="true" />
                           </Link>
+                          <button
+                            type="button"
+                            className="sa-btn sa-btn--small"
+                            onClick={() => setEdit({ tab: 'merchant', id: merchant.id, form: { name: merchant.name, owner: merchant.owner, ownerPhone: merchant.ownerPhone, city: merchant.city } })}
+                          >
+                            Edit
+                          </button>
                         </td>
                         <td>
                           {merchant.owner}
@@ -282,6 +301,13 @@ export default function SaUsers() {
                         <td>
                           {courier.name}
                           <span className="sa-table-sub">{courier.id}</span>
+                          <button
+                            type="button"
+                            className="sa-btn sa-btn--small"
+                            onClick={() => setEdit({ tab: 'courier', id: courier.id, form: { name: courier.name, phone: courier.phone } })}
+                          >
+                            Edit
+                          </button>
                         </td>
                         <td className="sa-nowrap">
                           {courier.phone}
@@ -315,6 +341,45 @@ export default function SaUsers() {
           </>
         ) : null}
       </section>
+      <EditUserSheet key={edit?.id ?? 'none'} edit={edit} onClose={() => setEdit(null)} />
     </SuperAdminShell>
+  )
+}
+
+type EditTarget = { tab: UserTab; id: string; form: Record<string, string> } | null
+
+const EDIT_FIELDS: Record<UserTab, [string, string][]> = {
+  customer: [['name', 'Nama'], ['phone', 'Nomor WA']],
+  merchant: [['name', 'Nama'], ['owner', 'Pemilik'], ['ownerPhone', 'Nomor WA'], ['city', 'Kota']],
+  courier: [['name', 'Nama'], ['phone', 'Nomor']],
+}
+
+/** Sheet edit satu baris registri pengguna (customer/merchant/kurir). */
+function EditUserSheet({ edit, onClose }: { edit: EditTarget; onClose: () => void }) {
+  const dispatch = useAppDispatch()
+  const [form, setForm] = useState<Record<string, string>>(edit?.form ?? {})
+  if (!edit) return null
+  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
+
+  const save = () => {
+    if (edit.tab === 'customer') dispatch(updateCustomer({ id: edit.id, patch: { name: form.name, phone: form.phone } }))
+    else if (edit.tab === 'merchant') dispatch(updateMerchant({ id: edit.id, patch: { name: form.name, owner: form.owner, ownerPhone: form.ownerPhone, city: form.city } }))
+    else dispatch(updateCourier({ id: edit.id, patch: { name: form.name, phone: form.phone } }))
+    toast.success('Pengguna disimpan')
+    onClose()
+  }
+
+  return (
+    <BottomSheet open title={`Edit ${edit.tab}`} onClose={onClose}>
+      {EDIT_FIELDS[edit.tab].map(([key, label]) => (
+        <label key={key} className="sa-field">
+          <span>{label}</span>
+          <input value={form[key] ?? ''} onChange={(e) => set(key, e.target.value)} />
+        </label>
+      ))}
+      <div className="sa-actions">
+        <button type="button" className="sa-btn sa-btn--primary" onClick={save}>Simpan</button>
+      </div>
+    </BottomSheet>
   )
 }

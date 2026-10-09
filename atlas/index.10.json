@@ -119,6 +119,139 @@
           "raw": "TASK-9940:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9951",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:27:30",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/superAdminSlice.ts (+27/-9) — edit via tool: ts: setOperatorStatus(sta",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/superAdminSlice.ts"
+    },
+    {
+      "id": "TASK-9952",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:27:42",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/adminSlice.ts (+45/-37) — edit via tool: ts: import { merchantFromTena",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/adminSlice.ts"
+    },
+    {
+      "id": "TASK-9953",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:28:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/courierSlice.ts (+14/-6) — edit via tool: ts: /** Sunting profil kurir",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/courierSlice.ts"
+    },
+    {
+      "id": "TASK-9954",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:28:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/merchantSlice.ts (+26/-17) — edit via tool: ts: deliveryConfig: Mercha",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/merchantSlice.ts"
+    },
+    {
+      "id": "TASK-9955",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:30:41",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/SaUsers.tsx'\ns=open(p).read()\ns=s.replace(\"\"\"      <Ed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9956",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:30:56",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/SaUsers.tsx'\ns=open(p).read()\ns=s.replace(\"\"\"  const d",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9957",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:32:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+6/-3) — edit via tool: tsx: Rating <code className=\"doc-i",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
     }
   ]
 }

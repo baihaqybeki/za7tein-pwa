@@ -20,6 +20,7 @@ import {
   removeMerchantLogo,
   setMerchantLogo,
   setStoreProfile,
+  setStoreDetails,
 } from '../store/slices/merchantSlice'
 
 const TIER_LABEL: Record<string, string> = { free: 'Gratis', pro: 'Pro' }
@@ -35,6 +36,9 @@ export default function MerchantSettings() {
   const storeName = useAppSelector((state) => state.merchant.storeName)
   const storePhone = useAppSelector((state) => state.merchant.storePhone)
   const storeAddress = useAppSelector((state) => state.merchant.storeAddress)
+  const storeOpenTime = useAppSelector((state) => state.merchant.storeOpenTime)
+  const storeCloseTime = useAppSelector((state) => state.merchant.storeCloseTime)
+  const [hours, setHours] = useState({ open: storeOpenTime, close: storeCloseTime })
   const walletBalance = useAppSelector((state) => state.payout.balance)
   const primaryAccount = useAppSelector(
     (state) => state.payout.accounts.find((a) => a.isPrimary) ?? state.payout.accounts[0],
@@ -108,6 +112,7 @@ export default function MerchantSettings() {
   // ini menampilkan sukses padahal tak ada satu pun nilai yang berubah).
   const onSubmit = (data: MerchantStoreFormData) => {
     dispatch(setStoreProfile(data))
+    dispatch(setStoreDetails({ openTime: hours.open, closeTime: hours.close, lat: coords.lat, lng: coords.lng }))
     toast.success('Setelan toko disimpan')
   }
 
@@ -240,10 +245,18 @@ export default function MerchantSettings() {
             <Clock size={20} strokeWidth={1.75} />
             <div>
               <p className="merchant-card-title">Jam operasional</p>
-              <p className="merchant-card-sub">
-                {mockMerchant.openTime} – {mockMerchant.closeTime}
-              </p>
+              <p className="merchant-card-sub">Ubah lalu Simpan perubahan di form atas.</p>
             </div>
+          </div>
+          <div className="merchant-hours">
+            <label className="form-group">
+              <span className="form-label">Buka</span>
+              <input type="time" className="form-control" value={hours.open} onChange={(e) => setHours((h) => ({ ...h, open: e.target.value }))} />
+            </label>
+            <label className="form-group">
+              <span className="form-label">Tutup</span>
+              <input type="time" className="form-control" value={hours.close} onChange={(e) => setHours((h) => ({ ...h, close: e.target.value }))} />
+            </label>
           </div>
         </section>
 

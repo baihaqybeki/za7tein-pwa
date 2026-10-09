@@ -23,7 +23,8 @@ import {
 } from '../data/registry'
 import { permissionLabel, roleForOperator, roleHasPermission } from '../data/superadmin'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
-import { reinstateMerchant, suspendMerchant } from '../store/slices/adminSlice'
+import type { MerchantRecord } from '../types'
+import { reinstateMerchant, suspendMerchant, updateMerchant } from '../store/slices/adminSlice'
 
 /**
  * Dossier satu merchant, plus kewenangan SA atas tenantnya.
@@ -122,6 +123,8 @@ export default function SaMerchantDetail() {
         <ArrowLeft size={14} strokeWidth={1.75} aria-hidden="true" />
         Registri pengguna
       </Link>
+
+      <MerchantEditCard merchant={merchant} />
 
       <section className="sa-hero sa-hero--money">
         <article className="sa-card">
@@ -464,5 +467,70 @@ export default function SaMerchantDetail() {
         </div>
       </BottomSheet>
     </SuperAdminShell>
+  )
+}
+
+/** Form edit teks registri merchant (dipakai konsol SA). */
+function MerchantEditCard({ merchant }: { merchant: MerchantRecord }) {
+  const dispatch = useAppDispatch()
+  const [form, setForm] = useState({
+    name: merchant.name,
+    owner: merchant.owner,
+    ownerPhone: merchant.ownerPhone,
+    city: merchant.city,
+    tier: merchant.tier,
+    deposit: String(merchant.deposit),
+    codIssues: String(merchant.codIssues),
+    isActiveHijazi: merchant.isActiveHijazi,
+    isActiveSyimali: merchant.isActiveSyimali,
+  })
+  const set = (patch: Partial<typeof form>) => setForm((f) => ({ ...f, ...patch }))
+
+  return (
+    <article className="sa-card">
+      <p className="sa-card-label">Edit data merchant</p>
+      <div className="sa-form-grid">
+        <label className="sa-field"><span>Nama</span><input value={form.name} onChange={(e) => set({ name: e.target.value })} /></label>
+        <label className="sa-field"><span>Pemilik</span><input value={form.owner} onChange={(e) => set({ owner: e.target.value })} /></label>
+        <label className="sa-field"><span>Nomor WA pemilik</span><input value={form.ownerPhone} onChange={(e) => set({ ownerPhone: e.target.value })} /></label>
+        <label className="sa-field"><span>Kota</span><input value={form.city} onChange={(e) => set({ city: e.target.value })} /></label>
+        <label className="sa-field">
+          <span>Paket</span>
+          <select value={form.tier} onChange={(e) => set({ tier: e.target.value as MerchantRecord['tier'] })}>
+            <option value="free">free</option>
+            <option value="pro">pro</option>
+          </select>
+        </label>
+        <label className="sa-field"><span>Deposit (JOD)</span><input type="number" step={0.1} value={form.deposit} onChange={(e) => set({ deposit: e.target.value })} /></label>
+        <label className="sa-field"><span>COD bermasalah</span><input type="number" value={form.codIssues} onChange={(e) => set({ codIssues: e.target.value })} /></label>
+        <label className="sa-field sa-field--inline"><input type="checkbox" checked={form.isActiveHijazi} onChange={(e) => set({ isActiveHijazi: e.target.checked })} /><span>Zona Hijazi</span></label>
+        <label className="sa-field sa-field--inline"><input type="checkbox" checked={form.isActiveSyimali} onChange={(e) => set({ isActiveSyimali: e.target.checked })} /><span>Zona Syimali</span></label>
+      </div>
+      <div className="sa-actions">
+        <button
+          type="button"
+          className="sa-btn sa-btn--primary"
+          onClick={() => {
+            dispatch(updateMerchant({
+              id: merchant.id,
+              patch: {
+                name: form.name,
+                owner: form.owner,
+                ownerPhone: form.ownerPhone,
+                city: form.city,
+                tier: form.tier,
+                deposit: Number(form.deposit),
+                codIssues: Number(form.codIssues),
+                isActiveHijazi: form.isActiveHijazi,
+                isActiveSyimali: form.isActiveSyimali,
+              },
+            }))
+            toast.success('Data merchant disimpan')
+          }}
+        >
+          Simpan
+        </button>
+      </div>
+    </article>
   )
 }

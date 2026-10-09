@@ -1,6 +1,7 @@
 import { Bike, Landmark, Store, UserRound } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 import { CourierPageHeader } from '../components/courier/CourierPageHeader'
 import { CourierBottomNav } from '../components/layout/CourierBottomNav'
@@ -10,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { money, mockMerchant } from '../data/merchant'
 import { courierSelf, isActiveTask } from '../data/courier'
 import { courierTipsAvailable } from '../data/courierWallet'
-import { toggleOnline } from '../store/slices/courierSlice'
+import { toggleOnline, updateCourierProfile } from '../store/slices/courierSlice'
 import { logout } from '../store/slices/authSlice'
 
 export default function CourierProfile() {
@@ -29,6 +30,8 @@ export default function CourierProfile() {
   const name = onboarding?.name || courierSelf.name
   const phone = onboarding?.phone || courierSelf.phone
   const vehicleLabel = onboarding?.vehicle === 'mobil' ? 'Mobil' : 'Motor'
+  const [editing, setEditing] = useState(false)
+  const [form, setForm] = useState({ name, phone, vehicle: (onboarding?.vehicle ?? 'motor') as 'motor' | 'mobil' })
 
   // Keluar = keluar dari akun lalu kembali ke layar masuk kurir. Memakai
   // `logout()` dari authSlice, sama seperti Profil customer dan Setelan merchant,
@@ -48,13 +51,46 @@ export default function CourierProfile() {
           <span className="courier-avatar" aria-hidden="true">
             <UserRound size={28} strokeWidth={1.75} />
           </span>
-          <div>
-            <p className="courier-card-title">{name}</p>
-            <p className="courier-card-sub">{phone}</p>
-            {onboarding ? (
+          {editing ? (
+            <div className="form-group">
+              <label className="form-group">
+                <span className="form-label">Nama</span>
+                <input className="form-control" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+              </label>
+              <label className="form-group">
+                <span className="form-label">Nomor WA</span>
+                <input className="form-control" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
+              </label>
+              <label className="form-group">
+                <span className="form-label">Kendaraan</span>
+                <select className="form-control" value={form.vehicle} onChange={(e) => setForm((f) => ({ ...f, vehicle: e.target.value as 'motor' | 'mobil' }))}>
+                  <option value="motor">Motor</option>
+                  <option value="mobil">Mobil</option>
+                </select>
+              </label>
+              <div className="courier-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    dispatch(updateCourierProfile({ name: form.name, phone: form.phone, vehicle: form.vehicle }))
+                    setEditing(false)
+                    toast.success('Profil kurir disimpan')
+                  }}
+                >
+                  Simpan
+                </button>
+                <button type="button" className="courier-btn-ghost" onClick={() => setEditing(false)}>Batal</button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <p className="courier-card-title">{name}</p>
+              <p className="courier-card-sub">{phone}</p>
               <p className="courier-card-sub">Kendaraan: {vehicleLabel}</p>
-            ) : null}
-          </div>
+              <button type="button" className="courier-btn-ghost" onClick={() => setEditing(true)}>Edit profil</button>
+            </div>
+          )}
         </section>
 
         <section className="courier-card">

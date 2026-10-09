@@ -158,6 +158,24 @@ const superAdminSlice = createSlice({
         operator.name,
       )
     },
+    /** Sunting profil operator: nama, kontak, role. */
+    updateOperator(state, action: PayloadAction<{ id: string; name: string; contact: string; roleId: string }>) {
+      const operator = state.operators.find((o) => o.id === action.payload.id)
+      const role = state.roles.find((r) => r.id === action.payload.roleId)
+      if (!operator || !role) return
+      operator.name = action.payload.name
+      operator.contact = action.payload.contact
+      operator.roleId = role.id
+      pushAsActive(state, 'operator', 'Ubah profil operator', operator.name)
+    },
+    /** Sunting label & catatan zona (poligon lewat `saveZone`). */
+    updateZoneMeta(state, action: PayloadAction<{ id: ZoneGeometry['id']; label: string; note: string }>) {
+      const zone = state.zones.find((z) => z.id === action.payload.id)
+      if (!zone) return
+      zone.label = action.payload.label
+      zone.note = action.payload.note
+      pushAsActive(state, 'zone', 'Ubah label zona', zone.label)
+    },
     /**
      * Tarik saldo keuntungan platform — satu-satunya dana yang boleh ditarik SA.
      * Saldo customer/merchant/tips tidak pernah masuk hitungan ini.
@@ -220,6 +238,8 @@ export const {
   togglePermission,
   addOperator,
   setOperatorStatus,
+  updateOperator,
+  updateZoneMeta,
   withdrawProfit,
   toggleSwitch,
 

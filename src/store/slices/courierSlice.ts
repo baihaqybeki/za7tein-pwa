@@ -126,6 +126,14 @@ const courierSlice = createSlice({
         destination: `${account.bankName} · ${account.accountNumber}`,
       })
     },
+    /** Sunting profil kurir (nama/telepon/kendaraan) setelah onboarding. */
+    updateCourierProfile(state, action: PayloadAction<{ name: string; phone: string; vehicle: 'motor' | 'mobil' }>) {
+      state.onboarding = {
+        name: action.payload.name,
+        phone: action.payload.phone,
+        vehicle: action.payload.vehicle,
+      }
+    },
   },
 })
 
@@ -140,5 +148,6 @@ export const {
   removePayoutAccount,
   setPrimaryPayoutAccount,
   requestCourierPayout,
+  updateCourierProfile,
 } = courierSlice.actions
 export default courierSlice.reducer

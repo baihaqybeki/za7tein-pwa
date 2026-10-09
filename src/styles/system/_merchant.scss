@@ -590,3 +590,6 @@
   align-items: center;
   gap: var(--space-3);
 }
+
+/* Jam operasional toko (Setelan) */
+.merchant-hours{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-2)}

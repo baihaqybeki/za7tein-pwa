@@ -9,11 +9,14 @@ import {
   ledgerEntryFor,
   mockLiability,
 } from '../../data/admin'
-import { merchantFromTenant } from '../../data/merchant'
+import { merchantFromTenant, couriers as seedCouriers } from '../../data/merchant'
+import { customers as seedCustomers } from '../../data/people'
 import type {
   AdminEscalation,
   AppealVerdict,
   AdminTenant,
+  Courier,
+  Customer,
   CustomerRiskFlag,
   Dispute,
   DisputeResolution,
@@ -25,6 +28,9 @@ import type {
 interface AdminState {
   tenants: AdminTenant[]
   merchants: MerchantRecord[]
+  /** Registri pengguna untuk konsol SA (`/superadmin/users`). */
+  customers: Customer[]
+  couriers: Courier[]
   disputes: Dispute[]
   ledger: LedgerEntry[]
   liability: LiabilitySummary
@@ -40,6 +46,8 @@ interface AdminState {
 const initialState: AdminState = {
   tenants: seedTenants,
   merchants: seedMerchants,
+  customers: seedCustomers,
+  couriers: seedCouriers,
   disputes: seedDisputes,
   ledger: seedLedger,
   liability: mockLiability,
@@ -188,6 +196,22 @@ const adminSlice = createSlice({
         if (entry) state.ledger.unshift({ ...entry, id: `${entry.id}-appeal` })
       }
     },
+    /** Sunting registri merchant (konsol SA). */
+    updateMerchant(state, action: PayloadAction<{ id: string; patch: Partial<MerchantRecord> }>) {
+      const merchant = state.merchants.find((m) => m.id === action.payload.id)
+      if (!merchant) return
+      Object.assign(merchant, action.payload.patch)
+    },
+    updateCustomer(state, action: PayloadAction<{ id: string; patch: Partial<Customer> }>) {
+      const customer = state.customers.find((c) => c.id === action.payload.id)
+      if (!customer) return
+      Object.assign(customer, action.payload.patch)
+    },
+    updateCourier(state, action: PayloadAction<{ id: string; patch: Partial<Courier> }>) {
+      const courier = state.couriers.find((c) => c.id === action.payload.id)
+      if (!courier) return
+      Object.assign(courier, action.payload.patch)
+    },
   },
 })
 
@@ -203,5 +227,8 @@ export const {
   clearEscalation,
   requestAppeal,
   decideAppeal,
+  updateMerchant,
+  updateCustomer,
+  updateCourier,
 } = adminSlice.actions
 export default adminSlice.reducer

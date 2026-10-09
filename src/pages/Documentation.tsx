@@ -216,6 +216,9 @@ export default function Documentation() {
               (<code className="doc-inline">open_time</code>/<code className="doc-inline">close_time</code>).
               Rating <code className="doc-inline">rating_avg</code> dihitung dari{' '}
               <code className="doc-inline">rating_reviews</code> (795 order, 956 ulasan mock).
+              Sejumlah field konsol kini <strong>editable</strong> (inline form + Simpan): data
+              merchant & pengguna di SA, label/catatan zona, jam operasional + koordinat toko,
+              dan profil kurir.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

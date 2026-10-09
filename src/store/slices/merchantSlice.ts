@@ -60,6 +60,11 @@ interface MerchantState {
    * `merchantDeliveryConfig`. Tidak dipersist.
    */
   deliveryConfig: MerchantDeliveryConfig
+  /** Jam operasional + koordinat toko (Setelan), bisa disunting. */
+  storeOpenTime: string
+  storeCloseTime: string
+  storeLat: number
+  storeLng: number
 }
 
 const initialState: MerchantState = {
@@ -75,6 +80,10 @@ const initialState: MerchantState = {
   storePhone: mockStoreProfile.phone,
   storeAddress: mockStoreProfile.address,
   deliveryConfig: merchantDeliveryConfig,
+  storeOpenTime: mockMerchant.openTime,
+  storeCloseTime: mockMerchant.closeTime,
+  storeLat: mockMerchant.lat,
+  storeLng: mockMerchant.lng,
 }
 
 /** Entry insentif: urutan + waktu, cukup unik untuk mock satu sesi. */
@@ -171,6 +180,13 @@ const merchantSlice = createSlice({
       state.storePhone = action.payload.phone
       state.storeAddress = action.payload.address
     },
+    /** Sunting jam operasional + koordinat toko. */
+    setStoreDetails(state, action: PayloadAction<{ openTime: string; closeTime: string; lat: number; lng: number }>) {
+      state.storeOpenTime = action.payload.openTime
+      state.storeCloseTime = action.payload.closeTime
+      state.storeLat = action.payload.lat
+      state.storeLng = action.payload.lng
+    },
     /** Konfigurasi pengiriman dari form profil toko onboarding (f16). */
     setDeliveryConfig(state, action: PayloadAction<MerchantDeliveryConfig>) {
       state.deliveryConfig = action.payload
@@ -248,6 +264,7 @@ export const {
   setMerchantLogo,
   removeMerchantLogo,
   setStoreProfile,
+  setStoreDetails,
   setDeliveryConfig,
   grantCredit,
   debitCredit,
