@@ -9,10 +9,19 @@ import { JourneyLine } from '../components/JourneyLine'
 import { BottomSheet } from '../components/ui/BottomSheet'
 import { ConfirmSheet } from '../components/ui/ConfirmSheet'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
+import { BATCH_STATUS_LABEL } from '../data/batches'
 import { COURIER_STATUS_LABEL } from '../data/courier'
 import { HOLD_STATUS_COPY, formatDistance, money, zoneLabel } from '../data/merchant'
 import { QUEUE_TABS, ordersForStatuses, orderStatusLabel, type QueueTabId } from '../data/merchantOrders'
-import { assignCourier, setCookMinutes, setOrderStatus } from '../store/slices/merchantSlice'
+import {
+  addOrderToBatch,
+  assignBatchCourier,
+  assignCourier,
+  closeBatch,
+  setCookMinutes,
+  setOrderStatus,
+  startBatchDelivery,
+} from '../store/slices/merchantSlice'
 import type { MerchantOrderStatus, OrderStage } from '../types'
 
 /**
@@ -41,6 +50,7 @@ export default function MerchantOrders() {
   const dispatch = useAppDispatch()
   const orders = useAppSelector((s) => s.merchant.orders)
   const couriers = useAppSelector((s) => s.merchant.couriers)
+  const batches = useAppSelector((s) => s.merchant.batches)
   const [params] = useSearchParams()
   /* Tab awal bisa datang dari tautan (?tab=batal), dipakai legenda donut di
      dashboard: potongan "Batal/tolak 1 order" harus mendarat di daftar yang
@@ -66,7 +76,9 @@ export default function MerchantOrders() {
 
   const receiveOrder = (id: string, code: string) => {
     dispatch(setOrderStatus({ id, status: 'diterima' }))
-    toast.success(`Order ${code} diterima`)
+    // F12: order yang diterima masuk ke batch aktif (dibuat bila belum ada).
+    dispatch(addOrderToBatch({ orderId: id }))
+    toast.success(`Order ${code} diterima — masuk batch`)
   }
 
   const confirmReject = () => {
@@ -102,6 +114,69 @@ export default function MerchantOrders() {
     <div className="app-shell">
       <main className="merchant-page">
         <MerchantPageHeader eyebrow="Antrean dapur" title="Order" />
+
+        {batches.length > 0 ? (
+          <section className="merchant-card">
+            <div className="merchant-row">
+              <div>
+                <p className="merchant-card-title">Batch pengantaran</p>
+                {batches.map((b) => (
+                  <p key={b.id} className="merchant-card-sub">
+                    {BATCH_STATUS_LABEL[b.status]} · {b.orderIds.length} order
+                    {b.courierId
+                      ? ` · ${couriers.find((c) => c.id === b.courierId)?.name ?? b.courierId}`
+                      : ''}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className="merchant-actions">
+              {batches.map((b) => (
+                <span key={b.id} style={{ display: 'contents' }}>
+                  {b.status === 'prepare' ? (
+                    <button
+                      type="button"
+                      className="merchant-btn-ghost"
+                      onClick={() => {
+                        dispatch(closeBatch({ id: b.id }))
+                        toast.success('Batch ditutup')
+                      }}
+                    >
+                      Tutup batch
+                    </button>
+                  ) : null}
+                  {b.status === 'waitingCourier' ? (
+                    <button
+                      type="button"
+                      className="merchant-btn-ghost"
+                      onClick={() => {
+                        const c = couriers.find((x) => x.status !== 'offline') ?? couriers[0]
+                        if (c) {
+                          dispatch(assignBatchCourier({ batchId: b.id, courierId: c.id }))
+                          toast.success(`Batch ditugaskan ke ${c.name}`)
+                        }
+                      }}
+                    >
+                      Assign kurir
+                    </button>
+                  ) : null}
+                  {b.status === 'waitingDelivery' ? (
+                    <button
+                      type="button"
+                      className="merchant-btn-ghost"
+                      onClick={() => {
+                        dispatch(startBatchDelivery({ id: b.id }))
+                        toast.success('Batch mulai diantar')
+                      }}
+                    >
+                      Mulai antar
+                    </button>
+                  ) : null}
+                </span>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <div className="merchant-tabs" role="tablist">
           {QUEUE_TABS.map((t) => (

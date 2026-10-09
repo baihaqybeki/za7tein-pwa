@@ -416,6 +416,28 @@ export interface ChatMessage {
   readAt?: string | null
 }
 
+export type BatchStatus = 'prepare' | 'closed' | 'waitingCourier' | 'waitingDelivery' | 'delivery'
+
+/**
+ * Batch pengantaran (tabel `batches`, ERD): sekumpulan order satu merchant yang
+ * disiapkan bersama lalu diantar oleh satu kurir. Mengikuti state machine F12:
+ * `prepare` → `closed` → (`waitingCourier` | `waitingDelivery`) → `delivery`.
+ */
+export interface OrderBatch {
+  id: string
+  merchantId: string
+  orderIds: string[]
+  courierId?: string
+  status: BatchStatus
+  etaPrepareSeconds: number
+  etaDeliverySeconds: number
+  /** Epoch ms — tenggat SLA; `escalatedToAdmin` bila terlewat. */
+  slaPrepareDeadline?: number
+  slaDeliveryDeadline?: number
+  escalatedToAdmin: boolean
+  createdAt: number
+}
+
 /**
  * Subscription Web Push (R-PUSH-01, M8). Bentuknya mengikuti kontrak BE
  * (`endpoint`, `keys`, `platform`, `expiresAt`); di repo ini registrasinya mock —

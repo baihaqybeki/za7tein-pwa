@@ -230,7 +230,11 @@ export default function Documentation() {
               checkpoint kurir); inbox memfilter per <code className="doc-inline">audience</code>. Push
               dikirim ke OS lewat <code className="doc-inline">deliverPush()</code> (Web Notifications API) untuk
               sisi peran yang cocok, dan coverage zona dilengkapi{' '}
-              <code className="doc-inline">pointCoverage()</code> (poligon + radius).
+              <code className="doc-inline">pointCoverage()</code> (poligon + radius). Batching order
+              (F12) kini berjalan: order yang diterima masuk <code className="doc-inline">merchant.batches</code>{' '}
+              (<code className="doc-inline">addOrderToBatch</code> → <code className="doc-inline">closeBatch</code> →{' '}
+              <code className="doc-inline">assignBatchCourier</code> → <code className="doc-inline">startBatchDelivery</code>),
+              dengan batch kosong otomatis dibuang.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 import { merchantOrders as seedOrders } from '../../data/merchantOrders'
+import { DELIVERY_WINDOW_SECONDS, PREPARE_WINDOW_SECONDS, seedBatches } from '../../data/batches'
 import { merchantReviewReplies } from '../../data/merchantReviews'
 import {
   MAX_COURIERS_PER_MERCHANT,
@@ -26,10 +27,13 @@ import type {
   MerchantDeliveryConfig,
   MerchantOrder,
   MerchantOrderStatus,
+  OrderBatch,
 } from '../../types'
 
 interface MerchantState {
   orders: MerchantOrder[]
+  /** Batch pengantaran (gabungan order) — state machine F12. */
+  batches: OrderBatch[]
   /**
    * Kurir milik merchant yang sedang login (C-06). Dikelola dari halaman Kurir:
    * tambah/hapus, jam tugas, dan pemilihan kurir per order.
@@ -69,6 +73,7 @@ interface MerchantState {
 
 const initialState: MerchantState = {
   orders: seedOrders,
+  batches: seedBatches,
   couriers: mockCouriers,
   isActive: mockMerchant.isActive,
   todayOrderCount: mockMerchant.todayOrderCount,
@@ -115,6 +120,72 @@ const merchantSlice = createSlice({
     setCookMinutes(state, action: PayloadAction<{ id: string; minutes: number }>) {
       const order = state.orders.find((o) => o.id === action.payload.id)
       if (order) order.cookMinutes = action.payload.minutes
+    },
+    /**
+     * Masukkan order ke batch aktif (F12): pakai batch `prepare` yang ada, atau
+     * buat baru bila belum ada. Order hanya boleh berada di satu batch.
+     */
+    addOrderToBatch(state, action: PayloadAction<{ orderId: string; now?: number }>) {
+      const order = state.orders.find((o) => o.id === action.payload.orderId)
+      if (!order) return
+      const now = action.payload.now ?? Date.now()
+      let batch = state.batches.find((b) => b.status === 'prepare' && b.merchantId === mockMerchant.id)
+      if (!batch) {
+        batch = {
+          id: `batch-${now}-${state.batches.length + 1}`,
+          merchantId: mockMerchant.id,
+          orderIds: [],
+          status: 'prepare',
+          etaPrepareSeconds: PREPARE_WINDOW_SECONDS,
+          etaDeliverySeconds: DELIVERY_WINDOW_SECONDS,
+          slaPrepareDeadline: now + PREPARE_WINDOW_SECONDS * 1000,
+          escalatedToAdmin: false,
+          createdAt: now,
+        }
+        state.batches.push(batch)
+      }
+      if (!batch.orderIds.includes(order.id)) batch.orderIds.push(order.id)
+    },
+    /**
+     * Tutup batch saat jendela prepare habis. Batch tanpa order dibuang (F12:
+     * destroy empty batch); sisanya menunggu kurir atau siap diantar.
+     */
+    closeBatch(state, action: PayloadAction<{ id: string }>) {
+      const batch = state.batches.find((b) => b.id === action.payload.id)
+      if (!batch) return
+      if (batch.orderIds.length === 0) {
+        state.batches = state.batches.filter((b) => b.id !== batch.id)
+        return
+      }
+      batch.status = batch.courierId ? 'waitingDelivery' : 'waitingCourier'
+    },
+    /** Merchant memilih kurir untuk batch (F12 `:assign`, C-06). */
+    assignBatchCourier(state, action: PayloadAction<{ batchId: string; courierId: string }>) {
+      const batch = state.batches.find((b) => b.id === action.payload.batchId)
+      const next = state.couriers.find((c) => c.id === action.payload.courierId)
+      if (!batch || !next || batch.courierId === next.id) return
+      const previous = state.couriers.find((c) => c.id === batch.courierId)
+      if (previous) previous.activeOrderCount = Math.max(0, previous.activeOrderCount - 1)
+      next.activeOrderCount += 1
+      batch.courierId = next.id
+      batch.status = 'waitingDelivery'
+    },
+    /** Kurir mulai mengantar batch → status `delivery` + tenggat SLA delivery. */
+    startBatchDelivery(state, action: PayloadAction<{ id: string; now?: number }>) {
+      const batch = state.batches.find((b) => b.id === action.payload.id)
+      if (!batch) return
+      const now = action.payload.now ?? Date.now()
+      batch.status = 'delivery'
+      batch.slaDeliveryDeadline = now + batch.etaDeliverySeconds * 1000
+    },
+    /** Keluarkan satu order dari batch (mis. dibatalkan); batch kosong dibuang. */
+    removeOrderFromBatch(state, action: PayloadAction<{ batchId: string; orderId: string }>) {
+      const batch = state.batches.find((b) => b.id === action.payload.batchId)
+      if (!batch) return
+      batch.orderIds = batch.orderIds.filter((id) => id !== action.payload.orderId)
+      if (batch.orderIds.length === 0) {
+        state.batches = state.batches.filter((b) => b.id !== batch.id)
+      }
     },
     /** Merchant mendaftarkan kurirnya sendiri — dibatasi kuota kurir per toko. */
     addCourier(state, action: PayloadAction<{ name: string; phone: string }>) {
@@ -256,6 +327,11 @@ export const {
   toggleActive,
   setOrderStatus,
   setCookMinutes,
+  addOrderToBatch,
+  closeBatch,
+  assignBatchCourier,
+  startBatchDelivery,
+  removeOrderFromBatch,
   addCourier,
   removeCourier,
   setCourierDuty,
