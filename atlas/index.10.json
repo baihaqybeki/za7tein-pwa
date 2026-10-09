@@ -448,6 +448,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9980",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:44:49",
+      "tags": [
+        "chat",
+        "slice",
+        "customer",
+        "feature"
+      ],
+      "summary": "Logic chat: tipe ChatThread/ChatMessage/ChatParticipant + data/chat + chatSlice (sendMessage/markThreadRead) + OrderChat pakai slice; gate P",
+      "conn": [
+        {
+          "id": "TASK-9970",
+          "type": "relates",
+          "raw": "TASK-9970:relates"
+        }
+      ]
     }
   ]
 }
