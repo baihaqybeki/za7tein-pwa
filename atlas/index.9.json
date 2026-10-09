@@ -4753,6 +4753,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9460",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:10:32",
+      "tags": [
+        "supabase",
+        "seed",
+        "fix",
+        "merchants"
+      ],
+      "summary": "Seed merchants/couriers/menus/deposits/merchant_credits pakai store_name; FK merchants tak kosong lagi; supabase/04-seed-core.sql",
+      "conn": [
+        {
+          "id": "DEC-1047",
+          "type": "relates",
+          "raw": "DEC-1047:relates"
+        }
+      ]
     }
   ]
 }

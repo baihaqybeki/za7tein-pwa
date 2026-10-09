@@ -16787,6 +16787,10 @@
     {
       "id": "DEC-1047",
       "shard": 9
+    },
+    {
+      "id": "TASK-9460",
+      "shard": 9
     }
   ],
   "append-only": [
@@ -16902,6 +16906,24 @@
   "restore": [
     {
       "id": "DEC-1047",
+      "shard": 9
+    }
+  ],
+  "seed": [
+    {
+      "id": "TASK-9460",
+      "shard": 9
+    }
+  ],
+  "fix": [
+    {
+      "id": "TASK-9460",
+      "shard": 9
+    }
+  ],
+  "merchants": [
+    {
+      "id": "TASK-9460",
       "shard": 9
     }
   ]
