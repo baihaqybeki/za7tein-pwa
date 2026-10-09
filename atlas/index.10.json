@@ -1132,6 +1132,44 @@
           "raw": "TASK-10060:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10071",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:24:15",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/17-notifications-seed.sql (+58) — write via tool: -- =========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/17-notifications-seed.sql"
+    },
+    {
+      "id": "TASK-10072",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:24:33",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `16-menu-category-stock.sql` | **Isi `",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }
