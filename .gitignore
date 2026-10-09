@@ -33,3 +33,4 @@ dev-dist
 # Yang di-commit cuma spec JSON + README (sumber yang diedit).
 docs/design/flows/*/*.html
 docs/design/flows/*/*.visual-check.*
+.env*

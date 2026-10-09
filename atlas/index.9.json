@@ -4590,6 +4590,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9450",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:56:36",
+      "tags": [
+        "test",
+        "e2e",
+        "deploy",
+        "vercel",
+        "release"
+      ],
+      "summary": "E2E all-role via Chrome CDP (core roles PASS, 24 FAIL = pengecualian terdokumentasi) + rilis v0.1.0 + deploy project baru sa7tein-pwa",
+      "conn": [
+        {
+          "id": "TASK-9440",
+          "type": "relates",
+          "raw": "TASK-9440:relates"
+        }
+      ]
     }
   ]
 }
