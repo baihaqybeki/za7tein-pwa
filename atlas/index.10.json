@@ -1034,6 +1034,26 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10060",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:15:53",
+      "tags": [
+        "supabase",
+        "address",
+        "schema"
+      ],
+      "summary": "Tambah kolom alamat apartemen di addresses (name, building, floor, unit, notes, city, full_address) + seed 7 alamat",
+      "conn": [
+        {
+          "id": "TASK-10020",
+          "type": "relates",
+          "raw": "TASK-10020:relates"
+        }
+      ]
     }
   ]
 }
