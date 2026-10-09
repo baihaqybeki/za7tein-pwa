@@ -1170,6 +1170,26 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10080",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:25:05",
+      "tags": [
+        "supabase",
+        "notification",
+        "seed"
+      ],
+      "summary": "Inject 81 notifikasi per peran (customer/merchant/courier/cs/SA) + kolom audience di tabel notifications",
+      "conn": [
+        {
+          "id": "TASK-10070",
+          "type": "relates",
+          "raw": "TASK-10070:relates"
+        }
+      ]
     }
   ]
 }
