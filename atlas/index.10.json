@@ -661,6 +661,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/zones.ts"
+    },
+    {
+      "id": "TASK-10000",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:54:52",
+      "tags": [
+        "push",
+        "notification",
+        "zone",
+        "coverage"
+      ],
+      "summary": "Push OS (Notification API) dikirim per peran dari journeyBridge + minta izin di setelan; tambah pointCoverage() zona (poligon+radius); gate ",
+      "conn": [
+        {
+          "id": "TASK-9990",
+          "type": "relates",
+          "raw": "TASK-9990:relates"
+        }
+      ]
     }
   ]
 }
