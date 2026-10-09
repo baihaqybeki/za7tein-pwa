@@ -837,6 +837,44 @@
           "raw": "TASK-10010:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10021",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:06:39",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# 1) tipe\np='src/types.ts'\ns=open(p).read()\ns=s.replace(\"\"\"export i",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10022",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:07:02",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/data/merchant.ts'\ns=open(p).read()\ns=s.replace(\"\"\"  return {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

@@ -588,3 +588,7 @@ body:has(.sa-root) .sheet-handle {
 
 /* Form/label edit zona (SA) */
 .sa-meta-edit{display:grid;gap:var(--space-2)}
+
+/* Identitas merchant + avatar foto */
+.sa-merchant-ident{display:flex;align-items:center;gap:var(--space-3)}
+.sa-merchant-avatar{width:44px;height:44px;border-radius:var(--radius-md);object-fit:cover;flex-shrink:0}

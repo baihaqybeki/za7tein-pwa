@@ -234,7 +234,9 @@ export default function Documentation() {
               (F12) kini berjalan: order yang diterima masuk <code className="doc-inline">merchant.batches</code>{' '}
               (<code className="doc-inline">addOrderToBatch</code> → <code className="doc-inline">closeBatch</code> →{' '}
               <code className="doc-inline">assignBatchCourier</code> → <code className="doc-inline">startBatchDelivery</code>),
-              dengan batch kosong otomatis dibuang.
+              dengan batch kosong otomatis dibuang. `MerchantRecord` kini punya
+              <code className="doc-inline">photo</code> (cover toko) dan ditampilkan di detail merchant SA,
+              plus cover lokal <code className="doc-inline">bakso-pak-kumis</code>/<code className="doc-inline">kopi-kenangan-kecil</code>.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

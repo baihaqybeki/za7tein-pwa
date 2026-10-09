@@ -131,7 +131,12 @@ export default function SaMerchantDetail() {
           <div className="sa-card-head">
             <div>
               <p className="sa-card-label">Merchant</p>
-              <h2 className="sa-card-value">{merchant.name}</h2>
+              <div className="sa-merchant-ident">
+                {merchant.photo ? (
+                  <img className="sa-merchant-avatar" src={merchant.photo} alt={merchant.name} width={44} height={44} />
+                ) : null}
+                <h2 className="sa-card-value">{merchant.name}</h2>
+              </div>
               <p className="sa-card-sub">
                 {merchant.id} · {merchant.owner} · {merchant.city} · paket {merchant.tier}
               </p>

@@ -326,6 +326,8 @@ export interface Merchant {
 export interface MerchantRecord {
   id: string
   name: string
+  /** Foto/cover toko (path aset lokal). */
+  photo: string
   /** Nama pemilik usaha, dipisah dari nama usaha supaya kontaknya bisa disimpan. */
   owner: string
   /** WA pemilik, E.164. Sebelum ini `AdminTenant.owner` hanya nama tanpa kontak. */

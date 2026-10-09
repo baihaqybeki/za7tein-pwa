@@ -164,6 +164,7 @@ export const merchants: MerchantRecord[] = [
   {
     id: 'am-1',
     name: 'Warung Sate Pak Ali',
+    photo: '/assets/img/merchant/warung-sate-pak-ali.svg',
     owner: 'Ali Santoso',
     ownerPhone: '+6281200000011',
     city: 'Irbid — Al-Hashmi',
@@ -181,6 +182,7 @@ export const merchants: MerchantRecord[] = [
   {
     id: 'am-2',
     name: 'Bakso Pak Kumis',
+    photo: '/assets/img/merchant/bakso-pak-kumis.svg',
     owner: 'Kumis Wijaya',
     ownerPhone: '+6281200000012',
     city: 'Irbid — Al-Hashmi',
@@ -198,6 +200,7 @@ export const merchants: MerchantRecord[] = [
   {
     id: 'am-3',
     name: 'Kopi Kenangan Kecil',
+    photo: '/assets/img/merchant/kopi-kenangan-kecil.svg',
     owner: 'Rina Kusuma',
     ownerPhone: '+6281200000013',
     city: 'Irbid — University St.',
@@ -230,6 +233,8 @@ export function merchantFromTenant(tenant: {
   return {
     id: `am-${tenant.id}`,
     name: tenant.name,
+    // Foto belum dikumpulkan onboarding (hanya jumlah foto) — kosong dulu.
+    photo: '',
     owner: tenant.owner,
     ownerPhone: '',
     city: tenant.city,
