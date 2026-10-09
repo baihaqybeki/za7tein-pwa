@@ -227,7 +227,10 @@ export default function Documentation() {
               bukan lagi state lokal halaman. Perpindahan order juga memicu{' '}
               <strong>notifikasi journey lintas peran</strong> lewat middleware{' '}
               <code className="doc-inline">journeyBridge</code> (assign kurir, terima/masak/kirim,
-              checkpoint kurir); inbox memfilter per <code className="doc-inline">audience</code>.
+              checkpoint kurir); inbox memfilter per <code className="doc-inline">audience</code>. Push
+              dikirim ke OS lewat <code className="doc-inline">deliverPush()</code> (Web Notifications API) untuk
+              sisi peran yang cocok, dan coverage zona dilengkapi{' '}
+              <code className="doc-inline">pointCoverage()</code> (poligon + radius).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

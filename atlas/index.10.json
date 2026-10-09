@@ -604,6 +604,63 @@
           "raw": "TASK-9980:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9991",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:53:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/push.ts (+37) — write via tool: ts: import type { AppNotification } from '..",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/push.ts"
+    },
+    {
+      "id": "TASK-9992",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:53:39",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/store/index.ts'\ns=open(p).read()\ns=s.replace(\"import { journ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9993",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:53:48",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/zones.ts (+26/-7) — edit via tool: ts: export function resolveCoverage(",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/zones.ts"
     }
   ]
 }

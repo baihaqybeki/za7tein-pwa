@@ -31,7 +31,8 @@ import superAdmin, { logAudit } from './slices/superAdminSlice'
 import notifications, { pushNotification } from './slices/notificationsSlice'
 import chat from './slices/chatSlice'
 import ui from './slices/uiSlice'
-import { journeyNotifications, type JourneyEvent } from '../lib/orderJourney'
+import { journeyNotifications, roleFromPath, type JourneyEvent } from '../lib/orderJourney'
+import { deliverPush } from '../lib/push'
 import type { AuditKind, DisputeResolution } from '../types'
 
 // Minimal localStorage-backed storage so we don't depend on redux-persist's
@@ -286,7 +287,12 @@ const journeyBridge: Middleware = (api) => (next) => (action) => {
   const state = api.getState() as RootState
   const emit = (event: JourneyEvent | undefined, code: string | undefined) => {
     if (!event || !code) return
-    journeyNotifications(event, code).forEach((n) => api.dispatch(pushNotification(n)))
+    const role = roleFromPath(window.location.pathname)
+    journeyNotifications(event, code).forEach((n) => {
+      api.dispatch(pushNotification(n))
+      // Kirim ke OS hanya untuk notifikasi yang menyasar sisi peran ini.
+      if (!n.audience || n.audience === 'all' || n.audience === role) deliverPush(n)
+    })
   }
   if (assignCourier.match(action)) {
     emit('assigned', before.merchant.orders.find((o) => o.id === action.payload.orderId)?.code)

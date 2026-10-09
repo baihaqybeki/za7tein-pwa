@@ -98,6 +98,25 @@ export function resolveCoverage(
 }
 
 /**
+ * Coverage lengkap sebuah titik: zona master + jarak + **kelayakan antar**.
+ * `deliverable` menggabungkan dua syarat coverage (dalam poligon master DAN
+ * ≤ radius maksimal) di satu tempat, supaya gate checkout dan konsol zona tidak
+ * menyusun ulang aturan yang sama dengan tafsir berbeda.
+ */
+export function pointCoverage(
+  point: GeoPoint,
+  polygons: ZoneGeometry[],
+  kitchen: GeoPoint = MERCHANT_KITCHEN,
+  maxMeters: number = MAX_DELIVERY_METERS,
+): Coverage & { deliverable: boolean } {
+  const coverage = resolveCoverage(point, polygons, kitchen)
+  return {
+    ...coverage,
+    deliverable: coverage.zone !== null && coverage.distanceMeters <= maxMeters,
+  }
+}
+
+/**
  * Ganti poligon yang bentuknya tidak valid (mis. sisa state lama dengan
  * koordinat gambar) dengan bentuk awal, supaya layar tidak menghitung NaN.
  */

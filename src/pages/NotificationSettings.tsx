@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 
 import { NOTIFICATION_SOUNDS, PUSH_CONTRACT, mockPushSubscription } from '../data/notifications'
 import { playNotificationSound } from '../lib/notificationSound'
+import { requestPushPermission } from '../lib/push'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { clearPush, registerPush, setSound, setSoundEnabled } from '../store/slices/notificationsSlice'
 
@@ -108,7 +109,8 @@ export default function NotificationSettings() {
                     <button
                       type="button"
                       className="btn-profile-primary"
-                      onClick={() => {
+                      onClick={async () => {
+                        const permission = await requestPushPermission()
                         dispatch(
                           registerPush({
                             subscription: mockPushSubscription(
@@ -116,7 +118,11 @@ export default function NotificationSettings() {
                             ),
                           }),
                         )
-                        toast.success('Push terdaftar (mock)')
+                        toast.success(
+                          permission === 'granted'
+                            ? 'Push terdaftar — izin notifikasi diberikan'
+                            : 'Push terdaftar (mock); izin notifikasi belum diberikan',
+                        )
                       }}
                     >
                       Aktifkan push
