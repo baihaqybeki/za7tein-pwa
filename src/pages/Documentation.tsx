@@ -237,6 +237,9 @@ export default function Documentation() {
               dengan batch kosong otomatis dibuang. `MerchantRecord` kini punya
               <code className="doc-inline">photo</code> (cover toko) dan ditampilkan di detail merchant SA,
               plus cover lokal <code className="doc-inline">bakso-pak-kumis</code>/<code className="doc-inline">kopi-kenangan-kecil</code>.
+              <code className="doc-inline">MerchantRecord</code> juga membawa <code className="doc-inline">rating</code>,
+              <code className="doc-inline">reviewCount</code>, <code className="doc-inline">openTime</code>,{' '}
+              <code className="doc-inline">closeTime</code> — jam operasional kini tampil di detail merchant SA.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

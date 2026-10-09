@@ -896,6 +896,25 @@
           "raw": "TASK-10020:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10031",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:09:49",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# tipe\np='src/types.ts'\ns=open(p).read()\ns=s.replace(\"\"\"  /** Foto/",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

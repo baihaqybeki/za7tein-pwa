@@ -1,4 +1,4 @@
-import { ArrowLeft, Ban, Bike, BookOpen, CheckCircle2, Clock, Scale, TriangleAlert } from 'lucide-react'
+import { ArrowLeft, Ban, Bike, BookOpen, CheckCircle2, Clock, Scale, Star, TriangleAlert } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { Link, useParams } from 'react-router-dom'
@@ -139,6 +139,10 @@ export default function SaMerchantDetail() {
               </div>
               <p className="sa-card-sub">
                 {merchant.id} · {merchant.owner} · {merchant.city} · paket {merchant.tier}
+              </p>
+              <p className="sa-card-sub" style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <Star size={12} strokeWidth={1.75} aria-hidden="true" /> {merchant.rating.toFixed(1)} (
+                {merchant.reviewCount}) · buka {merchant.openTime}–{merchant.closeTime}
               </p>
             </div>
             <span
