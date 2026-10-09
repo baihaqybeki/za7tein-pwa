@@ -5448,6 +5448,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9800",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:47:16",
+      "tags": [
+        "supabase",
+        "payment",
+        "fix",
+        "api"
+      ],
+      "summary": "Definisi semua metode bayar: payment_methods(cod,transfer,xendit_va,xendit_qris,wallet), fix CHECK orders/payments + provider, FK; OpenAPI e",
+      "conn": [
+        {
+          "id": "TASK-9700",
+          "type": "relates",
+          "raw": "TASK-9700:relates"
+        }
+      ]
     }
   ]
 }
