@@ -32,6 +32,8 @@ export interface Food {
   description: string
   isPopular?: boolean
   calories?: number
+  /** Estimasi waktu masak (menit) per menu — dipakai UI customer. */
+  cookMinutes?: number
   modifierGroups?: ModifierGroup[]
 }
 
@@ -285,6 +287,9 @@ export interface ExchangeRate {
   source: string
 }
 
+/** Status toko yang tampil di UI customer (open/busy/closed). */
+export type StoreStatus = 'open' | 'busy' | 'closed'
+
 export interface Merchant {
   id: string
   name: string
@@ -294,6 +299,8 @@ export interface Merchant {
   todayOrderCount: number
   dailyLimit: number
   isActive: boolean
+  /** Status toko: buka / sibuk / tutup (satu sumber, menggantikan `available`). */
+  storeStatus: StoreStatus
   openTime: string
   closeTime: string
   /** Foto toko (field `photo` D1, f16). Path aset atau object URL sesi unggah. */
@@ -372,6 +379,8 @@ export interface AppNotification {
   body: string
   time: string
   unread: boolean
+  /** Nada notifikasi (key dari NOTIFICATION_SOUNDS) — audio push. */
+  sound?: string
 }
 
 /**

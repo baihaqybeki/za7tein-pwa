@@ -3,18 +3,24 @@
 // pasti ikut menurunkan badge — angka dan daftarnya tidak bisa berbeda.
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import { mockNotifications } from '../../data/notifications'
+import { mockNotifications, DEFAULT_NOTIFICATION_SOUND } from '../../data/notifications'
 import type { AppNotification, PushSubscriptionRecord } from '../../types'
 
 interface NotificationsState {
   items: AppNotification[]
   /** Subscription push aktif (mock, M8). Null = belum mendaftar. */
   subscription: PushSubscriptionRecord | null
+  /** Audio push aktif? (preferensi; dipetakan ke push_subscriptions.sound_enabled). */
+  soundEnabled: boolean
+  /** Nada terpilih (key dari NOTIFICATION_SOUNDS). */
+  sound: string
 }
 
 const initialState: NotificationsState = {
   items: mockNotifications,
   subscription: null,
+  soundEnabled: true,
+  sound: DEFAULT_NOTIFICATION_SOUND,
 }
 
 const notificationsSlice = createSlice({
@@ -45,11 +51,24 @@ const notificationsSlice = createSlice({
     pushNotification(state, action: PayloadAction<AppNotification>) {
       state.items.unshift(action.payload)
     },
+    setSoundEnabled(state, action: PayloadAction<boolean>) {
+      state.soundEnabled = action.payload
+    },
+    setSound(state, action: PayloadAction<string>) {
+      state.sound = action.payload
+    },
   },
 })
 
-export const { markRead, markAllRead, registerPush, clearPush, pushNotification } =
-  notificationsSlice.actions
+export const {
+  markRead,
+  markAllRead,
+  registerPush,
+  clearPush,
+  pushNotification,
+  setSoundEnabled,
+  setSound,
+} = notificationsSlice.actions
 
 export const selectUnreadCount = (items: AppNotification[]) =>
   items.filter((n) => n.unread).length

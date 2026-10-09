@@ -43,6 +43,7 @@ import Home from './pages/Home'
 import Landing from './pages/Landing'
 import Language from './pages/Language'
 import MenuDetail from './pages/MenuDetail'
+import MerchantProfile from './pages/MerchantProfile'
 import MerchantCouriers from './pages/MerchantCouriers'
 import MerchantDashboard from './pages/MerchantDashboard'
 import MerchantMenu from './pages/MerchantMenu'
@@ -141,6 +142,7 @@ const customerRoutes: [string, ComponentType][] = [
   ['/filter', Filter],
   ['/favorites', Favorites],
   ['/menu-detail/:id', MenuDetail],
+  ['/store-profile', MerchantProfile],
   ['/checkout', Checkout],
   ['/address-selection', AddressSelection],
   ['/payment-selection', PaymentSelection],

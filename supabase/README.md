@@ -27,6 +27,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `04-seed-core.sql` | **Seed inti (idempoten)** — `merchants` (+`couriers`,`menus`,`menu_variants`,`deposits`,`merchant_credits`) memakai kolom **`store_name`**. Menutup FK `merchants` yang kosong. |
 | `05-seed-merchants.sql` | **Seed banyak merchant + menu** — 8 merchant (total 9) + 23 menu; tiap menu `image = /assets/img/menu/<slug>.webp` sesuai namanya (5 hidangan: nasi goreng, sate ayam/kambing, lontong, es teh). Menu lama dinormalisasi agar nama↔foto cocok. |
 | `06-seed-people.sql` | **Seed people** — 6 customer + 5 kurir + 2 admin (cs) + 2 super admin (dengan baris `operators` → `roles`). Total user: 27. |
+| `07-features-customer.sql` | **Skema 4 fitur customer** — `merchants.store_status` (open/busy/closed, ganti `available`), `menus.cook_minutes`, `push_subscriptions.sound_enabled`/`sound`, tabel `notifications` (+RLS). |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |

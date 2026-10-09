@@ -14,6 +14,7 @@ export const mockNotifications: AppNotification[] = [
     body: 'Warung Sate Pak Ali sedang menyiapkan pesanan SA-1041.',
     time: '12.32',
     unread: true,
+    sound: 'order',
   },
   {
     id: 'n2',
@@ -22,6 +23,7 @@ export const mockNotifications: AppNotification[] = [
     body: 'Budi Santoso sedang mengantar pesananmu ke Green View Apartment.',
     time: '12.41',
     unread: true,
+    sound: 'courier',
   },
   {
     id: 'n3',
@@ -30,6 +32,7 @@ export const mockNotifications: AppNotification[] = [
     body: 'Berlaku sampai akhir bulan, minimum belanja Rp50.000.',
     time: '09.15',
     unread: true,
+    sound: 'promo',
   },
   {
     id: 'n4',
@@ -38,6 +41,7 @@ export const mockNotifications: AppNotification[] = [
     body: 'Transfer Manual Rp118.000 sudah dikonfirmasi.',
     time: 'Kemarin',
     unread: false,
+    sound: 'payment',
   },
   {
     id: 'n5',
@@ -46,6 +50,7 @@ export const mockNotifications: AppNotification[] = [
     body: 'Pesanan S7-1019 sudah diterima. Beri rating untuk kurirnya?',
     time: '2 hari lalu',
     unread: false,
+    sound: 'order',
   },
   {
     id: 'n6',
@@ -54,8 +59,34 @@ export const mockNotifications: AppNotification[] = [
     body: 'Versi baru tersedia dengan perbaikan pada pelacakan pesanan.',
     time: '3 hari lalu',
     unread: false,
+    sound: 'system',
   },
 ]
+
+/* ── Nada notifikasi (audio push) ───────────────────────────────────────────── */
+
+/**
+ * Katalog nada notifikasi. Tidak ada berkas audio baru (AGENTS §6: aset dari
+ * `public/assets/`); nadanya dibangkitkan di klien lewat Web Audio (nada dasar
+ * per key) supaya tetap bisa didengar tanpa menambah aset biner.
+ */
+export const NOTIFICATION_SOUNDS = [
+  { key: 'order', label: 'Pesanan baru', tones: [660, 880] },
+  { key: 'courier', label: 'Kurir tiba', tones: [880, 660, 880] },
+  { key: 'promo', label: 'Promo', tones: [523, 659, 784] },
+  { key: 'payment', label: 'Pembayaran', tones: [784, 1047] },
+  { key: 'system', label: 'Sistem', tones: [440] },
+] as const
+
+export const DEFAULT_NOTIFICATION_SOUND = 'order'
+
+export function soundLabel(key: string): string {
+  return NOTIFICATION_SOUNDS.find((s) => s.key === key)?.label ?? 'Nada'
+}
+
+export function soundTones(key: string): readonly number[] {
+  return NOTIFICATION_SOUNDS.find((s) => s.key === key)?.tones ?? [440]
+}
 
 /* ── Push (R-PUSH-01, M8) ──────────────────────────────────────────────────── */
 

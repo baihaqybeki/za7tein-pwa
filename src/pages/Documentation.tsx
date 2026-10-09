@@ -198,6 +198,18 @@ export default function Documentation() {
               <code className="doc-inline">useDailyExchangeRate</code>) — lihat bagian{' '}
               <em>Mata Uang — IDR + JOD</em> untuk aturan dan UNRESOLVED-nya.
             </p>
+            <p className="doc-p">
+              Terbaru (2026-10-10): empat fitur customer —{' '}
+              <strong>profil merchant</strong> (<code className="doc-inline">/store-profile</code>),
+              estimasi <strong>waktu masak per menu</strong> (badge di detail menu & profil toko),
+              status toko <strong>buka/sibuk/tutup</strong> (<code className="doc-inline">store_status</code>,
+              satu sumber menggantikan <code className="doc-inline">available</code>), dan{' '}
+              <strong>audio push</strong> (toggle + pemilih nada di Pengaturan Notifikasi, nada dibangkitkan
+              via Web Audio). Skema DB: <code className="doc-inline">merchants.store_status</code>,{' '}
+              <code className="doc-inline">menus.cook_minutes</code>,{' '}
+              <code className="doc-inline">push_subscriptions.sound_enabled/sound</code>, tabel{' '}
+              <code className="doc-inline">notifications</code>.
+            </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (
                 <span key={tag} className="doc-hero-tag">

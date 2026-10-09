@@ -3,7 +3,7 @@ import { ChevronLeft, Clock3, Minus, Plus, ShoppingCart, Star } from 'lucide-rea
 import toast from 'react-hot-toast'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { modifierExtra, modifierSummary } from '../data/foods'
+import { cookMinutesFor, modifierExtra, modifierSummary } from '../data/foods'
 import { useCatalog } from '../hooks/useCatalog'
 import { menuDetailReviews } from '../data/reviews'
 import { useAppDispatch } from '../hooks/useAppStore'
@@ -125,10 +125,18 @@ export default function MenuDetail() {
                   <span>{food.deliveryTime}</span>
                 </div>
                 <div className="info-badge" role="listitem">
+                  <Clock3 size={18} strokeWidth={1.75} />
+                  <span>±{cookMinutesFor(food)} menit masak</span>
+                </div>
+                <div className="info-badge" role="listitem">
                   <Star size={16} strokeWidth={1.75} color="var(--star)" fill="var(--star)" />
                   <span>{food.rating}</span>
                 </div>
               </div>
+
+              <Link className="menu-store-link" to="/store-profile">
+                Lihat profil toko
+              </Link>
 
               <div className="menu-description-section">
                 <h3 className="description-title s7-parallax--title">Description</h3>

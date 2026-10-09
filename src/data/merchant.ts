@@ -9,6 +9,7 @@ import type {
   MerchantRecord,
   OrderStage,
   PaymentMethod,
+  StoreStatus,
   ZoneId,
 } from '../types'
 
@@ -131,6 +132,7 @@ export const mockMerchant: Merchant = {
   todayOrderCount: 7,
   dailyLimit: 10,
   isActive: true,
+  storeStatus: 'open',
   openTime: '07:00',
   closeTime: '22:00',
   // Foto contoh: memakai ulang aset menu yang sudah ada (tanpa aset baru).
@@ -423,4 +425,11 @@ export const HOLD_EVENT_LABEL: Record<HoldEventName, string> = {
   hold_settled: 'hold_settled — dana diteruskan ke merchant',
   hold_released: 'hold_released — hold dilepas (batal sebelum match)',
   hold_reversed: 'hold_reversed — reversal potongan (batal sesudah match)',
+}
+
+/** Label status toko untuk UI customer (open/busy/closed). */
+export const STORE_STATUS_LABEL: Record<StoreStatus, string> = {
+  open: 'Buka',
+  busy: 'Sibuk',
+  closed: 'Tutup',
 }

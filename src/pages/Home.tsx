@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react'
-import { money } from '../data/merchant'
+import { STORE_STATUS_LABEL, mockMerchant, money } from '../data/merchant'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
@@ -19,6 +19,7 @@ export default function Home() {
   const user = useAppSelector((s) => s.auth.user)
   const unreadNotifications = useAppSelector((s) => selectUnreadCount(s.notifications.items))
   const locationLabel = useAppSelector((s) => s.ui.locationLabel)
+  const storeStatus = useAppSelector((s) => s.ui.storeStatus)
   const [category, setCategory] = useState('all')
   const { categories, deals, popular } = useCatalog()
 
@@ -42,6 +43,17 @@ export default function Home() {
         />
 
         <div className="home-content">
+          <Link className="home-store-link" to="/store-profile">
+            <img className="home-store-link__logo" src={mockMerchant.logo} alt="" width={44} height={44} />
+            <span className="home-store-link__body">
+              <span className="home-store-link__name">{mockMerchant.name}</span>
+              <span className={`store-status store-status--${storeStatus}`}>
+                {STORE_STATUS_LABEL[storeStatus]}
+              </span>
+            </span>
+            <span className="home-store-link__cta">Profil toko</span>
+          </Link>
+
           <div className="categories-section">
             <h2 className="section-title s7-parallax--title">Categories</h2>
             <div className="categories-scroll" role="list">

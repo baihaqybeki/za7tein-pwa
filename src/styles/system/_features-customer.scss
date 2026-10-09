@@ -1,0 +1,252 @@
+/* ── Fitur customer: profil merchant, cook time, store status, audio ─────── */
+
+/* Status toko (open/busy/closed) */
+.store-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.store-status--open {
+  background: var(--green-soft);
+  color: var(--success-ink);
+}
+.store-status--busy {
+  background: var(--warning-soft);
+  color: var(--warning-ink);
+}
+.store-status--closed {
+  background: var(--red-soft);
+  color: var(--danger-ink);
+}
+
+/* Link toko di beranda */
+.home-store-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  text-decoration: none;
+  color: inherit;
+}
+.home-store-link__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.home-store-link__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+.home-store-link__name {
+  font-weight: 700;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-store-link__cta {
+  flex-shrink: 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--orange-ink);
+}
+
+/* Halaman profil merchant */
+.merchant-profile {
+  padding-bottom: var(--space-6);
+}
+.merchant-profile__hero {
+  position: relative;
+  height: 160px;
+  background: var(--orange-soft);
+  display: grid;
+  place-items: center;
+}
+.merchant-profile__back {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  background: var(--surface);
+}
+.merchant-profile__logo {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.merchant-profile__card {
+  margin: calc(-1 * var(--space-6)) var(--space-5) 0;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+}
+.merchant-profile__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.merchant-profile__name {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.merchant-profile__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+.merchant-profile__notice {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--warning-ink);
+}
+.merchant-profile__notice--closed {
+  color: var(--danger-ink);
+}
+
+/* Toggle status (demo) */
+.store-status-toggle {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.store-status-toggle__btn {
+  flex: 1;
+  min-height: var(--touch-min);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-weight: 700;
+  cursor: pointer;
+}
+.store-status-toggle__btn.is-active {
+  background: var(--sa7tein-orange);
+  border-color: var(--sa7tein-orange);
+  color: var(--on-brand);
+}
+
+/* Daftar menu di profil toko */
+.merchant-profile__menus {
+  margin: var(--space-5) var(--space-5) 0;
+}
+.merchant-profile__menus-title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.merchant-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.merchant-menu-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  cursor: pointer;
+}
+.merchant-menu-row__img {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.merchant-menu-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  flex: 1;
+}
+.merchant-menu-row__name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.merchant-menu-row__cook {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+.merchant-menu-row__price {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--orange-ink);
+}
+
+/* Link "profil toko" di detail menu */
+.menu-store-link {
+  display: inline-block;
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--orange-ink);
+  text-decoration: none;
+}
+
+/* Pemilih nada notifikasi */
+.sound-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+.sound-chip {
+  min-height: var(--touch-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+}
+.sound-chip.is-active {
+  background: var(--orange-soft);
+  border-color: var(--sa7tein-orange);
+  color: var(--orange-soft-ink);
+}
+.sound-chip:disabled,
+.admin-btn-ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

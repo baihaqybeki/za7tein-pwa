@@ -60,3 +60,6 @@
 // gerak masuk berurutan, reduced motion). Terakhir supaya `:active` di sini
 // tidak diratakan oleh aturan tekan warisan yang lebih awal.
 @use "./system/interaction";
+
+// Fitur customer baru (profil merchant, cook time, store status, audio push).
+@use "./system/features-customer";

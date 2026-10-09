@@ -131,6 +131,21 @@ const MENU: Array<Omit<Food, 'modifierGroups'> & { modifierGroups?: ModifierGrou
 
 export const foods: Food[] = MENU
 
+/**
+ * Estimasi waktu masak per menu (menit). Pakai `cookMinutes` bila ada (nilai
+ * dari DB), jika tidak diturunkan dari nama hidangan. Dipakai UI customer
+ * (kartu menu & profil toko) — satu tempat, bukan disalin ke tiap layar.
+ */
+export function cookMinutesFor(food: Pick<Food, 'name' | 'cookMinutes'>): number {
+  if (typeof food.cookMinutes === 'number') return food.cookMinutes
+  const name = food.name.toLowerCase()
+  if (name.includes('nasi goreng')) return 15
+  if (name.includes('sate')) return 20
+  if (name.includes('lontong')) return 10
+  if (name.includes('es ') || name.includes('teh') || name.includes('kopi') || name.includes('jus')) return 3
+  return 15
+}
+
 /** Ringkasan pilihan modifier, mis. "Sedang, Lontong". */
 export function modifierSummary(groups: ModifierGroup[] | undefined, chosen: string[]): string {
   if (!groups || chosen.length === 0) return ''
