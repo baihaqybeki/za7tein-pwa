@@ -135,8 +135,8 @@ export const mockMerchant: Merchant = {
   storeStatus: 'open',
   openTime: '07:00',
   closeTime: '22:00',
-  // Foto contoh: memakai ulang aset menu yang sudah ada (tanpa aset baru).
-  logo: '/assets/img/menu/sate-ayam.webp',
+  // Cover toko (SVG lokal, inisial + palet per toko) — bukan foto menu.
+  logo: '/assets/img/merchant/warung-sate-pak-ali.svg',
   bank: { name: 'BCA', account: '8830 1122 3344', holder: 'Ali Santoso' },
 }
 

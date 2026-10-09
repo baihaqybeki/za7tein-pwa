@@ -5469,6 +5469,101 @@
           "raw": "TASK-9700:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9801",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:55:14",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/gen-covers.mjs (+49) — write via tool: import { mkdirSync, writeFileSync }",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/gen-covers.mjs"
+    },
+    {
+      "id": "TASK-9802",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:55:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts (+4/-4) — edit via tool: ts: openTime: '07:00',",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts"
+    },
+    {
+      "id": "TASK-9803",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:56:51",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/09-merchant-covers.sql (+22) — write via tool: -- ============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/09-merchant-covers.sql"
+    },
+    {
+      "id": "TASK-9804",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:56:58",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `08-payment-methods.sql` | **Definisi ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9805",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:58:15",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+5/-3) — edit via tool: tsx: <code className=\"doc-inline\">",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
     }
   ]
 }

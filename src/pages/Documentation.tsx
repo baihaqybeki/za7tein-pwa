@@ -208,7 +208,9 @@ export default function Documentation() {
               via Web Audio). Skema DB: <code className="doc-inline">merchants.store_status</code>,{' '}
               <code className="doc-inline">menus.cook_minutes</code>,{' '}
               <code className="doc-inline">push_subscriptions.sound_enabled/sound</code>, tabel{' '}
-              <code className="doc-inline">notifications</code>.
+              <code className="doc-inline">notifications</code>. Cover tiap toko kini SVG lokal
+              unik (<code className="doc-inline">public/assets/img/merchant/</code>), menggantikan
+              foto yang kosong/dipakai ulang.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

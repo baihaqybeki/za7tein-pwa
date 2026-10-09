@@ -29,6 +29,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `06-seed-people.sql` | **Seed people** — 6 customer + 5 kurir + 2 admin (cs) + 2 super admin (dengan baris `operators` → `roles`). Total user: 27. |
 | `07-features-customer.sql` | **Skema 4 fitur customer** — `merchants.store_status` (open/busy/closed, ganti `available`), `menus.cook_minutes`, `push_subscriptions.sound_enabled`/`sound`, tabel `notifications` (+RLS). |
 | `08-payment-methods.sql` | **Definisi semua metode bayar** — tabel `payment_methods` (cod, transfer, xendit_va, xendit_qris, **wallet**), fix CHECK `orders.payment_method`/`payments.method` (tambah wallet), provider `payments` (+wallet), FK ke katalog. |
+| `09-merchant-covers.sql` | **Cover toko per merchant** — isi `merchants.photo` dengan SVG lokal (`public/assets/img/merchant/<slug>.svg`, inisial + palet unik per toko). |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |
