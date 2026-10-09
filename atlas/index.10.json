@@ -331,6 +331,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9970",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:40:10",
+      "tags": [
+        "customer",
+        "audio",
+        "notification",
+        "lib",
+        "hook"
+      ],
+      "summary": "Fungsi notifikasi suara reusable: lib/notificationSound.playNotificationSound + hook useNotificationSound (bunyi saat notif baru, hormati so",
+      "conn": [
+        {
+          "id": "TASK-9960",
+          "type": "relates",
+          "raw": "TASK-9960:relates"
+        }
+      ]
     }
   ]
 }
