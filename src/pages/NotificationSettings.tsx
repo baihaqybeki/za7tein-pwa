@@ -6,35 +6,11 @@ import { useNavigate } from 'react-router-dom'
 
 import toast from 'react-hot-toast'
 
-import { NOTIFICATION_SOUNDS, PUSH_CONTRACT, mockPushSubscription, soundTones } from '../data/notifications'
+import { NOTIFICATION_SOUNDS, PUSH_CONTRACT, mockPushSubscription } from '../data/notifications'
+import { playNotificationSound } from '../lib/notificationSound'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { clearPush, registerPush, setSound, setSoundEnabled } from '../store/slices/notificationsSlice'
 
-/** Bunyikan nada notifikasi lewat Web Audio (tanpa berkas aset). */
-function playSound(tones: readonly number[]) {
-  try {
-    const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-    if (!Ctx) return
-    const ctx = new Ctx()
-    tones.forEach((hz, i) => {
-      const osc = ctx.createOscillator()
-      const gain = ctx.createGain()
-      osc.type = 'sine'
-      osc.frequency.value = hz
-      osc.connect(gain)
-      gain.connect(ctx.destination)
-      const t = ctx.currentTime + i * 0.12
-      gain.gain.setValueAtTime(0.0001, t)
-      gain.gain.exponentialRampToValueAtTime(0.2, t + 0.02)
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.11)
-      osc.start(t)
-      osc.stop(t + 0.12)
-    })
-    window.setTimeout(() => ctx.close(), tones.length * 120 + 200)
-  } catch {
-    // Web Audio tidak tersedia (mis. autoplay diblokir) — abaikan.
-  }
-}
 
 const TOGGLES = [
   { id: 'notifications', label: 'Notifikasi', on: true },
@@ -173,7 +149,7 @@ export default function NotificationSettings() {
                       aria-pressed={sound === s.key}
                       onClick={() => {
                         dispatch(setSound(s.key))
-                        playSound(s.tones)
+                        playNotificationSound(s.key)
                       }}
                     >
                       {s.label}
@@ -184,7 +160,7 @@ export default function NotificationSettings() {
                   type="button"
                   className="admin-btn-ghost"
                   disabled={!soundEnabled}
-                  onClick={() => playSound(soundTones(sound))}
+                  onClick={() => playNotificationSound(sound)}
                 >
                   Coba suara
                 </button>

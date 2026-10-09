@@ -12,6 +12,7 @@ import { CurrencyConverter } from '../components/ui/CurrencyConverter'
 import { FoodCard } from '../components/ui/FoodCard'
 import { useAppSelector } from '../hooks/useAppStore'
 import { useCatalog } from '../hooks/useCatalog'
+import { useNotificationSound } from '../hooks/useNotificationSound'
 import { selectUnreadCount } from '../store/slices/notificationsSlice'
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
   const storeStatus = useAppSelector((s) => s.ui.storeStatus)
   const [category, setCategory] = useState('all')
   const { categories, deals, popular } = useCatalog()
+  useNotificationSound()
 
   const visiblePopular =
     category === 'all' ? popular : popular.filter((f) => f.category === category)

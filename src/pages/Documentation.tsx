@@ -218,7 +218,10 @@ export default function Documentation() {
               <code className="doc-inline">rating_reviews</code> (795 order, 956 ulasan mock).
               Sejumlah field konsol kini <strong>editable</strong> (inline form + Simpan): data
               merchant & pengguna di SA, label/catatan zona, jam operasional + koordinat toko,
-              dan profil kurir.
+              dan profil kurir. Nada notifikasi kini satu fungsi bersama{' '}
+              <code className="doc-inline">playNotificationSound()</code> (lib) yang dipakai
+              pengaturan (preview) dan hook <code className="doc-inline">useNotificationSound</code>{' '}
+              saat notifikasi baru masuk.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

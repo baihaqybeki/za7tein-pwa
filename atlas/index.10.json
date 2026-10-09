@@ -274,6 +274,63 @@
           "raw": "TASK-9950:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9961",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:38:43",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/notificationSound.ts (+40) — write via tool: ts: import { DEFAULT_NOTIFICATION_",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/notificationSound.ts"
+    },
+    {
+      "id": "TASK-9962",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:38:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useNotificationSound.ts (+22) — write via tool: ts: import { useEffect, useRe",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useNotificationSound.ts"
+    },
+    {
+      "id": "TASK-9963",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:39:10",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/Home.tsx'\ns=open(p).read()\ns=s.replace(\"import { useCa",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
