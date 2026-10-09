@@ -10709,6 +10709,14 @@
     {
       "id": "TASK-9463",
       "shard": 9
+    },
+    {
+      "id": "TASK-9471",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9472",
+      "shard": 9
     }
   ],
   "docs": [
@@ -16803,6 +16811,10 @@
     {
       "id": "TASK-9460",
       "shard": 9
+    },
+    {
+      "id": "TASK-9470",
+      "shard": 9
     }
   ],
   "append-only": [
@@ -16925,6 +16937,10 @@
     {
       "id": "TASK-9460",
       "shard": 9
+    },
+    {
+      "id": "TASK-9470",
+      "shard": 9
     }
   ],
   "fix": [
@@ -16936,6 +16952,16 @@
   "merchants": [
     {
       "id": "TASK-9460",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9470",
+      "shard": 9
+    }
+  ],
+  "menus": [
+    {
+      "id": "TASK-9470",
       "shard": 9
     }
   ]

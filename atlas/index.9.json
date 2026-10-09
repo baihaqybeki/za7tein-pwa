@@ -4831,6 +4831,65 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9470",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:18:18",
+      "tags": [
+        "supabase",
+        "seed",
+        "merchants",
+        "menus"
+      ],
+      "summary": "Seed 8 merchant baru (total 9) + 23 menu; image = /assets/img/menu/<slug>.webp cocok nama (5 hidangan); menu lama dinormalisasi; mismatch 0",
+      "conn": [
+        {
+          "id": "TASK-9460",
+          "type": "relates",
+          "raw": "TASK-9460:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9471",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:19:21",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-people.mjs (+68) — write via tool: import { writeFileSync } from 'no",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-people.mjs"
+    },
+    {
+      "id": "TASK-9472",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:19:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `05-seed-merchants.sql` | **Seed banya",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }
