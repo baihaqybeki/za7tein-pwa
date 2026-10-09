@@ -5797,6 +5797,85 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9920",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:06:57",
+      "tags": [
+        "supabase",
+        "orders",
+        "reviews",
+        "rating",
+        "seed"
+      ],
+      "summary": "Generate 70 order (done) + 93 rating_reviews (merchant & menu); rating_avg/rating_count merchant dihitung ulang dari ulasan (avg 4.53)",
+      "conn": [
+        {
+          "id": "TASK-9910",
+          "type": "relates",
+          "raw": "TASK-9910:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9921",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:07:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/gen-orders2.mjs (+74) — write via tool: import { writeFileSync } from 'nod",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/gen-orders2.mjs"
+    },
+    {
+      "id": "TASK-9922",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:08:16",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts (+2/-2) — edit via tool: ts: rating: 4.8,",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts"
+    },
+    {
+      "id": "TASK-9923",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:08:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+7/-5) — edit via tool: tsx: foto yang kosong/dipakai ulan",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
     }
   ]
 }

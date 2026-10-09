@@ -214,6 +214,8 @@ export default function Documentation() {
               <strong>rating</strong> (<code className="doc-inline">rating_avg</code>/
               <code className="doc-inline">rating_count</code>) dan <strong>jam operasional</strong>{' '}
               (<code className="doc-inline">open_time</code>/<code className="doc-inline">close_time</code>).
+              Rating <code className="doc-inline">rating_avg</code> dihitung dari{' '}
+              <code className="doc-inline">rating_reviews</code> (795 order, 956 ulasan mock).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

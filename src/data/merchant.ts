@@ -136,7 +136,7 @@ export const mockMerchant: Merchant = {
   openTime: '07:00',
   closeTime: '22:00',
   rating: 4.8,
-  reviewCount: 214,
+  reviewCount: 67,
   // Cover toko (SVG lokal, inisial + palet per toko) — bukan foto menu.
   logo: '/assets/img/merchant/warung-sate-pak-ali.svg',
   bank: { name: 'BCA', account: '8830 1122 3344', holder: 'Ali Santoso' },
