@@ -875,6 +875,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10030",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:08:04",
+      "tags": [
+        "merchant",
+        "photo",
+        "ui",
+        "fix"
+      ],
+      "summary": "MerchantRecord.photo ditambahkan (tipe+seed) + tampil di detail merchant SA; 2 cover baru (bakso-pak-kumis, kopi-kenangan-kecil); gate PASS",
+      "conn": [
+        {
+          "id": "TASK-10020",
+          "type": "relates",
+          "raw": "TASK-10020:relates"
+        }
+      ]
     }
   ]
 }
