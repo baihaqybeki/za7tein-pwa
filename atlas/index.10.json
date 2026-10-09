@@ -758,6 +758,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10010",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:59:22",
+      "tags": [
+        "merchant",
+        "batch",
+        "order",
+        "logic"
+      ],
+      "summary": "Logic batching order F12: tipe OrderBatch + data/batches + merchantSlice (addOrderToBatch/closeBatch/assignBatchCourier/startBatchDelivery/r",
+      "conn": [
+        {
+          "id": "TASK-10000",
+          "type": "relates",
+          "raw": "TASK-10000:relates"
+        }
+      ]
     }
   ]
 }
