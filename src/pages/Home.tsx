@@ -47,6 +47,10 @@ export default function Home() {
             <img className="home-store-link__logo" src={mockMerchant.logo} alt="" width={44} height={44} />
             <span className="home-store-link__body">
               <span className="home-store-link__name">{mockMerchant.name}</span>
+              <span className="home-store-link__rating">
+                <Star size={12} fill="currentColor" aria-hidden="true" /> {mockMerchant.rating.toFixed(1)} (
+                {mockMerchant.reviewCount}) · {mockMerchant.openTime}–{mockMerchant.closeTime}
+              </span>
               <span className={`store-status store-status--${storeStatus}`}>
                 {STORE_STATUS_LABEL[storeStatus]}
               </span>

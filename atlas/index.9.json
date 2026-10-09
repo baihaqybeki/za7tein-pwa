@@ -5564,6 +5564,179 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-9900",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:58:57",
+      "tags": [
+        "assets",
+        "merchant",
+        "covers",
+        "seed"
+      ],
+      "summary": "9 cover toko SVG lokal unik (inisial+palet) -> public/assets/img/merchant, isi merchants.photo, mock logo; menu tetap 5 foto asli; gate stor",
+      "conn": [
+        {
+          "id": "TASK-9800",
+          "type": "relates",
+          "raw": "TASK-9800:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9901",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:04",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/10-merchant-rating-hours.sql (+34) — write via tool: -- ======================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/10-merchant-rating-hours.sql"
+    },
+    {
+      "id": "TASK-9902",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts (+6/-3) — edit via tool: ts: storeStatus: StoreStatus",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts"
+    },
+    {
+      "id": "TASK-9903",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:25",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts (+5/-3) — edit via tool: ts: storeStatus: 'open',",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/merchant.ts"
+    },
+    {
+      "id": "TASK-9904",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:33",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantProfile.tsx (+2/-6) — edit via tool: tsx: const menus = popular.slice",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantProfile.tsx"
+    },
+    {
+      "id": "TASK-9905",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:48",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx (+10/-6) — edit via tool: tsx: <span className=\"home-store-link__bod",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx"
+    },
+    {
+      "id": "TASK-9906",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:00:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_features-customer.scss (+13/-6) — edit via tool: .home-store-link__c",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_features-customer.scss"
+    },
+    {
+      "id": "TASK-9907",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:01:07",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+7/-4) — edit via tool: tsx: <code className=\"doc-inline\">",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-9908",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:02:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `09-merchant-covers.sql` | **Cover tok",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

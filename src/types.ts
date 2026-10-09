@@ -303,6 +303,9 @@ export interface Merchant {
   storeStatus: StoreStatus
   openTime: string
   closeTime: string
+  /** Rating agregat merchant (dari `rating_reviews`) + jumlah ulasan. */
+  rating: number
+  reviewCount: number
   /** Foto toko (field `photo` D1, f16). Path aset atau object URL sesi unggah. */
   logo: string
   bank: { name: string; account: string; holder: string }

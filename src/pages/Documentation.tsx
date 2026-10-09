@@ -210,7 +210,10 @@ export default function Documentation() {
               <code className="doc-inline">push_subscriptions.sound_enabled/sound</code>, tabel{' '}
               <code className="doc-inline">notifications</code>. Cover tiap toko kini SVG lokal
               unik (<code className="doc-inline">public/assets/img/merchant/</code>), menggantikan
-              foto yang kosong/dipakai ulang.
+              foto yang kosong/dipakai ulang. Merchant juga menampilkan{' '}
+              <strong>rating</strong> (<code className="doc-inline">rating_avg</code>/
+              <code className="doc-inline">rating_count</code>) dan <strong>jam operasional</strong>{' '}
+              (<code className="doc-inline">open_time</code>/<code className="doc-inline">close_time</code>).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

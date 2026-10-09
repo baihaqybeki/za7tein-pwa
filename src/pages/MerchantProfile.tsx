@@ -24,10 +24,6 @@ export default function MerchantProfile() {
   const { popular } = useCatalog()
 
   const menus = popular.slice(0, 8)
-  const rating =
-    menus.length > 0
-      ? (menus.reduce((sum, m) => sum + m.rating, 0) / menus.length).toFixed(1)
-      : '4.8'
   const avgCook = menus.length
     ? Math.round(menus.reduce((sum, m) => sum + cookMinutesFor(m), 0) / menus.length)
     : 0
@@ -56,7 +52,8 @@ export default function MerchantProfile() {
               </span>
             </div>
             <p className="merchant-profile__meta">
-              <Star size={14} fill="currentColor" aria-hidden="true" /> {rating} ·{' '}
+              <Star size={14} fill="currentColor" aria-hidden="true" /> {mockMerchant.rating.toFixed(1)}{' '}
+              ({mockMerchant.reviewCount}) ·{' '}
               <Clock size={14} aria-hidden="true" /> buka {mockMerchant.openTime}–{mockMerchant.closeTime} ·{' '}
               <MapPin size={14} aria-hidden="true" /> 1,2 km
             </p>
