@@ -4949,6 +4949,28 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-9490",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:26:29",
+      "tags": [
+        "api",
+        "swagger",
+        "auth",
+        "superadmin",
+        "admin"
+      ],
+      "summary": "Akun Supabase Auth cs2/cs3/owner/ops dibuat + link auth_user_id (login 200); OpenAPI didokumentasikan akun demo admin & SA; redeploy sa7tein",
+      "conn": [
+        {
+          "id": "TASK-9480",
+          "type": "relates",
+          "raw": "TASK-9480:relates"
+        }
+      ]
     }
   ]
 }
