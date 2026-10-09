@@ -4890,6 +4890,65 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9480",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:20:34",
+      "tags": [
+        "supabase",
+        "seed",
+        "users",
+        "roles"
+      ],
+      "summary": "Seed people: 6 customer, 5 kurir, 2 cs, 2 superadmin (+operators->roles); total 27 user, 7 customer, 6 courier, 4 operator",
+      "conn": [
+        {
+          "id": "TASK-9470",
+          "type": "relates",
+          "raw": "TASK-9470:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9481",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:23:35",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/create-auth.mjs (+52) — write via tool: const REF = 'dwzxtnfesmpobnepilhl'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/create-auth.mjs"
+    },
+    {
+      "id": "TASK-9482",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:24:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+30/-3) — edit via tool: Perubahan apa pun pada kontrak ini ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
     }
   ]
 }

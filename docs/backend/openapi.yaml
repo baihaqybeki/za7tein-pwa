@@ -24,6 +24,33 @@ info:
 
     Perubahan apa pun pada kontrak ini wajib disertai pembaruan flow yang relevan di repo
     `za7tein-pwa` (`docs/design/flows/`), karena flow-lah yang menjadi basis requirement.
+
+    ### Akun demo (Supabase Auth, password `demo1234`)
+
+    | Email | Peran | Konsol |
+    |---|---|---|
+    | `customer@sa7tein.app` | customer | App customer |
+    | `merchant@sa7tein.app` | merchant | Konsol merchant |
+    | `courier@sa7tein.app` | courier | App kurir |
+    | `cs@sa7tein.app` | cs (admin) | Panel CS (`/admin/*`) |
+    | `cs2@sa7tein.app` | cs (admin) | Panel CS |
+    | `cs3@sa7tein.app` | cs (admin) | Panel CS |
+    | `owner@sa7tein.app` | superadmin (owner) | Konsol SA (`/superadmin/*`) |
+    | `ops@sa7tein.app` | superadmin (ops) | Konsol SA |
+
+    Login: `POST /auth/login` (atau GoTrue `POST /auth/v1/token?grant_type=password`).
+    Admin & superadmin memakai alur **email + password yang sama**; peran server menentukan
+    akses (`app_role()` → `app_is_ops()` untuk `cs`/`superadmin`).
+
+  x-demo-accounts:
+    - { email: customer@sa7tein.app, role: customer, password: demo1234 }
+    - { email: merchant@sa7tein.app, role: merchant, password: demo1234 }
+    - { email: courier@sa7tein.app, role: courier, password: demo1234 }
+    - { email: cs@sa7tein.app, role: cs, password: demo1234, console: /admin }
+    - { email: cs2@sa7tein.app, role: cs, password: demo1234, console: /admin }
+    - { email: cs3@sa7tein.app, role: cs, password: demo1234, console: /admin }
+    - { email: owner@sa7tein.app, role: superadmin, scope: owner, password: demo1234, console: /superadmin }
+    - { email: ops@sa7tein.app, role: superadmin, scope: ops, password: demo1234, console: /superadmin }
   contact:
     name: Sa7tein Backend
     url: https://github.com/baihaqybeki/sa7tein
@@ -172,6 +199,19 @@ paths:
                   description: Email atau nomor E.164
                 password: { type: string }
                 role: { $ref: '#/components/schemas/UserRole' }
+            examples:
+              customer:
+                summary: Customer
+                value: { identifier: customer@sa7tein.app, password: demo1234, role: customer }
+              admin_cs:
+                summary: Admin (CS) — panel /admin
+                value: { identifier: cs@sa7tein.app, password: demo1234, role: cs }
+              superadmin_owner:
+                summary: Super admin (owner) — konsol /superadmin
+                value: { identifier: owner@sa7tein.app, password: demo1234, role: superadmin }
+              superadmin_ops:
+                summary: Super admin (ops)
+                value: { identifier: ops@sa7tein.app, password: demo1234, role: superadmin }
       responses:
         '200':
           description: Sesi dibuat
