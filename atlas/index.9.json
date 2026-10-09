@@ -4612,6 +4612,90 @@
           "raw": "TASK-9440:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9451",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:02:37",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-restore.mjs (+184) — write via tool: import { readFileSync, writeFil",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-restore.mjs"
+    },
+    {
+      "id": "TASK-9452",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:03:09",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/reseed2.mjs (+45) — write via tool: import { readFileSync } from 'node:fs'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/reseed2.mjs"
+    },
+    {
+      "id": "TASK-9453",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:03:36",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+50) — write via tool: # supabase/ — skema database (target pro",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "DEC-1047",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-10-10",
+      "time": "00:03:49",
+      "tags": [
+        "supabase",
+        "schema",
+        "decision",
+        "erd",
+        "restore"
+      ],
+      "summary": "Revert align-ke-draft; DB dipulihkan ke ERD Final 42 tabel (docs/backend/ERD.md) + RLS + realtime; API spec kembali konsumabel",
+      "conn": [
+        {
+          "id": "TASK-9440",
+          "type": "relates",
+          "raw": "TASK-9440:relates"
+        },
+        {
+          "id": "DEC-1045",
+          "type": "led_to",
+          "raw": "DEC-1045:led_to"
+        }
+      ]
     }
   ]
 }
