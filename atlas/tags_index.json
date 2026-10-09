@@ -11171,6 +11171,10 @@
     {
       "id": "TASK-9900",
       "shard": 9
+    },
+    {
+      "id": "TASK-9910",
+      "shard": 9
     }
   ],
   "decision": [
@@ -11458,6 +11462,10 @@
     },
     {
       "id": "TASK-9700",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9910",
       "shard": 9
     }
   ],
@@ -14815,6 +14823,10 @@
     {
       "id": "TASK-915",
       "shard": 7
+    },
+    {
+      "id": "TASK-9910",
+      "shard": 9
     }
   ],
   "review": [
@@ -17039,6 +17051,10 @@
     {
       "id": "TASK-9800",
       "shard": 9
+    },
+    {
+      "id": "TASK-9910",
+      "shard": 9
     }
   ],
   "append-only": [
@@ -17216,6 +17232,12 @@
   "covers": [
     {
       "id": "TASK-9900",
+      "shard": 9
+    }
+  ],
+  "hours": [
+    {
+      "id": "TASK-9910",
       "shard": 9
     }
   ]

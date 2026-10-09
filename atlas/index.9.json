@@ -5737,6 +5737,28 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9910",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:02:46",
+      "tags": [
+        "merchant",
+        "rating",
+        "hours",
+        "supabase",
+        "ui"
+      ],
+      "summary": "Merchant rating (rating_avg/count) + jam operasional (open_time/close_time) di-seed; UI Home & profil merchant menampilkan rating+jam; gate ",
+      "conn": [
+        {
+          "id": "TASK-9900",
+          "type": "relates",
+          "raw": "TASK-9900:relates"
+        }
+      ]
     }
   ]
 }
