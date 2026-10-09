@@ -252,6 +252,28 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-9960",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:32:57",
+      "tags": [
+        "ui",
+        "editable",
+        "superadmin",
+        "merchant",
+        "courier"
+      ],
+      "summary": "Field editable: SA merchant/users/zones + setelan toko (jam+koordinat) + profil kurir; slice actions baru; gate merchant/kurir PASS",
+      "conn": [
+        {
+          "id": "TASK-9950",
+          "type": "relates",
+          "raw": "TASK-9950:relates"
+        }
+      ]
     }
   ]
 }

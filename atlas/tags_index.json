@@ -11239,6 +11239,10 @@
     {
       "id": "TASK-9910",
       "shard": 9
+    },
+    {
+      "id": "TASK-9960",
+      "shard": 10
     }
   ],
   "decision": [
@@ -11531,6 +11535,10 @@
     {
       "id": "TASK-9910",
       "shard": 9
+    },
+    {
+      "id": "TASK-9960",
+      "shard": 10
     }
   ],
   "verify": [
@@ -14587,6 +14595,10 @@
     {
       "id": "TASK-9320",
       "shard": 9
+    },
+    {
+      "id": "TASK-9960",
+      "shard": 10
     }
   ],
   "dashboard": [
@@ -15950,6 +15962,10 @@
     },
     {
       "id": "TASK-9950",
+      "shard": 10
+    },
+    {
+      "id": "TASK-9960",
       "shard": 10
     }
   ],
@@ -17388,6 +17404,12 @@
   "permissions": [
     {
       "id": "TASK-9950",
+      "shard": 10
+    }
+  ],
+  "editable": [
+    {
+      "id": "TASK-9960",
       "shard": 10
     }
   ]
