@@ -295,6 +295,10 @@
     {
       "id": "TASK-9480",
       "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "5": [
@@ -10358,6 +10362,14 @@
     },
     {
       "id": "TASK-9511",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
       "shard": 9
     }
   ],
@@ -27841,6 +27853,14 @@
     {
       "id": "TASK-9511",
       "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "/users/vanviakingali/downloads/sa7tein-pwa/agents.md": [
@@ -34722,6 +34742,10 @@
     },
     {
       "id": "TASK-9511",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
       "shard": 9
     }
   ],
@@ -43297,6 +43321,14 @@
     {
       "id": "TASK-9511",
       "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "tool:": [
@@ -51770,6 +51802,14 @@
     },
     {
       "id": "TASK-9511",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
       "shard": 9
     }
   ],
@@ -61893,6 +61933,14 @@
     {
       "id": "TASK-9512",
       "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "task-147": [
@@ -64328,6 +64376,10 @@
     },
     {
       "id": "TASK-9506",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9701",
       "shard": 9
     }
   ],
@@ -95873,6 +95925,10 @@
     {
       "id": "TASK-9512",
       "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "tail": [
@@ -102382,6 +102438,10 @@
     },
     {
       "id": "TASK-9511",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9702",
       "shard": 9
     }
   ],
@@ -154013,6 +154073,10 @@
     {
       "id": "TASK-9491",
       "shard": 9
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
     }
   ],
   "task-3584": [
@@ -162691,6 +162755,10 @@
     {
       "id": "TASK-4112",
       "shard": 6
+    },
+    {
+      "id": "TASK-9701",
+      "shard": 9
     }
   ],
   "\"keluar\"": [
@@ -182239,6 +182307,10 @@
     {
       "id": "TASK-9511",
       "shard": 9
+    },
+    {
+      "id": "TASK-9702",
+      "shard": 9
     }
   ],
   "supabase/": [
@@ -183738,6 +183810,42 @@
   "task-9700": [
     {
       "id": "TASK-9700",
+      "shard": 9
+    }
+  ],
+  "/users/muhammadbaihaqy/downloads/za7tein-pwa/supabase/08-payment-methods.sql": [
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    }
+  ],
+  "============================": [
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    }
+  ],
+  "task-9701": [
+    {
+      "id": "TASK-9701",
+      "shard": 9
+    }
+  ],
+  "`07-features-customer.sql`": [
+    {
+      "id": "TASK-9702",
+      "shard": 9
+    }
+  ],
+  "**skema": [
+    {
+      "id": "TASK-9702",
+      "shard": 9
+    }
+  ],
+  "task-9702": [
+    {
+      "id": "TASK-9702",
       "shard": 9
     }
   ]

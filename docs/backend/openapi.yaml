@@ -2029,7 +2029,7 @@ components:
                     variantId: { type: integer, format: int64 }
                     optionId: { type: integer, format: int64 }
               note: { type: ['string', 'null'], example: tanpa bawang }
-        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris] }
+        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
         promoCode: { type: ['string', 'null'] }
         tipJod: { type: number, default: 0 }
         orderNote: { type: ['string', 'null'] }
@@ -2078,7 +2078,7 @@ components:
         promoAmountJod: { type: number }
         totalJod: { type: number }
         zone: { $ref: '#/components/schemas/ZoneCode' }
-        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris] }
+        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
         paymentStatus: { type: string, enum: [unpaid, pending, paid, failed, refunded] }
         holdStatus:
           type: string
@@ -2354,8 +2354,8 @@ components:
       properties:
         id: { type: integer, format: int64 }
         orderId: { type: integer, format: int64 }
-        provider: { type: string, enum: [xendit, none] }
-        method: { type: string, enum: [cod, transfer, xendit_va, xendit_qris] }
+        provider: { type: string, enum: [xendit, wallet, none] }
+        method: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
         amountJod: { type: number }
         amountIdr: { type: ['number', 'null'], description: Nilai settlement }
         externalId: { type: ['string', 'null'], description: ID transaksi di sisi provider }

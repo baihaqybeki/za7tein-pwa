@@ -5410,6 +5410,44 @@
           "raw": "TASK-9480:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9701",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:45:48",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/08-payment-methods.sql (+67) — write via tool: -- ============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/08-payment-methods.sql"
+    },
+    {
+      "id": "TASK-9702",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:46:39",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `07-features-customer.sql` | **Skema 4",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }
