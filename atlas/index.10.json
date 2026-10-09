@@ -915,6 +915,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10040",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:11:05",
+      "tags": [
+        "merchant",
+        "hours",
+        "rating",
+        "ui",
+        "fix"
+      ],
+      "summary": "MerchantRecord + openTime/closeTime/rating/reviewCount; jam operasional & rating tampil di detail merchant SA (ikon Lucide, bukan emoji)",
+      "conn": [
+        {
+          "id": "TASK-10030",
+          "type": "relates",
+          "raw": "TASK-10030:relates"
+        }
+      ]
     }
   ]
 }
