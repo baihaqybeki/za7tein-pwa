@@ -975,6 +975,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10050",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:14:22",
+      "tags": [
+        "push",
+        "notification",
+        "journey",
+        "customer"
+      ],
+      "summary": "Push journey diperluas ke semua sisi: aksi customer cart (hold/match/settle/advance/cancel), batch (assign/start), kurir cancelTask; event p",
+      "conn": [
+        {
+          "id": "TASK-10000",
+          "type": "relates",
+          "raw": "TASK-10000:relates"
+        }
+      ]
     }
   ]
 }
