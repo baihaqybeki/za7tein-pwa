@@ -20,7 +20,7 @@ Timer 15/30/10 = keputusan sementara PO 2026-09-22 (OQ-13).
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Drill-down dari `f1:dapur | f1:tiba | f1:otp`; settled-nya → `f2-cod-hold:cut->settled`.
+Drill-down dari `f1:dapur | f1:tiba | f1:otp`; settled-nya → `f2-cod-hold:held->settled`.
 
 ## Sumber (jangan dikarang)
 
@@ -31,7 +31,7 @@ Drill-down dari `f1:dapur | f1:tiba | f1:otp`; settled-nya → `f2-cod-hold:cut-
 ## Catatan desain
 
 - `viewBox [1080, 640]` → teks proyeksi minimum 6.03px di 1440×900 (ambang batas 6px).
-- Band `event` (lane selain `main`/`terminal`) **dan** band `outcome` (`terminal`) hanya boleh kolom 0..2 — batas schema lifecycle. Route cut/otp → settled lintas band: pakai `route drop` + `channelY`, labelAt wajib di zona bebas (validator kasih koordinat saran).
+- Band `event` (lane selain `main`/`terminal`) **dan** band `outcome` (`terminal`) hanya boleh kolom 0..2 — batas schema lifecycle. Route otp/noOtp → settled lintas band: pakai `route drop` + `channelY`, labelAt wajib di zona bebas (validator kasih koordinat saran).
 
 ## Update
 

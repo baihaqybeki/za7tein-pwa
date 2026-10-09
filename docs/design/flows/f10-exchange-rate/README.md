@@ -31,6 +31,22 @@ Dipakai `f4-fee-tax` (semua nominal) dan seluruh tampilan saldo (`f3`, `f6`, `f7
 - `R-CURR-01` — `analysis.md` (DECIDED) · Milestone M1 — `versions/irbid-mvp-v2-2026-09-21/milestones.md`
 - **UNRESOLVED (jangan ditebak):** OQ-26 — provider IDR>JOD (bukan ECB-only); OQ-28 — umur maksimal fallback rate
 
+## Kartu konversi Home customer (client daily cache) — UNRESOLVED
+
+Sejak 2026-10-09, Home customer (`/customer/home`) memuat kartu **CurrencyConverter**
+(`src/components/ui/CurrencyConverter.tsx`) dua arah (IDR↔JOD) dengan tombol tukar.
+Rate diambil dari hook `useDailyExchangeRate` (`src/hooks/useDailyExchangeRate.ts`):
+satu "hit" per hari kalender, di-cache di `localStorage` (`sa7tein:exchange-rate`);
+hari berikutnya hit lagi.
+
+**Divergensi yang harus dicatat:** flow ini menaruh sinkron rate di **backend 1×24 jam**
+(`rate_fetch` → `exchange_rates`); hit sisi client ini adalah kompromi showcase karena
+repo tanpa backend (AGENTS §1). Saat backend ada, hook ini diganti pembacaan
+`exchange_rates` dan `fetchDailyRate()` mock dibuang.
+
+- **UNRESOLVED:** kebijakan cache client (per-device vs server), penandaan umur rate
+  (OQ-28), dan apakah kartu konversi tetap ada saat rate nyata tersedia.
+
 ## Catatan desain
 
 - `column_fit: "spread"` — label participant ("exchange_rates", "Kalkulasi uang") lewat 86px box fixed.

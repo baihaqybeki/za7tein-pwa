@@ -26,7 +26,7 @@ Workflow tiga jalur keluar dana via Xendit payout. Milestone **M3** (fee cash-ou
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Dipicu `f7-ledger-liability` (saldo liability cukup); dana masuk dari `f3-wallet-topup` (customer), `f2-cod-hold:cut->settled` (merchant kredit), tips (kurir).
+Dipicu `f7-ledger-liability` (saldo liability cukup); dana masuk dari `f3-wallet-topup` (customer), `f2-cod-hold:held->settled` (merchant kredit), tips (kurir).
 
 ## Sumber (jangan dikarang)
 

@@ -28,7 +28,7 @@
     ]
   },
   "nodes": [
-    { "id": "masuk", "lane": "pickup", "col": 0, "type": "frontend", "label": "Order masuk", "sublabel": "dari merchant", "width": 118 },
+    { "id": "masuk", "lane": "pickup", "col": 0, "type": "frontend", "label": "Order masuk", "sublabel": "dari batch", "width": 118 },
     { "id": "ambil", "lane": "pickup", "col": 1, "type": "frontend", "label": "Tap \"Ambil\"", "sublabel": "2-way: merchant konfirm", "width": 124 },
     { "id": "berangkat", "lane": "trip", "col": 2, "type": "frontend", "label": "Tap \"Berangkat\"", "sublabel": "SLA 15m → auto-alert", "width": 130 },
     { "id": "tiba", "lane": "trip", "col": 3, "type": "frontend", "label": "Tap \"Tiba\"", "sublabel": "geolocation + foto", "width": 118 },
@@ -37,16 +37,16 @@
     { "id": "batal", "lane": "trip", "col": 4, "type": "security", "label": "Customer lalai → Batal", "sublabel": "total 10m · penalti OQ-14", "tag": "open", "width": 156 }
   ],
   "edges": [
-    { "id": "e-assign", "from": "masuk", "to": "ambil", "label": "tugas dari merchant", "role": "main" },
+    { "id": "e-assign", "from": "masuk", "to": "ambil", "label": "tugas batch dari merchant", "role": "main" },
     { "id": "e-2way", "from": "ambil", "to": "berangkat", "label": "merchant konfirm (2-way)", "role": "main" },
     { "id": "e-sla", "from": "berangkat", "to": "tiba", "label": "SLA 30m · telat ditandai", "role": "main" },
     { "id": "e-ask", "from": "tiba", "to": "otp", "label": "minta OTP ke customer", "role": "main", "variant": "emphasis" },
-    { "id": "e-verify", "from": "otp", "to": "selesai", "label": "otp_verified → hold_settled", "role": "main", "variant": "emphasis" },
+    { "id": "e-verify", "from": "otp", "to": "selesai", "label": "otp_verified → reserve_settled", "role": "main", "variant": "emphasis" },
     { "id": "e-leave", "from": "tiba", "to": "batal", "label": "call 5m + tunggu 5m", "role": "branch" }
   ],
   "cards": [
     { "dot": "orange", "title": "Checkpoint wajib (R-DELIV-01)", "items": ["Ambil: tap \"Ambil\" + merchant konfirmasi di app (2-way)", "Berangkat: timer SLA → lewat timer auto-alert super admin", "Tiba: geolocation sekali + foto → notif customer \"Kurir sudah sampai\"", "Selesai: OTP 4-digit — tanpa OTP tidak bisa settle, kurir tidak dapat komisi"] },
     { "dot": "amber", "title": "Timer & guard", "items": ["15m Ambil→Berangkat · 30m Berangkat→Tiba · 10m Tiba→OTP auto-complete", "Tiba +5m: notif + call customer · +5m lagi: kurir boleh tap \"Batal\" · total 10m", "Kurir = karyawan merchant: tips only di wallet, platform tak pegang dana kurir (C-06)"] },
-    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-DELIV-01 (DECIDED) · R-COD-01 (hold_cut at courier match) · C-06..C-11 · M4/M5/M11", "UNRESOLVED: OQ-14 — penalti customer lalai (30% / 50% / full ongkir)", "UNRESOLVED-by-absence: detail lantai/unit & label \"Mulai Antar\" tak ada di PRD v2 (sumber baseline)"] }
+    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-DELIV-01 · R-COD-01 (reserve→done) · C-06..C-11 (tanpa live tracking, C-10) · M4/M5/M11", "UNRESOLVED: OQ-14 — penalti customer lalai (30% / 50% / full ongkir)", "UNRESOLVED-by-absence: detail lantai/unit & label \"Mulai Antar\" tak ada di PRD v2 (sumber baseline)"] }
   ]
 }

@@ -14,8 +14,8 @@
   "states": [
     { "id": "cart", "type": "start", "label": "cart", "sublabel": "isi keranjang", "lane": "main", "col": 0 },
     { "id": "quotation", "type": "decision", "label": "quotation", "sublabel": "draft harga · sebelum bayar", "lane": "main", "col": 1 },
-    { "id": "prepare", "type": "active", "label": "prepare", "sublabel": "masak · placedAt + SLA", "lane": "main", "col": 2 },
-    { "id": "waitingCourier", "type": "waiting", "label": "waitingCourier", "sublabel": "tunggu match kurir", "lane": "main", "col": 3 },
+    { "id": "prepare", "type": "active", "label": "prepare", "sublabel": "masak · batch etaPrepare", "lane": "main", "col": 2 },
+    { "id": "waitingCourier", "type": "waiting", "label": "waitingCourier", "sublabel": "batch closed → tunggu kurir", "lane": "main", "col": 3 },
     { "id": "waitingDelivery", "type": "waiting", "label": "waitingDelivery", "sublabel": "kurir ditugaskan", "lane": "kirim", "col": 1, "width": 118 },
     { "id": "delivery", "type": "active", "label": "delivery", "sublabel": "etaDelivery berjalan", "lane": "kirim", "col": 2, "width": 118 },
     { "id": "canceled", "type": "failure", "label": "canceled", "sublabel": "cancelBy + reason", "lane": "terminal", "col": 0 },
@@ -37,6 +37,6 @@
   "cards": [
     { "dot": "orange", "title": "Jalur utama (event snake_case)", "items": ["checkout_submitted → quotation", "payment_confirmed → prepare", "merchant_ready → courier_matched", "courier_picked_up → delivery → done"] },
     { "dot": "slate", "title": "Pembatalan & paymentStatus", "items": ["cancel: cancelBy + cancelReason", "merchant tolak → canceled + f2 hold", "paymentStatus: unpaid → paid", "failed retry · refunded = note (F22)"] },
-    { "dot": "amber", "title": "Sumber & UNRESOLVED", "items": ["R-STATE-01 · schema draft entri 9", "UNRESOLVED: quotation vs placed", "UNRESOLVED: cancel 10 mnt · SLA", "UNRESOLVED: paymentStatus manual?"] }
+    { "dot": "amber", "title": "Sumber & UNRESOLVED", "items": ["C-17 · schema draft entri 9/11", "UNRESOLVED: quotation vs placed", "UNRESOLVED: cancel 10 mnt · SLA", "UNRESOLVED: paymentStatus manual?"] }
   ]
 }

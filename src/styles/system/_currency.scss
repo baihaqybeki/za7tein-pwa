@@ -7,3 +7,103 @@
   font-size: var(--text-xs);
   color: var(--text-secondary);
 }
+
+/* Kartu konversi Home customer (dua arah + tukar). Angka = tampilan saja,
+   rate dari useDailyExchangeRate (hit sekali sehari). */
+.currency-converter {
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+}
+
+.currency-converter-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.currency-converter-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.currency-converter-hint {
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.currency-converter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.currency-converter-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.currency-converter-field label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.currency-converter-field input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg-warm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-field);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.currency-converter-field input:focus-visible {
+  outline: 2px solid var(--sa7tein-orange);
+  outline-offset: 1px;
+  border-color: var(--sa7tein-orange);
+}
+
+.currency-converter-field input[readonly] {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.currency-converter-swap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--orange-ink);
+  cursor: pointer;
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.currency-converter-swap:active {
+  transform: scale(0.94);
+}
+
+.currency-converter-swap:focus-visible {
+  outline: 2px solid var(--sa7tein-orange);
+  outline-offset: 1px;
+}
+

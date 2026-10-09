@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "F13 — System Orchestration (Delivery & Settlement)",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [1000, 560]
+  },
+  "participants": [
+    { "id": "cour", "type": "frontend", "label": "App kurir", "sublabel": "checkpoint" },
+    { "id": "sys", "type": "backend", "label": "System", "sublabel": "event + timer" },
+    { "id": "cust", "type": "frontend", "label": "App customer", "sublabel": "OTP" },
+    { "id": "led", "type": "backend", "label": "Ledger", "sublabel": "settle" }
+  ],
+  "messages": [
+    { "id": "m1", "from": "cour", "to": "sys", "y": 160, "label": "tap \"Ambil\" (merchant konfirmasi 2-way)" },
+    { "id": "m2", "from": "cour", "to": "sys", "y": 195, "label": "tap \"Berangkat\" → SLA 15m" },
+    { "id": "m3", "from": "cour", "to": "sys", "y": 230, "label": "tap \"Tiba\" → geolocation 1x + foto (SLA 30m)", "note": "tanpa live tracking (C-10)" },
+    { "id": "m4", "from": "sys", "to": "cust", "y": 265, "label": "notif \"kurir tiba\" + tampilkan OTP" },
+    { "id": "m5", "from": "cust", "to": "cour", "y": 300, "label": "serahkan OTP 4 digit · COD bayar tagihan (f24)" },
+    { "id": "m6", "from": "cour", "to": "sys", "y": 335, "label": "input OTP → otp_verified", "variant": "emphasis" },
+    { "id": "m7", "from": "sys", "to": "led", "y": 370, "label": "settle: reserve → saldo berkurang → merchant credit", "variant": "emphasis" },
+    { "id": "m8", "from": "sys", "to": "cust", "y": 405, "label": "push done → prompt rating + tip (f19)" },
+    { "id": "m9", "from": "cour", "to": "sys", "y": 440, "label": "customer lalai → Batal (10m · OQ-14 UNRESOLVED)", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "orange", "title": "Orkestrasi delivery (per flow f13)", "items": ["checkpoint → OTP → settle: reserve dicairkan, saldo berkurang (PO 2026-09-25)", "OTP 4 digit = satu-satunya trigger settle (C-09); tanpa live tracking (C-10)"] },
+    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-DELIV-01 · R-COD-01 · C-09/C-10 · M4/M5", "UNRESOLVED: penalti customer lalai (OQ-14) · SLA DEC-1037 sementara"] }
+  ]
+}

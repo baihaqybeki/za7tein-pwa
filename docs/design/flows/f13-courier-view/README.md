@@ -5,6 +5,7 @@ Workflow sisi kurir: 4 checkpoint + SLA timer + OTP. Milestone **M4/M5** (deps M
 | Berkas | Isi |
 |---|---|
 | `f13-courier-view.json` | Spec archify (workflow v2) — sumber yang diedit |
+| `f13-courier-view.sequence.json` | **Sequence orkestrasi sistem** (checkpoint → OTP → settle → push), scoped ke F13 |
 | `f13-courier-view.html` | Artefak jadi |
 | `f13-courier-view.visual-check.*` | Bukti visual-check |
 
@@ -14,10 +15,12 @@ Workflow sisi kurir: 4 checkpoint + SLA timer + OTP. Milestone **M4/M5** (deps M
 
 **Lane Perjalanan:** Tap "Berangkat" (SLA 15m → auto-alert super admin) → Tap "Tiba" (geolocation + foto → notif customer). Guard: customer lalai → tap "Batal" (total 10 menit).
 
-**Lane Serah terima:** Masuk OTP (4 digit dari customer) → Selesai (`otp_verified` → `hold_settled`).
+**Lane Serah terima:** Masuk OTP (4 digit dari customer) → Selesai (`otp_verified` → `reserve_settled`).
 
 ## Aturan keras
 
+- **Tanpa live tracking** (C-10) — customer melihat **status + estimasi**, bukan peta posisi kurir. Bukti = checkpoint + 1 snapshot geolokasi + foto; kurir tidak share lokasi berkelanjutan.
+- **Tugas datang sebagai batch** dari merchant (assign setelah batch ready, C-06); kurir mengantar order dalam batch.
 - **Tanpa OTP tidak bisa settle** — kurir tak dapat komisi (C-09: OTP = satu-satunya trigger settle).
 - **OTP ditampilkan customer, diketik kurir** (C-09) — layar customer memakai `otpDisplayCode`, form input hanya di layar kurir.
 - **Notif customer = mock tapi tersambung** — kurir tap Tiba → 1 notif masuk kotak masuk customer (`pushNotification`) + kartu OTP customer muncul; Web Push asli tidak diimplementasi (AGENTS.md §1, R-PUSH-01), bukan klaim kirim sungguhan.
@@ -28,7 +31,7 @@ Workflow sisi kurir: 4 checkpoint + SLA timer + OTP. Milestone **M4/M5** (deps M
 
 ## Terhubung (lihat `../INDEX.json`)
 
-`f12 → f13:masuk` (tugas dari merchant); `f13:tiba → f5` (checkpoint lifecycle); `f13:otp → f1:otp` + `f2:cut->settled` (`hold_settled`); timer → `f11` (push).
+`f12 → f13:masuk` (tugas dari merchant); `f13:tiba → f5` (checkpoint lifecycle); `f13:otp → f1:otp` + `f2:held->settled` (`reserve_settled`); timer → `f11` (push).
 
 ## Sumber (jangan dikarang)
 

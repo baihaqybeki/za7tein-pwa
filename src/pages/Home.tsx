@@ -8,6 +8,7 @@ import CustomerHomeHero from '../components/customer/CustomerHomeHero'
 import { HomePromoCarousel } from '../components/customer/HomePromoCarousel'
 import { BottomNav } from '../components/layout/BottomNav'
 import { AddToCartButton } from '../components/ui/AddToCartButton'
+import { CurrencyConverter } from '../components/ui/CurrencyConverter'
 import { FoodCard } from '../components/ui/FoodCard'
 import { useAppSelector } from '../hooks/useAppStore'
 import { useCatalog } from '../hooks/useCatalog'
@@ -62,6 +63,8 @@ export default function Home() {
               })}
             </div>
           </div>
+
+          <CurrencyConverter />
 
           <div className="deals-section">
             <div className="section-header">

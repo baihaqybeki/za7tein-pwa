@@ -2374,6 +2374,2222 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9190",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "19:59:44",
+      "tags": [
+        "setup",
+        "governance",
+        "tooling"
+      ],
+      "summary": "Commit 28667a0: commit setup.sh+serve-docs.mjs, prepare hooks, portabilitas path atlas; pre-commit 18 passed",
+      "conn": [
+        {
+          "id": "TASK-9181",
+          "type": "relates",
+          "raw": "TASK-9181:relates"
+        }
+      ]
+    },
+    {
+      "id": "DEC-1041",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "20:10:46",
+      "tags": [
+        "product",
+        "model",
+        "customer",
+        "catalog",
+        "flow"
+      ],
+      "summary": "Customer Sa7tein = marketplace multi-merchant: pilih merchant dulu baru menu; butuh merchants[]+selectedMerchantId+node di f1",
+      "conn": [
+        {
+          "id": "DEC-013",
+          "type": "relates",
+          "raw": "DEC-013:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9191",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:14:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f23-customer-discovery/f23-customer-discovery.json (+59) — write via ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f23-customer-discovery/f23-customer-discovery.json"
+    },
+    {
+      "id": "TASK-9192",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:15:07",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json (+2/-1) — edit via tool: \"f22-super-admin-sa\": { \"type\": \"",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json"
+    },
+    {
+      "id": "TASK-9193",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:15:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f23-customer-discovery/README.md (+43) — write via tool: # F23 — Cust",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f23-customer-discovery/README.md"
+    },
+    {
+      "id": "TASK-9194",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:15:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/PLAN.md (+1/-1) — edit via tool: `docs/design/app-map/`. **Status: fl",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/PLAN.md"
+    },
+    {
+      "id": "TASK-9195",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:16:23",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html (+4/-2) — edit via tool: {slug:\"f21-account-auth\",        ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html"
+    },
+    {
+      "id": "TASK-9196",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:30:34",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/f2-cod-hold.json (+33) — write via tool: {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/f2-cod-hold.json"
+    },
+    {
+      "id": "TASK-9197",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:30:41",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.json (+2/-2) — edit via tool: {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.json"
+    },
+    {
+      "id": "TASK-9198",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:30:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md (+1/-2) — edit via tool: - **Prepaid & C",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md"
+    },
+    {
+      "id": "TASK-9199",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md (+1/-1) — edit via tool: - **Batal sebel",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md"
+    },
+    {
+      "id": "TASK-9200",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:10",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/README.md (+51) — write via tool: # F2 — Wallet Reserve L",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/README.md"
+    },
+    {
+      "id": "TASK-9201",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:19",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json (+3/-4) — edit via tool: { \"from\": \"f1-order-lifecycle:ord",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json"
+    },
+    {
+      "id": "TASK-9202",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:30",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html (+1/-1) — edit via tool: {slug:\"f2-cod-hold\",             ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html"
+    },
+    {
+      "id": "TASK-9203",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:43",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/PLAN.md (+1/-1) — edit via tool: - **Alur utama:** pilih menu → check",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/PLAN.md"
+    },
+    {
+      "id": "TASK-9204",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:31:56",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/BUSINESS.md (+1/-1) — edit via tool: | **f2 cod-hold** | COD tunai be",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/BUSINESS.md"
+    },
+    {
+      "id": "TASK-9205",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:01",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/analysis.md (+1/-1) — edit via tool: ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/analysis.md"
+    },
+    {
+      "id": "TASK-9206",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/milestones.md (+1/-1) — edit via tool",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/milestones.md"
+    },
+    {
+      "id": "TASK-9207",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:17",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/decision-irbid-mvp.md (+11/-3) — edit via tool: ## Riwayat keputusan",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/decision-irbid-mvp.md"
+    },
+    {
+      "id": "TASK-9208",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f7-ledger-liability/f7-ledger-liability.json (+1/-1) — edit via tool:",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f7-ledger-liability/f7-ledger-liability.json"
+    },
+    {
+      "id": "TASK-9209",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:31",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.json (+1/-1) — edit via too",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.json"
+    },
+    {
+      "id": "TASK-9210",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:34",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/README.md (+1/-1) — edit via tool: **Lane Kurir ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/README.md"
+    },
+    {
+      "id": "TASK-9211",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:32:40",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.json (+1/-1) — edit via tool: \"R-DE",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.json"
+    },
+    {
+      "id": "TASK-9212",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:33:39",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/f2-cod-hold.json (+1/-1) — edit via tool: { \"id\": \"held\",",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f2-cod-hold/f2-cod-hold.json"
+    },
+    {
+      "id": "DEC-1042",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "20:34:32",
+      "tags": [
+        "cod",
+        "wallet",
+        "flow",
+        "prd",
+        "reserve"
+      ],
+      "summary": "PO 2026-09-25: saldo reserve saat order, berkurang saat order done; cut kurir match dihapus (prepaid & COD)",
+      "conn": [
+        {
+          "id": "FEAT-2007",
+          "type": "relates",
+          "raw": "FEAT-2007:relates"
+        },
+        {
+          "id": "DEC-1041",
+          "type": "relates",
+          "raw": "DEC-1041:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9213",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:43:26",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/f24-payment-methods.json (+56) — write via tool: ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/f24-payment-methods.json"
+    },
+    {
+      "id": "TASK-9214",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:44:05",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/README.md (+45) — write via tool: # F24 — Pembaya",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/README.md"
+    },
+    {
+      "id": "TASK-9215",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:44:13",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json (+2/-1) — edit via tool: \"f23-customer-discovery\": { \"type",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/INDEX.json"
+    },
+    {
+      "id": "TASK-9216",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:44:26",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html (+3/-2) — edit via tool: {slug:\"f23-customer-discovery\",  ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html"
+    },
+    {
+      "id": "TASK-9217",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:44:45",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md (+1/-1) — edit via tool: F1 = flow **pay",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md"
+    },
+    {
+      "id": "TASK-9300",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:45:14",
+      "tags": [
+        "flow",
+        "payment",
+        "cod",
+        "prepaid",
+        "archify"
+      ],
+      "summary": "Flow f24-payment-methods dibuat: COD prompt bayar tagihan saat terima → settle; prepaid otomatis dari reserve (PO 2026-09-25); gate 9/9",
+      "conn": [
+        {
+          "id": "DEC-1042",
+          "type": "relates",
+          "raw": "DEC-1042:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9301",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:51:09",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/build-docs.mjs (+60) — write via tool: #!/usr/bin/env node",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/build-docs.mjs"
+    },
+    {
+      "id": "TASK-9302",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:51:13",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/serve-docs.mjs (+15/-12) — edit via tool: * Jalankan: npm run docs:serve       ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/serve-docs.mjs"
+    },
+    {
+      "id": "TASK-9303",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:51:16",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/package.json (+2/-1) — edit via tool: \"docs:serve\": \"node scripts/serve-docs.m",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/package.json"
+    },
+    {
+      "id": "TASK-9304",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:51:19",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/.gitignore (+4/-3) — edit via tool: dist",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/.gitignore"
+    },
+    {
+      "id": "TASK-9305",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:54:04",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/AGENTS.md (+6/-4) — edit via tool: npm install --include=dev   # tanpa flag",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/AGENTS.md"
+    },
+    {
+      "id": "TASK-9306",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:54:22",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/.rules.json (+4/-2) — edit via tool: \"browser:gate\": \"node scripts/browser-ga",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/.rules.json"
+    },
+    {
+      "id": "TASK-9310",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "20:54:32",
+      "tags": [
+        "tooling",
+        "docs",
+        "deploy",
+        "flow",
+        "archify"
+      ],
+      "summary": "Docs-only deploy live di Vercel (sa7tein-docs.vercel.app): scripts/build-docs.mjs + npm run docs:build -> dist-docs/; 24/24 flow pass",
+      "conn": [
+        {
+          "id": "TASK-9300",
+          "type": "relates",
+          "raw": "TASK-9300:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9311",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:10:52",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.json (+54) — write via tool",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.json"
+    },
+    {
+      "id": "TASK-9312",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:11:25",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.json (+1/-1) — edit via tool: { \"id",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.json"
+    },
+    {
+      "id": "TASK-9313",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:11:37",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/README.md (+13/-11) — edit via tool: **Lane Toko",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/README.md"
+    },
+    {
+      "id": "TASK-9314",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:11:46",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md (+1/-1) — edit via tool: Setelah order d",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md"
+    },
+    {
+      "id": "TASK-9315",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:11:51",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f18-order-state/README.md (+2/-1) — edit via tool: - `payment_confirm",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f18-order-state/README.md"
+    },
+    {
+      "id": "TASK-9316",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:11:55",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/README.md (+3/-1) — edit via tool: - **Tanpa live tr",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/README.md"
+    },
+    {
+      "id": "TASK-9320",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:12:40",
+      "tags": [
+        "flow",
+        "batch",
+        "merchant",
+        "courier",
+        "archify"
+      ],
+      "summary": "Batch (schema entri 11) dilengkapi ke f12/f1/f18/f13: window prepare, close batch, assign kurir C-06; auto-resequence & live tracking tidak ",
+      "conn": [
+        {
+          "id": "DEC-1042",
+          "type": "relates",
+          "raw": "DEC-1042:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9321",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:16:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json (+36) — write via",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json"
+    },
+    {
+      "id": "TASK-9322",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:17:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.sequence.json (+30) — write",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.sequence.json"
+    },
+    {
+      "id": "TASK-9323",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:17:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.sequence.json (+32) — write via too",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f13-courier-view/f13-courier-view.sequence.json"
+    },
+    {
+      "id": "TASK-9324",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:17:22",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/flows-gate.sh (+80) — write via tool: #!/usr/bin/env bash",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/flows-gate.sh"
+    },
+    {
+      "id": "TASK-9325",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:17:27",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/check-governance.mjs (+20/-7) — edit via tool: for (const slug of flowFolders) ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/check-governance.mjs"
+    },
+    {
+      "id": "TASK-9326",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:18:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json (+32) — write via",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json"
+    },
+    {
+      "id": "TASK-9327",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:18:52",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md (+1/-1) — edit via tool: | `f1-order-lif",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/README.md"
+    },
+    {
+      "id": "DEC-1043",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-09-25",
+      "time": "21:19:00",
+      "tags": [
+        "rule",
+        "flow",
+        "sequence",
+        "archify",
+        "governance"
+      ],
+      "summary": "Rule: tiap folder flow boleh punya <slug>.sequence.json (sequence orkestrasi sistem, scoped per flow); gate/governance per spec",
+      "conn": [
+        {
+          "id": "DEC-1042",
+          "type": "relates",
+          "raw": "DEC-1042:relates"
+        },
+        {
+          "id": "TASK-9320",
+          "type": "relates",
+          "raw": "TASK-9320:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9328",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:21:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json (+33) — write via",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f1-order-lifecycle/f1-order-lifecycle.sequence.json"
+    },
+    {
+      "id": "TASK-9329",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:21:42",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.sequence.json (+32) — write",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f12-merchant-console/f12-merchant-console.sequence.json"
+    },
+    {
+      "id": "TASK-9330",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:21:49",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/f24-payment-methods.sequence.json (+30) — write v",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f24-payment-methods/f24-payment-methods.sequence.json"
+    },
+    {
+      "id": "TASK-9340",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:22:51",
+      "tags": [
+        "flow",
+        "sequence",
+        "archify",
+        "batch",
+        "payment"
+      ],
+      "summary": "Sequence detail per-flow: f1 (intake+tolak), f12 (mekanik batch), f13 (delivery+settle), f24 (pembayaran); 4 spec, semua gate 9/9 visual pas",
+      "conn": [
+        {
+          "id": "DEC-1043",
+          "type": "relates",
+          "raw": "DEC-1043:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9341",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:23:54",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html (+3/-2) — edit via tool: <button id=\"back\">← Dashboard</bu",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html"
+    },
+    {
+      "id": "TASK-9342",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:24:03",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html (+23/-17) — edit via tool: function route() {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/index.html"
+    },
+    {
+      "id": "TASK-9350",
+      "type": "task",
+      "status": "done",
+      "date": "2026-09-25",
+      "time": "21:27:53",
+      "tags": [
+        "dashboard",
+        "sequence",
+        "deploy",
+        "vercel"
+      ],
+      "summary": "Dashboard toggle Utama/Sequence (hash #slug/sequence) + redeploy docs; 4 sequence live di sa7tein-docs.vercel.app",
+      "conn": [
+        {
+          "id": "TASK-9340",
+          "type": "relates",
+          "raw": "TASK-9340:relates"
+        },
+        {
+          "id": "DEC-1043",
+          "type": "relates",
+          "raw": "DEC-1043:relates"
+        }
+      ]
+    },
+    {
+      "id": "DEC-9351",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "18:33:05",
+      "tags": [
+        "backend",
+        "db",
+        "scope",
+        "migration"
+      ],
+      "summary": "PO 2026-10-09: repo sa7tein jadi backend resmi (bukan referensi saja); DB ganti total ke ERD Irbid; API REST+Realtime",
+      "conn": [
+        {
+          "id": "TASK-267",
+          "type": "relates",
+          "raw": "TASK-267:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9352",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "18:33:11",
+      "tags": [
+        "backend",
+        "db",
+        "milestone"
+      ],
+      "summary": "Milestone M0-M8 migrasi DB+API spec ke ERD Irbid dibuat (repo sa7tein docs/backend/MILESTONES.md)",
+      "conn": [
+        {
+          "id": "DEC-9351",
+          "type": "implements",
+          "raw": "DEC-9351:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9353",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "18:38:59",
+      "tags": [
+        "backend",
+        "api",
+        "openapi",
+        "swagger"
+      ],
+      "summary": "OpenAPI 3.1 draft: 68 path/83 operasi/43 schema/8 kanal realtime; 18 blocker x-unresolved (repo sa7tein)",
+      "conn": [
+        {
+          "id": "DEC-9351",
+          "type": "implements",
+          "raw": "DEC-9351:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9354",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "18:44:25",
+      "tags": [
+        "backend",
+        "api",
+        "audit"
+      ],
+      "summary": "Audit 1:1 API spec: 12 temuan diperbaiki, 0 gap; skrip scripts/audit-api-1to1.py + laporan AUDIT-2026-10-09.md",
+      "conn": [
+        {
+          "id": "TASK-9353",
+          "type": "relates",
+          "raw": "TASK-9353:relates"
+        }
+      ]
+    },
+    {
+      "id": "PF-9355",
+      "type": "pitfall",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "18:44:31",
+      "tags": [
+        "backend",
+        "api",
+        "traceability"
+      ],
+      "summary": "Jangan ganti penomoran keputusan produk (OQ-nn/I-n); simpan sourceIds agar id UNRESOLVED bisa ditelusuri",
+      "conn": [
+        {
+          "id": "TASK-9354",
+          "type": "caused",
+          "raw": "TASK-9354:caused"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9356",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "18:50:09",
+      "tags": [
+        "backend",
+        "db",
+        "erd",
+        "migration"
+      ],
+      "summary": "M1 ERD final: 42 tabel, DDL dijalankan nyata di Postgres lokal (scripts/verify-erd.sh) — 62 FK, 46 check, exit 0",
+      "conn": [
+        {
+          "id": "TASK-9352",
+          "type": "implements",
+          "raw": "TASK-9352:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9357",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "19:06:59",
+      "tags": [
+        "backend",
+        "db",
+        "migration",
+        "rls"
+      ],
+      "summary": "M2-M5: 6 migrasi (42 tabel) dijalankan nyata di Postgres; RLS 42/42, 59 policy, 11 realtime, 12 uji constraint LULUS",
+      "conn": [
+        {
+          "id": "TASK-9356",
+          "type": "implements",
+          "raw": "TASK-9356:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9358",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "19:12:44",
+      "tags": [
+        "backend",
+        "db",
+        "e2e",
+        "testing"
+      ],
+      "summary": "E2E skema Irbid 23/23 lulus; menemukan defect nyata: wallet_ledgers tidak append-only → diperbaiki 0006 (trigger)",
+      "conn": [
+        {
+          "id": "TASK-9357",
+          "type": "relates",
+          "raw": "TASK-9357:relates"
+        }
+      ]
+    },
+    {
+      "id": "PF-9359",
+      "type": "pitfall",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "19:12:44",
+      "tags": [
+        "backend",
+        "db",
+        "rls",
+        "security"
+      ],
+      "summary": "RLS TIDAK menegakkan append-only (pemilik tabel tetap bisa UPDATE/DELETE) — butuh trigger penjaga",
+      "conn": [
+        {
+          "id": "TASK-9358",
+          "type": "caused",
+          "raw": "TASK-9358:caused"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9360",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "19:32:31",
+      "tags": [
+        "sa7tein",
+        "backend",
+        "m6",
+        "adapter",
+        "schema"
+      ],
+      "summary": "M6 (milestone sa7tein M0-M8): adapter skema baru irbidBackend.js selesai sebagian — 33 metode, saklar VITE_SCHEMA=irbid (default legacy, pro",
+      "conn": [
+        {
+          "id": "DEC-9351",
+          "type": "relates",
+          "raw": "DEC-9351"
+        },
+        {
+          "id": "TASK-9352",
+          "type": "relates",
+          "raw": "TASK-9352"
+        },
+        {
+          "id": "TASK-9358",
+          "type": "relates",
+          "raw": "TASK-9358"
+        }
+      ]
+    },
+    {
+      "id": "PF-9361",
+      "type": "pitfall",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "19:32:35",
+      "tags": [
+        "vite",
+        "build",
+        "tree-shaking",
+        "supabase"
+      ],
+      "summary": "Vite: menulis import.meta.env?.VITE_X (opsional chaining) membuat Vite TIDAK menyubstitusi nilai jadi literal, sehingga Rollup tak bisa memb",
+      "conn": [
+        {
+          "id": "TASK-9360",
+          "type": "relates",
+          "raw": "TASK-9360"
+        }
+      ]
+    },
+    {
+      "id": "BUG-9362",
+      "type": "bug",
+      "status": "fixed",
+      "date": "2026-10-09",
+      "time": "19:32:40",
+      "tags": [
+        "sa7tein",
+        "m6",
+        "append-only",
+        "reset-demo"
+      ],
+      "summary": "resetDemo() di irbidBackend akan SELALU gagal: penjaga append-only migrasi 0006 menolak DELETE pada wallet_ledgers & audit_logs untuk semua ",
+      "conn": [
+        {
+          "id": "TASK-9360",
+          "type": "relates",
+          "raw": "TASK-9360"
+        },
+        {
+          "id": "TASK-9358",
+          "type": "relates",
+          "raw": "TASK-9358"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9363",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "19:45:59",
+      "tags": [
+        "sa7tein",
+        "backend",
+        "m6",
+        "default",
+        "schema"
+      ],
+      "summary": "M6 lanjutan: skema baru dijadikan DEFAULT (permintaan pemilik produk: portal lama boleh putus agar skema baru bisa dikonsumsi). index.js: VI",
+      "conn": [
+        {
+          "id": "TASK-9360",
+          "type": "relates",
+          "raw": "TASK-9360"
+        },
+        {
+          "id": "DEC-9351",
+          "type": "relates",
+          "raw": "DEC-9351"
+        }
+      ]
+    },
+    {
+      "id": "BUG-9364",
+      "type": "bug",
+      "status": "fixed",
+      "date": "2026-10-09",
+      "time": "19:45:59",
+      "tags": [
+        "sa7tein",
+        "m6",
+        "sql",
+        "constraint"
+      ],
+      "summary": "7 bug nyata di adapter skema baru, ditemukan lewat audit (bukan dugaan). Terpenting: createOrder mengirim delivery_address_id null padahal k",
+      "conn": [
+        {
+          "id": "TASK-9363",
+          "type": "relates",
+          "raw": "TASK-9363"
+        }
+      ]
+    },
+    {
+      "id": "PF-9365",
+      "type": "pitfall",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "19:46:17",
+      "tags": [
+        "audit",
+        "parser",
+        "regex",
+        "python"
+      ],
+      "summary": "Auditor skema saya punya 4 blind spot yang membuat bug nyata lolos: (1) objek insert lewat const X={...} atau map(x=>({...})) tidak diperiks",
+      "conn": [
+        {
+          "id": "TASK-9363",
+          "type": "relates",
+          "raw": "TASK-9363"
+        },
+        {
+          "id": "BUG-9364",
+          "type": "relates",
+          "raw": "BUG-9364"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9366",
+      "type": "task",
+      "status": "open",
+      "date": "2026-10-09",
+      "time": "19:46:17",
+      "tags": [
+        "sa7tein",
+        "backend",
+        "blocker",
+        "kontrak",
+        "ui-baru"
+      ],
+      "summary": "BLOCKER sebelum UI baru (za7tein-pwa) bisa konsumsi backend: 3 ketidakcocokan kontrak yang perlu keputusan produk (jangan ditebak). (1) MATA",
+      "conn": [
+        {
+          "id": "TASK-9363",
+          "type": "relates",
+          "raw": "TASK-9363"
+        },
+        {
+          "id": "DEC-9351",
+          "type": "relates",
+          "raw": "DEC-9351"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9367",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:43:45",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/currency.ts (+42/-2) — edit via tool: ts: /** Kalimat wajib di dekat nominal J",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/currency.ts"
+    },
+    {
+      "id": "TASK-9368",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:43:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useDailyExchangeRate.ts (+64) — write via tool: ts: import { useState } from ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useDailyExchangeRate.ts"
+    },
+    {
+      "id": "TASK-9369",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:44:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/components/ui/ExchangeRateNote.tsx (+34) — write via tool: tsx: import {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/components/ui/ExchangeRateNote.tsx"
+    },
+    {
+      "id": "TASK-9370",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:44:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/components/ui/CurrencyConverter.tsx (+107) — write via tool: tsx: import { ArrowUpD",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/components/ui/CurrencyConverter.tsx"
+    },
+    {
+      "id": "TASK-9371",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:44:13",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_currency.scss (+105/-5) — edit via tool: .exchange-rate-note {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_currency.scss"
+    },
+    {
+      "id": "TASK-9372",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:44:16",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx (+3/-2) — edit via tool: tsx: import { AddToCartButton } from '../co",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx"
+    },
+    {
+      "id": "TASK-9373",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:44:34",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run lint 2>&1 | tail -20\necho \"=== build ===\"\nnpm run build 2>&1 | tail -20 pass",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9374",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:45:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f10-exchange-rate/README.md (+22/-6) — edit via tool: ## Sumber (jang",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/flows/f10-exchange-rate/README.md"
+    },
+    {
+      "id": "TASK-9375",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:45:05",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/documentation/sections/CurrencySection.tsx (+50/-16) — edit via tool: tsx: <t",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/documentation/sections/CurrencySection.tsx"
+    },
+    {
+      "id": "TASK-9376",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:45:46",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+9/-2) — edit via tool: tsx: </p>",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "DEC-1044",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "22:46:10",
+      "tags": [
+        "currency",
+        "decision",
+        "unresolved",
+        "f10",
+        "home"
+      ],
+      "summary": "Kartu konversi kurs Home customer pakai client daily cache (mock, localStorage) — menyimpang dari f10 (backend 1x24h); UNRESOLVED",
+      "conn": [
+        {
+          "id": "FEAT-2004",
+          "type": "relates",
+          "raw": "FEAT-2004:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9400",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:46:20",
+      "tags": [
+        "currency",
+        "home",
+        "feature",
+        "daily-cache"
+      ],
+      "summary": "CurrencyConverter di /customer/home: 2 arah+swap, useDailyExchangeRate cache 1x/hari, styles _currency.scss; scan 0 FAIL, build OK, browser-",
+      "conn": [
+        {
+          "id": "DEC-1044",
+          "type": "implements",
+          "raw": "DEC-1044:implements"
+        },
+        {
+          "id": "FEAT-2004",
+          "type": "relates",
+          "raw": "FEAT-2004:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9401",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:52:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/schema.sql (+287) — write via tool: -- =====================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/schema.sql"
+    },
+    {
+      "id": "TASK-9402",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:52:26",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/reference-schema-drop.sql (+44) — write via tool: -- =========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/reference-schema-drop.sql"
+    },
+    {
+      "id": "TASK-9403",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:52:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/repo-sa7tein-schema.md (+8/-13) — edi",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/irbid-mvp-v2-2026-09-21/repo-sa7tein-schema.md"
+    },
+    {
+      "id": "TASK-9404",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:53:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+42) — write via tool: # supabase/ — skema database (target pro",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "DEC-1045",
+      "type": "decision",
+      "status": "active",
+      "date": "2026-10-09",
+      "time": "22:53:09",
+      "tags": [
+        "database",
+        "supabase",
+        "schema",
+        "decision"
+      ],
+      "summary": "Skema DB tunggal = schema-draft-v1.md (17 entitas); repo-sa7tein-schema §6 dicabut; SQL aditif di supabase/, skema lama via drop terpisah",
+      "conn": [
+        {
+          "id": "TASK-9400",
+          "type": "relates",
+          "raw": "TASK-9400:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9410",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "22:53:12",
+      "tags": [
+        "database",
+        "supabase",
+        "sql",
+        "migration"
+      ],
+      "summary": "Buat supabase/schema.sql (18 tabel, aditif) + reference-schema-drop.sql + README; hapus §6 repo-sa7tein-schema.md; scan 0 FAIL",
+      "conn": [
+        {
+          "id": "DEC-1045",
+          "type": "implements",
+          "raw": "DEC-1045:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9411",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:02:16",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/erd-ui.md (+474) — write via tool: # ERD UI — Sa7tein PWA (semua fitur)",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/erd-ui.md"
+    },
+    {
+      "id": "TASK-9412",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:02:25",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/check-erd.mjs (+20) — write via tool: import { readFileSync } from 'node:f",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/check-erd.mjs"
+    },
+    {
+      "id": "TASK-9420",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:02:37",
+      "tags": [
+        "erd",
+        "schema",
+        "documentation",
+        "mermaid"
+      ],
+      "summary": "ERD UI (semua fitur) di docs/product/erd-ui.md: Mermaid erDiagram 42 entitas, 48 relasi; 19 GAP ditandai; diagram saja",
+      "conn": [
+        {
+          "id": "DEC-1045",
+          "type": "relates",
+          "raw": "DEC-1045:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9421",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:05:53",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/00-preflight.sql (+41) — write via tool: -- ==================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/00-preflight.sql"
+    },
+    {
+      "id": "TASK-9422",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:06:01",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+21/-15) — edit via tool: Database: project `dwzxtnfesmpobnepilhl`",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "BUG-1046",
+      "type": "bug",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:06:06",
+      "tags": [
+        "supabase",
+        "schema",
+        "bug",
+        "42703"
+      ],
+      "summary": "Selesai: DB direbuild ke schema-draft (19 tabel, dual-currency, RLS); 42703 hilang; data di-reseed dari backup",
+      "conn": [
+        {
+          "id": "TASK-9410",
+          "type": "relates",
+          "raw": "TASK-9410:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9423",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:07:52",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/00-introspect.sql (+57) — write via tool: -- =================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/00-introspect.sql"
+    },
+    {
+      "id": "TASK-9424",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:17:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/.config/opencode/opencode.json (+21/-8) — edit via tool: \"command\": [",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/.config/opencode/opencode.json"
+    },
+    {
+      "id": "TASK-9425",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:24:34",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/sbq.mjs (+17) — write via tool: const REF = 'dwzxtnfesmpobnepilhl'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/sbq.mjs"
+    },
+    {
+      "id": "TASK-9426",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:30:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/dump.mjs (+32) — write via tool: import { writeFileSync } from 'node:fs'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/dump.mjs"
+    },
+    {
+      "id": "TASK-9427",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:32:48",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/02-align-to-doc.sql (+306) — write via tool: -- ==============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/02-align-to-doc.sql"
+    },
+    {
+      "id": "TASK-9428",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:32:52",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/run-sql.mjs (+18) — write via tool: import { readFileSync } from 'node:fs'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/run-sql.mjs"
+    },
+    {
+      "id": "TASK-9429",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:33:21",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/reseed.mjs (+89) — write via tool: import { readFileSync } from 'node:fs'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/reseed.mjs"
+    },
+    {
+      "id": "TASK-9430",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:33:40",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+60) — write via tool: # supabase/ — skema database (target pro",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9440",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:33:50",
+      "tags": [
+        "supabase",
+        "schema",
+        "destructive",
+        "rebuild"
+      ],
+      "summary": "Align DB ke dokumen (destruktif, opsi A): 39 -> 19 tabel dual-currency + notifications + RLS; reseed backup; file supabase/02-align-to-doc.s",
+      "conn": [
+        {
+          "id": "BUG-1046",
+          "type": "fixes",
+          "raw": "BUG-1046:fixes"
+        },
+        {
+          "id": "DEC-1045",
+          "type": "relates",
+          "raw": "DEC-1045:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9441",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-09",
+      "time": "23:47:07",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\necho \"=== .github workflows ===\"; ls -R .github 2>/dev/null || echo \"no .github\"\nech",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

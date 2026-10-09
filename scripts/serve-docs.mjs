@@ -7,16 +7,19 @@
  *
  * Jalankan: npm run docs:serve            (default port 8090)
  *           npm run docs:serve -- --port 9000
+ *           npm run docs:serve -- --root dist-docs   (sajikan hasil docs:build)
  */
 
 import { createServer } from 'node:http'
 import { createReadStream, existsSync, statSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 
-const ROOT = resolve(import.meta.dirname, '..', 'docs/design/flows')
+const REPO_ROOT = resolve(import.meta.dirname, '..')
 const argv = process.argv.slice(2)
 const portArg = argv.indexOf('--port')
 const PORT = Number(portArg >= 0 ? argv[portArg + 1] : process.env.PORT || 8090)
+const rootArg = argv.indexOf('--root')
+const ROOT = resolve(REPO_ROOT, rootArg >= 0 ? argv[rootArg + 1] : 'docs/design/flows')
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

@@ -90,9 +90,22 @@ if (!existsSync(resolve(flowsDir, 'INDEX.json'))) {
     .map((entry) => entry.name)
   for (const slug of flowFolders) {
     if (!indexed.includes(slug)) errors.push(`Flow folder not listed in INDEX.json: ${slug}`)
-    const spec = resolve(flowsDir, slug, `${slug}.json`)
-    if (!existsSync(spec)) errors.push(`Missing flow spec: ${slug}/${slug}.json`)
-    else if (!JSON.parse(readFileSync(spec, 'utf8')).diagram_type) errors.push(`Flow spec has no diagram_type: ${slug}`)
+    const primary = resolve(flowsDir, slug, `${slug}.json`)
+    if (!existsSync(primary)) errors.push(`Missing flow spec: ${slug}/${slug}.json`)
+    // Satu folder boleh punya spec tambahan (mis. <slug>.sequence.json untuk
+    // orkestrasi sistem per flow). Semua spec wajib punya diagram_type.
+    const specs = readdirSync(resolve(flowsDir, slug)).filter(
+      (name) => name.endsWith('.json') && !name.includes('.visual-check.'),
+    )
+    for (const name of specs) {
+      try {
+        if (!JSON.parse(readFileSync(resolve(flowsDir, slug, name), 'utf8')).diagram_type) {
+          errors.push(`Flow spec has no diagram_type: ${slug}/${name}`)
+        }
+      } catch {
+        errors.push(`Flow spec invalid JSON: ${slug}/${name}`)
+      }
+    }
     if (!existsSync(resolve(flowsDir, slug, 'README.md'))) errors.push(`Missing flow README: ${slug}/README.md`)
   }
   for (const slug of indexed) {

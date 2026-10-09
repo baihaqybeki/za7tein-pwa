@@ -1,7 +1,9 @@
-# F2 — COD via Wallet Hold Lifecycle
+# F2 — Wallet Reserve Lifecycle (Prepaid & COD)
 
-State machine status hold untuk order COD via wallet.
+State machine saldo yang di-**reserve** untuk order via wallet — prepaid dan COD memakai mekanisme yang sama.
 Milestone **M4** (PRD aktif `irbid-mvp-v2-2026-09-21`).
+
+**Revisi PO 2026-09-25:** saldo **tidak** berkurang saat order dibuat — saldo hanya di-reserve; saldo berkurang saat order **done**. Tahap `cut` saat kurir match **dihapus**.
 
 | Berkas | Isi |
 |---|---|
@@ -12,31 +14,32 @@ Milestone **M4** (PRD aktif `irbid-mvp-v2-2026-09-21`).
 ## State & Transisi
 
 **Jalur utama:**
-Tanpa hold → **Held** (order dibuat) → **Cut** (kurir match) → **Settled** (OTP sukses → bayar merchant/kurir).
+Tanpa reserve → **Reserved** (order dibuat, saldo ditahan) → **Settled** (order done → saldo berkurang).
 
 **Jalur pembatalan (exception):**
-- **Held → Released** — batal sebelum match = hold dibatalkan (hold released).
-- **Cut → Reversed** — batal sesudah match = potongan dikembalikan via reversal append-only.
+- **Reserved → Released** — batal sebelum order done = reserve dilepas, saldo tidak berkurang.
+
+Refund/dispute **setelah** order done bukan state hold — itu reversal ledger (`f7-ledger-liability` / `f8-dispute`). Karena itu state `cut` dan `reversed` dihapus.
 
 Tiap transisi = 1 entry ledger double-entry append-only (R-COD-01).
 
 ## Catatan desain
 
 - Lifecycle diagram memakai schema v1 (`meta.viewBox [1000, 640]`) supaya muat di 1440×900 tanpa scroll.
-- Tiga lane: Lifecycle utama + Pembatalan & Reversal + `terminal` (Hasil akhir — id lane **wajib `terminal`**, kolom 0..2, menaruh `settled` di band 03; tanpa lane ini renderer menampilkan band "03 / Outcomes" **kosong** = diagram terlihat putus). Cancel lane tidak memakai `variant` (lifecycle schema tidak mendukung).
-- Route cut → settled lintas band: `route drop` + `channelY` (koridor y=200), cancel horizontal dipindah y=110 & y=420 biar tak nabrak — geometri kolom outcome band bebas dari `reversed` (col 0).
+- Tiga lane: Lifecycle reserve + Pembatalan + `terminal` (Hasil akhir — id lane **wajib `terminal`**, kolom 0..2, menaruh `settled` di band 03; tanpa lane ini renderer menampilkan band "03 / Outcomes" **kosong** = diagram terlihat putus).
+- Route reserve → settled lintas band: `route drop` + `channelY` (koridor y=200); cancel horizontal di y=110 biar tak nabrak.
 - State `settled` memakai sublabel ringkas supaya teks tetap ≥ 6px di viewport 1440px.
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Drill-down dari F1: `f1:order → f2:none→held` (`hold_created`), `f1:dapur → f2:held→cut` (`hold_cut`), `f1:otp → f2:cut→settled` (`hold_settled`), `f1:batal → f2:released|reversed`. Feed ke `f7-ledger-liability`; diinterupsi `f8-dispute`.
+Drill-down dari F1: `f1:order → f2:none→held` (`reserve_created`), `f1:otp → f2:held→settled` (`reserve_settled`), `f1:batal → f2:released` (`reserve_released`). Feed ke `f7-ledger-liability`; diinterupsi `f8-dispute`. Kurir match (`f12:assign`) **tidak lagi** memotong saldo.
 
 ## Sumber (jangan dikarang)
 
-- `R-COD-01` — `analysis.md`
+- `R-COD-01` — `analysis.md` (**direvisi** PO 2026-09-25)
 - Milestone M4 — `versions/irbid-mvp-v2-2026-09-21/milestones.md`
 - Fee 0,37 JOD berlaku semua metode, termasuk legacy (OQ-25, PO 2026-09-22)
-- Batal sesudah match = reversal (append-only), bukan refund tunai
+- **PO 2026-09-25:** reserve saat order → saldo berkurang saat done; `cut` saat kurir match dihapus, menggantikan Update PO #5 (`source.md:47`)
 
 ## Update
 

@@ -14,8 +14,8 @@
   ],
   "nodes": [
     { "id": "topupIn", "type": "external", "label": "Top-up Xendit", "sublabel": "top_up_completed (F3)", "stage": 0, "row": 0, "width": 132 },
-    { "id": "orderFlow", "type": "backend", "label": "Order & fee", "sublabel": "hold/cut/settle (F2, F4)", "stage": 0, "row": 1, "width": 140 },
-    { "id": "reversal", "type": "backend", "label": "Reversal / batal", "sublabel": "released atau reversed", "stage": 0, "row": 2, "width": 140 },
+    { "id": "orderFlow", "type": "backend", "label": "Order & fee", "sublabel": "reserve/settle (F2, F4)", "stage": 0, "row": 1, "width": 140 },
+    { "id": "reversal", "type": "backend", "label": "Reversal / refund", "sublabel": "reserve dilepas / dispute", "stage": 0, "row": 2, "width": 140 },
 
     { "id": "entry", "type": "backend", "label": "Entri double-entry", "sublabel": "1 peristiwa ≥ 2 baris", "stage": 1, "row": 0, "width": 140 },
 
@@ -27,7 +27,7 @@
   ],
   "flows": [
     { "id": "f-topup-entry", "from": "topupIn", "to": "entry", "label": "top_up_completed", "variant": "emphasis", "route": "straight", "labelAt": [155, 200] },
-    { "id": "f-order-entry", "from": "orderFlow", "to": "entry", "label": "hold / cut / settle", "labelAt": [330, 204] },
+    { "id": "f-order-entry", "from": "orderFlow", "to": "entry", "label": "reserve / settle", "labelAt": [330, 204] },
     { "id": "f-reversal-entry", "from": "reversal", "to": "entry", "label": "entry baru, bukan edit", "variant": "dashed", "labelAt": [208, 314] },
     { "id": "f-entry-ledger", "from": "entry", "to": "ledger", "label": "append", "variant": "emphasis" },
     { "id": "f-ledger-liability", "from": "ledger", "to": "liability", "label": "jumlah per wallet", "labelAt": [636, 200] },

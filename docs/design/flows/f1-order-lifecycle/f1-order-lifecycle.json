@@ -27,15 +27,15 @@
     { "id": "browse", "lane": "customer", "col": 0, "type": "external", "label": "Pilih menu", "sublabel": "katalog + zona" },
     { "id": "checkout", "lane": "customer", "col": 1, "type": "external", "label": "Checkout", "sublabel": "ongkir + fee 0,22 JOD" },
     { "id": "payMethod", "lane": "customer", "col": 2, "type": "security", "label": "Pilih bayar", "sublabel": "prepaid / COD / transfer", "width": 112 },
-    { "id": "order", "lane": "customer", "col": 3, "type": "backend", "label": "Order dibuat", "sublabel": "prepaid potong; COD hold", "width": 150 },
-    { "id": "otp", "lane": "customer", "col": 5, "type": "external", "label": "OTP 4 digit", "sublabel": "konfirmasi → auto-settle", "width": 112 },
+    { "id": "order", "lane": "customer", "col": 3, "type": "backend", "label": "Order dibuat", "sublabel": "reserve saldo (prepaid & COD)", "width": 168 },
+    { "id": "otp", "lane": "customer", "col": 5, "type": "external", "label": "OTP 4 digit", "sublabel": "konfirmasi → saldo berkurang", "width": 132 },
 
-    { "id": "dapur", "lane": "merchant", "col": 4, "type": "frontend", "label": "Dapur", "sublabel": "ambil → masak → kurir match", "width": 132 },
+    { "id": "dapur", "lane": "merchant", "col": 4, "type": "frontend", "label": "Dapur", "sublabel": "batch → assign kurir", "width": 132 },
     { "id": "tiba", "lane": "merchant", "col": 5, "type": "external", "label": "Berangkat / Tiba", "sublabel": "15m/30m · geo + foto", "width": 132 },
 
     { "id": "zonablock", "lane": "caveat", "col": 0, "type": "security", "label": "Di luar zona", "sublabel": "checkout diblokir", "tag": "guard" },
     { "id": "topUpGate", "lane": "caveat", "col": 1, "type": "security", "label": "Saldo kurang", "sublabel": "akun baru < 3,5 JOD", "tag": "gate" },
-    { "id": "batal", "lane": "caveat", "col": 3, "type": "security", "label": "Batal", "sublabel": "sebelum match" }
+    { "id": "batal", "lane": "caveat", "col": 3, "type": "security", "label": "Batal", "sublabel": "sebelum order done" }
   ],
   "edges": [
     { "id": "e-browse-checkout", "from": "browse", "to": "checkout", "label": "pilih", "role": "main" },
@@ -53,8 +53,8 @@
     { "id": "e-order-batal", "from": "order", "to": "batal", "label": "batal", "variant": "dashed", "role": "error" }
   ],
   "cards": [
-    { "dot": "orange", "title": "Prepaid vs COD & tip", "items": ["Prepaid: saldo dipotong saat order; tip kurir opsional, 100% ke kurir, saat checkout / setelah terima", "COD via wallet: hold saat order → potong saat kurir match → settle saat OTP sukses", "Transfer manual kena fee flat 0,37 JOD (semua metode, PO 2026-09-22)"] },
-    { "dot": "amber", "title": "Waktu (SLA)", "items": ["Dapur (ambil → masak → match) → Berangkat 15m → Tiba 30m → OTP 10m → auto-settle 10m", "Sumber: R-DELIV-01, M5 (15/30/10 sementara)"] },
-    { "dot": "slate", "title": "Guard & Gate", "items": ["Di luar zona → checkout diblokir", "Akun baru top-up min 3,5 JOD sebelum order", "Batal sebelum match → hold released; sesudah match → reversal append-only"] }
+    { "dot": "orange", "title": "Reserve balance (prepaid & COD)", "items": ["Saldo di-reserve saat order dibuat — belum berkurang", "Saldo berkurang saat order done (settle); tip 100% ke kurir", "Transfer manual kena fee flat 0,37 JOD (semua metode, PO 2026-09-22)"] },
+    { "dot": "amber", "title": "Waktu (SLA)", "items": ["Dapur: batch prepare → assign kurir (C-06) → Berangkat 15m → Tiba 30m → OTP 10m → auto-settle 10m", "Sumber: R-DELIV-01, M5 (15/30/10 sementara)"] },
+    { "dot": "slate", "title": "Guard & Gate", "items": ["Di luar zona → checkout diblokir", "Akun baru top-up min 3,5 JOD sebelum order", "Batal sebelum done → reserve dilepas (released), saldo tidak berkurang"] }
   ]
 }

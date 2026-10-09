@@ -12,7 +12,7 @@ Dataflow double-entry append-only + cek solvabilitas. Milestone **M9** (M0 BE co
 
 **Peristiwa uang** → **Entri double-entry** (1 peristiwa ≥ 2 baris) → **`wallet_ledgers`** (append-only, kronologis) → **Liability wallet** (saldo user = utang platform) → **Cek Xendit** (saldo ≥ total liability?) → **Flag** kalau kurang.
 
-Masukan: `top_up_completed` (F3), `hold/cut/settle` (F2), fee (F4). Reversal/batal = **entry baru, bukan edit baris** (dashed).
+Masukan: `top_up_completed` (F3), `reserve/settle` (F2), fee (F4). Reversal/batal = **entry baru, bukan edit baris** (dashed).
 
 ## Aturan (R-LEDGER-01)
 
@@ -23,7 +23,7 @@ Masukan: `top_up_completed` (F3), `hold/cut/settle` (F2), fee (F4). Reversal/bat
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Dipicu `f2-cod-hold:cut->settled` + `f3-wallet-topup`; feed `f6-cashout-payout`.
+Dipicu `f2-cod-hold:held->settled` + `f3-wallet-topup`; feed `f6-cashout-payout`.
 
 ## Sumber (jangan dikarang)
 

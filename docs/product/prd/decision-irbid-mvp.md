@@ -13,6 +13,14 @@ Jika pemilik produk menyatakan dokumen lain lebih otoritatif, ubah manifest dan 
 
 ## Riwayat keputusan
 
+### Model uang: reserve saat order, saldo berkurang saat order done — 2026-09-25 (keputusan PO)
+
+- **Menyimpang dari `source.md:47` (Update PO #5) dan `source.md:115`:** aturan *"COD: saldo dipotong saat kurir match"* **tidak lagi berlaku**. Prepaid dan COD memakai mekanisme yang sama: saldo di-**reserve** saat order dibuat (belum berkurang), lalu **berkurang saat order done** (settle/OTP).
+- **Tahap `cut` saat kurir match dihapus** dari lifecycle hold. Karena saldo baru berkurang saat done, tidak ada potongan yang perlu di-reverse saat batal — batal sebelum done hanya melepas reserve (`released`).
+- **Refund/dispute setelah done** tetap jalur ledger reversal (`f7-ledger-liability` / `f8-dispute`), bukan state hold.
+- Efek: `order.hold_status` menyusut jadi `none/reserved/settled/released`; event `reserve_created`, `reserve_settled`, `reserve_released`. `R-COD-01` di `analysis.md` dan M4 di `milestones.md` dikoreksi di commit yang sama; flow `f1-order-lifecycle` / `f2-cod-hold` + referensi silang diperbarui.
+- **UNRESOLVED:** apakah reserve punya batas waktu/expiry tersendiri kalau order menggantung (belum diputuskan).
+
 ### Onboarding tiap peran — 2026-09-25 (keputusan PO)
 
 - **Setiap peran punya layar onboarding sendiri.** Customer `/customer/onboarding` (sudah ada), merchant `/merchant/onboarding` (form profil toko = langkah `profil` flow `f16`), kurir `/courier/onboarding` (profil + kendaraan), panel admin punya antrean `/admin/onboarding` (approval tenant). Layar onboarding bukan fitur opsional.

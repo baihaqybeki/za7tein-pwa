@@ -80,19 +80,14 @@ Adapter dipilih otomatis (`lib/backend/index.js`): `getBackend()` → `supabaseB
 
 Permukaan method (dari `localBackend.js`, cocok FSD §6): `register`, `login`, `logout`, `getCurrentUser`, `sendVerificationCode`, `verifyCode`, `updateProfile`, `getMerchants`, `updateMerchant`, `onMerchantsChange`, `getStoreStatus`, `setStoreStatus`, `onStoreStatusChange`, `getMenu`, `saveMenu`, `updateStock`, `onMenuChange`, `createOrder`, `getOrders`, `onOrdersChange`, `updateOrderStatus`, `claimOrder`, `updateCourierLocation`, `onCourierLocation`, `getCouriers`, `updateCourier`, `onCouriersChange`, `getMessages`, `sendMessage`, `onMessagesChange`, `resetDemo`.
 
-## 6. Tabel Supabase (`supabase/schema.sql`)
+## 6. Tabel Supabase — DIHAPUS dari dokumen ini
 
-| Tabel | Kolom |
-|---|---|
-| `merchants` | `id` text PK, `name` text NOT NULL, `address` text, `lat` double, `lng` double, `emoji` text, `category` text, `photo` text, `open` boolean DEFAULT true, `created_at` timestamptz |
-| `menu_items` | `id` text PK, `merchant_id` → merchants, `name` text NOT NULL, `description` text, `price` integer DEFAULT 0, `category` text DEFAULT 'Main Dishes', `stock` integer DEFAULT 0, `image` text, `photo` text, `available` boolean DEFAULT true, `created_at` timestamptz |
-| `orders` | `id` text PK, `code` text, `status` text DEFAULT 'pending', `merchant_id` → merchants, `data` jsonb DEFAULT '{}' (objek order penuh), `created_at` timestamptz |
-| `couriers` | `id` text PK, `name` text NOT NULL, `phone` text, `vehicle` text DEFAULT 'On foot', `status` text DEFAULT 'idle', `lat` double, `lng` double, `photo` text, `online` boolean DEFAULT false, `last_seen_at` bigint |
-| `profiles` | `id` uuid PK → auth.users, `email` text, `name` text, `phone` text, `address` text, `role` text DEFAULT 'customer', `merchant_id` → merchants, `courier_id` → couriers, `created_at` timestamptz |
-| `settings` | `key` text PK, `value` jsonb DEFAULT '{}' (kunci store status: `store_status:{id}`) |
-| `order_messages` | `id` uuid PK DEFAULT gen_random_uuid(), `order_id` → orders, `channel` text NOT NULL, `sender_id` text, `sender_name` text, `sender_role` text, `text` text NOT NULL, `created_at` timestamptz |
+Skema Supabase repo referensi (7 tabel: `merchants`, `menu_items`, `orders`, `couriers`, `profiles`, `settings`, `order_messages`, dengan text PK + `profiles → auth.users` + RLS permissive) **dicabut sebagai acuan** pada 2026-10-09 — bentuk tabelnya tidak dipakai.
 
-Realtime publication aktif untuk 7 tabel. RLS aktif dengan policy permissive `using(true)` (MVP).
+- **Sumber tunggal skema DB sekarang:** `docs/product/schema-draft-v1.md` (17 entitas) → SQL di `supabase/schema.sql` (aditif).
+- **Membuang skema referensi lama dari database:** `supabase/reference-schema-drop.sql` (destruktif, manual).
+
+Bagian lain dokumen ini (portal/route, state machine, store, bentuk objek, uang & geo) tetap berlaku sebagai **referensi UI/UX saja, bukan target**.
 
 ## 7. Uang & geo (`packages/shared/src/lib/geo.js`)
 

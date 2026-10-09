@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "F1 — System Orchestration (Order Intake → Assign)",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [1080, 560]
+  },
+  "participants": [
+    { "id": "cust", "type": "frontend", "label": "App customer", "sublabel": "checkout" },
+    { "id": "sys", "type": "backend", "label": "System order", "sublabel": "event + timer" },
+    { "id": "mch", "type": "frontend", "label": "Merchant", "sublabel": "batch & kurir" },
+    { "id": "cour", "type": "frontend", "label": "App kurir", "sublabel": "tugas" },
+    { "id": "led", "type": "backend", "label": "Ledger", "sublabel": "reserve" }
+  ],
+  "messages": [
+    { "id": "m1", "from": "cust", "to": "sys", "y": 160, "label": "checkout: gate zona lolos · fee 0,22 · pilih metode (f20/f4/f24)" },
+    { "id": "m2", "from": "sys", "to": "led", "y": 195, "label": "create order → quotation · reserve saldo → hold_status: held", "variant": "emphasis", "note": "saldo belum berkurang (PO 2026-09-25)" },
+    { "id": "m3", "from": "sys", "to": "mch", "y": 230, "label": "notify order baru (pending) → merchant lihat antrean" },
+    { "id": "m4", "from": "mch", "to": "sys", "y": 265, "label": "approve → pilih batch (existing / create) → order = prepare · mulai SLA" },
+    { "id": "m6", "from": "sys", "to": "cust", "y": 300, "label": "push status prepare + estimasi waktu (tanpa live tracking, C-10)" },
+    { "id": "m7", "from": "sys", "to": "mch", "y": 370, "label": "etaPrepare habis → close batch (closed) → waitingCourier" },
+    { "id": "m8", "from": "mch", "to": "sys", "y": 405, "label": "assign kurir sendiri (C-06) → courier_matched → waitingDelivery" },
+    { "id": "m9", "from": "mch", "to": "sys", "y": 440, "label": "tolak order → canceled (cancelBy=merchant) · release reserve · notify customer", "variant": "dashed", "note": "saldo tidak berkurang; customer lihat dibatalkan" }
+  ],
+  "cards": [
+    { "dot": "orange", "title": "Orkestrasi System (per flow f1)", "items": ["Intake: order → quotation → reserve → prepare/batch → assign kurir", "Cabang tolak (dashed) = canceled + release reserve"] },
+    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["C-06/C-07 · PO 2026-09-25 (reserve→done) · schema entri 11 (batch)", "UNRESOLVED: batch/auto-resequence schema-only (proposed) · SLA DEC-1037 sementara"] }
+  ]
+}

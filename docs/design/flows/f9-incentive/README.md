@@ -28,7 +28,7 @@ Modal 5 JOD = kredit sistem non-tunai, **terpisah** dari deposit COD 3,50 JOD (I
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Volume dari `f2-cod-hold:cut->settled`; fee 0,15 ditahan mengikuti `f4-fee-tax`; kredit tercatat di `f7-ledger-liability`.
+Volume dari `f2-cod-hold:held->settled`; fee 0,15 ditahan mengikuti `f4-fee-tax`; kredit tercatat di `f7-ledger-liability`.
 
 ## Sumber (jangan dikarang)
 

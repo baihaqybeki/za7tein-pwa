@@ -1,0 +1,55 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "F24 — Pembayaran Order (COD & Prepaid)",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "customer", "label": "Customer" },
+    { "id": "courier", "label": "Kurir" },
+    { "id": "guard", "label": "Guard", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "reserve", "label": "Reserve", "fromCol": 0, "toCol": 1 },
+    { "id": "bayar", "label": "Bayar & Settle", "fromCol": 2, "toCol": 5, "variant": "emphasis" }
+  ],
+  "mainPath": ["order", "metode", "cod", "bayar", "settle"],
+  "semanticChecks": {
+    "allowedRoots": ["order", "tiba"],
+    "allowedTerminals": ["settle"],
+    "requiredEdges": [
+      { "from": "metode", "to": "cod" },
+      { "from": "bayar", "to": "settle" }
+    ]
+  },
+  "nodes": [
+    { "id": "order", "lane": "customer", "col": 0, "type": "external", "label": "Order dibuat", "sublabel": "saldo di-reserve" },
+    { "id": "metode", "lane": "customer", "col": 1, "type": "security", "label": "Pilih metode", "sublabel": "prepaid / COD", "width": 132 },
+    { "id": "prepaid", "lane": "customer", "col": 2, "type": "external", "label": "Prepaid", "sublabel": "otomatis dari reserve", "width": 132 },
+    { "id": "cod", "lane": "customer", "col": 3, "type": "external", "label": "COD", "sublabel": "bayar saat terima" },
+    { "id": "bayar", "lane": "customer", "col": 4, "type": "external", "label": "Customer bayar", "sublabel": "prompt tagihan di pintu", "width": 140 },
+    { "id": "settle", "lane": "courier", "col": 5, "type": "backend", "label": "Settle", "sublabel": "saldo berkurang → done", "width": 140 },
+
+    { "id": "tiba", "lane": "courier", "col": 4, "type": "frontend", "label": "Kurir tiba", "sublabel": "serah terima", "width": 132 },
+
+    { "id": "gagal", "lane": "guard", "col": 4, "type": "security", "label": "Tidak bayar", "sublabel": "timer / dispute", "tag": "guard" }
+  ],
+  "edges": [
+    { "id": "e-order-metode", "from": "order", "to": "metode", "label": "lanjut", "role": "main" },
+    { "id": "e-metode-cod", "from": "metode", "to": "cod", "label": "COD", "variant": "emphasis", "role": "main" },
+    { "id": "e-metode-prepaid", "from": "metode", "to": "prepaid", "label": "prepaid", "role": "branch" },
+    { "id": "e-prepaid-settle", "from": "prepaid", "to": "settle", "label": "reserve dicairkan", "role": "branch" },
+    { "id": "e-cod-bayar", "from": "cod", "to": "bayar", "label": "prompt tagihan", "role": "main" },
+    { "id": "e-bayar-settle", "from": "bayar", "to": "settle", "label": "konfirmasi", "variant": "emphasis", "role": "main" },
+
+    { "id": "e-tiba-bayar", "from": "tiba", "to": "bayar", "label": "minta bayar", "role": "branch" },
+    { "id": "e-bayar-gagal", "from": "bayar", "to": "gagal", "label": "tidak bayar", "variant": "dashed", "role": "error" },
+    { "id": "e-gagal-settle", "from": "gagal", "to": "settle", "label": "auto-settle", "variant": "dashed", "role": "branch" }
+  ],
+  "cards": [
+    { "dot": "orange", "title": "Bisnis (PO 2026-09-25)", "items": ["Reserve saat order; saldo berkurang saat order done", "COD: customer diminta bayar tagihan saat terima → settle"] },
+    { "dot": "amber", "title": "Prepaid", "items": ["Tanpa prompt — reserve dicairkan otomatis saat done", "Top-up Xendit (f3); fee customer 0,22 JOD (f4)"] },
+    { "dot": "slate", "title": "Guard", "items": ["Tidak bayar → timer auto-settle / dispute (f8)", "Penalti customer lalai OQ-14 UNRESOLVED"] }
+  ]
+}

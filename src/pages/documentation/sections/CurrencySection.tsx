@@ -83,9 +83,43 @@ jod(1.09)         // "1,09 JOD"`}
                 layar uang
               </td>
             </tr>
+            <tr>
+              <td>
+                <code className="doc-inline">components/ui/CurrencyConverter.tsx</code>
+              </td>
+              <td>
+                Kartu konversi dua arah di Home customer: input jumlah, tombol tukar
+                (IDR↔JOD), hasil hanya-baca, ditutup{' '}
+                <code className="doc-inline">ExchangeRateNote</code>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code className="doc-inline">hooks/useDailyExchangeRate.ts</code>
+              </td>
+              <td>
+                Kurs harian: satu hit per hari kalender, di-cache di{' '}
+                <code className="doc-inline">localStorage</code>{' '}
+                (<code className="doc-inline">sa7tein:exchange-rate</code>) — rate baru hanya
+                saat hari berganti
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
+      <h3 className="doc-h3">Konverter Home &amp; cache harian (UNRESOLVED)</h3>
+      <p className="doc-p">
+        Sejak 2026-10-09 Home customer memuat kartu{' '}
+        <code className="doc-inline">CurrencyConverter</code> (dua arah + tombol tukar). Rate-nya
+        dari <code className="doc-inline">useDailyExchangeRate</code>:{' '}
+        <code className="doc-inline">fetchDailyRate()</code> mensimulasikan{' '}
+        <code className="doc-inline">&ldquo;hit&rdquo;</code> sekali per hari (rate bergeser ±1,5%
+        deterministik per tanggal) lalu hasilnya disimpan — reload di hari yang sama tidak
+        menghitung ulang. Ini <strong>menyimpang</strong> dari flow F10 yang menaruh sinkron rate di
+        backend 1×24 jam; kompromi showcase karena repo tanpa backend.{' '}
+        <strong>UNRESOLVED:</strong> kebijakan cache (per-device vs server) dan apakah kartu tetap
+        ada saat rate nyata tersedia. Konversi tetap tampilan saja — tidak ada state nominal JOD.
+      </p>
       <h3 className="doc-h3">Disclaimer wajib, dan yang masih UNRESOLVED</h3>
       <p className="doc-p">
         Setiap tempat yang menampilkan JOD wajib dekat dengan kalimat{' '}

@@ -2,35 +2,31 @@
   "schema_version": 1,
   "diagram_type": "lifecycle",
   "meta": {
-    "title": "F2 — COD via Wallet Hold Lifecycle",
+    "title": "F2 — Wallet Reserve Lifecycle (Prepaid & COD)",
     "quality_profile": "showcase",
     "viewBox": [1000, 640]
   },
   "lanes": [
-    { "id": "main", "label": "Lifecycle utama" },
-    { "id": "cancel", "label": "Pembatalan & Reversal" },
+    { "id": "main", "label": "Lifecycle reserve" },
+    { "id": "cancel", "label": "Pembatalan" },
     { "id": "terminal", "label": "Hasil akhir" }
   ],
   "states": [
-    { "id": "none", "type": "start", "label": "Tanpa hold", "sublabel": "belum ada order", "lane": "main", "col": 0 },
-    { "id": "held", "type": "active", "label": "Held", "sublabel": "order dibuat", "lane": "main", "col": 1 },
-    { "id": "cut", "type": "active", "label": "Cut", "sublabel": "saat kurir match", "lane": "main", "col": 2 },
-    { "id": "settled", "type": "success", "label": "Settled", "sublabel": "OTP sukses → bayar", "lane": "terminal", "col": 0, "width": 120 },
+    { "id": "none", "type": "start", "label": "Tanpa reserve", "sublabel": "belum ada order", "lane": "main", "col": 0 },
+    { "id": "held", "type": "active", "label": "Reserved", "sublabel": "order dibuat (reserve)", "lane": "main", "col": 1 },
+    { "id": "settled", "type": "success", "label": "Settled", "sublabel": "order done → saldo berkurang", "lane": "terminal", "col": 0, "width": 140 },
 
-    { "id": "released", "type": "failure", "label": "Released", "sublabel": "batal sebelum match", "lane": "cancel", "col": 1 },
-    { "id": "reversed", "type": "failure", "label": "Reversed", "sublabel": "batal sesudah match", "lane": "cancel", "col": 2 }
+    { "id": "released", "type": "failure", "label": "Released", "sublabel": "batal sebelum done", "lane": "cancel", "col": 1 }
   ],
   "transitions": [
-    { "id": "t-order", "from": "none", "to": "held", "label": "order dibuat", "labelDy": 55 },
-    { "id": "t-match", "from": "held", "to": "cut", "label": "kurir match", "variant": "emphasis", "labelDy": 55, "labelDx": 40 },
-    { "id": "t-otp", "from": "cut", "to": "settled", "label": "OTP sukses", "variant": "emphasis", "route": "drop", "channelY": 200, "labelDy": 40 },
+    { "id": "t-order", "from": "none", "to": "held", "label": "order dibuat (reserve)", "labelDy": 55 },
+    { "id": "t-settle", "from": "held", "to": "settled", "label": "order done / OTP", "variant": "emphasis", "route": "drop", "channelY": 200, "labelDy": 40 },
 
-    { "id": "t-cancel-before", "from": "held", "to": "released", "label": "batal sebelum match", "variant": "dashed", "route": "drop", "channelY": 110, "labelAt": [390, 112] },
-    { "id": "t-cancel-after", "from": "cut", "to": "reversed", "label": "batal sesudah match", "variant": "dashed", "route": "drop", "channelY": 420, "labelAt": [560, 422] }
+    { "id": "t-cancel", "from": "held", "to": "released", "label": "batal sebelum done", "variant": "dashed", "route": "drop", "channelY": 110, "labelAt": [390, 112] }
   ],
   "cards": [
-    { "dot": "orange", "title": "COD via Wallet", "items": ["Saldo customer dipotong bertahap: held → cut → settled", "Tiap transisi = 1 entry ledger append-only (double-entry)"] },
-    { "dot": "slate", "title": "Jalur Pembatalan", "items": ["Batal sebelum match = held → released (hold dibatalkan)", "Batal sesudah match = cut → reversed (potongan dikembalikan via reversal)"] },
-    { "dot": "amber", "title": "Sumber", "items": ["R-COD-01 — analysis.md", "Milestone M4 — milestones.md", "PO 2026-09-22 — fee 0,37 JOD berlaku semua metode"] }
+    { "dot": "orange", "title": "Reserve Balance", "items": ["Order dibuat → saldo di-reserve, belum berkurang", "Saldo berkurang hanya saat order done"] },
+    { "dot": "slate", "title": "Pembatalan & Reversal", "items": ["Batal sebelum done → released (reserve dilepas)", "Cut saat match dihapus; refund post-done = ledger"] },
+    { "dot": "amber", "title": "Sumber", "items": ["R-COD-01 — analysis.md (revisi 2026-09-25)", "Milestone M4 · PO 2026-09-25: reserve → done"] }
   ]
 }

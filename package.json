@@ -1,7 +1,7 @@
 {
   "name": "sa7tein-pwa",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +14,7 @@
     "scan:test": "node scripts/surface-scan.test.mjs",
     "browser:gate": "node scripts/browser-gate.mjs",
     "docs:serve": "node scripts/serve-docs.mjs",
+    "docs:build": "node scripts/build-docs.mjs",
     "setup": "bash scripts/setup.sh",
     "prepare": "bash scripts/setup.sh",
     "atlas": "node \"$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs\""

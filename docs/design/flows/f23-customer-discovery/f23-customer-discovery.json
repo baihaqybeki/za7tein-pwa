@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "F23 — Customer Discovery (Multi-Merchant)",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "customer", "label": "Customer" },
+    { "id": "merchant", "label": "Merchant" },
+    { "id": "caveat", "label": "Guard & Filter", "variant": "exception" }
+  ],
+  "phases": [
+    { "id": "temukan", "label": "Temukan", "fromCol": 0, "toCol": 2 },
+    { "id": "masuk", "label": "Masuk ke menu", "fromCol": 3, "toCol": 4, "variant": "emphasis" }
+  ],
+  "mainPath": ["home", "daftar", "pilih", "menu", "lanjut"],
+  "semanticChecks": {
+    "allowedRoots": ["home", "status", "zona"],
+    "allowedTerminals": ["lanjut", "tutup", "luarzona", "kosong"],
+    "requiredEdges": [
+      { "from": "daftar", "to": "pilih" },
+      { "from": "pilih", "to": "menu" }
+    ]
+  },
+  "nodes": [
+    { "id": "home", "lane": "customer", "col": 0, "type": "external", "label": "Buka app", "sublabel": "beranda customer" },
+    { "id": "daftar", "lane": "customer", "col": 1, "type": "external", "label": "Daftar merchant", "sublabel": "terdekat + badge buka", "width": 132 },
+    { "id": "pilih", "lane": "customer", "col": 2, "type": "external", "label": "Pilih merchant", "sublabel": "masuk ke warung", "width": 132 },
+    { "id": "menu", "lane": "customer", "col": 3, "type": "external", "label": "Menu merchant", "sublabel": "katalog + zona" },
+    { "id": "lanjut", "lane": "customer", "col": 4, "type": "backend", "label": "Lanjut checkout", "sublabel": "→ f1 order lifecycle", "width": 132 },
+
+    { "id": "status", "lane": "merchant", "col": 1, "type": "frontend", "label": "Status buka", "sublabel": "toggle merchant", "width": 132 },
+    { "id": "zona", "lane": "merchant", "col": 2, "type": "frontend", "label": "Zona aktif", "sublabel": "Hijazi / Syimali", "width": 132 },
+
+    { "id": "tutup", "lane": "caveat", "col": 1, "type": "security", "label": "Warung tutup", "sublabel": "ditandai, tak bisa order", "tag": "guard", "width": 132 },
+    { "id": "luarzona", "lane": "caveat", "col": 2, "type": "security", "label": "Di luar zona", "sublabel": "tidak muncul", "tag": "guard" },
+    { "id": "kosong", "lane": "caveat", "col": 3, "type": "security", "label": "Tidak ada hasil", "sublabel": "ubah filter / zona", "tag": "guard", "width": 132 }
+  ],
+  "edges": [
+    { "id": "e-home-daftar", "from": "home", "to": "daftar", "label": "buka", "role": "main" },
+    { "id": "e-daftar-pilih", "from": "daftar", "to": "pilih", "label": "pilih", "role": "main" },
+    { "id": "e-pilih-menu", "from": "pilih", "to": "menu", "label": "masuk", "role": "main" },
+    { "id": "e-menu-lanjut", "from": "menu", "to": "lanjut", "label": "lanjut", "variant": "emphasis", "role": "main" },
+
+    { "id": "e-status-daftar", "from": "status", "to": "daftar", "label": "buka / tutup", "role": "branch" },
+    { "id": "e-zona-pilih", "from": "zona", "to": "pilih", "label": "aktif?", "role": "branch" },
+
+    { "id": "e-daftar-tutup", "from": "daftar", "to": "tutup", "label": "tutup", "variant": "dashed", "role": "error" },
+    { "id": "e-daftar-luarzona", "from": "daftar", "to": "luarzona", "label": "di luar zona", "variant": "dashed", "role": "error" },
+    { "id": "e-pilih-kosong", "from": "pilih", "to": "kosong", "label": "tak tersedia", "variant": "dashed", "role": "error" }
+  ],
+  "cards": [
+    { "dot": "orange", "title": "Bisnis (keputusan PO 2026-09-25)", "items": ["Customer memilih merchant dulu, baru menu — marketplace multi-merchant", "Basis DEC-1041; requirement PRD belum ditulis (UNRESOLVED)"] },
+    { "dot": "amber", "title": "Ketersediaan & zona", "items": ["Merchant menandai buka/tutup (f12)", "Zona aktif Hijazi / Syimali (f20)"] },
+    { "dot": "slate", "title": "Guard", "items": ["Warung tutup ditandai; di luar zona tidak muncul", "Hasil kosong → ubah filter / zona"] }
+  ]
+}

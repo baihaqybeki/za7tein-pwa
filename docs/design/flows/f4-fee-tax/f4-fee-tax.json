@@ -38,7 +38,7 @@
   ],
   "cards": [
     { "dot": "orange", "title": "Fee flat 0,37 JOD", "items": ["Customer 0,22 JOD + merchant 0,15 JOD per order", "Berlaku SEMUA metode, termasuk transfer manual & COD cash (OQ-25, PO 2026-09-22)", "Ongkir 100% ke merchant — bukan pendapatan platform", "Tip opsional & sukarela, 100% ke kurir, tidak kena fee platform: dipilih saat checkout ATAU setelah terima (dua titik masuk; yang setelah-terima = prompt pasca-order `f19`)"] },
-    { "dot": "amber", "title": "Pajak 2 lapis", "items": ["GST makanan Jordan 16% — merchant setor atas penjualan", "GST/PPh atas fee platform (objek 0,37) + PPh final 0,5%", "Fee merchant dipotong saat settle (lihat F2); fee customer saat order dibayar"] },
+    { "dot": "amber", "title": "Pajak 2 lapis", "items": ["GST makanan Jordan 16% — merchant setor atas penjualan", "GST/PPh atas fee platform (objek 0,37) + PPh final 0,5%", "Fee merchant dipotong saat settle (lihat F2); fee customer saat order done"] },
     { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-FEE-01, R-TAX-01 — analysis.md · M2, M7 — milestones.md", "UNRESOLVED (jangan ditebak): OQ-2/3/4 tarif GST makanan, PPN ekspor jasa, status PKP", "UNRESOLVED: OQ-17/18 (R-TAX-01) · OQ-27 sanity check fee customer 0,22"] }
   ]
 }

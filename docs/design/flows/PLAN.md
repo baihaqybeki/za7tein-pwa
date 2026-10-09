@@ -1,7 +1,7 @@
 # Rencana Diagram Flow Bisnis Sa7tein
 
 Dokumen perencanaan untuk diagram flow bisnis (archify). Peta arsitektur sudah jadi:
-`docs/design/app-map/`. **Status: 20 flow selesai (F1–F20), semua lolos gate** — lihat `INDEX.json` / `index.html`.
+`docs/design/app-map/`. **Status: flow F1–F24 terdaftar di `INDEX.json`** — F23 (`f23-customer-discovery`) masih `proposed` karena requirement PRD-nya belum ditulis; F24 (`f24-payment-methods`) baru (PO 2026-09-25) — lihat `INDEX.json` / `index.html`.
 
 Sumber: PRD aktif `irbid-mvp-v2-2026-09-21`
 (`docs/product/prd/versions/irbid-mvp-v2-2026-09-21/{source,analysis,milestones}.md`).
@@ -16,7 +16,8 @@ Satu flow = satu folder `docs/design/flows/<slug>/`:
 
 | Berkas | Isi |
 |---|---|
-| `<slug>.json` | Spec archify — satu-satunya yang diedit |
+| `<slug>.json` | Spec archify diagram **utama** — sumber yang diedit |
+| `<slug>.sequence.json` | **Opsional** — sequence diagram **orkestrasi sistem**, scoped ke flow ini (event/timer antar-aktor). Artefak `<slug>.sequence.html` |
 | `<slug>.html` | Artefak jadi — **generated, di-gitignore** |
 | `<slug>.visual-check.*` | Screenshot + receipt + contact sheet — **generated, di-gitignore**; PNG dibuang otomatis setelah lolos |
 | `README.md` | Ringkas flow + sumber requirement + cara update |
@@ -35,9 +36,9 @@ Aturan (sama seperti `app-map/`):
 ./scripts/flows-gate.sh <slug> --keep-shots   # simpan PNG (hanya saat debug)
 ```
 
-Script itu menjalankan `deliver` + `visual-check`, membaca `diagram_type` dari JSON
-(jadi tipe tidak perlu diingat), membuang PNG kalau lolos, dan mencetak **satu baris**
-hasil. Jangan panggil `archify.mjs` langsung untuk kerja rutin.
+Script itu menjalankan `deliver` + `visual-check` untuk **semua spec** di folder flow
+(`<slug>.json` + `<slug>.sequence.json`), membaca `diagram_type` tiap spec, membuang PNG
+kalau lolos, dan mencetak satu baris per spec. Jangan panggil `archify.mjs` langsung untuk kerja rutin.
 
 ### Fitur archify yang dipakai (dan yang tidak)
 
@@ -81,15 +82,15 @@ Urutan bangun = urutan milestone (M1 → M11), lalu nilai baca. Status: `todo` /
 
 ### F1 — Order end-to-end ✅ done
 - **Slug:** `f1-order-lifecycle` · **Type:** `workflow` · **Milestone:** M2–M5
-- **Alur utama:** pilih menu → checkout (ongkir + fee) → order dibuat (hold) → merchant konfirmasi "Ambil" → masak → kurir match → "Berangkat" → "Tiba" (geo + foto) → OTP 4 digit → auto-settle → selesai → rating
+- **Alur utama:** pilih menu → checkout (ongkir + fee) → order dibuat (reserve saldo) → merchant konfirmasi "Ambil" → masak → kurir match → "Berangkat" → "Tiba" (geo + foto) → OTP 4 digit → order done (saldo berkurang) → rating
 - **Cabang:** di luar zona → checkout diblokir; saldo akun baru < 3,5 JOD → gate
 - **Sumber:** R-COD-01, R-DELIV-01, R-TOPUP-01, R-FEE-01 (analysis); M2, M4, M5
 - **Catatan:** ini flow payung; detail uang ada di F2, detail checkpoint di F5
 
 ### F2 — COD via wallet (hold lifecycle) ✅ done
 - **Slug:** `f2-cod-hold` · **Type:** `lifecycle` · **Milestone:** M4
-- **State:** `none → held → cut → settled`; batal sebelum match `held → released`; batal sesudah match `held|cut → reversed`
-- **Event:** `hold_created`, `hold_cut` (kurir match), `hold_settled` (OTP sukses), `hold_released`, `hold_reversed` — tiap transisi = 1 entry ledger append-only
+- **State:** `none → held → settled`; batal sebelum done `held → released` (saldo tidak berkurang). `cut`/`reversed` dihapus (PO 2026-09-25)
+- **Event:** `reserve_created` (order dibuat), `reserve_settled` (order done), `reserve_released` (batal sebelum done) — tiap transisi = 1 entry ledger append-only
 - **Sumber:** R-COD-01 (analysis); M4.1
 
 ### F3 — Wallet & top-up ✅ done
@@ -158,16 +159,32 @@ Urutan bangun = urutan milestone (M1 → M11), lalu nilai baca. Status: `todo` /
 
 ### F12 — Merchant Console ✅ done
 - **Slug:** `f12-merchant-console` · **Type:** `workflow` · **Milestone:** M4/M5/M11 (PRD) + plan-merchant M0–M7
-- **Alur:** toggle Buka/Tutup → antrean order → Terima/Tolak → pilih kurir sendiri (`hold_cut`) → estimasi masak slider 15–30 m → siap diambil (2-way); guard: order macet → reassign/batal → refund
-- **Aturan:** platform TIDAK assign kurir (C-06), ongkir 100% merchant (C-07), maks 3 kurir
-- **UNRESOLVED:** merchant sbg pihak bersengketa (OQ-30), nav merchant belum diputuskan
-- **Sumber:** plan-merchant.md, C-06/C-07/C-17, R-COD-01; M4, M5, M11
+- **Alur:** toggle Buka/Tutup → antrean order → Terima/Tolak → **window prepare (batch)** (`etaPrepare`/`slaPrepareDeadline`) → **close batch** → **assign kurir sendiri** setelah batch ready; guard: batch tanpa kurir → reassign/batal → refund
+- **Aturan:** batch = unit prepare (schema entri 11: prepare→closed→waitingCourier→waitingDelivery→delivery); platform TIDAK assign kurir (C-06), assign setelah batch ready; ongkir 100% merchant (C-07); maks 3 kurir
+- **UNRESOLVED:** batch & auto-resequence **tidak ada di PRD aktif** (schema-only, proposed) · merchant sbg pihak bersengketa (OQ-30) · nav merchant belum diputuskan
+- **Sumber:** plan-merchant.md, C-06/C-07/C-17, R-COD-01, schema entri 11; M4, M5, M11
 
 ### F13 — Tampilan Kurir ✅ done
 - **Slug:** `f13-courier-view` · **Type:** `workflow` · **Milestone:** M4, M5
-- **Alur:** order masuk → Tap "Ambil" (2-way) → "Berangkat" (SLA 15m) → "Tiba" (geo+foto) → OTP 4 digit → `hold_settled`; guard: customer lalai → "Batal" (total 10m)
+- **Alur:** order masuk → Tap "Ambil" (2-way) → "Berangkat" (SLA 15m) → "Tiba" (geo+foto) → OTP 4 digit → `reserve_settled`; guard: customer lalai → "Batal" (total 10m)
 - **UNRESOLVED:** % penalti customer lalai (OQ-14), SLA final (OQ-13); lantai/unit + label "Mulai Antar" tak ada di PRD v2 (unresolved-by-absence)
 - **Sumber:** R-DELIV-01, R-COD-01, C-06..C-11; M4, M5
+
+### F23 — Customer discovery (multi-merchant) 🟡 proposed
+- **Slug:** `f23-customer-discovery` · **Type:** `workflow` · **Milestone:** belum (butuh requirement PRD dulu)
+- **Alur utama:** buka app → daftar merchant (terdekat + badge buka) → pilih merchant → menu merchant → lanjut checkout (`f1:browse`)
+- **Guard:** warung tutup ditandai · di luar zona tidak muncul · hasil kosong → ubah filter/zona
+- **Dasar:** keputusan PO 2026-09-25 (`DEC-1041`) + bentuk layar referensi `repo-sa7tein-schema.md:15`
+- **UNRESOLVED:** requirement `R-*` belum ditulis di PRD aktif · format daftar/filter · perilaku merchant tutup/di luar zona
+- **Catatan:** kode masih single-merchant (`mockMerchant`) → gap; menambahkan langkah "pilih merchant" ke `f1` tidak bisa (workflow v2 dibatasi `col` 0..5), jadi dibuat flow terpisah yang menyerahkan ke `f1`.
+
+### F24 — Pembayaran order (COD & prepaid) ✅ done
+- **Slug:** `f24-payment-methods` · **Type:** `workflow` · **Milestone:** M4
+- **Alur utama:** order dibuat (saldo di-reserve) → pilih metode → **COD:** kurir tiba → customer diminta bayar tagihan → konfirmasi → settle; **prepaid:** reserve dicairkan otomatis saat done
+- **Guard:** tidak bayar → timer auto-settle / dispute (`f8`)
+- **Dasar:** PO 2026-09-25 (reserve→done + prompt bayar COD); R-COD-01, R-FEE-01, R-TOPUP-01
+- **UNRESOLVED:** durasi timer auto-settle saat tidak bayar · penalti customer lalai (OQ-14)
+- **Catatan:** saldo tidak berkurang saat order; COD bayar saat serah terima (bukan potong saat match).
 
 ---
 

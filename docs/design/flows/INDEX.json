@@ -3,7 +3,7 @@
   "schema_version": 1,
   "flows": {
     "f1-order-lifecycle": { "type": "workflow", "status": "done", "role": "umbrella", "basis": "R-COD-01, R-DELIV-01, R-TOPUP-01, R-FEE-01", "biz": "decided" },
-    "f2-cod-hold": { "type": "lifecycle", "status": "done", "role": "drilldown", "basis": "R-COD-01, C-08, PO#5", "biz": "decided" },
+    "f2-cod-hold": { "type": "lifecycle", "status": "done", "role": "drilldown", "basis": "R-COD-01, C-08, PO 2026-09-25 (reserve→done)", "biz": "decided" },
     "f3-wallet-topup": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "R-WALLET-01, R-TOPUP-01, C-14", "biz": "decided" },
     "f4-fee-tax": { "type": "dataflow", "status": "done", "role": "drilldown", "basis": "R-FEE-01, R-TAX-01, PO#1-2", "biz": "partial" },
     "f5-delivery-verification": { "type": "lifecycle", "status": "done", "role": "drilldown", "basis": "R-DELIV-01, C-09, C-10", "biz": "partial" },
@@ -13,7 +13,7 @@
     "f9-incentive": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "R-INCENTIVE-01, PO#7, I-1/I-2", "biz": "partial" },
     "f10-exchange-rate": { "type": "sequence", "status": "done", "role": "support", "basis": "R-CURR-01, C-14", "biz": "partial" },
     "f11-push-notification": { "type": "sequence", "status": "done", "role": "support", "basis": "R-PUSH-01, C-18", "biz": "partial" },
-    "f12-merchant-console": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-06, C-07, plan-merchant", "biz": "partial" },
+    "f12-merchant-console": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-06, C-07, C-17, plan-merchant; batch = schema entri 11 (proposed)", "biz": "partial" },
     "f13-courier-view": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-06, R-DELIV-01", "biz": "partial" },
     "f14-chat-order": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-18 (in-app chat), C-12", "biz": "decided" },
     "f15-super-admin": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-12, PRD 5C, R-DISPUTE-01", "biz": "partial" },
@@ -23,20 +23,21 @@
     "f19-rating-review": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "BRS rating-review-2026-09-22 (proposed) + PO 2026-09-22 + PRD §Tips (tip digabung)", "biz": "partial" },
     "f20-address-zone": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "C-13, C-05, C-07", "biz": "decided" },
     "f21-account-auth": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "PRD §Registrasi (source.md:760) + E.164 (:727) + PO 2026-09-22 (Google + nomor WA, Level 1)", "biz": "decided" },
-    "f22-super-admin-sa": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "PO 2026-09-23 (cakupan Super Admin, decision-irbid-mvp.md) + C-12 + R-DISPUTE-01 + R-LEDGER-01 + C-13", "biz": "partial" }
+    "f22-super-admin-sa": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "PO 2026-09-23 (cakupan Super Admin, decision-irbid-mvp.md) + C-12 + R-DISPUTE-01 + R-LEDGER-01 + C-13", "biz": "partial" },
+    "f23-customer-discovery": { "type": "workflow", "status": "proposed", "role": "drilldown", "basis": "DEC-1041 (PO 2026-09-25) + repo-sa7tein-schema.md:15; requirement PRD belum ditulis", "biz": "proposed" },
+    "f24-payment-methods": { "type": "workflow", "status": "done", "role": "drilldown", "basis": "R-COD-01, R-FEE-01, R-TOPUP-01, PO 2026-09-25 (reserve→done + prompt bayar COD)", "biz": "partial" }
   },
   "links": [
-    { "from": "f1-order-lifecycle:order", "to": "f2-cod-hold:none->held", "as": "drilldown", "event": "hold_created", "req": "R-COD-01" },
-    { "from": "f1-order-lifecycle:dapur", "to": "f2-cod-hold:held->cut", "as": "drilldown", "event": "hold_cut", "req": "R-COD-01", "note": "kurir match di dalam node Dapur" },
-    { "from": "f1-order-lifecycle:otp", "to": "f2-cod-hold:cut->settled", "as": "drilldown", "event": "hold_settled", "req": "R-COD-01" },
-    { "from": "f1-order-lifecycle:batal", "to": "f2-cod-hold:released|reversed", "as": "drilldown", "event": "hold_released|hold_reversed", "req": "R-COD-01" },
+    { "from": "f1-order-lifecycle:order", "to": "f2-cod-hold:none->held", "as": "drilldown", "event": "reserve_created", "req": "R-COD-01" },
+    { "from": "f1-order-lifecycle:otp", "to": "f2-cod-hold:held->settled", "as": "drilldown", "event": "reserve_settled", "req": "R-COD-01" },
+    { "from": "f1-order-lifecycle:batal", "to": "f2-cod-hold:released", "as": "drilldown", "event": "reserve_released", "req": "R-COD-01" },
     { "from": "f1-order-lifecycle:topUpGate", "to": "f3-wallet-topup:completed", "as": "drilldown", "event": "top_up_completed", "req": "R-TOPUP-01" },
     { "from": "f1-order-lifecycle:checkout", "to": "f4-fee-tax", "as": "drilldown", "event": "fee_computed", "req": "R-FEE-01" },
     { "from": "f1-order-lifecycle:dapur|tiba|otp", "to": "f5-delivery-verification", "as": "drilldown", "event": "checkpoint_*", "req": "R-DELIV-01" },
-    { "from": "f2-cod-hold:cut->settled", "to": "f7-ledger-liability:entry", "as": "feeds", "event": "ledger_entry", "req": "R-LEDGER-01" },
+    { "from": "f2-cod-hold:held->settled", "to": "f7-ledger-liability:entry", "as": "feeds", "event": "ledger_entry", "req": "R-LEDGER-01" },
     { "from": "f7-ledger-liability:ledger", "to": "f6-cashout-payout", "as": "feeds", "event": "cashout_requested", "req": "R-CASHOUT-01" },
     { "from": "f2-cod-hold", "to": "f8-dispute", "as": "interrupts", "event": "dispute_opened", "req": "R-DISPUTE-01", "note": "dispute membekukan hold + pause auto-settle" },
-    { "from": "f2-cod-hold:cut->settled", "to": "f9-incentive", "as": "feeds", "event": "fee_deducted_from_credit", "req": "R-INCENTIVE-01" },
+    { "from": "f2-cod-hold:held->settled", "to": "f9-incentive", "as": "feeds", "event": "fee_deducted_from_credit", "req": "R-INCENTIVE-01" },
     { "from": "f4-fee-tax", "to": "f10-exchange-rate", "as": "reads", "event": "rate_fetched", "req": "R-CURR-01" },
     { "from": "f1-order-lifecycle|f8-dispute", "to": "f11-push-notification", "as": "notifies", "event": "push_sent", "req": "R-PUSH-01" },
     { "from": "f1-order-lifecycle:dapur", "to": "f12-merchant-console", "as": "drilldown", "event": "order_accepted", "req": "R-COD-01", "note": "antrean & terima/tolak dari sisi merchant" },
@@ -66,7 +67,10 @@
     { "from": "f20-address-zone:zone", "to": "f22-super-admin-sa:zone", "as": "reads", "event": "zone_master_defined", "req": "R-ADDR-01", "note": "poligon Hijazi/Syimali ditentukan SA (f22) dan dipakai gate lewat resolveCoverage(); merchant hanya mengaktifkan" },
     { "from": "f15-super-admin:dispute", "to": "f22-super-admin-sa:appeal", "as": "feeds", "event": "verdict_appealed", "req": "R-DISPUTE-01", "note": "putusan sengketa level-1 CS bisa dibanding ke SA" },
     { "from": "f22-super-admin-sa:appeal", "to": "f8-dispute", "as": "drilldown", "event": "appeal_decided", "req": "R-DISPUTE-01" },
-    { "from": "f7-ledger-liability:ledger", "to": "f22-super-admin-sa:ledger", "as": "feeds", "event": "ledger_monitored", "req": "R-LEDGER-01", "note": "SA memantau read-only; top-up & payout tetap self-service" }
+    { "from": "f7-ledger-liability:ledger", "to": "f22-super-admin-sa:ledger", "as": "feeds", "event": "ledger_monitored", "req": "R-LEDGER-01", "note": "SA memantau read-only; top-up & payout tetap self-service" },
+    { "from": "f23-customer-discovery:lanjut", "to": "f1-order-lifecycle:browse", "as": "feeds", "event": "merchant_selected", "req": "DEC-1041", "note": "pilih merchant (multi-merchant) → lanjut ke order lifecycle f1" },
+    { "from": "f1-order-lifecycle:payMethod", "to": "f24-payment-methods:order", "as": "drilldown", "event": "payment_method_selected", "req": "R-COD-01", "note": "detail langkah bayar per metode (COD prompt / prepaid otomatis)" },
+    { "from": "f1-order-lifecycle:otp", "to": "f24-payment-methods:settle", "as": "drilldown", "event": "reserve_settled", "req": "R-COD-01", "note": "COD prompt bayar saat terima; prepaid otomatis dari reserve" }
   ],
   "trace": [
     { "req": "R-COD-01", "flows": ["f1-order-lifecycle:order", "f2-cod-hold"], "entities": ["wallet_holds", "wallet_ledgers", "orders"] },
@@ -81,7 +85,7 @@
     { "req": "R-INCENTIVE-01", "flows": ["f9-incentive"], "entities": ["merchant_credit", "cashback_tiers"], "unresolved": ["I-4", "I-5"] },
     { "req": "R-CURR-01", "flows": ["f10-exchange-rate"], "entities": ["exchange_rates"], "unresolved": ["OQ-26", "OQ-28"] },
     { "req": "R-PUSH-01", "flows": ["f11-push-notification"], "entities": ["push_subscriptions"], "unresolved": ["uji push di device"] },
-    { "req": "MERCHANT-CONSOLE", "flows": ["f1-order-lifecycle:dapur", "f12-merchant-console"], "entities": ["orders", "couriers", "merchant_credit"], "unresolved": ["angka SLA (DEC-1037 sementara)"], "note": "tanpa R-* khusus — sumber plan-merchant.md M0-M7 + C-06/C-07" },
+    { "req": "MERCHANT-CONSOLE", "flows": ["f1-order-lifecycle:dapur", "f12-merchant-console"], "entities": ["orders", "couriers", "merchant_credit"], "unresolved": ["angka SLA (DEC-1037 sementara)"], "note": "tanpa R-* khusus — sumber plan-merchant.md M0-M7 + C-06/C-07; batch (entri 11) proposed, auto-resequence tidak ada di PRD" },
     { "req": "C-18 (chat in-app)", "flows": ["f1-order-lifecycle:placed", "f14-chat-order"], "entities": ["chats", "chat_messages"], "unresolved": ["retensi chat (N hari)"], "note": "tanpa R-* — dasar C-18 + C-12; skema draft hanya nama field" },
     { "req": "C-12 (panel CS; Super Admin terpisah sejak 2026-09-23) — approval", "flows": ["f15-super-admin:queue", "f15-super-admin:deposit", "f15-super-admin:blacklist", "f16-merchant-onboarding"], "entities": ["merchants", "deposits", "users"], "unresolved": ["jadwal settlement liability"], "note": "tanpa R-* — dasar C-12 + PRD §5C (deposit 3,50 JOD)" },
     { "req": "C-12 (panel CS; Super Admin terpisah sejak 2026-09-23) — monitoring", "flows": ["f15-super-admin:liability", "f15-super-admin:escalate"], "entities": ["wallet_ledgers", "incident_resolutions", "orders"], "unresolved": ["angka SLA (DEC-1037)"], "note": "liability = customer + merchant + tips kurir (bukan gaji kurir)" },
@@ -91,6 +95,8 @@
     { "req": "R-RATE-01", "flows": ["f18-order-state:done", "f19-rating-review"], "entities": ["rating_reviews", "review_replies"], "unresolved": ["jendela pengisian", "edit/hapus", "tag cepat", "batas balasan", "moderasi", "ambang rata-rata"] },
     { "req": "R-ADDR-01", "flows": ["f16-merchant-onboarding:profil", "f20-address-zone"], "entities": ["addresses", "merchants", "orders"], "unresolved": ["master zona (f15)"], "note": "zona Hijazi/Syimali ≤2 km (C-13)" },
     { "req": "PRD §Registrasi (Level 1)", "flows": ["f21-account-auth:method", "f21-account-auth:phone", "f21-account-auth:verify"], "entities": ["users", "phone_verifications"], "unresolved": ["Google untuk merchant/kurir", "sesi/token & PIN", "verifikasi otomatis (Level 2)"], "note": "PO 2026-09-22: login Google + nomor WA wajib (validasi format); E.164 (source.md:727, :760)" },
-    { "req": "PO 2026-09-23 (cakupan Super Admin)", "flows": ["f22-super-admin-sa:zone", "f22-super-admin-sa:roles", "f22-super-admin-sa:tax", "f22-super-admin-sa:profit", "f22-super-admin-sa:switch", "f22-super-admin-sa:audit", "f22-super-admin-sa:appeal"], "entities": ["zones", "roles", "operators", "audit_logs", "tax_reports", "platform_profit", "platform_switches"], "unresolved": ["tarif pajak final (OQ-2/3/4, OQ-17/18)", "jumlah operator konkret (OQ-30 sebagian)", "jadwal settlement liability"], "note": "tanpa R-* — dasar keputusan PO + C-12; SA bukan approver top-up/payout, dana user = liability" }
+    { "req": "PO 2026-09-23 (cakupan Super Admin)", "flows": ["f22-super-admin-sa:zone", "f22-super-admin-sa:roles", "f22-super-admin-sa:tax", "f22-super-admin-sa:profit", "f22-super-admin-sa:switch", "f22-super-admin-sa:audit", "f22-super-admin-sa:appeal"], "entities": ["zones", "roles", "operators", "audit_logs", "tax_reports", "platform_profit", "platform_switches"], "unresolved": ["tarif pajak final (OQ-2/3/4, OQ-17/18)", "jumlah operator konkret (OQ-30 sebagian)", "jadwal settlement liability"], "note": "tanpa R-* — dasar keputusan PO + C-12; SA bukan approver top-up/payout, dana user = liability" },
+    { "req": "DEC-1041 (discovery multi-merchant)", "flows": ["f23-customer-discovery", "f1-order-lifecycle:browse"], "entities": ["merchants", "menu_items", "orders"], "unresolved": ["requirement PRD belum ditulis", "master zona (f20)"], "note": "PO 2026-09-25: customer memilih merchant dulu, baru menu" },
+    { "req": "R-COD-01 (pembayaran per metode)", "flows": ["f24-payment-methods", "f1-order-lifecycle:payMethod", "f2-cod-hold"], "entities": ["orders", "wallet_holds", "payments"], "unresolved": ["timer auto-settle saat tidak bayar", "penalti OQ-14"], "note": "PO 2026-09-25: COD diminta bayar tagihan saat terima → settle; prepaid otomatis dari reserve" }
   ]
 }

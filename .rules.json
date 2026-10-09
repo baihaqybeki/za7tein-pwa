@@ -8,7 +8,7 @@
     "rule": "PDF/BRS baru proposed sampai source-backed analysis, decision record, dan milestone plan selesai; jangan menyimpulkan dari nama/versi file",
     "flows": "docs/design/flows/INDEX.json",
     "flowsPlan": "docs/design/flows/PLAN.md",
-    "flowsRule": "Perilaku wajib ikut PRD aktif DAN flow yang sudah ada. Kalau perubahan menyimpang dari flow, tandai UNRESOLVED (dengan sumber) dan update flow + PRD di commit yang sama. Regenerasi diagram: ./scripts/flows-gate.sh <slug>. Dienforce di governance:check (paritas folder<->INDEX, spec+README ada, terikat revisi PRD aktif)"
+    "flowsRule": "Perilaku wajib ikut PRD aktif DAN flow yang sudah ada. Satu folder flow boleh punya beberapa spec: diagram utama <slug>.json + opsional sequence orkestrasi sistem <slug>.sequence.json (scoped per flow). Kalau perubahan menyimpang dari flow, tandai UNRESOLVED (dengan sumber) dan update flow + PRD di commit yang sama. Regenerasi: ./scripts/flows-gate.sh <slug> (memproses semua spec di folder). Dienforce di governance:check (paritas folder<->INDEX, tiap spec punya diagram_type + README ada, terikat revisi PRD aktif)"
   },
   "designDNA": "docs/design/DNA.md",
   "designDebt": "docs/design/legacy-debt.json (inline SVG count per TSX file may only decrease without a recorded decorative exception)",
@@ -68,6 +68,8 @@
     "lint": "npm run lint",
     "preview": "npm run preview",
     "browser:gate": "node scripts/browser-gate.mjs",
+    "docs:build": "node scripts/build-docs.mjs",
+    "docs:serve": "node scripts/serve-docs.mjs",
     "flows:gate": "./scripts/flows-gate.sh",
     "scan": "node scripts/surface-scan.mjs",
     "scan:test": "node scripts/surface-scan.test.mjs"

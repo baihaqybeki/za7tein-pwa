@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "F24 — System Orchestration (Pembayaran & Settle)",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [1000, 480]
+  },
+  "participants": [
+    { "id": "cust", "type": "frontend", "label": "App customer", "sublabel": "bayar" },
+    { "id": "sys", "type": "backend", "label": "System", "sublabel": "reserve/settle" },
+    { "id": "cour", "type": "frontend", "label": "App kurir", "sublabel": "serah terima" },
+    { "id": "led", "type": "backend", "label": "Ledger", "sublabel": "saldo" }
+  ],
+  "messages": [
+    { "id": "m1", "from": "cust", "to": "sys", "y": 160, "label": "pilih metode: prepaid / COD / transfer (f24)" },
+    { "id": "m2", "from": "sys", "to": "cust", "y": 195, "label": "prepaid: saldo di-reserve → dicairkan otomatis saat order done", "variant": "emphasis" },
+    { "id": "m3", "from": "cour", "to": "cust", "y": 230, "label": "COD: prompt bayar tagihan saat serah terima" },
+    { "id": "m4", "from": "cust", "to": "cour", "y": 265, "label": "bayar / konfirmasi tagihan (+ serahkan OTP)" },
+    { "id": "m5", "from": "cour", "to": "sys", "y": 300, "label": "input OTP → otp_verified" },
+    { "id": "m6", "from": "sys", "to": "led", "y": 335, "label": "settle: reserve → saldo berkurang (semua metode)", "variant": "emphasis" },
+    { "id": "m7", "from": "sys", "to": "cour", "y": 370, "label": "transfer manual: verifikasi bukti dulu (UNRESOLVED)", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "orange", "title": "Orkestrasi pembayaran (per flow f24)", "items": ["prepaid = otomatis dari reserve; COD = prompt bayar tagihan saat terima lalu settle", "Saldo tidak berkurang saat order; berkurang saat order done (PO 2026-09-25)"] },
+    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-COD-01 · R-FEE-01 · C-09 · PO 2026-09-25", "UNRESOLVED: verifikasi transfer manual · timer auto-settle saat tidak bayar · penalti OQ-14"] }
+  ]
+}

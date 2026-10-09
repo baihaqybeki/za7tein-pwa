@@ -24,7 +24,7 @@ Dataflow fee flat 0,37 JOD + pajak 2 lapis. Milestone **M2** (fee) & **M7** (paj
 
 ## Terhubung (lihat `../INDEX.json`)
 
-Drill-down dari `f1:checkout`; feed `f2-cod-hold` (fee merchant dipotong saat settle), `f3-wallet-topup` (fee customer saat order dibayar), `f9-incentive` (fee 0,15 ditahan dari kredit merchant).
+Drill-down dari `f1:checkout`; feed `f2-cod-hold` (fee merchant dipotong saat settle), `f3-wallet-topup` (fee customer saat order done), `f9-incentive` (fee 0,15 ditahan dari kredit merchant).
 
 ## Sumber (jangan dikarang)
 

@@ -24,12 +24,13 @@ Root = `cart`; terminal = `done`, `canceled`.
 - `quotation` = draft harga final sebelum bayar; istilah ini **baru** dan belum ada di F1 (F1 memakai `cart → placed → prepare`) — konfirmasi bahasa masih UNRESOLVED.
 - Semua transisi cancel wajib membawa `cancelBy` + `cancelReason`; `prepare → canceled` (merchant tolak) wajib feeds `f2-cod-hold` release/reverse hold.
 - `payment_confirmed` adalah gerbang SLA: `placedAt` terisi di `prepare`, angka SLA mengikuti DEC-1037 (sementara).
+- **Batch** (schema entri 11) berjalan paralel: `prepare → closed → waitingCourier → waitingDelivery → delivery`. Order `prepare` dikumpulkan di window batch (`etaPrepare`/`slaPrepareDeadline`); `merchant_ready` = batch ditutup / timer habis → order `waitingCourier`; merchant assign kurir (`courier_matched`) → `waitingDelivery`. Batch `escalatedToAdmin` kalau tanpa kurir.
 - `delivery` hanya bisa berakhir `done` (OTP 4-digit, `f5-delivery-verification`) — tidak ada cabang cancel; batal di jalan = incident ke `f8-dispute`.
 - `paymentStatus` (unpaid/pending/paid/failed/refunded) disinkronkan dengan `order.status`, bukan menjadi state-nya; `refunded` jangan dimasukkan ke diagram.
 
 ## Terhubung (lihat ../INDEX.json)
 
-`f1-order-lifecycle` (payung end-to-end; selisih bahasa `quotation` vs `placed` UNRESOLVED) · `f2-cod-hold` (drill-down hold: cancel `prepare` → release, OTP → `hold_settled`) · `f5-delivery-verification` (event `otp_verified`) · `f8-dispute` (batal di jalan, bukan state) · `f12-merchant-console` (`merchant_ready`, antrean masuk) · `f13-courier-view` (`courier_matched` C-06, `courier_picked_up`) · `f17-payment-xendit` (`payment_confirmed` paid|cod|transfer) · `f22-refund` (`refunded`, akan datang).
+`f1-order-lifecycle` (payung end-to-end; selisih bahasa `quotation` vs `placed` UNRESOLVED) · `f2-cod-hold` (drill-down hold: cancel `prepare` → release, OTP → `reserve_settled`) · `f5-delivery-verification` (event `otp_verified`) · `f8-dispute` (batal di jalan, bukan state) · `f12-merchant-console` (`merchant_ready`, antrean masuk) · `f13-courier-view` (`courier_matched` C-06, `courier_picked_up`) · `f17-payment-xendit` (`payment_confirmed` paid|cod|transfer) · `f22-refund` (`refunded`, akan datang).
 
 ## Sumber (jangan dikarang)
 

@@ -2,52 +2,52 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "F12 — Merchant Console (Toko, Antrean, Kurir Sendiri)",
+    "title": "F12 — Merchant Console (Batch, Antrean, Kurir Sendiri)",
     "quality_profile": "showcase"
   },
   "lanes": [
-    { "id": "store", "label": "Toko & Antrean order" },
+    { "id": "store", "label": "Toko & Batch order" },
     { "id": "courier", "label": "Kurir milik merchant (C-06)" },
     { "id": "guard", "label": "Guard & Intervensi", "variant": "exception" }
   ],
   "phases": [
-    { "id": "terima", "label": "Terima order", "fromCol": 0, "toCol": 2 },
-    { "id": "penuhi", "label": "Penuhi", "fromCol": 3, "toCol": 5, "variant": "emphasis" }
+    { "id": "terima", "label": "Terima & batch", "fromCol": 0, "toCol": 2 },
+    { "id": "penuhi", "label": "Prepare & kirim", "fromCol": 3, "toCol": 5, "variant": "emphasis" }
   ],
-  "mainPath": ["toggle", "antrean", "terima", "assign", "masak", "siap"],
+  "mainPath": ["toggle", "antrean", "terima", "masak", "siap", "assign"],
   "semanticChecks": {
     "allowedRoots": ["toggle", "daftar"],
-    "allowedTerminals": ["siap", "macet"],
+    "allowedTerminals": ["assign", "macet"],
     "requiredEdges": [
       { "from": "toggle", "to": "antrean" },
       { "from": "antrean", "to": "terima" },
-      { "from": "terima", "to": "assign" },
-      { "from": "assign", "to": "masak" },
-      { "from": "masak", "to": "siap" }
+      { "from": "terima", "to": "masak" },
+      { "from": "masak", "to": "siap" },
+      { "from": "siap", "to": "assign" }
     ]
   },
   "nodes": [
-    { "id": "toggle", "lane": "store", "col": 0, "type": "frontend", "label": "Buka / Tutup", "sublabel": "isActive · state tampilan", "width": 124 },
-    { "id": "antrean", "lane": "store", "col": 1, "type": "frontend", "label": "Antrean order", "sublabel": "kode · total · zona ≤2 km", "width": 130 },
-    { "id": "terima", "lane": "store", "col": 2, "type": "frontend", "label": "Terima / Tolak", "sublabel": "MerchantOrderStatus", "width": 124 },
+    { "id": "toggle", "lane": "store", "col": 0, "type": "frontend", "label": "Buka / Tutup", "sublabel": "isActive · tampilan", "width": 116 },
+    { "id": "antrean", "lane": "store", "col": 1, "type": "frontend", "label": "Antrean order", "sublabel": "kode · total · zona ≤2 km", "width": 124 },
+    { "id": "terima", "lane": "store", "col": 2, "type": "frontend", "label": "Terima / Tolak", "sublabel": "tolak → canceled", "width": 128 },
+    { "id": "masak", "lane": "store", "col": 3, "type": "frontend", "label": "Window prepare (batch)", "sublabel": "etaPrepare · slaDeadline", "width": 152 },
+    { "id": "siap", "lane": "store", "col": 4, "type": "backend", "label": "Close batch", "sublabel": "status = closed", "width": 124 },
+    { "id": "assign", "lane": "courier", "col": 5, "type": "backend", "label": "Assign kurir sendiri", "sublabel": "waitingCourier → C-06", "width": 146 },
     { "id": "daftar", "lane": "courier", "col": 1, "type": "frontend", "label": "Kelola kurir", "sublabel": "maks 3 · mock", "width": 118 },
-    { "id": "assign", "lane": "courier", "col": 3, "type": "backend", "label": "Pilih kurir sendiri", "sublabel": "badge at_store/offline", "width": 130 },
-    { "id": "masak", "lane": "store", "col": 4, "type": "backend", "label": "Estimasi masak", "sublabel": "timer 15/25/35 m (PRD)", "width": 134 },
-    { "id": "siap", "lane": "store", "col": 5, "type": "backend", "label": "Siap diambil", "sublabel": "2-way confirm", "width": 120 },
-    { "id": "macet", "lane": "guard", "col": 5, "type": "security", "label": "Order macet", "sublabel": "reassign / batal → refund", "tag": "open", "width": 134 }
+    { "id": "macet", "lane": "guard", "col": 4, "type": "security", "label": "Batch tanpa kurir", "sublabel": "escalatedToAdmin", "tag": "open", "width": 142 }
   ],
   "edges": [
     { "id": "e-open", "from": "toggle", "to": "antrean", "label": "toko buka", "role": "main" },
     { "id": "e-in", "from": "antrean", "to": "terima", "label": "order masuk", "role": "main" },
-    { "id": "e-pick", "from": "terima", "to": "assign", "label": "pilih kurir sendiri", "role": "main" },
-    { "id": "e-match", "from": "assign", "to": "masak", "label": "kurir match → hold_cut", "role": "main", "variant": "emphasis" },
-    { "id": "e-done", "from": "masak", "to": "siap", "label": "selesai masak", "role": "main" },
+    { "id": "e-batch", "from": "terima", "to": "masak", "label": "masuk batch", "role": "main" },
+    { "id": "e-close", "from": "masak", "to": "siap", "label": "window habis → close", "role": "main" },
+    { "id": "e-ready", "from": "siap", "to": "assign", "label": "batch ready → pilih kurir", "role": "main", "variant": "emphasis" },
     { "id": "e-roster", "from": "daftar", "to": "assign", "label": "dari daftar kurir", "role": "branch" },
-    { "id": "e-stuck", "from": "siap", "to": "macet", "label": "timer habis, tanpa checkpoint", "role": "branch" }
+    { "id": "e-stuck", "from": "siap", "to": "macet", "label": "tanpa kurir", "role": "branch" }
   ],
   "cards": [
-    { "dot": "orange", "title": "Antrean & aksi", "items": ["Tab Antrean / Diproses / Selesai / Batal · stats dari merchantOrders", "Kartu: kode, item, total, jarak, zona Hijazi + Syimali (Haversine ≤2 km, is_active_*)", "Detail order reuse JourneyLine (OrderStageScreen) — jangan gambar ulang"] },
-    { "dot": "amber", "title": "Kurir = karyawan merchant", "items": ["Platform TIDAK assign kurir (C-06) — digaji merchant, ongkir 100% merchant (C-07)", "Maks MAX_COURIERS_PER_MERCHANT (3) · badge at_store / delivering / offline", "Macet → merchant reassign sendiri / batal → refund customer dari dana hold"] },
-    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["plan-merchant.md M0–M7 (FE showcase) · C-06..C-11 — analysis.md · M4/M5/M11 — milestones.md", "UNRESOLVED: OQ-30 — merchant sebagai pihak bersengketa", "UNRESOLVED: nav merchant (bottom/top) belum diputuskan · kuota 7/10 = state tampilan"] }
+    { "dot": "orange", "title": "Batch (schema entri 11)", "items": ["Batch = unit prepare: prepare → closed → waitingCourier → waitingDelivery → delivery", "Window prepare: order ditambah sampai slaPrepareDeadline / etaPrepare habis", "Detail order reuse JourneyLine (OrderStageScreen) — jangan gambar ulang"] },
+    { "dot": "amber", "title": "Kurir = karyawan merchant", "items": ["Platform TIDAK assign kurir (C-06) — assign setelah batch ready", "Ongkir 100% merchant (C-07) · maks 3 kurir · assign → waitingDelivery", "Batch tanpa kurir → reassign sendiri / batal → refund"] },
+    { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["plan-merchant M0–M7 · C-06/C-07/C-17 · schema entri 11", "UNRESOLVED: batch & auto-resequence tidak ada di PRD aktif (schema-only, proposed)", "UNRESOLVED: OQ-30 · nav merchant"] }
   ]
 }

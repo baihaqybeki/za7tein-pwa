@@ -50,7 +50,7 @@
   ],
   "cards": [
     { "dot": "orange", "title": "Tiga wallet (closed-loop)", "items": ["Customer: top-up Xendit VA/QRIS masuk, bayar order keluar", "Merchant: kredit otomatis saat settle (lihat F2) · Kurir: khusus tips, gaji dari merchant", "Antar-wallet = internal ledger, instan, tanpa fee gateway (R-WALLET-01)"] },
-    { "dot": "amber", "title": "State & aturan teknis", "items": ["TopUp state: pending / processing / completed / failed", "Setiap request gateway wajib idempotency-key + reference_id (anti duplikat)", "Saldo punya status available dan pending (hold saat order berjalan)"] },
+    { "dot": "amber", "title": "State & aturan teknis", "items": ["TopUp state: pending / processing / completed / failed", "Setiap request gateway wajib idempotency-key + reference_id (anti duplikat)", "Saldo punya status available dan pending (saldo di-reserve saat order berjalan)"] },
     { "dot": "slate", "title": "Sumber & UNRESOLVED", "items": ["R-WALLET-01, R-TOPUP-01 — analysis.md · M0, M2, M3 — milestones.md", "DEFERRED (BE, PO 2026-09-22): OQ-5/7/8/23 onboarding & fee Xendit", "UNRESOLVED: OQ-15/19 segregated account e-money; gate 3,5 JOD berlaku semua metode (bukan hanya prepaid)"] }
   ]
 }
