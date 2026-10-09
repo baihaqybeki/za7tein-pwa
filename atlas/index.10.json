@@ -1054,6 +1054,63 @@
           "raw": "TASK-10020:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10061",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:19:02",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/test-push.mjs (+66) — write via tool: // Uji fungsi push notifikasi lewat ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/test-push.mjs"
+    },
+    {
+      "id": "TASK-10062",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:20:47",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/16-menu-category-stock.sql (+21) — write via tool: -- ========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/16-menu-category-stock.sql"
+    },
+    {
+      "id": "TASK-10063",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:21:10",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `15-address-fields.sql` | **Kolom alam",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

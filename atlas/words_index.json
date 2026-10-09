@@ -10599,6 +10599,18 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "sa7tein": [
@@ -12102,6 +12114,10 @@
     },
     {
       "id": "TASK-10050",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10061",
       "shard": 10
     }
   ],
@@ -28501,6 +28517,18 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "/users/vanviakingali/downloads/sa7tein-pwa/agents.md": [
@@ -35490,6 +35518,10 @@
     },
     {
       "id": "TASK-10052",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
       "shard": 10
     }
   ],
@@ -44245,6 +44277,18 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "tool:": [
@@ -52898,6 +52942,18 @@
     },
     {
       "id": "TASK-10052",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
       "shard": 10
     }
   ],
@@ -63265,6 +63321,18 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "task-147": [
@@ -63716,6 +63784,10 @@
     },
     {
       "id": "TASK-9970",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10061",
       "shard": 10
     }
   ],
@@ -65800,6 +65872,14 @@
     },
     {
       "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10062",
       "shard": 10
     }
   ],
@@ -93271,6 +93351,10 @@
     {
       "id": "TASK-9160",
       "shard": 9
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
     }
   ],
   "item": [
@@ -98093,6 +98177,10 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "tail": [
@@ -102695,6 +102783,10 @@
     {
       "id": "TASK-4236",
       "shard": 6
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
     }
   ],
   "reactno": [
@@ -104686,6 +104778,10 @@
     },
     {
       "id": "TASK-10052",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10063",
       "shard": 10
     }
   ],
@@ -133301,6 +133397,10 @@
     {
       "id": "PF-9365",
       "shard": 9
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
     }
   ],
   "(1": [
@@ -140238,6 +140338,10 @@
     },
     {
       "id": "TASK-9941",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10061",
       "shard": 10
     }
   ],
@@ -156993,6 +157097,10 @@
     {
       "id": "TASK-10051",
       "shard": 10
+    },
+    {
+      "id": "TASK-10062",
+      "shard": 10
     }
   ],
   "task-3584": [
@@ -160727,6 +160835,10 @@
     {
       "id": "TASK-9357",
       "shard": 9
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
     }
   ],
   "nyata": [
@@ -185547,6 +185659,10 @@
     {
       "id": "TASK-10052",
       "shard": 10
+    },
+    {
+      "id": "TASK-10063",
+      "shard": 10
     }
   ],
   "supabase/": [
@@ -188133,6 +188249,10 @@
     {
       "id": "TASK-9970",
       "shard": 10
+    },
+    {
+      "id": "TASK-10061",
+      "shard": 10
     }
   ],
   "suara": [
@@ -189020,6 +189140,60 @@
   "task-10060": [
     {
       "id": "TASK-10060",
+      "shard": 10
+    }
+  ],
+  "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/t/opencode/test-push.mjs": [
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    }
+  ],
+  "task-10061": [
+    {
+      "id": "TASK-10061",
+      "shard": 10
+    }
+  ],
+  "/users/muhammadbaihaqy/downloads/za7tein-pwa/supabase/16-menu-category-stock.sql": [
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    }
+  ],
+  "========================": [
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    }
+  ],
+  "task-10062": [
+    {
+      "id": "TASK-10062",
+      "shard": 10
+    }
+  ],
+  "`15-address-fields.sql`": [
+    {
+      "id": "TASK-10063",
+      "shard": 10
+    }
+  ],
+  "**kolom": [
+    {
+      "id": "TASK-10063",
+      "shard": 10
+    }
+  ],
+  "alam": [
+    {
+      "id": "TASK-10063",
+      "shard": 10
+    }
+  ],
+  "task-10063": [
+    {
+      "id": "TASK-10063",
       "shard": 10
     }
   ]
