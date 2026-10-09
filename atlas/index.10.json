@@ -353,6 +353,101 @@
           "raw": "TASK-9960:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9971",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:42:56",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts (+38/-10) — edit via tool: ts: export interface AppNotification {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts"
+    },
+    {
+      "id": "TASK-9972",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:43:07",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/chat.ts (+48) — write via tool: ts: import type { ChatMessage, ChatThread } ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/data/chat.ts"
+    },
+    {
+      "id": "TASK-9973",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:43:15",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/chatSlice.ts (+72) — write via tool: ts: import { createSlice, type Pa",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/chatSlice.ts"
+    },
+    {
+      "id": "TASK-9974",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:43:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/OrderChat.tsx (+191) — write via tool: tsx: import { ArrowLeft, MessageCircle",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/OrderChat.tsx"
+    },
+    {
+      "id": "TASK-9975",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:43:48",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run build 2>&1 | grep -E \"error TS|error|✓ built\" | head -20 passed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

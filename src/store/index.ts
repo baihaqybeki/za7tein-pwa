@@ -29,6 +29,7 @@ import payout from './slices/payoutSlice'
 import admin from './slices/adminSlice'
 import superAdmin, { logAudit } from './slices/superAdminSlice'
 import notifications from './slices/notificationsSlice'
+import chat from './slices/chatSlice'
 import ui from './slices/uiSlice'
 import type { AuditKind, DisputeResolution } from '../types'
 
@@ -52,6 +53,7 @@ const rootReducer = combineReducers({
   admin,
   superAdmin,
   notifications,
+  chat,
   ui,
   accountSetup,
 })

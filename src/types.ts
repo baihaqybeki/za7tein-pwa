@@ -386,6 +386,34 @@ export interface AppNotification {
   sound?: string
 }
 
+export type ChatRole = 'customer' | 'merchant' | 'courier' | 'cs'
+
+/** Peserta satu thread chat (maks 3: customer, merchant, kurir) — C-18. */
+export interface ChatParticipant {
+  userId: string
+  role: ChatRole
+}
+
+/** Thread chat per order (tabel `chats`). */
+export interface ChatThread {
+  id: string
+  orderId: string
+  participants: ChatParticipant[]
+  lastMessage?: string
+  lastAt: string
+}
+
+/** Satu pesan (tabel `chat_messages`). `readAt` null = belum dibaca penerima. */
+export interface ChatMessage {
+  id: string
+  chatId: string
+  senderId: string
+  senderRole: ChatRole
+  body: string
+  at: string
+  readAt?: string | null
+}
+
 /**
  * Subscription Web Push (R-PUSH-01, M8). Bentuknya mengikuti kontrak BE
  * (`endpoint`, `keys`, `platform`, `expiresAt`); di repo ini registrasinya mock —

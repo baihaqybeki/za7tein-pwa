@@ -221,7 +221,10 @@ export default function Documentation() {
               dan profil kurir. Nada notifikasi kini satu fungsi bersama{' '}
               <code className="doc-inline">playNotificationSound()</code> (lib) yang dipakai
               pengaturan (preview) dan hook <code className="doc-inline">useNotificationSound</code>{' '}
-              saat notifikasi baru masuk.
+              saat notifikasi baru masuk. Chat per order kini punya model sendiri
+              (<code className="doc-inline">chatSlice</code>: thread + pesan, bentuk mengikuti tabel{' '}
+              <code className="doc-inline">chats</code>/<code className="doc-inline">chat_messages</code>),
+              bukan lagi state lokal halaman.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (
