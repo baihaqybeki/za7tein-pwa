@@ -5876,6 +5876,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-9930",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:09:27",
+      "tags": [
+        "supabase",
+        "reviews",
+        "rating",
+        "seed"
+      ],
+      "summary": "Seed diperbesar: 795 order + 956 rating_reviews; rating_count 63-116, avg 4.45-4.82 (dari ulasan); mock UI selaras (4.8/67)",
+      "conn": [
+        {
+          "id": "TASK-9920",
+          "type": "relates",
+          "raw": "TASK-9920:relates"
+        }
+      ]
     }
   ]
 }
