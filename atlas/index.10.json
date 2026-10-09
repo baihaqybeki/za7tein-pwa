@@ -583,6 +583,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9990",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:50:18",
+      "tags": [
+        "order",
+        "notification",
+        "journey",
+        "middleware"
+      ],
+      "summary": "Journey notification middleware (assign kurir, setOrderStatus, checkpoint, complete) + audience per peran; inbox filter; CourierTaskDetail d",
+      "conn": [
+        {
+          "id": "TASK-9980",
+          "type": "relates",
+          "raw": "TASK-9980:relates"
+        }
+      ]
     }
   ]
 }
