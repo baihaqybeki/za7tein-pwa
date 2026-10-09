@@ -38,6 +38,28 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-9940",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:14:54",
+      "tags": [
+        "supabase",
+        "incentive",
+        "cashback",
+        "modal",
+        "seed"
+      ],
+      "summary": "Insentif: cashback_tiers 3 tier (500/1000/1250->15/40/62.5 JOD), tabel merchant_credit_events, credit+deposit semua 9 merchant",
+      "conn": [
+        {
+          "id": "TASK-9930",
+          "type": "relates",
+          "raw": "TASK-9930:relates"
+        }
+      ]
     }
   ]
 }
