@@ -996,6 +996,44 @@
           "raw": "TASK-10000:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10051",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:15:10",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/15-address-fields.sql (+28) — write via tool: -- =============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/15-address-fields.sql"
+    },
+    {
+      "id": "TASK-10052",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:15:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `14-merchant-record-fields.sql` | **Ko",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

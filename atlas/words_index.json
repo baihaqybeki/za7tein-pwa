@@ -10587,6 +10587,14 @@
     {
       "id": "TASK-10012",
       "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "sa7tein": [
@@ -28473,6 +28481,14 @@
     {
       "id": "TASK-10012",
       "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "/users/vanviakingali/downloads/sa7tein-pwa/agents.md": [
@@ -35458,6 +35474,10 @@
     },
     {
       "id": "TASK-10012",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
       "shard": 10
     }
   ],
@@ -44205,6 +44225,14 @@
     {
       "id": "TASK-10012",
       "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "tool:": [
@@ -52850,6 +52878,14 @@
     },
     {
       "id": "TASK-10012",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
       "shard": 10
     }
   ],
@@ -63209,6 +63245,14 @@
     {
       "id": "TASK-10042",
       "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "task-147": [
@@ -65736,6 +65780,10 @@
     },
     {
       "id": "TASK-10011",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10051",
       "shard": 10
     }
   ],
@@ -98025,6 +98073,10 @@
     {
       "id": "TASK-10012",
       "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "tail": [
@@ -104614,6 +104666,10 @@
     },
     {
       "id": "TASK-10012",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10052",
       "shard": 10
     }
   ],
@@ -119289,6 +119345,10 @@
     {
       "id": "TASK-4118",
       "shard": 6
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
     }
   ],
   "keputusan": [
@@ -156893,6 +156953,10 @@
     {
       "id": "TASK-10011",
       "shard": 10
+    },
+    {
+      "id": "TASK-10051",
+      "shard": 10
     }
   ],
   "task-3584": [
@@ -185439,6 +185503,10 @@
     {
       "id": "TASK-10012",
       "shard": 10
+    },
+    {
+      "id": "TASK-10052",
+      "shard": 10
     }
   ],
   "supabase/": [
@@ -188818,6 +188886,42 @@
   "task-10050": [
     {
       "id": "TASK-10050",
+      "shard": 10
+    }
+  ],
+  "/users/muhammadbaihaqy/downloads/za7tein-pwa/supabase/15-address-fields.sql": [
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    }
+  ],
+  "=============================": [
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    }
+  ],
+  "task-10051": [
+    {
+      "id": "TASK-10051",
+      "shard": 10
+    }
+  ],
+  "`14-merchant-record-fields.sql`": [
+    {
+      "id": "TASK-10052",
+      "shard": 10
+    }
+  ],
+  "**ko": [
+    {
+      "id": "TASK-10052",
+      "shard": 10
+    }
+  ],
+  "task-10052": [
+    {
+      "id": "TASK-10052",
       "shard": 10
     }
   ]
