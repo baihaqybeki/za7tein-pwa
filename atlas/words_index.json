@@ -10211,6 +10211,18 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "sa7tein": [
@@ -27529,6 +27541,18 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "/users/vanviakingali/downloads/sa7tein-pwa/agents.md": [
@@ -34326,6 +34350,14 @@
     },
     {
       "id": "TASK-9456",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
       "shard": 9
     }
   ],
@@ -42793,6 +42825,18 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "tool:": [
@@ -51158,6 +51202,18 @@
     },
     {
       "id": "TASK-9456",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
       "shard": 9
     }
   ],
@@ -61165,6 +61221,18 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "task-147": [
@@ -63568,6 +63636,10 @@
     },
     {
       "id": "TASK-9455",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
       "shard": 9
     }
   ],
@@ -66222,6 +66294,10 @@
     },
     {
       "id": "TASK-9455",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
       "shard": 9
     }
   ],
@@ -73289,6 +73365,10 @@
     {
       "id": "TASK-9455",
       "shard": 9
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
     }
   ],
   "type": [
@@ -74616,6 +74696,10 @@
     },
     {
       "id": "TASK-9454",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
       "shard": 9
     }
   ],
@@ -78886,6 +78970,10 @@
     },
     {
       "id": "TASK-9454",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
       "shard": 9
     }
   ],
@@ -94797,6 +94885,10 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "tail": [
@@ -101266,6 +101358,10 @@
     },
     {
       "id": "TASK-9456",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9463",
       "shard": 9
     }
   ],
@@ -118323,6 +118419,10 @@
     {
       "id": "TASK-4205",
       "shard": 6
+    },
+    {
+      "id": "TASK-9461",
+      "shard": 9
     }
   ],
   "task-1077": [
@@ -144907,6 +145007,10 @@
     {
       "id": "TASK-911",
       "shard": 7
+    },
+    {
+      "id": "TASK-9462",
+      "shard": 9
     }
   ],
   "kepotong": [
@@ -146954,6 +147058,10 @@
     },
     {
       "id": "TASK-9376",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9462",
       "shard": 9
     }
   ],
@@ -180763,6 +180871,10 @@
     {
       "id": "TASK-9456",
       "shard": 9
+    },
+    {
+      "id": "TASK-9463",
+      "shard": 9
     }
   ],
   "supabase/": [
@@ -181132,6 +181244,10 @@
   "writefilesync": [
     {
       "id": "TASK-9426",
+      "shard": 9
+    },
+    {
+      "id": "TASK-9461",
       "shard": 9
     }
   ],
@@ -181554,6 +181670,66 @@
   "task-9460": [
     {
       "id": "TASK-9460",
+      "shard": 9
+    }
+  ],
+  "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/t/opencode/build-merchants.mjs": [
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    }
+  ],
+  "task-9461": [
+    {
+      "id": "TASK-9461",
+      "shard": 9
+    }
+  ],
+  "/users/muhammadbaihaqy/downloads/za7tein-pwa/supabase/05-seed-merchants.sql": [
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    }
+  ],
+  "setval(pg_get_serial_seq": [
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    }
+  ],
+  "task-9462": [
+    {
+      "id": "TASK-9462",
+      "shard": 9
+    }
+  ],
+  "`04-seed-core.sql`": [
+    {
+      "id": "TASK-9463",
+      "shard": 9
+    }
+  ],
+  "**seed": [
+    {
+      "id": "TASK-9463",
+      "shard": 9
+    }
+  ],
+  "inti": [
+    {
+      "id": "TASK-9463",
+      "shard": 9
+    }
+  ],
+  "(idem": [
+    {
+      "id": "TASK-9463",
+      "shard": 9
+    }
+  ],
+  "task-9463": [
+    {
+      "id": "TASK-9463",
       "shard": 9
     }
   ]

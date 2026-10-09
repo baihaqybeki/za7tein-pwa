@@ -25,6 +25,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 |---|---|
 | `03-restore-erd.sql` | Rebuild ke ERD 42 tabel + RLS + realtime + trigger (destruktif). |
 | `04-seed-core.sql` | **Seed inti (idempoten)** — `merchants` (+`couriers`,`menus`,`menu_variants`,`deposits`,`merchant_credits`) memakai kolom **`store_name`**. Menutup FK `merchants` yang kosong. |
+| `05-seed-merchants.sql` | **Seed banyak merchant + menu** — 8 merchant (total 9) + 23 menu; tiap menu `image = /assets/img/menu/<slug>.webp` sesuai namanya (5 hidangan: nasi goreng, sate ayam/kambing, lontong, es teh). Menu lama dinormalisasi agar nama↔foto cocok. |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |

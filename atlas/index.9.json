@@ -4774,6 +4774,63 @@
           "raw": "DEC-1047:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9461",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:16:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-merchants.mjs (+68) — write via tool: import { writeFileSync } from ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/build-merchants.mjs"
+    },
+    {
+      "id": "TASK-9462",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:17:36",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/05-seed-merchants.sql (+9/-2) — edit via tool: select setval(pg_get_serial_seq",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/05-seed-merchants.sql"
+    },
+    {
+      "id": "TASK-9463",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:17:43",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `04-seed-core.sql` | **Seed inti (idem",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }
