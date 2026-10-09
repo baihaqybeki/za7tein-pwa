@@ -23,7 +23,8 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 
 | Berkas | Isi |
 |---|---|
-| `03-restore-erd.sql` | **Migrasi yang dijalankan terakhir** — rebuild ke ERD 42 tabel + RLS + realtime + trigger (destruktif). |
+| `03-restore-erd.sql` | Rebuild ke ERD 42 tabel + RLS + realtime + trigger (destruktif). |
+| `04-seed-core.sql` | **Seed inti (idempoten)** — `merchants` (+`couriers`,`menus`,`menu_variants`,`deposits`,`merchant_credits`) memakai kolom **`store_name`**. Menutup FK `merchants` yang kosong. |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |
