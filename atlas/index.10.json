@@ -1,4 +1,43 @@
 {
   "shard": 10,
-  "nodes": []
+  "nodes": [
+    {
+      "id": "TASK-9931",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:13:36",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/12-incentive.sql (+78) — write via tool: -- ==================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/12-incentive.sql"
+    },
+    {
+      "id": "TASK-9932",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:14:11",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `11-orders-reviews.sql` | **Order + ul",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    }
+  ]
 }
