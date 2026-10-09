@@ -5389,6 +5389,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9700",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "00:42:38",
+      "tags": [
+        "customer",
+        "feature",
+        "ui",
+        "supabase"
+      ],
+      "summary": "DB+UI customer: profil merchant (/store-profile), cook time per menu, store_status open/busy/closed, audio push (toggle+nada WebAudio); supa",
+      "conn": [
+        {
+          "id": "TASK-9480",
+          "type": "relates",
+          "raw": "TASK-9480:relates"
+        }
+      ]
     }
   ]
 }
