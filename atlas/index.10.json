@@ -60,6 +60,44 @@
           "raw": "TASK-9930:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9941",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:19:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/13-role-permissions.sql (+66) — write via tool: -- ===========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/13-role-permissions.sql"
+    },
+    {
+      "id": "TASK-9942",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:20:12",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `12-incentive.sql` | **Insentif mercha",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

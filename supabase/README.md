@@ -33,6 +33,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `10-merchant-rating-hours.sql` | **Rating + jam operasional merchant** — `merchants.rating_avg`/`rating_count` (denormalized dari `rating_reviews`) + `open_time`/`close_time`, di-seed per toko. |
 | `11-orders-reviews.sql` | **Order + ulasan** — 70 order (status `done`) + 93 `rating_reviews` (merchant & menu), lalu `rating_avg`/`rating_count` **dihitung ulang dari ulasan** (bukan seed statis). |
 | `12-incentive.sql` | **Insentif merchant** — `cashback_tiers` diselaraskan ke flow F9 (500/1000/1250 order → 15/40/62,5 JOD) + tabel baru `merchant_credit_events` (grant/fee/rebate) + `merchant_credits`/`deposits` untuk semua 9 merchant. |
+| `13-role-permissions.sql` | **Role permission Super Admin** — katalog `permissions` (12 platform + 6 operasi) + set `roles.permissions` kanonik: `sa_owner` (12), `sa_ops` (6), `cs_ops` (6). |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |
