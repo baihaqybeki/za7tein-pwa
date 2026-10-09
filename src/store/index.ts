@@ -19,11 +19,18 @@ import { mockUser } from '../data/user'
 
 import auth from './slices/authSlice'
 import accountSetup from './slices/accountSetupSlice'
-import cart from './slices/cartSlice'
+import cart, {
+  advanceDelivery,
+  cancelOrder,
+  completeDelivery,
+  createOrderHold,
+  matchCourier,
+  settleOrderHold,
+} from './slices/cartSlice'
 import favorites from './slices/favoritesSlice'
 import catalog from './slices/catalogSlice'
-import merchant, { assignCourier, setOrderStatus } from './slices/merchantSlice'
-import courier, { advanceCheckpoint, completeTask } from './slices/courierSlice'
+import merchant, { assignBatchCourier, assignCourier, setOrderStatus, startBatchDelivery } from './slices/merchantSlice'
+import courier, { advanceCheckpoint, cancelTask, completeTask } from './slices/courierSlice'
 import wallet from './slices/walletSlice'
 import payout from './slices/payoutSlice'
 import admin from './slices/adminSlice'
@@ -32,6 +39,7 @@ import notifications, { pushNotification } from './slices/notificationsSlice'
 import chat from './slices/chatSlice'
 import ui from './slices/uiSlice'
 import { journeyNotifications, roleFromPath, type JourneyEvent } from '../lib/orderJourney'
+import { mockOrder } from '../data/merchant'
 import { deliverPush } from '../lib/push'
 import type { AuditKind, DisputeResolution } from '../types'
 
@@ -294,7 +302,34 @@ const journeyBridge: Middleware = (api) => (next) => (action) => {
       if (!n.audience || n.audience === 'all' || n.audience === role) deliverPush(n)
     })
   }
-  if (assignCourier.match(action)) {
+  const STAGE_EVENT: Record<string, JourneyEvent> = {
+    diterima: 'accepted',
+    dimasak: 'preparing',
+    diantar: 'onTheWay',
+    tiba: 'arrived',
+  }
+  const firstOrderCode = (batchId: string) => {
+    const batch = before.merchant.batches.find((b) => b.id === batchId)
+    const orderId = batch?.orderIds[0]
+    return before.merchant.orders.find((o) => o.id === orderId)?.code
+  }
+  if (createOrderHold.match(action)) {
+    emit('placed', mockOrder.code)
+  } else if (matchCourier.match(action)) {
+    emit('assigned', mockOrder.code)
+  } else if (settleOrderHold.match(action) || completeDelivery.match(action)) {
+    emit('delivered', mockOrder.code)
+  } else if (cancelOrder.match(action)) {
+    emit('canceled', mockOrder.code)
+  } else if (advanceDelivery.match(action)) {
+    emit(STAGE_EVENT[state.cart.orderStage], mockOrder.code)
+  } else if (assignBatchCourier.match(action)) {
+    emit('assigned', firstOrderCode(action.payload.batchId))
+  } else if (startBatchDelivery.match(action)) {
+    emit('onTheWay', firstOrderCode(action.payload.id))
+  } else if (cancelTask.match(action)) {
+    emit('canceled', before.courier.tasks.find((t) => t.id === action.payload.id)?.code)
+  } else if (assignCourier.match(action)) {
     emit('assigned', before.merchant.orders.find((o) => o.id === action.payload.orderId)?.code)
   } else if (setOrderStatus.match(action)) {
     emit(JOURNEY_STATUS[action.payload.status], before.merchant.orders.find((o) => o.id === action.payload.id)?.code)

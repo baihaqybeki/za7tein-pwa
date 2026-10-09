@@ -2,6 +2,7 @@ import type { AppNotification } from '../types'
 
 /** Peristiwa journey pesanan yang memicu notifikasi lintas peran. */
 export type JourneyEvent =
+  | 'placed'
   | 'accepted'
   | 'rejected'
   | 'preparing'
@@ -25,6 +26,11 @@ const id = (tag: string) => `n-${tag}-${Date.now()}-${(seq += 1)}`
 export function journeyNotifications(event: JourneyEvent, code: string): AppNotification[] {
   const order = { kind: 'order' as const, time: 'Baru saja', unread: true as const, sound: 'order' }
   switch (event) {
+    case 'placed':
+      return [
+        { ...order, id: id('pl-m'), audience: 'merchant', title: 'Order baru', body: `Pesanan ${code} masuk — siapkan.` },
+        { ...order, id: id('pl-c'), audience: 'customer', title: 'Pesanan dibuat', body: `Pesanan ${code} dikirim ke toko.` },
+      ]
     case 'accepted':
       return [{ ...order, id: id('acc'), audience: 'customer', title: 'Pesanan diterima', body: `Toko menerima pesanan ${code} dan mulai menyiapkan.` }]
     case 'rejected':
@@ -51,7 +57,10 @@ export function journeyNotifications(event: JourneyEvent, code: string): AppNoti
         { ...order, id: id('dlv-m'), audience: 'merchant', title: 'Order selesai', body: `Pesanan ${code} selesai.` },
       ]
     case 'canceled':
-      return [{ ...order, id: id('can'), audience: 'customer', title: 'Pesanan dibatalkan', body: `Pesanan ${code} dibatalkan.` }]
+      return [
+        { ...order, id: id('can-c'), audience: 'customer', title: 'Pesanan dibatalkan', body: `Pesanan ${code} dibatalkan.` },
+        { ...order, id: id('can-m'), audience: 'merchant', title: 'Order dibatalkan', body: `Pesanan ${code} dibatalkan.` },
+      ]
   }
 }
 

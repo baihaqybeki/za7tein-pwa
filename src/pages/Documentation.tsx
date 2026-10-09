@@ -240,6 +240,11 @@ export default function Documentation() {
               <code className="doc-inline">MerchantRecord</code> juga membawa <code className="doc-inline">rating</code>,
               <code className="doc-inline">reviewCount</code>, <code className="doc-inline">openTime</code>,{' '}
               <code className="doc-inline">closeTime</code> — jam operasional kini tampil di detail merchant SA.
+              Push journey kini mencakup <strong>semua sisi</strong>: aksi customer
+              (<code className="doc-inline">createOrderHold</code>, <code className="doc-inline">matchCourier</code>,
+              <code className="doc-inline">settleOrderHold</code>, <code className="doc-inline">advanceDelivery</code>), batch
+              (<code className="doc-inline">assignBatchCourier</code>, <code className="doc-inline">startBatchDelivery</code>),
+              dan kurir (<code className="doc-inline">cancelTask</code>), bukan hanya merchant.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

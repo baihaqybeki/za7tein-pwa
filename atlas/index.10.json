@@ -937,6 +937,44 @@
           "raw": "TASK-10030:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10041",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:13:11",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# orderJourney: event placed + canceled ke merchant\np='src/lib/orde",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10042",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:13:28",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/store/index.ts'\ns=open(p).read()\ns=s.replace(\"  createOrderH",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
