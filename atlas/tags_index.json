@@ -16821,6 +16821,10 @@
     {
       "id": "TASK-9100",
       "shard": 9
+    },
+    {
+      "id": "TASK-10070",
+      "shard": 10
     }
   ],
   "decision-data": [
@@ -17483,6 +17487,10 @@
     {
       "id": "TASK-10060",
       "shard": 10
+    },
+    {
+      "id": "TASK-10070",
+      "shard": 10
     }
   ],
   "append-only": [
@@ -17774,6 +17782,18 @@
   "photo": [
     {
       "id": "TASK-10030",
+      "shard": 10
+    }
+  ],
+  "category": [
+    {
+      "id": "TASK-10070",
+      "shard": 10
+    }
+  ],
+  "stock": [
+    {
+      "id": "TASK-10070",
       "shard": 10
     }
   ]

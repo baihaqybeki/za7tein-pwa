@@ -1111,6 +1111,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10070",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "02:21:38",
+      "tags": [
+        "supabase",
+        "menu",
+        "category",
+        "stock"
+      ],
+      "summary": "Isi menus.category (Makanan Utama/Minuman) + menus.stock (9-47) yang sebelumnya null; 27/27 menu terisi",
+      "conn": [
+        {
+          "id": "TASK-10060",
+          "type": "relates",
+          "raw": "TASK-10060:relates"
+        }
+      ]
     }
   ]
 }
