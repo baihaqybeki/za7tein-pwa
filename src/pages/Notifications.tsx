@@ -6,10 +6,11 @@
 // dari menu Profil, bukan dari lonceng.
 import { Bell, Bike, Check, Tag, Wallet, type LucideIcon, ChevronLeft } from 'lucide-react'
 
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { markAllRead, markRead, selectUnreadCount } from '../store/slices/notificationsSlice'
+import { roleFromPath } from '../lib/orderJourney'
 import type { AppNotification } from '../types'
 
 const KIND_ICON: Record<AppNotification['kind'], LucideIcon> = {
@@ -22,7 +23,12 @@ const KIND_ICON: Record<AppNotification['kind'], LucideIcon> = {
 export default function Notifications() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const items = useAppSelector((s) => s.notifications.items)
+  const location = useLocation()
+  const role = roleFromPath(location.pathname)
+  const allItems = useAppSelector((s) => s.notifications.items)
+  // Inbox menampilkan notifikasi untuk peran yang sedang dibuka (journey
+  // lintas peran; `audience` menentukan sisi).
+  const items = allItems.filter((n) => !n.audience || n.audience === 'all' || n.audience === role)
   const unread = selectUnreadCount(items)
 
   return (

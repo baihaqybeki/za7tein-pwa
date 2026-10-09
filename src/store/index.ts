@@ -22,15 +22,16 @@ import accountSetup from './slices/accountSetupSlice'
 import cart from './slices/cartSlice'
 import favorites from './slices/favoritesSlice'
 import catalog from './slices/catalogSlice'
-import merchant from './slices/merchantSlice'
-import courier from './slices/courierSlice'
+import merchant, { assignCourier, setOrderStatus } from './slices/merchantSlice'
+import courier, { advanceCheckpoint, completeTask } from './slices/courierSlice'
 import wallet from './slices/walletSlice'
 import payout from './slices/payoutSlice'
 import admin from './slices/adminSlice'
 import superAdmin, { logAudit } from './slices/superAdminSlice'
-import notifications from './slices/notificationsSlice'
+import notifications, { pushNotification } from './slices/notificationsSlice'
 import chat from './slices/chatSlice'
 import ui from './slices/uiSlice'
+import { journeyNotifications, type JourneyEvent } from '../lib/orderJourney'
 import type { AuditKind, DisputeResolution } from '../types'
 
 // Minimal localStorage-backed storage so we don't depend on redux-persist's
@@ -268,6 +269,40 @@ const auditBridge: Middleware = (api) => (next) => (action) => {
   return result
 }
 
+
+/** Notifikasi journey pesanan lintas peran saat order bergerak (R-PUSH-01). */
+const JOURNEY_STATUS: Record<string, JourneyEvent> = {
+  diterima: 'accepted',
+  ditolak: 'rejected',
+  dimasak: 'preparing',
+  diantar: 'onTheWay',
+  batal: 'canceled',
+  selesai: 'delivered',
+}
+
+const journeyBridge: Middleware = (api) => (next) => (action) => {
+  const before = api.getState() as RootState
+  const result = next(action)
+  const state = api.getState() as RootState
+  const emit = (event: JourneyEvent | undefined, code: string | undefined) => {
+    if (!event || !code) return
+    journeyNotifications(event, code).forEach((n) => api.dispatch(pushNotification(n)))
+  }
+  if (assignCourier.match(action)) {
+    emit('assigned', before.merchant.orders.find((o) => o.id === action.payload.orderId)?.code)
+  } else if (setOrderStatus.match(action)) {
+    emit(JOURNEY_STATUS[action.payload.status], before.merchant.orders.find((o) => o.id === action.payload.id)?.code)
+  } else if (advanceCheckpoint.match(action)) {
+    const task = state.courier.tasks.find((t) => t.id === action.payload.id)
+    const ev: JourneyEvent | undefined =
+      task?.checkpoint === 'tiba' ? 'arrived' : task?.checkpoint === 'berangkat' ? 'onTheWay' : 'pickedUp'
+    emit(ev, task?.code)
+  } else if (completeTask.match(action)) {
+    emit('delivered', before.courier.tasks.find((t) => t.id === action.payload.id)?.code)
+  }
+  return result
+}
+
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -275,7 +310,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(auditBridge),
+    }).concat(auditBridge, journeyBridge),
 })
 
 export const persistor = persistStore(store)

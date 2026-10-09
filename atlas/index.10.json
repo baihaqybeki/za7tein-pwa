@@ -469,6 +469,120 @@
           "raw": "TASK-9970:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-9981",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:47:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts (+6/-4) — edit via tool: ts: unread: boolean",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/types.ts"
+    },
+    {
+      "id": "TASK-9982",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:47:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/orderJourney.ts (+65) — write via tool: ts: import type { AppNotification } fro",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/orderJourney.ts"
+    },
+    {
+      "id": "TASK-9983",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:47:56",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/store/index.ts'\ns=open(p).read()\ns=s.replace(\"import merchan",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9984",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:48:15",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run build 2>&1 | grep -E \"error TS|error|✓ built\" | head passed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9985",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:48:29",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nsed -n '13,20p' src/pages/CourierTaskDetail.tsx\npython3 - <<'PY'\np='src/pages/Courie",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-9986",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "01:48:50",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/Notifications.tsx'\ns=open(p).read()\ns=s.replace(\"impor",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

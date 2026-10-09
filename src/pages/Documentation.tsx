@@ -224,7 +224,10 @@ export default function Documentation() {
               saat notifikasi baru masuk. Chat per order kini punya model sendiri
               (<code className="doc-inline">chatSlice</code>: thread + pesan, bentuk mengikuti tabel{' '}
               <code className="doc-inline">chats</code>/<code className="doc-inline">chat_messages</code>),
-              bukan lagi state lokal halaman.
+              bukan lagi state lokal halaman. Perpindahan order juga memicu{' '}
+              <strong>notifikasi journey lintas peran</strong> lewat middleware{' '}
+              <code className="doc-inline">journeyBridge</code> (assign kurir, terima/masak/kirim,
+              checkpoint kurir); inbox memfilter per <code className="doc-inline">audience</code>.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

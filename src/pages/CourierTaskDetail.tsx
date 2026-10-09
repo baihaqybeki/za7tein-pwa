@@ -12,12 +12,9 @@ import { formatDistance, money, zoneLabel } from '../data/merchant'
 import {
   COURIER_ACTION_LABEL,
   COURIER_GUARD_MINUTES,
-  courierSelf,
   elapsedMinutes,
-  nextCheckpoint,
 } from '../data/courier'
 import { advanceCheckpoint, cancelTask, completeTask } from '../store/slices/courierSlice'
-import { pushNotification } from '../store/slices/notificationsSlice'
 
 export default function CourierTaskDetail() {
   const { id } = useParams()
@@ -68,20 +65,9 @@ export default function CourierTaskDetail() {
   // sengketa yang dibaca lintas peran. Web Push asli tetap di luar scope.
   function advance() {
     if (!task) return
-    const next = nextCheckpoint(task.checkpoint)
+    // Notifikasi journey (kurir berangkat/tiba ke customer, merchant) dipicu
+    // terpusat oleh `journeyBridge` di store, bukan di sini.
     dispatch(advanceCheckpoint({ id: task.id }))
-    if (next === 'tiba') {
-      dispatch(
-        pushNotification({
-          id: `n-tiba-${task.id}`,
-          kind: 'order',
-          title: 'Kurir sudah sampai',
-          body: `${courierSelf.name} menunggu di depan. Siapkan kode OTP untuk serah terima.`,
-          time: 'Baru saja',
-          unread: true,
-        }),
-      )
-    }
   }
 
   return (

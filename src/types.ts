@@ -384,6 +384,8 @@ export interface AppNotification {
   unread: boolean
   /** Nada notifikasi (key dari NOTIFICATION_SOUNDS) — audio push. */
   sound?: string
+  /** Peran penerima; `undefined`/`'all'` = tampil di semua sisi. */
+  audience?: ChatRole | 'all'
 }
 
 export type ChatRole = 'customer' | 'merchant' | 'courier' | 'cs'
