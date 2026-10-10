@@ -1285,6 +1285,27 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10090",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:46:17",
+      "tags": [
+        "push",
+        "edge-function",
+        "vapid",
+        "backend"
+      ],
+      "summary": "Pipeline push produksi: edge function supabase/functions/send-push + scripts/send-push.mjs + npm push:deploy/push:send + subscribePush klien",
+      "conn": [
+        {
+          "id": "TASK-10080",
+          "type": "relates",
+          "raw": "TASK-10080:relates"
+        }
+      ]
     }
   ]
 }
