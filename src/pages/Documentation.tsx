@@ -249,6 +249,9 @@ export default function Documentation() {
               <code className="doc-inline">send-push</code> → VAPID → perangkat) didokumentasikan di{' '}
               <code className="doc-inline">docs/backend/PUSH.md</code>; klien memakai{' '}
               <code className="doc-inline">subscribePush()</code> (aktif bila env VAPID/Supabase diisi).
+              Lapisan klien <code className="doc-inline">src/api/</code> (config, db, reference, push) mengonsumsi
+              Supabase PostgREST & spec — aktif di 5 URL role bila env{' '}
+              <code className="doc-inline">VITE_SUPABASE_URL/ANON_KEY/VAPID_PUBLIC_KEY</code> terisi di Vercel.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

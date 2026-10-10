@@ -1348,6 +1348,101 @@
           "raw": "TASK-10100:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10111",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:53:41",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/config.ts (+26) — write via tool: ts: /**",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/config.ts"
+    },
+    {
+      "id": "TASK-10112",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:53:49",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/db.ts (+74) — write via tool: ts: import { restBase, SUPABASE_ANON_KEY, is",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/db.ts"
+    },
+    {
+      "id": "TASK-10113",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:53:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts (+96) — write via tool: ts: import { dbSelect } from './db'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts"
+    },
+    {
+      "id": "TASK-10114",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:54:04",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/push.ts (+11) — write via tool: ts: /**",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/push.ts"
+    },
+    {
+      "id": "TASK-10115",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:54:37",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/api/push.ts'\ns=open(p).read()\ns=s.replace(\"export { subscrib",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
