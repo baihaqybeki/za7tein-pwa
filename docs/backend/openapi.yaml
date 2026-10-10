@@ -111,6 +111,8 @@ tags:
     description: Langganan Web Push
   - name: Ops
     description: Panel CS — monitoring, putusan level-1, blacklist
+  - name: Payments
+    description: Katalog metode bayar (cod, transfer, xendit_va, xendit_qris, wallet)
   - name: SuperAdmin
     description: Konsol pemilik platform (non-PWA) — zona, role, pajak, profit, kill switch
   - name: Webhooks
@@ -413,6 +415,72 @@ paths:
         '204': { description: Terhapus }
 
   # ---------------------------------------------------------------- ZONES
+  /notifications:
+    get:
+      tags: [Push]
+      summary: Daftar notifikasi (inbox per peran via `audience`)
+      responses:
+        '200':
+          description: Daftar notifikasi
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Notification' }
+    post:
+      tags: [Push]
+      summary: Tulis notifikasi — memicu Database Webhook → Edge Function `send-push`
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Notification' }
+      responses:
+        '201':
+          description: Notifikasi dibuat
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Notification' }
+
+  /payment_methods:
+    get:
+      tags: [Payments]
+      summary: Katalog metode bayar
+      responses:
+        '200':
+          description: Daftar metode
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PaymentMethod' }
+
+  /permissions:
+    get:
+      tags: [SuperAdmin]
+      summary: Katalog izin (platform & operasi)
+      responses:
+        '200':
+          description: Daftar izin
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Permission' }
+
+  /merchant_credit_events:
+    get:
+      tags: [Tenant]
+      summary: Jejak modal merchant (grant / fee / rebate)
+      responses:
+        '200':
+          description: Daftar event modal
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/MerchantCreditEvent' }
+
   /zones:
     get:
       tags: [Zones]

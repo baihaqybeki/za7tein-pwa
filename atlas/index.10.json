@@ -1306,6 +1306,27 @@
           "raw": "TASK-10080:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10100",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:56:23",
+      "tags": [
+        "api",
+        "swagger",
+        "openapi",
+        "redeploy"
+      ],
+      "summary": "Update OpenAPI 0.1.1: +PaymentMethod/Notification/Permission/MerchantCreditEvent, kolom merchant/menu/address baru; redeploy sa7tein-api",
+      "conn": [
+        {
+          "id": "TASK-10090",
+          "type": "relates",
+          "raw": "TASK-10090:relates"
+        }
+      ]
     }
   ]
 }

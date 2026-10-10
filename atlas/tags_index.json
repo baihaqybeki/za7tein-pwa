@@ -17351,12 +17351,20 @@
     {
       "id": "TASK-9800",
       "shard": 9
+    },
+    {
+      "id": "TASK-10100",
+      "shard": 10
     }
   ],
   "openapi": [
     {
       "id": "TASK-9353",
       "shard": 9
+    },
+    {
+      "id": "TASK-10100",
+      "shard": 10
     }
   ],
   "swagger": [
@@ -17367,6 +17375,10 @@
     {
       "id": "TASK-9490",
       "shard": 9
+    },
+    {
+      "id": "TASK-10100",
+      "shard": 10
     }
   ],
   "traceability": [
@@ -17858,6 +17870,12 @@
   "vapid": [
     {
       "id": "TASK-10090",
+      "shard": 10
+    }
+  ],
+  "redeploy": [
+    {
+      "id": "TASK-10100",
       "shard": 10
     }
   ]
