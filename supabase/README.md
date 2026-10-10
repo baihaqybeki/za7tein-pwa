@@ -38,6 +38,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `15-address-fields.sql` | **Kolom alamat apartemen di `addresses`** — `name`, `building`, `floor`, `unit`, `notes`, `city`, `full_address` (FE `Address` memakainya) + seed. |
 | `16-menu-category-stock.sql` | **Isi `menus.category` + `menus.stock`** yang kosong (kategori ikut id FE `CATEGORIES`; stock angka mock 9–47). |
 | `17-notifications-seed.sql` | **Inject data notifikasi** — 81 baris per peran (customer/merchant/courier/cs/SA) + kolom `audience` (paritas FE inbox). |
+| `18-webhook-send-push.sql` | **Database Webhook via pg_net** — trigger `notifications_send_push` (AFTER INSERT) → Edge Function `send-push`; service-role di Vault. |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |
