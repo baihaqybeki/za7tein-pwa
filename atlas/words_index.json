@@ -12177,6 +12177,10 @@
     {
       "id": "TASK-10090",
       "shard": 10
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "pwa-nya": [
@@ -19424,6 +19428,10 @@
     },
     {
       "id": "TASK-10110",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ],
@@ -93185,6 +93193,10 @@
     {
       "id": "TASK-10090",
       "shard": 10
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "useleafletmap(": [
@@ -108829,6 +108841,10 @@
     {
       "id": "TASK-9450",
       "shard": 9
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "vercel": [
@@ -108854,6 +108870,10 @@
     },
     {
       "id": "TASK-10120",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ],
@@ -119044,6 +119064,10 @@
     },
     {
       "id": "TASK-10030",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ],
@@ -129824,6 +129848,10 @@
     },
     {
       "id": "TASK-10090",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ],
@@ -141749,6 +141777,10 @@
     {
       "id": "TASK-4126",
       "shard": 6
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "jeda": [
@@ -190127,6 +190159,10 @@
     {
       "id": "TASK-10090",
       "shard": 10
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "supabase/functions/send-push": [
@@ -190167,11 +190203,19 @@
     {
       "id": "TASK-10090",
       "shard": 10
+    },
+    {
+      "id": "TASK-10130",
+      "shard": 10
     }
   ],
   "vapid": [
     {
       "id": "TASK-10090",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ],
@@ -190430,6 +190474,66 @@
   "task-10120": [
     {
       "id": "TASK-10120",
+      "shard": 10
+    }
+  ],
+  "secrets": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "set,": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "send-push": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "active": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "(invoke": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "ok),": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "vite_vapid_public_key": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "diupdate;": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "webh": [
+    {
+      "id": "TASK-10130",
+      "shard": 10
+    }
+  ],
+  "task-10130": [
+    {
+      "id": "TASK-10130",
       "shard": 10
     }
   ]

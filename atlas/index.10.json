@@ -1483,6 +1483,27 @@
           "raw": "TASK-10110:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10130",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "21:16:02",
+      "tags": [
+        "push",
+        "edge-function",
+        "vapid",
+        "deploy"
+      ],
+      "summary": "Deploy push produksi: VAPID baru + secrets set, edge function send-push ACTIVE (invoke OK), VITE_VAPID_PUBLIC_KEY Vercel diupdate; sisa webh",
+      "conn": [
+        {
+          "id": "TASK-10090",
+          "type": "relates",
+          "raw": "TASK-10090:relates"
+        }
+      ]
     }
   ]
 }
