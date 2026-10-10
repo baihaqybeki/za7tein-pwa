@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.0-draft
+  version: 0.1.1-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -1845,6 +1845,13 @@ components:
         latitude: { type: number, format: double }
         longitude: { type: number, format: double }
         isDefault: { type: boolean }
+        name: { type: string }
+        building: { type: string }
+        floor: { type: string }
+        unit: { type: string }
+        notes: { type: string }
+        city: { type: string }
+        fullAddress: { type: string }
 
     Address:
       allOf:
@@ -1906,8 +1913,9 @@ components:
         name: { type: string }
         photo: { type: ['string', 'null'], format: uri }
         description: { type: ['string', 'null'] }
-        available: { type: boolean }
+        storeStatus: { type: string, enum: [open, busy, closed] }
         ratingAvg: { type: ['number', 'null'], description: Angka turunan dari ulasan }
+        ratingCount: { type: integer }
         distanceMeters: { type: ['number', 'null'] }
         deliveryFeeFromJod: { type: ['number', 'null'] }
 
@@ -1917,6 +1925,17 @@ components:
         - type: object
           properties:
             userId: { type: integer, format: int64 }
+            owner: { type: ['string', 'null'] }
+            ownerPhone: { type: ['string', 'null'] }
+            city: { type: ['string', 'null'] }
+            tier: { type: string, enum: [free, pro] }
+            isActiveHijazi: { type: boolean }
+            isActiveSyimali: { type: boolean }
+            codIssues: { type: integer }
+            approvedAt: { type: ['string', 'null'], format: date-time }
+            statusReason: { type: ['string', 'null'] }
+            openTime: { type: ['string', 'null'] }
+            closeTime: { type: ['string', 'null'] }
             deliveryConfig: { $ref: '#/components/schemas/DeliveryConfig' }
             tenantStatus: { type: string, enum: [pending, approved, suspended, blacklisted] }
             depositJod: { type: number, description: "Deposit COD (keputusan PO: 3,50 JOD)" }
@@ -1969,6 +1988,8 @@ components:
         available: { type: boolean }
         image: { type: ['string', 'null'], format: uri }
         stock: { type: integer }
+        category: { type: ['string', 'null'] }
+        cookMinutes: { type: ['integer', 'null'] }
 
     Menu:
       allOf:
@@ -2481,6 +2502,50 @@ components:
         roleId: { type: integer, format: int64 }
         active: { type: boolean }
         createdBy: { type: ['integer', 'null'], format: int64, description: SA yang membuat akun operator }
+
+    PaymentMethod:
+      type: object
+      description: Katalog metode bayar (tabel payment_methods).
+      properties:
+        key: { type: string, enum: [wallet, cod, transfer, xendit_va, xendit_qris] }
+        label: { type: string }
+        provider: { type: string, enum: [xendit, wallet, none] }
+        kind: { type: string, enum: [prepaid, postpaid] }
+        feeJod: { type: number }
+        description: { type: ['string', 'null'] }
+        active: { type: boolean }
+        sortOrder: { type: integer }
+
+    Notification:
+      type: object
+      description: Baris notifikasi (tabel notifications) — INSERT memicu webhook → send-push.
+      properties:
+        id: { type: integer, format: int64 }
+        userId: { type: integer, format: int64 }
+        kind: { type: string, enum: [order, promo, payment, system, courier] }
+        title: { type: string }
+        body: { type: ['string', 'null'] }
+        sound: { type: string }
+        read: { type: boolean }
+        audience: { oneOf: [{ type: string, enum: [customer, merchant, courier, cs, all] }, { type: 'null' }] }
+        createdAt: { type: string, format: date-time }
+
+    Permission:
+      type: object
+      properties:
+        key: { type: string }
+        label: { type: string }
+        groupName: { type: string, enum: [platform, operasi] }
+
+    MerchantCreditEvent:
+      type: object
+      description: Jejak modal merchant (tabel merchant_credit_events).
+      properties:
+        id: { type: integer, format: int64 }
+        merchantId: { type: integer, format: int64 }
+        event: { type: string, enum: [merchant_credit_granted, credit_fee_deducted, rebate_tier_reached, rebate_paid] }
+        amountJod: { type: number }
+        at: { type: string, format: date-time }
 
 x-traceability:
   description: |
