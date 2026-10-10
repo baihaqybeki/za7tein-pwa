@@ -51,12 +51,18 @@ npm run push:send -- --title "Pesanan siap" --body "Sate Ayam sedang dimasak" --
 npm run push:send -- --user 1 --title "Halo" --body "Untuk user 1 saja"
 ```
 
-## Status (2026-10-10)
+## Status (live, 2026-10-10)
 
-- ✅ Edge Function `send-push` **deployed** (ACTIVE).
-- ✅ Secrets VAPID (public/privat/subject) ter-set; klien `VITE_VAPID_PUBLIC_KEY` disamakan.
-- ✅ Webhook trigger `notifications_send_push` aktif — uji INSERT → `send-push` balas `200 {"sent":0,"note":"no subscriptions"}`.
-- ⏳ **Langganan perangkat belum ada** (`push_subscriptions` kosong). Butuh klien di perangkat nyata menjalankan `subscribePush(userId)`.
+- ✅ Edge Function `send-push` **deployed & ACTIVE**; `POST /functions/v1/send-push` → **200** (bukan 404).
+- ✅ Secrets VAPID (`VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY`/`VAPID_SUBJECT`) ter-set; klien `VITE_VAPID_PUBLIC_KEY` = publik yang sama.
+- ✅ Webhook trigger `notifications_send_push` aktif — INSERT → `net._http_response` = `200 {"sent":0,"expired":0}`.
+- ⏳ **`sent:1` butuh langganan perangkat** — `push_subscriptions` masih kosong. Tanpa baris langganan, function balas `{"sent":0}` (bukan bug).
+
+## RLS `push_subscriptions`
+
+Dua policy (keduanya `ALL`):
+- `push_subscriptions_owner` → `user_id = app_uid()` (klien hanya baris miliknya; kirim JWT pemilik).
+- `push_subscriptions_ops` → `app_is_ops()` (cs/superadmin boleh mengelola baris siapa pun — **by design**, bukan longgar tak sengaja). Ini sebabnya `cs@` bisa insert `user_id=1` (201).
 
 ## Catatan
 
