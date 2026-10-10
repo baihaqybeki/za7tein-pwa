@@ -1443,6 +1443,46 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10116",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:57:18",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/Documentation.tsx'\ns=open(p).read()\ns=s.replace(\"\"\"   ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10120",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "18:57:25",
+      "tags": [
+        "api",
+        "supabase",
+        "vercel",
+        "integration"
+      ],
+      "summary": "Lapisan klien src/api (config/db/reference/push) konsumsi Supabase REST+spec; env VITE_SUPABASE_*/VAPID di Vercel sa7tein-pwa; CORS anon OK,",
+      "conn": [
+        {
+          "id": "TASK-10110",
+          "type": "relates",
+          "raw": "TASK-10110:relates"
+        }
+      ]
     }
   ]
 }
