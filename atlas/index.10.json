@@ -1327,6 +1327,27 @@
           "raw": "TASK-10090:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10110",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "17:00:23",
+      "tags": [
+        "api",
+        "swagger",
+        "openapi",
+        "paths"
+      ],
+      "summary": "OpenAPI: tambah path /notifications, /payment_methods, /permissions, /merchant_credit_events + tag Payments; redeploy live (104006 B)",
+      "conn": [
+        {
+          "id": "TASK-10100",
+          "type": "relates",
+          "raw": "TASK-10100:relates"
+        }
+      ]
     }
   ]
 }
