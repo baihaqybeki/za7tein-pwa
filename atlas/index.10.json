@@ -1523,6 +1523,27 @@
         }
       ],
       "loc": "/var/folders/9_/2vjr42hx0_1267zdj9gyggk00000gn/T/opencode/webhook.mjs"
+    },
+    {
+      "id": "TASK-10140",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "21:26:42",
+      "tags": [
+        "push",
+        "webhook",
+        "pg_net",
+        "vault"
+      ],
+      "summary": "Webhook push live: trigger pg_net notifications_send_push + Vault secret; INSERT→send-push 200; supabase/18; sisa langganan perangkat",
+      "conn": [
+        {
+          "id": "TASK-10130",
+          "type": "relates",
+          "raw": "TASK-10130:relates"
+        }
+      ]
     }
   ]
 }
