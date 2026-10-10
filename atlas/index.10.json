@@ -1190,6 +1190,101 @@
           "raw": "TASK-10070:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10081",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:43:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/functions/send-push/index.ts (+87) — write via tool: ts: // Edge Function `sen",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/functions/send-push/index.ts"
+    },
+    {
+      "id": "TASK-10082",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:43:37",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/send-push.mjs (+90) — write via tool: #!/usr/bin/env node",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/send-push.mjs"
+    },
+    {
+      "id": "TASK-10083",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:44:07",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/push.ts (+67/-13) — edit via tool: ts: export function deliverPush(notification",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/lib/push.ts"
+    },
+    {
+      "id": "TASK-10084",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:44:31",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/PUSH.md (+57) — write via tool: # Push Notification — Pipeline (Webhook ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/PUSH.md"
+    },
+    {
+      "id": "TASK-10085",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-10",
+      "time": "16:45:06",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/lib/push.ts'\ns=open(p).read()\ns=s.replace(\"function urlBase6",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

@@ -17,7 +17,9 @@
     "docs:build": "node scripts/build-docs.mjs",
     "setup": "bash scripts/setup.sh",
     "prepare": "bash scripts/setup.sh",
-    "atlas": "node \"$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs\""
+    "atlas": "node \"$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs\"",
+    "push:deploy": "supabase functions deploy send-push",
+    "push:send": "node scripts/send-push.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
@@ -44,6 +46,7 @@
     "sass": "^1.104.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
-    "vite-plugin-pwa": "^1.3.0"
+    "vite-plugin-pwa": "^1.3.0",
+    "web-push": "3.6.7"
   }
 }

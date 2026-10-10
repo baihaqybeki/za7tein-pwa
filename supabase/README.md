@@ -42,7 +42,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |
 
-Dokumen backend (salinan dari https://sa7tein-api.vercel.app): `docs/backend/{openapi.yaml,ERD.md,CONSUME.md,M6-ADAPTER.md,MILESTONES.md}`.
+Dokumen backend (salinan dari https://sa7tein-api.vercel.app): `docs/backend/{openapi.yaml,ERD.md,CONSUME.md,M6-ADAPTER.md,MILESTONES.md}`. Pipeline push: `docs/backend/PUSH.md` + `supabase/functions/send-push/`.
 
 ## Data yang di-reseed
 

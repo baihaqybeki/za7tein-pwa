@@ -245,6 +245,10 @@ export default function Documentation() {
               <code className="doc-inline">settleOrderHold</code>, <code className="doc-inline">advanceDelivery</code>), batch
               (<code className="doc-inline">assignBatchCourier</code>, <code className="doc-inline">startBatchDelivery</code>),
               dan kurir (<code className="doc-inline">cancelTask</code>), bukan hanya merchant.
+              Pipeline push produksi (Database Webhook → Edge Function{' '}
+              <code className="doc-inline">send-push</code> → VAPID → perangkat) didokumentasikan di{' '}
+              <code className="doc-inline">docs/backend/PUSH.md</code>; klien memakai{' '}
+              <code className="doc-inline">subscribePush()</code> (aktif bila env VAPID/Supabase diisi).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (
