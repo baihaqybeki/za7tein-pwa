@@ -1582,6 +1582,28 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/20-missing-tables.sql"
+    },
+    {
+      "id": "TASK-10150",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "18:56:24",
+      "tags": [
+        "notification",
+        "journey",
+        "backend",
+        "schema",
+        "openapi"
+      ],
+      "summary": "Notifikasi journey per step x role via trigger orders_journey_notify; tambah tabel cards/payout_accounts/profit_withdrawals; OpenAPI 0.1.2",
+      "conn": [
+        {
+          "id": "TASK-10140",
+          "type": "relates",
+          "raw": "TASK-10140:relates"
+        }
+      ]
     }
   ]
 }
