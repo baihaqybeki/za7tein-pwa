@@ -1663,6 +1663,65 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/22-ui-columns.sql"
+    },
+    {
+      "id": "TASK-10170",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:08:49",
+      "tags": [
+        "backend",
+        "schema",
+        "audit",
+        "openapi"
+      ],
+      "summary": "Tambah kolom UI kurang di users/customers/couriers/menus/orders; OpenAPI 0.1.4. Sisa gap = integrasi FE (auth/realtime/storage/wiring)",
+      "conn": [
+        {
+          "id": "TASK-10160",
+          "type": "relates",
+          "raw": "TASK-10160:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10171",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:10:18",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/auth.ts (+136) — write via tool: ts: import { authBase, isBackendConfigured, ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/auth.ts"
+    },
+    {
+      "id": "TASK-10172",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:10:38",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/api/db.ts'\ns=open(p).read()\ns=s.replace(\"import { restBase, ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

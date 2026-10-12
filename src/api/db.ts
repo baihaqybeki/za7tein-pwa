@@ -1,3 +1,4 @@
+import { getAccessToken } from './auth'
 import { restBase, SUPABASE_ANON_KEY, isBackendConfigured } from './config'
 
 /** Nilai filter PostgREST, mis. { tenant_status: 'eq.approved', id: 'in.(1,2)' }. */
@@ -13,9 +14,11 @@ interface DbOptions {
 }
 
 function headers(token?: string, prefer?: string): HeadersInit {
+  // Prioritas: token eksplisit → sesi Supabase → anon.
+  const bearer = token ?? getAccessToken() ?? SUPABASE_ANON_KEY ?? ''
   return {
     apikey: SUPABASE_ANON_KEY ?? '',
-    Authorization: `Bearer ${token ?? SUPABASE_ANON_KEY ?? ''}`,
+    Authorization: `Bearer ${bearer}`,
     'Content-Type': 'application/json',
     ...(prefer ? { Prefer: prefer } : {}),
   }

@@ -252,6 +252,9 @@ export default function Documentation() {
               Lapisan klien <code className="doc-inline">src/api/</code> (config, db, reference, push) mengonsumsi
               Supabase PostgREST & spec — aktif di 5 URL role bila env{' '}
               <code className="doc-inline">VITE_SUPABASE_URL/ANON_KEY/VAPID_PUBLIC_KEY</code> terisi di Vercel.
+              Auth Supabase (<code className="doc-inline">src/api/auth.ts</code>: signIn/signUp/signOut/getAccessToken/
+              refresh) menyimpan sesi di localStorage; <code className="doc-inline">db.ts</code> memakai access_token
+              sebagai Bearer → RLS <code className="doc-inline">app_uid()</code> berlaku.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (
