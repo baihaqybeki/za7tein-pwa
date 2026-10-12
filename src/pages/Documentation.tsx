@@ -254,7 +254,9 @@ export default function Documentation() {
               <code className="doc-inline">VITE_SUPABASE_URL/ANON_KEY/VAPID_PUBLIC_KEY</code> terisi di Vercel.
               Auth Supabase (<code className="doc-inline">src/api/auth.ts</code>: signIn/signUp/signOut/getAccessToken/
               refresh) menyimpan sesi di localStorage; <code className="doc-inline">db.ts</code> memakai access_token
-              sebagai Bearer → RLS <code className="doc-inline">app_uid()</code> berlaku.
+              sebagai Bearer → RLS <code className="doc-inline">app_uid()</code> berlaku. Login merchant
+              (<code className="doc-inline">MerchantSignIn</code>) sudah memakai Auth nyata bila env backend diisi;
+              tanpa env tetap mode demo.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

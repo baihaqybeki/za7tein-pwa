@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { signInWithPassword } from '../api/auth'
+import { isBackendConfigured } from '../api/config'
 import { AuthLayout } from '../components/ui/AuthLayout'
 import { AUTH_PHOTO, AUTH_ROLE_LABEL } from '../data/auth'
 import { useAppDispatch } from '../hooks/useAppStore'
@@ -21,9 +23,22 @@ export default function MerchantSignIn() {
     formState: { errors, isSubmitting },
   } = useForm<MerchantSignInFormData>({ resolver: zodResolver(merchantSignInSchema) })
 
-  const onSubmit = () => {
+  const onSubmit = async (data: MerchantSignInFormData) => {
+    // Bila backend dikonfigurasi, autentikasi nyata ke Supabase Auth.
+    if (isBackendConfigured) {
+      const session = await signInWithPassword(data.email, data.password)
+      if (!session) {
+        toast.error('Email atau kata sandi salah')
+        return
+      }
+      dispatch(signIn('/merchant'))
+      toast.success('Masuk sebagai merchant (Supabase Auth)')
+      navigate('/')
+      return
+    }
+    // Mode demo (tanpa env backend).
     dispatch(signIn('/merchant'))
-    toast.success('Masuk sebagai merchant')
+    toast.success('Mode demo: masuk sebagai merchant')
     navigate('/')
   }
 

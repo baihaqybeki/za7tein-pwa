@@ -1722,6 +1722,25 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10173",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:11:37",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/MerchantSignIn.tsx'\ns=open(p).read()\ns=s.replace(\"impo",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
