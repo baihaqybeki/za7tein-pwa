@@ -1623,6 +1623,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/21-gap-tables.sql"
+    },
+    {
+      "id": "TASK-10160",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "18:59:07",
+      "tags": [
+        "backend",
+        "schema",
+        "gap",
+        "openapi"
+      ],
+      "summary": "Sisa gap ditutup: customer_risk_flags, admin_escalations, menu_reviews (52 tabel total); OpenAPI 0.1.3 (67 schema, 78 path)",
+      "conn": [
+        {
+          "id": "TASK-10150",
+          "type": "relates",
+          "raw": "TASK-10150:relates"
+        }
+      ]
     }
   ]
 }
