@@ -1741,6 +1741,65 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10180",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:13:21",
+      "tags": [
+        "auth",
+        "supabase",
+        "api",
+        "integration"
+      ],
+      "summary": "Auth Supabase: src/api/auth.ts (signIn/signUp/signOut/refresh/getAccessToken) + db.ts pakai token; MerchantSignIn wired (fallback demo); RLS",
+      "conn": [
+        {
+          "id": "TASK-10170",
+          "type": "relates",
+          "raw": "TASK-10170:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10181",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:14:08",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useRemoteCatalog.ts (+49) — write via tool: ts: import { useEffect, useState ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useRemoteCatalog.ts"
+    },
+    {
+      "id": "TASK-10182",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:14:32",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/MerchantProfile.tsx'\ns=open(p).read()\ns=s.replace(\"imp",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

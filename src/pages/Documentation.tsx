@@ -256,7 +256,8 @@ export default function Documentation() {
               refresh) menyimpan sesi di localStorage; <code className="doc-inline">db.ts</code> memakai access_token
               sebagai Bearer → RLS <code className="doc-inline">app_uid()</code> berlaku. Login merchant
               (<code className="doc-inline">MerchantSignIn</code>) sudah memakai Auth nyata bila env backend diisi;
-              tanpa env tetap mode demo.
+              tanpa env tetap mode demo. Profil toko (<code className="doc-inline">/store-profile</code>) kini
+              membaca katalog Supabase via <code className="doc-inline">useRemoteCatalog</code> (fallback mock).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

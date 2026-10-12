@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { cookMinutesFor } from '../data/foods'
 import { mockMerchant, STORE_STATUS_LABEL } from '../data/merchant'
-import { money } from '../data/currency'
+import { jodToIdr, money } from '../data/currency'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { useCatalog } from '../hooks/useCatalog'
+import { useRemoteCatalog } from '../hooks/useRemoteCatalog'
 import { setStoreStatus } from '../store/slices/uiSlice'
 import type { StoreStatus } from '../types'
 
@@ -22,10 +23,33 @@ export default function MerchantProfile() {
   const dispatch = useAppDispatch()
   const status = useAppSelector((s) => s.ui.storeStatus)
   const { popular } = useCatalog()
+  const remote = useRemoteCatalog()
+  const rm = remote.source === 'remote' ? remote.merchant : null
 
-  const menus = popular.slice(0, 8)
-  const avgCook = menus.length
-    ? Math.round(menus.reduce((sum, m) => sum + cookMinutesFor(m), 0) / menus.length)
+  const name = rm?.store_name ?? mockMerchant.name
+  const photo = rm?.photo ?? mockMerchant.logo
+  const rating = rm ? Number(rm.rating_avg) : mockMerchant.rating
+  const reviewCount = rm?.rating_count ?? mockMerchant.reviewCount
+  const openTime = rm?.open_time ? rm.open_time.slice(0, 5) : mockMerchant.openTime
+  const closeTime = rm?.close_time ? rm.close_time.slice(0, 5) : mockMerchant.closeTime
+
+  const menuRows = rm
+    ? remote.menus.slice(0, 8).map((m) => ({
+        id: String(m.id),
+        name: m.name,
+        image: m.image ?? '',
+        cook: m.cook_minutes ?? 15,
+        priceIdr: jodToIdr(Number(m.price_jod)),
+      }))
+    : popular.slice(0, 8).map((m) => ({
+        id: m.id,
+        name: m.name,
+        image: m.image,
+        cook: cookMinutesFor(m),
+        priceIdr: m.price,
+      }))
+  const avgCook = menuRows.length
+    ? Math.round(menuRows.reduce((sum, m) => sum + m.cook, 0) / menuRows.length)
     : 0
 
   return (
@@ -41,20 +65,20 @@ export default function MerchantProfile() {
             >
               <ChevronLeft size={24} strokeWidth={1.75} aria-hidden="true" />
             </button>
-            <img className="merchant-profile__logo" src={mockMerchant.logo} alt={mockMerchant.name} />
+            <img className="merchant-profile__logo" src={photo} alt={name} />
           </header>
 
           <section className="merchant-profile__card">
             <div className="merchant-profile__title-row">
-              <h1 className="merchant-profile__name">{mockMerchant.name}</h1>
+              <h1 className="merchant-profile__name">{name}</h1>
               <span className={`store-status store-status--${status}`} aria-live="polite">
                 {STORE_STATUS_LABEL[status]}
               </span>
             </div>
             <p className="merchant-profile__meta">
-              <Star size={14} fill="currentColor" aria-hidden="true" /> {mockMerchant.rating.toFixed(1)}{' '}
-              ({mockMerchant.reviewCount}) ·{' '}
-              <Clock size={14} aria-hidden="true" /> buka {mockMerchant.openTime}–{mockMerchant.closeTime} ·{' '}
+              <Star size={14} fill="currentColor" aria-hidden="true" /> {rating.toFixed(1)}{' '}
+              ({reviewCount}) ·{' '}
+              <Clock size={14} aria-hidden="true" /> buka {openTime}–{closeTime} ·{' '}
               <MapPin size={14} aria-hidden="true" /> 1,2 km
             </p>
 
@@ -88,7 +112,7 @@ export default function MerchantProfile() {
               Menu · estimasi masak rata-rata ±{avgCook} menit
             </h2>
             <ul className="merchant-menu-list" role="list">
-              {menus.map((menu) => (
+              {menuRows.map((menu) => (
                 <li key={menu.id}>
                   <button
                     type="button"
@@ -99,10 +123,10 @@ export default function MerchantProfile() {
                     <span className="merchant-menu-row__body">
                       <span className="merchant-menu-row__name">{menu.name}</span>
                       <span className="merchant-menu-row__cook">
-                        <Clock size={13} strokeWidth={1.75} aria-hidden="true" /> ±{cookMinutesFor(menu)} menit masak
+                        <Clock size={13} strokeWidth={1.75} aria-hidden="true" /> ±{menu.cook} menit masak
                       </span>
                     </span>
-                    <span className="merchant-menu-row__price">{money(menu.price)}</span>
+                    <span className="merchant-menu-row__price">{money(menu.priceIdr)}</span>
                   </button>
                 </li>
               ))}
