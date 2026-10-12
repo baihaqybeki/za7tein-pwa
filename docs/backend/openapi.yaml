@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.2-draft
+  version: 0.1.3-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -519,6 +519,45 @@ paths:
               schema:
                 type: array
                 items: { $ref: '#/components/schemas/ProfitWithdrawal' }
+
+  /customer_risk_flags:
+    get:
+      tags: [Ops]
+      summary: Riwayat risk/blacklist customer
+      responses:
+        '200':
+          description: Daftar risk flag
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/CustomerRiskFlag' }
+
+  /admin_escalations:
+    get:
+      tags: [Ops]
+      summary: Alert SLA yang naik ke CS/SA
+      responses:
+        '200':
+          description: Daftar eskalasi
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/AdminEscalation' }
+
+  /menu_reviews:
+    get:
+      tags: [Ratings]
+      summary: Ulasan menu (legacy, tanpa order)
+      responses:
+        '200':
+          description: Daftar ulasan menu
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/MenuReview' }
 
   /zones:
     get:
@@ -2686,6 +2725,39 @@ components:
         amountJod: { type: number }
         method: { type: ['string', 'null'] }
         status: { type: string, enum: [processing, paid, failed] }
+
+    CustomerRiskFlag:
+      type: object
+      description: Riwayat blacklist/risk COD customer (tabel customer_risk_flags).
+      properties:
+        id: { type: integer, format: int64 }
+        customerId: { type: integer, format: int64 }
+        reason: { type: string }
+        byOperatorId: { type: ['integer', 'null'], format: int64 }
+        at: { type: string, format: date-time }
+
+    AdminEscalation:
+      type: object
+      description: Alert SLA ke CS/SA (tabel admin_escalations).
+      properties:
+        id: { type: integer, format: int64 }
+        orderId: { type: ['integer', 'null'], format: int64 }
+        merchantId: { type: ['integer', 'null'], format: int64 }
+        detail: { type: string }
+        minutesLate: { type: integer }
+        resolved: { type: boolean }
+        createdAt: { type: string, format: date-time }
+
+    MenuReview:
+      type: object
+      description: Ulasan menu legacy tanpa order (tabel menu_reviews).
+      properties:
+        id: { type: integer, format: int64 }
+        menuId: { type: integer, format: int64 }
+        name: { type: string }
+        avatar: { type: ['string', 'null'] }
+        rating: { type: integer }
+        text: { type: ['string', 'null'] }
 
 x-traceability:
   description: |
