@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.1-draft
+  version: 0.1.2-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -480,6 +480,45 @@ paths:
               schema:
                 type: array
                 items: { $ref: '#/components/schemas/MerchantCreditEvent' }
+
+  /cards:
+    get:
+      tags: [Me]
+      summary: Kartu pembayaran milik sesi
+      responses:
+        '200':
+          description: Daftar kartu
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Card' }
+
+  /payout_accounts:
+    get:
+      tags: [Wallet]
+      summary: Rekening tujuan pencairan (merchant/kurir)
+      responses:
+        '200':
+          description: Daftar rekening
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/PayoutAccount' }
+
+  /profit_withdrawals:
+    get:
+      tags: [SuperAdmin]
+      summary: Penarikan laba platform
+      responses:
+        '200':
+          description: Daftar penarikan
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/ProfitWithdrawal' }
 
   /zones:
     get:
@@ -2614,6 +2653,39 @@ components:
         event: { type: string, enum: [merchant_credit_granted, credit_fee_deducted, rebate_tier_reached, rebate_paid] }
         amountJod: { type: number }
         at: { type: string, format: date-time }
+
+    Card:
+      type: object
+      description: Kartu pembayaran customer (tabel cards).
+      properties:
+        id: { type: integer, format: int64 }
+        userId: { type: integer, format: int64 }
+        brand: { type: string }
+        last4: { type: string }
+        holder: { type: ['string', 'null'] }
+        expiry: { type: ['string', 'null'] }
+        isPrimary: { type: boolean }
+
+    PayoutAccount:
+      type: object
+      description: Rekening tujuan pencairan merchant/kurir (tabel payout_accounts).
+      properties:
+        id: { type: integer, format: int64 }
+        userId: { type: integer, format: int64 }
+        bankName: { type: string }
+        accountNumber: { type: string }
+        holderName: { type: string }
+        isPrimary: { type: boolean }
+
+    ProfitWithdrawal:
+      type: object
+      description: Penarikan laba platform (tabel profit_withdrawals).
+      properties:
+        id: { type: integer, format: int64 }
+        period: { type: ['string', 'null'] }
+        amountJod: { type: number }
+        method: { type: ['string', 'null'] }
+        status: { type: string, enum: [processing, paid, failed] }
 
 x-traceability:
   description: |
