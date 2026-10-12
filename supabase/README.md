@@ -42,6 +42,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `19-orders-journey-notify.sql` | **Notifikasi journey otomatis per step × role** — trigger `orders_journey_notify` (AFTER UPDATE status) menulis `notifications` utk customer/merchant/courier; tiap INSERT memicu push. |
 | `20-missing-tables.sql` | **Tabel yang belum ada** — `cards`, `payout_accounts`, `profit_withdrawals` (+RLS, seed). |
 | `21-gap-tables.sql` | **Sisa gap** — `customer_risk_flags`, `admin_escalations`, `menu_reviews` (+RLS, seed). |
+| `22-ui-columns.sql` | **Kolom UI yang belum ada** — users(name,dob,gender,avatar), customers(avatar,status), couriers(phone,phone_verified,active_order_count), menus(discount_percent,is_popular,calories), orders(otp,otp_verified,cook_minutes). |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |

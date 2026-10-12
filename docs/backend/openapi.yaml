@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.3-draft
+  version: 0.1.4-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -1960,6 +1960,9 @@ components:
         role: { $ref: '#/components/schemas/UserRole' }
         merchantId: { type: ['integer', 'null'], format: int64 }
         courierId: { type: ['integer', 'null'], format: int64 }
+        dob: { type: ['string', 'null'], format: date }
+        gender: { type: ['string', 'null'], enum: [male, female, other, null] }
+        avatar: { type: ['string', 'null'] }
 
     UserRecord:
       type: object
@@ -2123,6 +2126,9 @@ components:
         longitude: { type: ['number', 'null'], format: double }
         photo: { type: ['string', 'null'], format: uri }
         vehicle: { type: ['string', 'null'] }
+        phone: { type: ['string', 'null'] }
+        phoneVerified: { type: boolean }
+        activeOrderCount: { type: integer }
 
     MenuInput:
       type: object
@@ -2136,6 +2142,9 @@ components:
         stock: { type: integer }
         category: { type: ['string', 'null'] }
         cookMinutes: { type: ['integer', 'null'] }
+        discountPercent: { type: ['integer', 'null'] }
+        isPopular: { type: boolean }
+        calories: { type: ['integer', 'null'] }
 
     Menu:
       allOf:
@@ -2256,6 +2265,9 @@ components:
         placedAt: { type: ['string', 'null'], format: date-time }
         cancelReason: { type: ['string', 'null'] }
         cancelBy: { type: ['string', 'null'], enum: [customer, merchant, system, null] }
+        otp: { type: ['string', 'null'], description: Kode serah terima (verifikasi kurir) }
+        otpVerified: { type: boolean }
+        cookMinutes: { type: ['integer', 'null'] }
         items:
           type: array
           items: { $ref: '#/components/schemas/OrderItem' }
@@ -2492,6 +2504,8 @@ components:
         riskFlag:
           type: boolean
           description: Blacklist COD — ditandai Super Admin. Blacklist menyentuh dua sisi (merchant + customer).
+        avatar: { type: ['string', 'null'] }
+        status: { type: string, enum: [active, suspended, blocked] }
 
     FavMerchant:
       type: object

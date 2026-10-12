@@ -1644,6 +1644,25 @@
           "raw": "TASK-10150:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10161",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:07:17",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/22-ui-columns.sql (+60) — write via tool: -- =================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/22-ui-columns.sql"
     }
   ]
 }
