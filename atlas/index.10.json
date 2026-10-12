@@ -1544,6 +1544,25 @@
           "raw": "TASK-10130:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10141",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "18:53:14",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/19-orders-journey-notify.sql (+85) — write via tool: -- ======================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/19-orders-journey-notify.sql"
     }
   ]
 }
