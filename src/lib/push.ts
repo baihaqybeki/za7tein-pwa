@@ -1,3 +1,4 @@
+import { getAccessToken } from '../api/auth'
 import type { AppNotification } from '../types'
 
 /** Web Notifications API tersedia? (tidak di semua peramban/konteks). */
@@ -72,7 +73,7 @@ export async function subscribePush(userId: number): Promise<SubscribeResult> {
       method: 'POST',
       headers: {
         apikey: SUPABASE_ANON,
-        Authorization: `Bearer ${SUPABASE_ANON}`,
+        Authorization: `Bearer ${getAccessToken() ?? SUPABASE_ANON}`,
         'Content-Type': 'application/json',
         Prefer: 'return=minimal',
       },

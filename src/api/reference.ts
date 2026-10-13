@@ -1,3 +1,4 @@
+import { getCurrentSession } from './auth'
 import { dbSelect } from './db'
 import type { AppNotification } from '../types'
 
@@ -43,6 +44,16 @@ export interface DbNotification {
   read: boolean
   audience: string | null
   created_at: string
+}
+
+/** Resolve `users.id` (bigint) dari sesi auth (uuid) — untuk RLS & push. */
+export async function resolveMyUserId(): Promise<number | null> {
+  const s = getCurrentSession()
+  if (!s) return null
+  const rows = await dbSelect<{ id: number }>('users', {
+    query: { select: 'id', auth_user_id: `eq.${s.userId}` },
+  })
+  return rows[0]?.id ?? null
 }
 
 /** Merchant yang tayang (tenant approved), ringkas untuk daftar. */

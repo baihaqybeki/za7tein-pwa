@@ -1859,6 +1859,142 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/24-hide-otp.sql"
+    },
+    {
+      "id": "TASK-10200",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:30:05",
+      "tags": [
+        "backend",
+        "api-spec",
+        "otp",
+        "chat",
+        "rls"
+      ],
+      "summary": "Delta BE API spec: OTP acak+verify RPC+hide, chat participants+RLS, order_status_history, incident_resolutions, notifications.order_id, real",
+      "conn": [
+        {
+          "id": "TASK-10190",
+          "type": "relates",
+          "raw": "TASK-10190:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10201",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:34:35",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/25-be-remainder.sql (+146) — write via tool: -- ==============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/25-be-remainder.sql"
+    },
+    {
+      "id": "TASK-10202",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:35:05",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/26-storage.sql (+37) — write via tool: -- ====================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/26-storage.sql"
+    },
+    {
+      "id": "TASK-10203",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:35:34",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/public/push-sw.js (+34) — write via tool: js: // Service worker addendum: handler Web ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/public/push-sw.js"
+    },
+    {
+      "id": "TASK-10204",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:35:45",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/vite.config.ts (+5/-3) — edit via tool: ts: workbox: {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/vite.config.ts"
+    },
+    {
+      "id": "TASK-10205",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:35:56",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/storage.ts (+32) — write via tool: ts: import { getAccessToken } from './auth'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/storage.ts"
+    },
+    {
+      "id": "TASK-10206",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:36:17",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# reference.ts: resolveMyUserId\np='src/api/reference.ts'\ns=open(p).",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

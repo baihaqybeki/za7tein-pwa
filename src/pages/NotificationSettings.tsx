@@ -8,6 +8,9 @@ import toast from 'react-hot-toast'
 
 import { NOTIFICATION_SOUNDS, PUSH_CONTRACT, mockPushSubscription } from '../data/notifications'
 import { playNotificationSound } from '../lib/notificationSound'
+import { isBackendConfigured } from '../api/config'
+import { subscribePush } from '../api/push'
+import { resolveMyUserId } from '../api/reference'
 import { requestPushPermission } from '../lib/push'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { clearPush, registerPush, setSound, setSoundEnabled } from '../store/slices/notificationsSlice'
@@ -110,6 +113,23 @@ export default function NotificationSettings() {
                       type="button"
                       className="btn-profile-primary"
                       onClick={async () => {
+                        // Backend dikonfigurasi → langganan Web Push nyata (SW + VAPID).
+                        if (isBackendConfigured) {
+                          const userId = await resolveMyUserId()
+                          const result = userId ? await subscribePush(userId) : 'denied'
+                          if (result === 'ok') {
+                            dispatch(
+                              registerPush({
+                                subscription: mockPushSubscription(
+                                  navigator.userAgent.includes('Mobile') ? 'mobile-web' : 'web',
+                                ),
+                              }),
+                            )
+                            toast.success('Push terdaftar di perangkat')
+                            return
+                          }
+                        }
+                        // Fallback mock.
                         const permission = await requestPushPermission()
                         dispatch(
                           registerPush({

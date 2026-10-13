@@ -258,6 +258,10 @@ export default function Documentation() {
               (<code className="doc-inline">MerchantSignIn</code>) sudah memakai Auth nyata bila env backend diisi;
               tanpa env tetap mode demo. Profil toko (<code className="doc-inline">/store-profile</code>) kini
               membaca katalog Supabase via <code className="doc-inline">useRemoteCatalog</code> (fallback mock).
+              Ditambah: <strong>Storage</strong> (bucket menu-images/merchant-photos/avatars + RLS, helper
+              <code className="doc-inline">uploadToBucket</code>), <strong>handler push di service worker</strong>
+              (<code className="doc-inline">public/push-sw.js</code>) + <code className="doc-inline">subscribePush</code> bertoken,
+              <strong>SLA watcher</strong>/<strong>auto-settle</strong> (pg_cron), dan RPC <code className="doc-inline">resolve_coverage</code>.
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

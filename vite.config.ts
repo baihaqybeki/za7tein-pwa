@@ -18,6 +18,8 @@ export default defineConfig({
       // diam-diam, dan offline mati. webp cukup ditambahkan ke globPatterns.
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,webp,svg,woff2}'],
+        // Handler Web Push ditambahkan ke SW workbox (showNotification + click).
+        importScripts: ['/push-sw.js'],
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//, /^\/$/, /^\/documentation/],
         runtimeCaching: [
