@@ -1800,6 +1800,65 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10190",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-12",
+      "time": "19:16:35",
+      "tags": [
+        "integration",
+        "data",
+        "supabase",
+        "customer"
+      ],
+      "summary": "Wiring data #1: useRemoteCatalog (Supabase merchants+menus, fallback mock) dipakai di /store-profile; live redeploy sa7tein-pwa",
+      "conn": [
+        {
+          "id": "TASK-10180",
+          "type": "relates",
+          "raw": "TASK-10180:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10191",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:27:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/23-be-deltas.sql (+183) — write via tool: -- =================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/23-be-deltas.sql"
+    },
+    {
+      "id": "TASK-10192",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:28:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/24-hide-otp.sql (+24) — write via tool: -- ===================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/24-hide-otp.sql"
     }
   ]
 }

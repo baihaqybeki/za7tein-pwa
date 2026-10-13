@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.4-draft
+  version: 0.1.5-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -558,6 +558,19 @@ paths:
               schema:
                 type: array
                 items: { $ref: '#/components/schemas/MenuReview' }
+
+  /incident_resolutions:
+    get:
+      tags: [Ops]
+      summary: Jejak tutup insiden CS
+      responses:
+        '200':
+          description: Daftar resolusi insiden
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/IncidentResolution' }
 
   /zones:
     get:
@@ -2688,6 +2701,7 @@ components:
         sound: { type: string }
         read: { type: boolean }
         audience: { oneOf: [{ type: string, enum: [customer, merchant, courier, cs, all] }, { type: 'null' }] }
+        orderId: { type: ['integer', 'null'], format: int64, description: Deep-link ke order }
         createdAt: { type: string, format: date-time }
 
     Permission:
@@ -2696,6 +2710,19 @@ components:
         key: { type: string }
         label: { type: string }
         groupName: { type: string, enum: [platform, operasi] }
+
+    IncidentResolution:
+      type: object
+      description: Jejak tutup insiden CS (tabel incident_resolutions).
+      properties:
+        id: { type: integer, format: int64 }
+        orderId: { type: ['integer', 'null'], format: int64 }
+        disputeId: { type: ['integer', 'null'], format: int64 }
+        kind: { type: ['string', 'null'] }
+        actorId: { type: ['integer', 'null'], format: int64 }
+        action: { type: ['string', 'null'] }
+        note: { type: ['string', 'null'] }
+        createdAt: { type: string, format: date-time }
 
     MerchantCreditEvent:
       type: object
