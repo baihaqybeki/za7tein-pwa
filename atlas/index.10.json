@@ -1995,6 +1995,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10210",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-13",
+      "time": "18:38:24",
+      "tags": [
+        "backend",
+        "storage",
+        "push",
+        "sla",
+        "realtime"
+      ],
+      "summary": "Sisa: SLA cron+auto-settle, resolve_coverage RPC, order_items seed, promo FK, storage buckets+upload, SW push handler, subscribePush bertoke",
+      "conn": [
+        {
+          "id": "TASK-10200",
+          "type": "relates",
+          "raw": "TASK-10200:relates"
+        }
+      ]
     }
   ]
 }
