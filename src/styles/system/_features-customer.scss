@@ -257,3 +257,30 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* Pencarian merchant di beranda */
+.merchant-search { display: flex; gap: var(--space-2); align-items: center; margin: var(--space-3) 0 0; }
+.merchant-search-btn {
+  min-height: var(--touch-min);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--orange-ink);
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.merchant-search-input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--touch-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg-warm);
+  color: var(--text-primary);
+  font-size: var(--text-field);
+}
+.merchant-search-results { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.merchant-search-empty { padding: var(--space-3); color: var(--text-secondary); font-size: var(--text-sm); }

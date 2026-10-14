@@ -12,6 +12,7 @@ import { CurrencyConverter } from '../components/ui/CurrencyConverter'
 import { FoodCard } from '../components/ui/FoodCard'
 import { useAppSelector } from '../hooks/useAppStore'
 import { useCatalog } from '../hooks/useCatalog'
+import { useMerchantSearch } from '../hooks/useMerchantSearch'
 import { useNotificationSound } from '../hooks/useNotificationSound'
 import { selectUnreadCount } from '../store/slices/notificationsSlice'
 
@@ -21,6 +22,9 @@ export default function Home() {
   const unreadNotifications = useAppSelector((s) => selectUnreadCount(s.notifications.items))
   const locationLabel = useAppSelector((s) => s.ui.locationLabel)
   const storeStatus = useAppSelector((s) => s.ui.storeStatus)
+  const [showFilter, setShowFilter] = useState(false)
+  const [merchantQuery, setMerchantQuery] = useState('')
+  const { results: merchantResults } = useMerchantSearch(merchantQuery)
   const [category, setCategory] = useState('all')
   const { categories, deals, popular } = useCatalog()
   useNotificationSound()
@@ -45,6 +49,50 @@ export default function Home() {
         />
 
         <div className="home-content">
+          <div className="merchant-search">
+            <button
+              type="button"
+              className="merchant-search-btn"
+              aria-expanded={showFilter}
+              onClick={() => setShowFilter((v) => !v)}
+            >
+              {showFilter ? 'Tutup pencarian merchant' : 'Cari merchant'}
+            </button>
+            {showFilter ? (
+              <input
+                className="merchant-search-input"
+                type="search"
+                value={merchantQuery}
+                onChange={(e) => setMerchantQuery(e.target.value)}
+                placeholder="Nama merchant…"
+                aria-label="Cari merchant berdasarkan nama"
+              />
+            ) : null}
+          </div>
+
+          {showFilter && merchantQuery.trim() ? (
+            <ul className="merchant-search-results" role="list">
+              {merchantResults.map((m) => (
+                <li key={m.id}>
+                  <Link className="home-store-link" to="/store-profile">
+                    <img className="home-store-link__logo" src={m.photo ?? ''} alt="" width={44} height={44} />
+                    <span className="home-store-link__body">
+                      <span className="home-store-link__name">{m.store_name}</span>
+                      <span className="home-store-link__rating">
+                        <Star size={12} fill="currentColor" aria-hidden="true" /> {Number(m.rating_avg).toFixed(1)} ({m.rating_count})
+                        {m.open_time && m.close_time ? ` · ${m.open_time.slice(0, 5)}–${m.close_time.slice(0, 5)}` : ''}
+                      </span>
+                    </span>
+                    <span className="home-store-link__cta">Lihat</span>
+                  </Link>
+                </li>
+              ))}
+              {merchantResults.length === 0 ? (
+                <li className="merchant-search-empty">Tidak ada merchant yang cocok.</li>
+              ) : null}
+            </ul>
+          ) : null}
+
           <Link className="home-store-link" to="/store-profile">
             <img className="home-store-link__logo" src={mockMerchant.logo} alt="" width={44} height={44} />
             <span className="home-store-link__body">

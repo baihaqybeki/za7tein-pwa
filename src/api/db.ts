@@ -61,6 +61,18 @@ export async function dbDelete(table: string, opts: DbOptions = {}): Promise<voi
   if (!res.ok) throw new Error(`DELETE ${table} ${res.status}`)
 }
 
+/** Panggil RPC (fungsi) PostgREST, mis. `search_merchants`. */
+export async function dbRpc<T = unknown>(fn: string, args: Record<string, unknown>, opts: DbOptions = {}): Promise<T | null> {
+  if (!isBackendConfigured) return null
+  const res = await fetch(`${restBase()}/rpc/${fn}`, {
+    method: 'POST',
+    headers: headers(opts.token),
+    body: JSON.stringify(args),
+  })
+  if (!res.ok) return null
+  return res.json() as Promise<T>
+}
+
 /** Login Supabase Auth (email + password) → access_token. */
 export async function signIn(email: string, password: string): Promise<string | null> {
   if (!isBackendConfigured) return null

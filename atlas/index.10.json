@@ -2057,6 +2057,63 @@
           "raw": "TASK-10210:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10221",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:44:53",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/28-search-merchants.sql (+43) — write via tool: -- ===========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/28-search-merchants.sql"
+    },
+    {
+      "id": "TASK-10222",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:45:54",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useMerchantSearch.ts (+31) — write via tool: ts: import { useEffect, useState",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useMerchantSearch.ts"
+    },
+    {
+      "id": "TASK-10223",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:46:36",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/Home.tsx'\ns=open(p).read()\ns=s.replace(\"import { useNo",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { getCurrentSession } from './auth'
-import { dbSelect } from './db'
+import { dbRpc, dbSelect } from './db'
 import type { AppNotification } from '../types'
 
 /**
@@ -54,6 +54,34 @@ export async function resolveMyUserId(): Promise<number | null> {
     query: { select: 'id', auth_user_id: `eq.${s.userId}` },
   })
   return rows[0]?.id ?? null
+}
+
+export interface DbMerchantSearch {
+  id: number
+  store_name: string
+  photo: string | null
+  store_status: string
+  rating_avg: number | string
+  rating_count: number
+  open_time: string | null
+  close_time: string | null
+  min_price_jod: number | string | null
+}
+
+/** Cari merchant (nama/rating/harga) lewat RPC `search_merchants`. */
+export async function searchMerchants(params: {
+  query?: string
+  minRating?: number
+  priceMin?: number
+  priceMax?: number
+}): Promise<DbMerchantSearch[]> {
+  const rows = await dbRpc<DbMerchantSearch[]>('search_merchants', {
+    p_query: params.query ?? null,
+    p_min_rating: params.minRating ?? null,
+    p_price_min: params.priceMin ?? null,
+    p_price_max: params.priceMax ?? null,
+  })
+  return rows ?? []
 }
 
 /** Merchant yang tayang (tenant approved), ringkas untuk daftar. */
