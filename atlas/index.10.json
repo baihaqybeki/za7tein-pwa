@@ -2157,6 +2157,27 @@
           "raw": "TASK-10230:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10250",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:59:41",
+      "tags": [
+        "docs",
+        "swagger",
+        "deploy",
+        "fix"
+      ],
+      "summary": "Fix sa7tein-api 404: rebuild situs swagger (index/swagger.html + vendor dari npm) + redeploy (semua 200); sumber HTML dipersist ke docs/back",
+      "conn": [
+        {
+          "id": "TASK-10240",
+          "type": "relates",
+          "raw": "TASK-10240:relates"
+        }
+      ]
     }
   ]
 }
