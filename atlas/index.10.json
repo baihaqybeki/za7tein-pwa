@@ -2114,6 +2114,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10230",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:49:23",
+      "tags": [
+        "customer",
+        "search",
+        "merchant",
+        "rpc",
+        "feature"
+      ],
+      "summary": "Filter nama merchant di beranda: RPC search_merchants + dbRpc + useMerchantSearch + tombol/input/hasil di Home; app redeploy",
+      "conn": [
+        {
+          "id": "TASK-10220",
+          "type": "relates",
+          "raw": "TASK-10220:relates"
+        }
+      ]
     }
   ]
 }
