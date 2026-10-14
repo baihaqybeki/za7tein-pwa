@@ -45,6 +45,9 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `22-ui-columns.sql` | **Kolom UI yang belum ada** — users(name,dob,gender,avatar), customers(avatar,status), couriers(phone,phone_verified,active_order_count), menus(discount_percent,is_popular,calories), orders(otp,otp_verified,cook_minutes). |
 | `23-be-deltas.sql` | **Delta BE (API spec)** — `order_status_history`+trigger, `notifications.order_id`, `incident_resolutions`, OTP acak+RPC verify, chat peserta (isi `chat_participants` + RLS peserta), realtime `notifications`/`checkpoints`, view `liabilities`. (Xendit & Google login dilewati.) |
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
+| `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
+| `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `27-order-transition.sql` | **Validasi transisi status order** (state-machine BEFORE UPDATE) + auto-isi `cancel_by`/`cancel_reason`; ops boleh override. |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |
 | `schema.sql` | Lama (schema-draft), superseded. |
 | `00-preflight.sql`, `00-introspect.sql`, `reference-schema-drop.sql` | Diagnosa/drop lama (arsip). |

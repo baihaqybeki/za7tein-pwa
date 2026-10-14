@@ -2017,6 +2017,25 @@
           "raw": "TASK-10200:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10211",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-14",
+      "time": "23:07:59",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/27-order-transition.sql (+56) — write via tool: -- ===========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/27-order-transition.sql"
     }
   ]
 }
