@@ -2178,6 +2178,44 @@
           "raw": "TASK-10240:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10251",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:02:49",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/29-remove-xendit-hours.sql (+44) — write via tool: -- ========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/29-remove-xendit-hours.sql"
+    },
+    {
+      "id": "TASK-10252",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:03:48",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# 1) PaymentMethodId\np='src/types.ts'\ns=open(p).read()\ns=s.replace(",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

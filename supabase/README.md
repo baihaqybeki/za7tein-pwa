@@ -47,6 +47,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `29-remove-xendit-hours.sql` | **Hapus Xendit dari metode bayar order** (data→wallet, enum cod/transfer/wallet, katalog) + constraint jam operasional merchant. |
 | `28-search-merchants.sql` | **Pencarian merchant** — RPC `search_merchants(query, min_rating, price_min, price_max)` untuk filter nama/rating/harga di beranda. |
 | `27-order-transition.sql` | **Validasi transisi status order** (state-machine BEFORE UPDATE) + auto-isi `cancel_by`/`cancel_reason`; ops boleh override. |
 | `02-align-to-doc.sql` | ⚠️ **DIBATALKAN** — rebuild ke draft 17 entitas (menghapus 22 tabel fitur). Jangan dijalankan lagi. |

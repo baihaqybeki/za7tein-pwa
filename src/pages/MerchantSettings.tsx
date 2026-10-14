@@ -10,6 +10,8 @@ import { MerchantPageHeader } from '../components/merchant/MerchantPageHeader'
 import { ConfirmSheet } from '../components/ui/ConfirmSheet'
 import { InstallAppCard } from '../components/ui/InstallAppCard'
 import { useLeafletMap } from '../hooks/useLeafletMap'
+import { isBackendConfigured } from '../api/config'
+import { updateMyMerchant } from '../api/reference'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { money } from '../data/currency'
 import { mockMerchant } from '../data/merchant'
@@ -110,9 +112,21 @@ export default function MerchantSettings() {
 
   // Simpan benar-benar mengubah state, bukan cuma toast "berhasil" (dulu form
   // ini menampilkan sukses padahal tak ada satu pun nilai yang berubah).
-  const onSubmit = (data: MerchantStoreFormData) => {
+  const onSubmit = async (data: MerchantStoreFormData) => {
     dispatch(setStoreProfile(data))
     dispatch(setStoreDetails({ openTime: hours.open, closeTime: hours.close, lat: coords.lat, lng: coords.lng }))
+    // Simpan ke backend bila dikonfigurasi (merchant milik sesi).
+    if (isBackendConfigured) {
+      const ok = await updateMyMerchant({
+        store_name: data.name,
+        store_phone: data.phone,
+        store_address: data.address,
+        open_time: hours.open,
+        close_time: hours.close,
+      })
+      toast.success(ok ? 'Setelan toko disimpan ke backend' : 'Setelan toko disimpan (lokal)')
+      return
+    }
     toast.success('Setelan toko disimpan')
   }
 

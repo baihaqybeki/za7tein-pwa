@@ -51,6 +51,17 @@ export async function dbInsert(table: string, row: unknown, opts: DbOptions = {}
   if (!res.ok) throw new Error(`POST ${table} ${res.status}`)
 }
 
+/** PATCH (update) baris dengan filter. */
+export async function dbUpdate(table: string, query: DbQuery, patch: Record<string, unknown>, opts: DbOptions = {}): Promise<void> {
+  if (!isBackendConfigured) return
+  const res = await fetch(`${restBase()}/${table}${qs(query)}`, {
+    method: 'PATCH',
+    headers: headers(opts.token, opts.prefer ?? 'return=minimal'),
+    body: JSON.stringify(patch),
+  })
+  if (!res.ok) throw new Error(`PATCH ${table} ${res.status}`)
+}
+
 /** DELETE dengan filter (wajib ada query agar tak menghapus semua). */
 export async function dbDelete(table: string, opts: DbOptions = {}): Promise<void> {
   if (!isBackendConfigured) return

@@ -1,5 +1,5 @@
 import { getCurrentSession } from './auth'
-import { dbRpc, dbSelect } from './db'
+import { dbRpc, dbSelect, dbUpdate } from './db'
 import type { AppNotification } from '../types'
 
 /**
@@ -44,6 +44,28 @@ export interface DbNotification {
   read: boolean
   audience: string | null
   created_at: string
+}
+
+/** Ubah profil merchant milik sesi (store_name/phone/address/jam operasional). */
+export async function updateMyMerchant(patch: {
+  store_name?: string
+  store_phone?: string
+  store_address?: string
+  open_time?: string
+  close_time?: string
+  store_status?: string
+}): Promise<boolean> {
+  const uid = await resolveMyUserId()
+  if (!uid) return false
+  const rows = await dbSelect<{ id: number }>('merchants', { query: { select: 'id', user_id: `eq.${uid}` } })
+  const mid = rows[0]?.id
+  if (!mid) return false
+  try {
+    await dbUpdate('merchants', { id: `eq.${mid}` }, patch)
+    return true
+  } catch {
+    return false
+  }
 }
 
 /** Resolve `users.id` (bigint) dari sesi auth (uuid) — untuk RLS & push. */

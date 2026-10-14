@@ -263,6 +263,9 @@ export default function Documentation() {
               (<code className="doc-inline">public/push-sw.js</code>) + <code className="doc-inline">subscribePush</code> bertoken,
               <strong>SLA watcher</strong>/<strong>auto-settle</strong> (pg_cron), dan RPC <code className="doc-inline">resolve_coverage</code>.
               Beranda punya pencarian <strong>nama merchant</strong> (tombol + input) via RPC <code className="doc-inline">search_merchants</code>.
+              Setelan merchant kini menyimpan profil + <strong>jam operasional</strong> ke backend
+              (<code className="doc-inline">updateMyMerchant</code>), dan opsi bayar <strong>Xendit dihapus</strong>
+              (kini cod/transfer/wallet).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (
