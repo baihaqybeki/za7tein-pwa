@@ -2136,6 +2136,27 @@
           "raw": "TASK-10220:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10240",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "00:54:47",
+      "tags": [
+        "api",
+        "openapi",
+        "rpc",
+        "swagger"
+      ],
+      "summary": "OpenAPI 0.1.6: tambah 4 RPC (search_merchants, resolve_coverage, verify_order_otp, my_order_otp) + schemas; live redeploy",
+      "conn": [
+        {
+          "id": "TASK-10230",
+          "type": "relates",
+          "raw": "TASK-10230:relates"
+        }
+      ]
     }
   ]
 }
