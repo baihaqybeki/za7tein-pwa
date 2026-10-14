@@ -2216,6 +2216,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10260",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:06:57",
+      "tags": [
+        "merchant",
+        "hours",
+        "payment",
+        "xendit",
+        "feature"
+      ],
+      "summary": "Jam operasional merchant simpan ke backend (updateMyMerchant/dbUpdate) + hapus Xendit dari metode bayar (cod/transfer/wallet); DB migration ",
+      "conn": [
+        {
+          "id": "TASK-10230",
+          "type": "relates",
+          "raw": "TASK-10230:relates"
+        }
+      ]
     }
   ]
 }
