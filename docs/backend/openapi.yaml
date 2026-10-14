@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.2.0-draft
+  version: 0.2.1-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -125,6 +125,10 @@ tags:
     description: Langganan Web Push
   - name: Ops
     description: Panel CS — monitoring, putusan level-1, blacklist
+  - name: Flow
+    description: |
+      Alur **end-to-end** Sa7tein (baca ini dulu). Ringkas: Auth → Discovery → Checkout → Payment → Merchant/Batch → Delivery/OTP → Review → Dispute/CS.
+      Detail tiap langkah ada di `GET /flow`.
   - name: Payments
     description: Katalog metode bayar (wallet, cod, dana_va, qris)
   - name: SuperAdmin
@@ -140,6 +144,37 @@ security:
 
 paths:
   # ---------------------------------------------------------------- AUTH
+  /flow:
+    get:
+      tags: [Flow]
+      summary: Alur end-to-end (dokumentasi) — urutan layar & panggilan API
+      description: |
+        **0. Auth (f21)** — `POST /auth/v1/token` → `GET users?auth_user_id=eq.<uuid>` (peta auth → `users.id`).
+
+        **1. Discovery (f23/f20)** — `POST /rpc/search_merchants` → `GET menus` → `POST /rpc/resolve_coverage`.
+
+        **2. Checkout (f1/f4)** — `POST orders` (`cart → quotation`; snapshot harga/fee/zone; hold reserve bila COD).
+
+        **3. Pembayaran (f24)** — pilih `wallet | cod | dana_va | qris` → `prepare`; event `payment_confirmed`.
+
+        **4. Merchant & batch (f12)** — `PATCH orders {status:'prepare'}` (accept) → `PATCH orders {courier_id}` (`courier_matched`).
+
+        **5. Pengantaran (f13/f5)** — `POST checkpoints` (`picked_up` → `arrived`) → customer `POST /rpc/my_order_otp` → kurir `POST /rpc/verify_order_otp` (`delivery → done`, hold settle + ledger).
+
+        **6. Review (f19)** — `POST rating_reviews` (+ tip) → `POST review_replies`.
+
+        **7. Sengketa (f8/f24)** — `POST disputes` (freeze hold, audience `cs`) → CS `PATCH disputes {resolution}` → banding diputus SA.
+
+        **8. Lintas-cutting** — `INSERT notifications` → webhook → `send-push` (VAPID); Realtime; `pg_cron` SLA + auto-settle.
+
+        > Detail terstruktur: ekstensi `x-flows.e2e` di berkas ini.
+      responses:
+        '200':
+          description: Ringkasan flow (string markdown)
+          content:
+            application/json:
+              schema: { type: string, example: "Auth → Discovery → Checkout → Payment → Merchant/Batch → Delivery/OTP → Review → Dispute/CS" }
+
   /auth/google:
     post:
       tags: [Auth]
