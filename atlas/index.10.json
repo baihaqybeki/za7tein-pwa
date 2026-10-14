@@ -2238,6 +2238,27 @@
           "raw": "TASK-10230:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10270",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:10:41",
+      "tags": [
+        "api",
+        "openapi",
+        "flow",
+        "swagger"
+      ],
+      "summary": "OpenAPI 0.1.7: enum metode order tanpa Xendit + x-flows (order-lifecycle steps, matriks notifikasi, realtime, payment) agar FE mudah mencern",
+      "conn": [
+        {
+          "id": "TASK-10260",
+          "type": "relates",
+          "raw": "TASK-10260:relates"
+        }
+      ]
     }
   ]
 }
