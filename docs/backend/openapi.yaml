@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.9-draft
+  version: 0.2.0-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -41,6 +41,20 @@ info:
     Login: `POST /auth/login` (atau GoTrue `POST /auth/v1/token?grant_type=password`).
     Admin & superadmin memakai alur **email + password yang sama**; peran server menentukan
     akses (`app_role()` → `app_is_ops()` untuk `cs`/`superadmin`).
+
+    ## Flow end-to-end (ringkas)
+
+    0. **Auth (f21)** — `POST /auth/v1/token` → `GET users?auth_user_id=eq.<uuid>` (peta ke `users.id`).
+    1. **Discovery (f23/f20)** — `POST /rpc/search_merchants` → `GET menus` → `POST /rpc/resolve_coverage`.
+    2. **Checkout (f1/f4)** — `POST orders` (`cart → quotation`, snapshot harga/fee/zone, **hold reserve** bila COD).
+    3. **Pembayaran (f24)** — pilih `wallet | cod | dana_va | qris` → `prepare`, event `payment_confirmed`.
+    4. **Merchant & batch (f12)** — `PATCH orders {status:'prepare'}` (accept) → `PATCH orders {courier_id}` (`courier_matched`).
+    5. **Pengantaran (f13/f5)** — `POST checkpoints` (`picked_up` → `arrived`) → customer `POST /rpc/my_order_otp` → kurir `POST /rpc/verify_order_otp` (`delivery → done`, **hold settle** + ledger).
+    6. **Review (f19)** — `POST rating_reviews` (+ tip) → merchant `POST review_replies`.
+    7. **Sengketa (f8/f24)** — `POST disputes` (**freeze hold**, audience `cs`) → CS `PATCH disputes {resolution}` (1 ledger entry baru) → banding diputus SA.
+    8. **Lintas-cutting** — `INSERT notifications` → webhook → `send-push` (VAPID); Realtime `orders/chats/wallets/notifications/checkpoints`; `pg_cron` SLA + auto-settle.
+
+    Detail terstruktur (per fase, actor/api/state/audience) ada di ekstensi **`x-flows.e2e`** pada berkas ini.
 
   x-demo-accounts:
     - { email: customer@sa7tein.app, role: customer, password: demo1234 }
@@ -2921,6 +2935,52 @@ components:
 
 x-flows:
   note: Alur pesanan end-to-end + penerima notifikasi (turunan docs/design/flows). FE membaca ini untuk urutan layar & panggilan API.
+  e2e:
+    title: "Flow end-to-end Sa7tein (customer → merchant → kurir → settle → review)"
+    legend: "Setiap langkah: actor, api (PostgREST/RPC), state, notif audience."
+    phases:
+      - phase: "0. Auth & onboarding (f21)"
+        steps:
+          - { actor: user, api: "POST /auth/v1/token?grant_type=password", state: "sesi", note: "login email+password (GoTrue)" }
+          - { actor: user, api: "GET /rest/v1/users?auth_user_id=eq.<uuid>", state: "-", note: "peta auth→users.id (bigint)" }
+          - { actor: user, api: "POST /rpc (phone_verifications, target)", state: "-", note: "Level 1: validasi E.164, tanpa OTP WA" }
+      - phase: "1. Discovery & coverage (f23, f20)"
+        steps:
+          - { actor: customer, api: "POST /rpc/search_merchants", state: "-", note: "cari merchant (nama/rating/harga)" }
+          - { actor: customer, api: "GET /rest/v1/menus?merchant_id=eq.<id>", state: "-", note: "katalog + variants" }
+          - { actor: customer, api: "POST /rpc/resolve_coverage", state: "-", note: "geofence: zona + jarak + covered" }
+      - phase: "2. Cart & checkout (f1, f4)"
+        steps:
+          - { actor: customer, api: "POST /rest/v1/orders", state: "cart → quotation", note: "snapshot harga/fee/zone; hold reserve (COD)" }
+          - { actor: system, api: "(internal)", state: "-", note: "otp acak dibuat; fee 0,37 + ongkir" }
+      - phase: "3. Payment (f24)"
+        steps:
+          - { actor: customer, api: "PATCH /rest/v1/orders {payment_method}", state: "quotation → prepare", note: "wallet/cod/dana_va/qris; event payment_confirmed" }
+          - { actor: customer, api: "(dana_va/qris) bayar", state: "-", note: "VA otomatis / QRIS; wallet & COD tanpa antar-provider" }
+      - phase: "4. Merchant: accept & batch (f12)"
+        steps:
+          - { actor: merchant, api: "PATCH /rest/v1/orders {status:'prepare'}", state: "prepare", note: "target POST /orders/{id}/accept; validasi transisi aktif" }
+          - { actor: merchant, api: "PATCH /rest/v1/orders {courier_id}", state: "waitingCourier → waitingDelivery", note: "event courier_matched; tasks: batch (entri 11)" }
+      - phase: "5. Delivery & OTP (f13, f5)"
+        steps:
+          - { actor: courier, api: "POST /rest/v1/checkpoints {kind:'picked_up'}", state: "delivery", note: "Ambil/Berangkat" }
+          - { actor: courier, api: "POST /rest/v1/checkpoints {kind:'arrived'}", state: "delivery", note: "Tiba (kritis → fallback WA)" }
+          - { actor: customer, api: "POST /rpc/my_order_otp", state: "-", note: "customer baca OTP sendiri" }
+          - { actor: courier, api: "POST /rpc/verify_order_otp", state: "delivery → done", note: "hold settle + ledger; checkpoint otp_verified" }
+      - phase: "6. Review & tip (f19)"
+        steps:
+          - { actor: customer, api: "POST /rest/v1/rating_reviews", state: "done", note: "bintang + teks + tip (100% ke kurir)" }
+          - { actor: merchant, api: "POST /rest/v1/review_replies", state: "-", note: "balas ulasan" }
+      - phase: "7. Sengketa & CS (f8, f24)"
+        steps:
+          - { actor: customer/merchant, api: "POST /rest/v1/disputes", state: "disputed", note: "freeze hold + pause auto-settle; audience cs" }
+          - { actor: cs, api: "PATCH /rest/v1/disputes {resolution}", state: "resolved", note: "1 entry ledger baru (append-only); target POST /disputes/{id}/resolve" }
+          - { actor: sa, api: "(appeal)", state: "-", note: "banding diputus SA" }
+      - phase: "8. Lintas-cutting"
+        steps:
+          - { actor: system, api: "INSERT /rest/v1/notifications", state: "-", note: "trigger→webhook(pg_net)→send-push (VAPID)" }
+          - { actor: system, api: "Realtime supabase.channel", state: "-", note: "orders, chats, menus, wallets, notifications, checkpoints" }
+          - { actor: system, api: "pg_cron: sla_watch / auto_settle_orders", state: "-", note: "alert SLA ke cs; settle order menggantung" }
   order-lifecycle:
     title: "Order end-to-end (f1 + f11)"
     steps:
