@@ -1,10 +1,10 @@
 // Metode bayar (PRD v2): saldo Sa7tein, COD, dan transfer manual legacy.
-import { ChevronLeft, CheckCircle2, Banknote, Landmark, Wallet } from 'lucide-react'
+import { ChevronLeft, CheckCircle2, Banknote, Landmark, QrCode, Wallet } from 'lucide-react'
 
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
-import { PAYMENT_METHODS, mockMerchant } from '../data/merchant'
+import { PAYMENT_METHODS } from '../data/merchant'
 import { switchBlockCopy, switchIsDown } from '../data/superadmin'
 import { PlatformNotice } from '../components/ui/PlatformNotice'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
@@ -13,7 +13,8 @@ import { setPayment } from '../store/slices/cartSlice'
 const METHOD_ICONS: Record<string, typeof Wallet> = {
   wallet: Wallet,
   cod: Banknote,
-  transfer: Landmark,
+  dana_va: Landmark,
+  qris: QrCode,
 }
 
 export default function PaymentSelection() {
@@ -78,11 +79,7 @@ export default function PaymentSelection() {
                           {m.label}
                         </h3>
                         <p className="payment-number">
-                          {blocked && reason
-                            ? reason
-                            : m.id === 'transfer'
-                              ? `${mockMerchant.bank.name} ${mockMerchant.bank.account} · ${mockMerchant.bank.holder}`
-                              : m.description}
+                          {blocked && reason ? reason : m.description}
                         </p>
                       </div>
                       <div className="payment-radio">

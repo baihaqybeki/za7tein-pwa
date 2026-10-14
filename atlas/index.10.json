@@ -2280,6 +2280,101 @@
           "raw": "TASK-10270:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10281",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:20:58",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/30-payment-methods-dana.sql (+37) — write via tool: -- =======================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/30-payment-methods-dana.sql"
+    },
+    {
+      "id": "TASK-10282",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:21:46",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\n# types\np='src/types.ts'\ns=open(p).read()\ns=s.replace(\"export type ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10283",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:22:31",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/data/courier.ts'\ns=open(p).read()\ns=s.replace(\"    paymentMe",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10284",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:23:08",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\nimport re\n# merchantOrders\np='src/data/merchantOrders.ts'; s=open(p",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10285",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:23:34",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ngrep -n \"mockMerchant\" src/pages/PaymentAmount.tsx | head\npython3 - <<'PY'\np='src/pa",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

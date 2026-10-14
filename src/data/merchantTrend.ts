@@ -99,10 +99,10 @@ export function orderMixSegments(orders: MerchantOrder[] = merchantOrders): Char
 /** Perbandingan metode bayar — COD ditagih kurir, transfer dicek buktinya. */
 export function paymentMixSegments(orders: MerchantOrder[] = merchantOrders): ChartSegment[] {
   const cod = orders.filter((order) => order.paymentMethod === 'cod').length
-  const transfer = orders.filter((order) => order.paymentMethod === 'transfer').length
+  const dana = orders.filter((order) => order.paymentMethod === 'dana_va').length
   const segments: ChartSegment[] = [
     { label: 'COD (tunai)', value: cod, tone: 'brand' },
-    { label: 'Transfer', value: transfer, tone: 'success' },
+    { label: 'DANA / QRIS', value: dana, tone: 'success' },
   ]
   return segments.filter((segment) => segment.value > 0)
 }

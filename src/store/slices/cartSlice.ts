@@ -135,7 +135,7 @@ const cartSlice = createSlice({
     setPayment(state, action: PayloadAction<string>) {
       state.selectedPaymentId = action.payload
       // Bukti transfer hanya relevan untuk metode transfer.
-      if (action.payload !== 'transfer') state.transferProof = null
+      if (action.payload !== 'dana_va') state.transferProof = null
     },
     setTransferProof(state, action: PayloadAction<string | null>) {
       state.transferProof = action.payload

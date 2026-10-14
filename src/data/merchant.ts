@@ -97,12 +97,14 @@ export const merchantDeliveryConfig: MerchantDeliveryConfig = {
   ongkirIdr: 5000,
 }
 
-/** Metode bayar PRD v2 — saldo wallet dulu; COD & transfer legacy tetap ada (OQ-25). */
+/**
+ * Metode bayar PRD v2 — Saldo Sa7tein, COD, DANA Virtual Account, QRIS.
+ */
 export const PAYMENT_METHODS: PaymentMethod[] = [
   {
     id: 'wallet',
     label: 'Saldo Sa7tein',
-    description: 'Bayar dari saldo wallet Sa7tein — top-up lewat Xendit (VA/QRIS).',
+    description: 'Bayar dari saldo wallet Sa7tein — top-up lewat DANA (VA/QRIS).',
   },
   {
     id: 'cod',
@@ -110,9 +112,14 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     description: 'Saldo dipotong (hold) saat kurir match, settle setelah OTP.',
   },
   {
-    id: 'transfer',
-    label: 'Transfer Manual (legacy)',
-    description: 'Transfer ke rekening toko, lalu unggah bukti transfer.',
+    id: 'dana_va',
+    label: 'DANA Virtual Account',
+    description: 'Nomor VA dibuat otomatis; bayar dari m-banking atau e-wallet apa pun.',
+  },
+  {
+    id: 'qris',
+    label: 'QRIS',
+    description: 'Scan kode QR pakai aplikasi e-wallet atau m-banking apa pun.',
   },
 ]
 

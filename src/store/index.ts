@@ -140,7 +140,7 @@ function repairPersistedCart() {
       zonesOutdated ||
       cart.transferProof === undefined ||
       legacyItems ||
-      !['wallet', 'cod', 'transfer'].includes(cart.selectedPaymentId)
+      !['wallet', 'cod', 'dana_va', 'qris'].includes(cart.selectedPaymentId)
 
     if (!needsRepair) return
 
@@ -160,7 +160,7 @@ function repairPersistedCart() {
       selectedAddressId: mockUser.addresses.some((a) => a.id === cart.selectedAddressId)
         ? cart.selectedAddressId
         : mockUser.addresses[0].id,
-      selectedPaymentId: ['wallet', 'cod', 'transfer'].includes(cart.selectedPaymentId)
+      selectedPaymentId: ['wallet', 'cod', 'dana_va', 'qris'].includes(cart.selectedPaymentId)
         ? cart.selectedPaymentId
         : 'wallet',
     })

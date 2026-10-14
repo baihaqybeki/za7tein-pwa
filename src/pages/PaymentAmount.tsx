@@ -18,7 +18,6 @@ import {
   needsTopUpGate,
   zoneFor,
 } from '../data/merchant'
-import { mockMerchant } from '../data/merchant'
 import { mockUser } from '../data/user'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { selectSubtotal, setTransferProof, createOrderHold } from '../store/slices/cartSlice'
@@ -43,7 +42,7 @@ export default function PaymentAmount() {
   const fee = address ? deliveryFeeFor(address) : 0
   const total = subtotal + fee + PLATFORM_FEE_CUSTOMER_IDR
   const method = PAYMENT_METHODS.find((m) => m.id === paymentId) ?? PAYMENT_METHODS[0]
-  const needsProof = method.id === 'transfer'
+  const needsProof = method.id === 'dana_va'
   const walletAvailable = useAppSelector((s) => s.wallet.balance.available)
   const gated = needsTopUpGate(walletAvailable)
   /**
@@ -193,9 +192,7 @@ export default function PaymentAmount() {
                     </button>
                   </div>
                   <p className="payment-method-note">
-                    {method.id === 'transfer'
-                      ? `Transfer ke ${mockMerchant.bank.name} ${mockMerchant.bank.account} a/n ${mockMerchant.bank.holder}`
-                      : method.description}
+                    {method.description}
                   </p>
 
                   {needsProof ? (

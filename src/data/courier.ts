@@ -164,7 +164,7 @@ export const courierTasks: CourierTask[] = [
     total: 60000,
     distanceMeters: 1300,
     zone: 'syimali',
-    paymentMethod: 'transfer',
+    paymentMethod: 'cod',
     tip: 5000,
     orderStage: 'diantar',
     checkpoint: 'tiba',

@@ -209,7 +209,7 @@ export interface Card {
 }
 
 /** Metode bayar PRD v2: `wallet` (top-up Xendit) + channel VA/QRIS. `cod` & `transfer` legacy. */
-export type PaymentMethodId = 'cod' | 'transfer' | 'wallet'
+export type PaymentMethodId = 'wallet' | 'cod' | 'dana_va' | 'qris'
 
 export interface PaymentMethod {
   id: PaymentMethodId

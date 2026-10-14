@@ -264,8 +264,8 @@ export default function Documentation() {
               <strong>SLA watcher</strong>/<strong>auto-settle</strong> (pg_cron), dan RPC <code className="doc-inline">resolve_coverage</code>.
               Beranda punya pencarian <strong>nama merchant</strong> (tombol + input) via RPC <code className="doc-inline">search_merchants</code>.
               Setelan merchant kini menyimpan profil + <strong>jam operasional</strong> ke backend
-              (<code className="doc-inline">updateMyMerchant</code>), dan opsi bayar <strong>Xendit dihapus</strong>
-              (kini cod/transfer/wallet).
+              (<code className="doc-inline">updateMyMerchant</code>), dan metode bayar = <strong>Saldo Sa7tein, COD, DANA Virtual Account, QRIS</strong>
+              (Xendit & transfer legacy dihapus).
             </p>
             <div className="doc-hero-tags">
               {HERO_TAGS.map((tag) => (

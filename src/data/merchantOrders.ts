@@ -63,7 +63,7 @@ export const merchantOrders: MerchantOrder[] = [
     zone: 'syimali',
     status: 'masuk',
     placedAt: '5 menit lalu',
-    paymentMethod: 'transfer',
+    paymentMethod: 'dana_va',
   },
   {
     id: 'mo-3',
@@ -96,7 +96,7 @@ export const merchantOrders: MerchantOrder[] = [
     zone: 'hijazi',
     status: 'dimasak',
     placedAt: '18 menit lalu',
-    paymentMethod: 'transfer',
+    paymentMethod: 'dana_va',
     cookMinutes: 25,
   },
   {
@@ -129,7 +129,7 @@ export const merchantOrders: MerchantOrder[] = [
     zone: 'hijazi',
     status: 'tiba',
     placedAt: '34 menit lalu',
-    paymentMethod: 'transfer',
+    paymentMethod: 'dana_va',
   },
   {
     id: 'mo-7',
@@ -161,7 +161,7 @@ export const merchantOrders: MerchantOrder[] = [
     zone: 'hijazi',
     status: 'ditolak',
     placedAt: '2 jam lalu',
-    paymentMethod: 'transfer',
+    paymentMethod: 'dana_va',
   },
 ]
 
