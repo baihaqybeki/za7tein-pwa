@@ -2036,6 +2036,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/27-order-transition.sql"
+    },
+    {
+      "id": "TASK-10220",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-14",
+      "time": "23:08:45",
+      "tags": [
+        "backend",
+        "order",
+        "trigger",
+        "validation"
+      ],
+      "summary": "Trigger validasi transisi status order (state-machine) + auto cancel_by/reason; ops override; terbukti valid 204 / invalid 400",
+      "conn": [
+        {
+          "id": "TASK-10210",
+          "type": "relates",
+          "raw": "TASK-10210:relates"
+        }
+      ]
     }
   ]
 }
