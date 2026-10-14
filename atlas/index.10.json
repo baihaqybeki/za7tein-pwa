@@ -2397,6 +2397,28 @@
           "raw": "TASK-10280:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10300",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:29:58",
+      "tags": [
+        "api",
+        "openapi",
+        "flow",
+        "e2e",
+        "swagger"
+      ],
+      "summary": "OpenAPI 0.2.0: x-flows.e2e (9 fase) + ringkasan flow e2e di info.description (tampil di Swagger UI); payment methods terdaftar; live",
+      "conn": [
+        {
+          "id": "TASK-10290",
+          "type": "relates",
+          "raw": "TASK-10290:relates"
+        }
+      ]
     }
   ]
 }
