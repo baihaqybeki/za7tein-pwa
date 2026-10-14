@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.6-draft
+  version: 0.1.7-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -112,7 +112,7 @@ tags:
   - name: Ops
     description: Panel CS — monitoring, putusan level-1, blacklist
   - name: Payments
-    description: Katalog metode bayar (cod, transfer, xendit_va, xendit_qris, wallet)
+    description: Katalog metode bayar (cod, transfer, wallet)
   - name: SuperAdmin
     description: Konsol pemilik platform (non-PWA) — zona, role, pajak, profit, kill switch
   - name: Webhooks
@@ -2305,7 +2305,7 @@ components:
                     variantId: { type: integer, format: int64 }
                     optionId: { type: integer, format: int64 }
               note: { type: ['string', 'null'], example: tanpa bawang }
-        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
+        paymentMethod: { type: string, enum: [cod, transfer, wallet] }
         promoCode: { type: ['string', 'null'] }
         tipJod: { type: number, default: 0 }
         orderNote: { type: ['string', 'null'] }
@@ -2354,7 +2354,7 @@ components:
         promoAmountJod: { type: number }
         totalJod: { type: number }
         zone: { $ref: '#/components/schemas/ZoneCode' }
-        paymentMethod: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
+        paymentMethod: { type: string, enum: [cod, transfer, wallet] }
         paymentStatus: { type: string, enum: [unpaid, pending, paid, failed, refunded] }
         holdStatus:
           type: string
@@ -2635,8 +2635,8 @@ components:
       properties:
         id: { type: integer, format: int64 }
         orderId: { type: integer, format: int64 }
-        provider: { type: string, enum: [xendit, wallet, none] }
-        method: { type: string, enum: [cod, transfer, xendit_va, xendit_qris, wallet] }
+        provider: { type: string, enum: [wallet, none] }
+        method: { type: string, enum: [cod, transfer, wallet] }
         amountJod: { type: number }
         amountIdr: { type: ['number', 'null'], description: Nilai settlement }
         externalId: { type: ['string', 'null'], description: ID transaksi di sisi provider }
@@ -2767,9 +2767,9 @@ components:
       type: object
       description: Katalog metode bayar (tabel payment_methods).
       properties:
-        key: { type: string, enum: [wallet, cod, transfer, xendit_va, xendit_qris] }
+        key: { type: string, enum: [wallet, cod, transfer] }
         label: { type: string }
-        provider: { type: string, enum: [xendit, wallet, none] }
+        provider: { type: string, enum: [wallet, none] }
         kind: { type: string, enum: [prepaid, postpaid] }
         feeJod: { type: number }
         description: { type: ['string', 'null'] }
@@ -2910,6 +2910,37 @@ components:
         avatar: { type: ['string', 'null'] }
         rating: { type: integer }
         text: { type: ['string', 'null'] }
+
+x-flows:
+  note: Alur pesanan end-to-end + penerima notifikasi (turunan docs/design/flows). FE membaca ini untuk urutan layar & panggilan API.
+  order-lifecycle:
+    title: "Order end-to-end (f1 + f11)"
+    steps:
+      - { n: 1, actor: customer, action: checkout / bayar, api: "POST /orders", state: "cart → quotation", note: "hold reserve (COD); otp dibuat BE" }
+      - { n: 2, actor: system, action: pembayaran terkonfirmasi, api: "(internal)", state: "quotation → prepare", note: "event payment_confirmed" }
+      - { n: 3, actor: merchant, action: terima + masak, api: "PATCH /orders?status=prepare", state: "prepare", note: "target: POST /orders/{id}/accept" }
+      - { n: 4, actor: merchant, action: siap & pilih kurir, api: "PATCH /orders?courier_id=", state: "prepare → waitingCourier → waitingDelivery", note: "courier_match" }
+      - { n: 5, actor: courier, action: ambil / berangkat, api: "POST checkpoints", state: "waitingDelivery → delivery", note: "checkpoint picked_up" }
+      - { n: 6, actor: courier, action: tiba, api: "POST checkpoints", state: "delivery", note: "checkpoint arrived (kritis → fallback WA)" }
+      - { n: 7, actor: customer, action: serah terima OTP, api: "POST /rpc/verify_order_otp", state: "delivery → done", note: "hold settle + ledger" }
+      - { n: 8, actor: customer, action: rating & tip, api: "(f19)", state: "done", note: "review_prompt" }
+  notifications:
+    note: "Penerima notifikasi per event (audience). Wajib dipancarkan BE (trigger/job)."
+    matrix:
+      - { event: payment_confirmed, customer: true, merchant: true, courier: false, cs: false }
+      - { event: merchant_ready, customer: true, merchant: false, courier: false, cs: false }
+      - { event: courier_matched, customer: true, merchant: false, courier: true, cs: false }
+      - { event: courier_picked_up, customer: true, merchant: true, courier: false, cs: false }
+      - { event: arrived, customer: true, merchant: true, courier: false, cs: false }
+      - { event: otp_verified, customer: true, merchant: true, courier: true, cs: false }
+      - { event: order_canceled, customer: true, merchant: true, courier: true, cs: true }
+      - { event: dispute_opened, customer: true, merchant: true, courier: true, cs: true }
+      - { event: sla_breached, customer: false, merchant: true, courier: true, cs: true }
+  realtime:
+    topics: [orders, merchants, menus, chats, chat_messages, wallets, wallet_ledgers, disputes, couriers, batches, notifications, checkpoints]
+  payment-methods:
+    allowed: [cod, transfer, wallet]
+    note: "Xendit (VA/QRIS) dihapus dari metode bayar order."
 
 x-traceability:
   description: |
