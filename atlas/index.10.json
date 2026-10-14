@@ -2375,6 +2375,28 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10290",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-15",
+      "time": "01:26:32",
+      "tags": [
+        "payment",
+        "merchant",
+        "dana",
+        "qris",
+        "swagger"
+      ],
+      "summary": "Metode bayar order: Saldo/COD/DANA VA/QRIS (transfer+xendit dihapus) di DB+FE; Swagger 0.1.9 (enum+x-flows) + app redeploy",
+      "conn": [
+        {
+          "id": "TASK-10280",
+          "type": "relates",
+          "raw": "TASK-10280:relates"
+        }
+      ]
     }
   ]
 }
