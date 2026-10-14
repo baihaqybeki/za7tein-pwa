@@ -2,7 +2,7 @@ openapi: 3.1.0
 
 info:
   title: Sa7tein API — Irbid MVP
-  version: 0.1.7-draft
+  version: 0.1.8-draft
   summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -761,7 +761,10 @@ paths:
         '404': { $ref: '#/components/responses/NotFound' }
     patch:
       tags: [Merchants]
-      summary: Perbarui profil/toko saya (merchant)
+      summary: Perbarui profil/toko & JAM OPERASIONAL saya (merchant)
+      description: |
+        Merchant hanya boleh mengubah tokonya sendiri (RLS `merchants_owner`: `user_id = app_uid()`).
+        PostgREST: `PATCH /rest/v1/merchants?id=eq.<id>` dengan `Prefer: return=minimal`.
       requestBody:
         required: true
         content:
@@ -769,9 +772,14 @@ paths:
             schema:
               type: object
               properties:
+                storeName: { type: string }
+                storePhone: { type: string }
+                storeAddress: { type: string }
+                openTime: { type: string, description: 'HH:MM (jam operasional)' }
+                closeTime: { type: string, description: 'HH:MM; tidak boleh sama dengan openTime' }
+                storeStatus: { type: string, enum: [open, busy, closed] }
                 description: { type: string }
                 photo: { type: string, format: uri }
-                available: { type: boolean }
                 deliveryConfig: { $ref: '#/components/schemas/DeliveryConfig' }
       responses:
         '200':
