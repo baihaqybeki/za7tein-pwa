@@ -232,3 +232,90 @@ export function sendChatMessage(
 export function closeStaleChats(): Promise<number | null> {
   return dbRpc<number>('close_stale_chats', {})
 }
+
+// ── AP8 rating & AP9.2 dispute (api-spec §5.9, §5.8) ─────────────────────────
+export function submitReview(input: {
+  orderId: number
+  customerId: number
+  rating: number
+  review?: string
+  merchantId?: number | null
+  menuId?: number | null
+}): Promise<number | null> {
+  return dbRpc<number>('submit_review', {
+    p_order: input.orderId,
+    p_customer: input.customerId,
+    p_rating: input.rating,
+    p_review: input.review ?? null,
+    p_merchant_id: input.merchantId ?? null,
+    p_menu_id: input.menuId ?? null,
+  })
+}
+
+export function replyReview(reviewId: number, body: string): Promise<number | null> {
+  return dbRpc<number>('reply_review', { p_review: reviewId, p_body: body })
+}
+
+export function openDispute(input: {
+  orderId: number
+  filedBy: number
+  filedRole: string
+  category: string
+  reason?: string
+}): Promise<number | null> {
+  return dbRpc<number>('open_dispute', {
+    p_order: input.orderId,
+    p_filed_by: input.filedBy,
+    p_filed_role: input.filedRole,
+    p_category: input.category,
+    p_reason: input.reason ?? null,
+  })
+}
+
+/** p_resolution ∈ refund_customer | refund_order | resettle | no_action */
+export function resolveDispute(
+  disputeId: number,
+  resolution: 'refund_customer' | 'refund_order' | 'resettle' | 'no_action',
+  actorId: number,
+  note?: string,
+  refundJod = 0,
+): Promise<void> {
+  return dbRpc<void>('resolve_dispute', {
+    p_dispute: disputeId,
+    p_resolution: resolution,
+    p_actor: actorId,
+    p_note: note ?? null,
+    p_refund_jod: refundJod,
+  }).then(() => undefined)
+}
+
+export function appealDispute(disputeId: number, actorId: number): Promise<void> {
+  return dbRpc<void>('appeal_dispute', { p_dispute: disputeId, p_actor: actorId }).then(() => undefined)
+}
+
+// ── AP1.3 katalog atribut (api-spec §17.3.6) ─────────────────────────────────
+export interface DbAttribute {
+  id: number
+  name: string
+  display_type: string
+  create_variant: string
+}
+export interface DbAttributeValue {
+  id: number
+  attribute_id: number
+  name: string
+  html_color: string | null
+  price_extra: number | string
+  sort_order: number
+}
+
+export function fetchAttributes(): Promise<DbAttribute[]> {
+  return dbSelect<DbAttribute>('product_attributes', {
+    query: { select: 'id,name,display_type,create_variant', order: 'sort_order.asc' },
+  })
+}
+export function fetchAttributeValues(): Promise<DbAttributeValue[]> {
+  return dbSelect<DbAttributeValue>('product_attribute_values', {
+    query: { select: 'id,attribute_id,name,html_color,price_extra,sort_order', order: 'sort_order.asc' },
+  })
+}

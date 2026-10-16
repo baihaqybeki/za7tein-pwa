@@ -4502,6 +4502,103 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "FEAT-902",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:52:35",
+      "tags": [
+        "backend",
+        "catalog",
+        "api-spec",
+        "ap1.2"
+      ],
+      "summary": "AP1.2: menu_categories + menus.category_id (backfill 20/7/0) + RLS ops; FE fetchMenuCategories baca-saja. Migrasi 39 diterapkan.",
+      "conn": [
+        {
+          "id": "PRD-003",
+          "type": "implements",
+          "raw": "PRD-003:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10400",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:54:41",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/40-catalog-rating-dispute.sql (+165) — write via tool: -- ====================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/40-catalog-rating-dispute.sql"
+    },
+    {
+      "id": "TASK-10401",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:56:55",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/40-catalog-rating-dispute.sql (+53/-44) — edit via tool: -- ── AP9.2 dispute l",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/40-catalog-rating-dispute.sql"
+    },
+    {
+      "id": "TASK-10402",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:59:43",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat >> src/api/mvp.ts <<'EOF'\n\n// ── AP8 rating & AP9.2 dispute (api-spec §5.9, §5.8",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10403",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:00:02",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `40-catalog-rating-dispute.sql` | **AP",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

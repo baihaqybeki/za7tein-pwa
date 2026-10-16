@@ -31,7 +31,7 @@ G3 (emit notif), G9 (realtime), G14 (order_status_history).
 |---|---|---|---|---|---|
 | AP1.1 | `GET /merchants` tag/sort/filter lintas instance | `[BELUM]` (OPEN-25) | `[ADA]` `browse_merchants` (`33`) | Merchan sembunyi bila tak punya kuota & setting "tidak" | AP0 |
 | AP1.2 | Kategori menu sebagai taksonomi ops (DEC-88104) | `[BELUM]` | `[BELUM]` | `menu_categories` + `menus.category_id`; merchant memilih, ops mengelola | AP0 |
-| AP1.3 | Katalog atribut/variant/exclusion (§14) | `[SEBAGIAN]` | `[SEBAGIAN]` | `create_variant` + `display_type` + toggle 3 level | AP0 |
+| AP1.3 | Katalog atribut/variant/exclusion (§14) | `[SEBAGIAN]` | `[ADA]` (`40`) | `create_variant` + `display_type` + toggle 3 level | AP0 |
 | AP1.4 | `menu_variants` binding flow | `[SEBAGIAN]` | — | Variant terpakai di checkout | AP1.3 |
 
 ## AP2 — Uang: model S..Ft + pembayaran + refund (M2, f1/f17)
@@ -92,15 +92,15 @@ G3 (emit notif), G9 (realtime), G14 (order_status_history).
 ## AP8 — Rating & review (M8, f19)
 | # | Item | Spec | Repo | Acceptance criteria | Dep |
 |---|---|---|---|---|---|
-| AP8.1 | `POST /orders/{id}/review` (merchant + menu, tanpa variant) | `[BELUM]` | `[SEBAGIAN]` (tabel) | Rating 1–5; tip 100% ke kurir → ledger | AP2 |
-| AP8.2 | `POST /reviews/{id}/reply` | `[BELUM]` (RATE-1/2) | `[SEBAGIAN]` | RLS owner merchant | AP8.1 |
-| AP8.3 | Agregat `rating_avg`/`rating_count` refresh | `[BELUM]` | `[SEBAGIAN]` | Trigger saat review masuk | AP8.1 |
+| AP8.1 | `POST /orders/{id}/review` (merchant + menu, tanpa variant) | `[BELUM]` | `[ADA]` (`submit_review`,`40`) | Rating 1–5; tip 100% ke kurir → ledger | AP2 |
+| AP8.2 | `POST /reviews/{id}/reply` | `[BELUM]` (RATE-1/2) | `[ADA]` (`reply_review`) | RLS owner merchant | AP8.1 |
+| AP8.3 | Agregat `rating_avg`/`rating_count` refresh | `[BELUM]` | `[ADA]` (trigger `refresh_merchant_rating`) | Trigger saat review masuk | AP8.1 |
 
 ## AP9 — Dispute & punishment (M9, f8/f24)
 | # | Item | Spec | Repo | Acceptance criteria | Dep |
 |---|---|---|---|---|---|
 | AP9.1 | Rule + kompensasi + punishment + snapshot ke order | `[BELUM]` | `[ADA]` (`31`,`33`) | Snapshot saat order dibuat | AP0 |
-| AP9.2 | `POST /disputes` + `resolve` + `appeals` | `[BELUM]` (DSP-1) | `[BELUM]` | 4 resolusi; tiap putusan = 1 entry ledger; freeze + pause auto-settle | AP2, AP9.1 |
+| AP9.2 | `POST /disputes` + `resolve` + `appeals` | `[BELUM]` (DSP-1) | `[ADA]` (`open/resolve/appeal_dispute`) | 4 resolusi; tiap putusan = 1 entry ledger; freeze + pause auto-settle | AP2, AP9.1 |
 | AP9.3 | `incident_resolutions` (G8) | `[BELUM]` | `[ADA]` (migrasi lama) | Jejak tutup insiden CS | AP9.2 |
 | AP9.4 | Batas peran CS vs SA (DEC-2003) | `[ADA]` | `[SEBAGIAN]` | CS menangani; SA hanya eskalasi | AP9.2 |
 
