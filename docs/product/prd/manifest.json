@@ -65,6 +65,16 @@
       "supersedes": "irbid-mvp-v2-2026-09-21",
       "decisionRecord": "versions/sa7tein-mvp-2026-10-11/analysis.md",
       "milestonePlan": "versions/sa7tein-mvp-2026-10-11/milestones.md"
+    },
+    {
+      "id": "api-spec-2026-10-16",
+      "documentVersion": "UNVERIFIED",
+      "status": "proposed",
+      "source": "versions/api-spec-2026-10-16/source.md",
+      "sha256": "8191a9f07aea103c889b1b4490a0fd3710b101b55542c34d33ec7e4cb5512a80",
+      "originalFilename": "API-SPEC (1).md",
+      "decisionRecord": "versions/api-spec-2026-10-16/analysis.md",
+      "milestonePlan": "versions/api-spec-2026-10-16/milestones.md"
     }
   ]
 }

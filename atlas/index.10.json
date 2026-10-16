@@ -4367,6 +4367,84 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/legacy-debt.json"
+    },
+    {
+      "id": "FEAT-901",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:32:16",
+      "tags": [
+        "zones",
+        "leaflet",
+        "superadmin"
+      ],
+      "summary": "Migrasi 38 diterapkan: policy zones_ops + RPC ops_upsert_zone; terverifikasi via sesi ops (cs@sa7tein.app) -> id 1.",
+      "conn": [
+        {
+          "id": "BUG-901",
+          "type": "relates",
+          "raw": "BUG-901:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10395",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:49:14",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/api-spec-2026-10-16/analysis.md (+60) — write via tool: # Ana",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/api-spec-2026-10-16/analysis.md"
+    },
+    {
+      "id": "TASK-10396",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:49:44",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/api-spec-2026-10-16/milestones.md (+136) — write via tool: # ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/product/prd/versions/api-spec-2026-10-16/milestones.md"
+    },
+    {
+      "id": "PRD-003",
+      "type": "requirement",
+      "status": "open",
+      "date": "2026-10-16",
+      "time": "23:50:01",
+      "tags": [
+        "prd",
+        "api-spec",
+        "intake"
+      ],
+      "summary": "Intake API-SPEC 2026-10-16 (1556 baris): kontrak BE live + delta PRD aktif. analysis+milestones AP0-AP11 terisi; revisi proposed, aktif teta",
+      "conn": [
+        {
+          "id": "PRD-002",
+          "type": "relates",
+          "raw": "PRD-002:relates"
+        }
+      ]
     }
   ]
 }
