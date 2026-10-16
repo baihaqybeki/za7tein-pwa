@@ -4831,6 +4831,44 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/45-courier-types.sql"
+    },
+    {
+      "id": "TASK-10415",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:39:44",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-quota-exit-milestones.md (+67) — write via tool: # Milestone: ke",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-quota-exit-milestones.md"
+    },
+    {
+      "id": "TASK-10416",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:40:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-quota-exit-runbook.md (+196) — write via tool: # Runbook: migras",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-quota-exit-runbook.md"
     }
   ]
 }

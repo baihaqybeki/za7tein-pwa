@@ -91,3 +91,5 @@ Auth Supabase, helper `app_*` untuk RLS, snake_case ↔ camelCase di frontend.
 ## Catatan
 
 - Token Supabase sempat terpampang di chat — **rotate** sesudah sesi ini.
+
+> **Kuota:** organisasi Supabase melebihi kuota (proyek dibatasi 21 Okt 2026). Rencana keluar dari kuota (migrasi DB + S3): `docs/backend/MIGRATION-quota-exit-milestones.md` (milestone) + `docs/backend/MIGRATION-quota-exit-runbook.md` (runbook).
