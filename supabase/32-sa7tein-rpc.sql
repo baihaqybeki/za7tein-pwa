@@ -206,7 +206,7 @@ returns bigint language plpgsql as $$
 declare v_courier bigint; v_id bigint;
 begin
   select c.id into v_courier from public.couriers c
-    where c.courier_type = 'partner' and c.availability = 'available'
+    where c.courier_type in ('partner', 'partner_ondemand') and c.availability = 'available'
     order by c.active_order_count asc, c.id asc limit 1;
   if v_courier is null then return null; end if; -- menunggu (OPEN-14 diputuskan: sistem menunggu)
   insert into public.dispatch_assignments (order_id, courier_id, status)
