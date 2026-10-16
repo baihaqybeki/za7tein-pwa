@@ -2085,6 +2085,54 @@ paths:
       responses:
         '201': { description: Refund dibuat }
 
+  # ── RPC logika bisnis PRD aktif (Supabase, migrasi 32) ─────────────────────
+  /rpc/fx_rate_latest:
+    get: { summary: Kurs JOD→IDR terbaru (single numeric), responses: { '200': { description: OK } } }
+  /rpc/price_order:
+    post:
+      summary: Hitung harga order per PRD §16.3 (S−Dm−Da+F+Pc+Ft) + kunci kurs
+      responses:
+        '200': { description: Breakdown JOD + total IDR + rate_locked + rounding }
+  /rpc/reserve_quota:
+    post:
+      summary: Reserve kuota order/order COD (prioritas order → order_cod → none)
+      responses:
+        '200': { description: 'kind: order | order_cod | none | null (null = order tak boleh dibuat)' }
+  /rpc/consume_quota:
+    post: { summary: Konsumsi kuota saat order selesai, responses: { '200': { description: OK } } }
+  /rpc/release_quota:
+    post: { summary: Lepas reserve kuota saat batal/tolak, responses: { '200': { description: OK } } }
+  /rpc/settle_order:
+    post:
+      summary: Settlement order selesai (§16.4) — ledger merchant/kurir/aplikator idempotent
+      responses:
+        '200': { description: Entri enterprise_ledger ditulis }
+  /rpc/assign_batch:
+    post:
+      summary: Assign order ke batch kurir inhouse (maks 24, §9.6)
+      responses:
+        '200': { description: batch_id }
+  /rpc/dispatch_partner:
+    post:
+      summary: Dispatch kurir partner Quick (reserve sejak assignment, §9.3-9.5)
+      responses:
+        '200': { description: assignment_id atau null bila menunggu }
+  /rpc/respond_assignment:
+    post:
+      summary: Kurir partner approve/reject (reject wajib alasan, COU-18)
+      responses:
+        '200': { description: OK }
+  /rpc/create_refund:
+    post:
+      summary: Buat refund (§16.6) — DANA atau bank BI-FAST
+      responses:
+        '201': { description: refund_id }
+  /rpc/check_coverage:
+    post:
+      summary: Cek coverage merchant terhadap titik (radius/polygon, §9.1)
+      responses:
+        '200': { description: boolean }
+
 components:
   securitySchemes:
     bearerAuth:

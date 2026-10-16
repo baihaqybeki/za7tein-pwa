@@ -3117,6 +3117,101 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10333",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:03:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/32-sa7tein-rpc.sql (+272) — write via tool: -- ===============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/32-sa7tein-rpc.sql"
+    },
+    {
+      "id": "TASK-10334",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:05:15",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+51/-3) — edit via tool: '201': { description: Refund dibuat",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10335",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:05:44",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts (+102) — write via tool: ts: import { dbRpc } from './db'",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts"
+    },
+    {
+      "id": "TASK-10336",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:05:59",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `32-sa7tein-rpc.sql` | **RPC logika bi",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10337",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:06:32",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnode -e \"const y=require('js-yaml'),fs=require('fs');try{y.load(fs.readFileSync('doc",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
