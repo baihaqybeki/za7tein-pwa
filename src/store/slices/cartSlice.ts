@@ -59,7 +59,7 @@ const initialState: CartState = {
   ],
   addresses: mockUser.addresses,
   selectedAddressId: 'tower-a',
-  selectedPaymentId: 'wallet',
+  selectedPaymentId: 'dana_balance',
   transferProof: null,
   // Order demo dimulai dari tahap yang sama dengan yang dilihat merchant
   // ('masuk' di `merchantOrders` SA-1041) dan kurir ('masuk', belum diambil).
@@ -135,7 +135,7 @@ const cartSlice = createSlice({
     setPayment(state, action: PayloadAction<string>) {
       state.selectedPaymentId = action.payload
       // Bukti transfer hanya relevan untuk metode transfer.
-      if (action.payload !== 'dana_va') state.transferProof = null
+      if (action.payload !== 'qris') state.transferProof = null
     },
     setTransferProof(state, action: PayloadAction<string | null>) {
       state.transferProof = action.payload

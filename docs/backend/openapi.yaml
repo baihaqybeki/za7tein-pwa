@@ -1,9 +1,10 @@
 openapi: 3.1.0
 
 info:
-  title: Sa7tein API — Irbid MVP
-  version: 0.2.1-draft
-  summary: Kontrak REST + Realtime untuk platform pesan-antar Sa7tein (Irbid, Jordan).
+  title: Sa7tein API — Marketplace MVP
+  x-prd-revision: sa7tein-mvp-2026-10-11
+  version: 0.3.0-draft
+  summary: Kontrak REST + Realtime untuk marketplace pesan-antar Sa7tein (Jordan, harga JOD, transaksi IDR).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
     bisa ditinjau lebih dulu. Sumber:
@@ -12,6 +13,11 @@ info:
     - `za7tein-pwa/docs/product/prd/decision-irbid-mvp.md` — keputusan PO
     - `za7tein-pwa/docs/design/flows/INDEX.json` — 24 flow (peta `event → entity`)
     - Milestone: `docs/backend/MILESTONES.md` (M7)
+
+    **Revisi aktif 2026-10-16:** `sa7tein-mvp-2026-10-11` (marketplace Yordania, JOD, Regular/Quick,
+    DANA, kuota langganan). Backend tetap **Supabase** — deviasi disetujui dari Cloudflare Workers/DO
+    (ARC-01..13, ditandai `UNRESOLVED`). Peta: `docs/backend/PRD-MAPPING-sa7tein-mvp.md`, migrasi
+    `supabase/31-sa7tein-mvp.sql`. Metode bayar: `qris | dana_balance | cod`.
 
     Aturan yang mengikat kontrak ini:
 
@@ -47,7 +53,7 @@ info:
     0. **Auth (f21)** — `POST /auth/v1/token` → `GET users?auth_user_id=eq.<uuid>` (peta ke `users.id`).
     1. **Discovery (f23/f20)** — `POST /rpc/search_merchants` → `GET menus` → `POST /rpc/resolve_coverage`.
     2. **Checkout (f1/f4)** — `POST orders` (`cart → quotation`, snapshot harga/fee/zone, **hold reserve** bila COD).
-    3. **Pembayaran (f24)** — pilih `wallet | cod | dana_va | qris` → `prepare`, event `payment_confirmed`.
+    3. **Pembayaran (f24)** — pilih `qris | dana_balance | cod` → `prepare`, event `payment_confirmed`.
     4. **Merchant & batch (f12)** — `PATCH orders {status:'prepare'}` (accept) → `PATCH orders {courier_id}` (`courier_matched`).
     5. **Pengantaran (f13/f5)** — `POST checkpoints` (`picked_up` → `arrived`) → customer `POST /rpc/my_order_otp` → kurir `POST /rpc/verify_order_otp` (`delivery → done`, **hold settle** + ledger).
     6. **Review (f19)** — `POST rating_reviews` (+ tip) → merchant `POST review_replies`.
@@ -130,7 +136,7 @@ tags:
       Alur **end-to-end** Sa7tein (baca ini dulu). Ringkas: Auth → Discovery → Checkout → Payment → Merchant/Batch → Delivery/OTP → Review → Dispute/CS.
       Detail tiap langkah ada di `GET /flow`.
   - name: Payments
-    description: Katalog metode bayar (wallet, cod, dana_va, qris)
+    description: Katalog metode bayar (qris, dana_balance, cod)
   - name: SuperAdmin
     description: Konsol pemilik platform (non-PWA) — zona, role, pajak, profit, kill switch
   - name: Webhooks
@@ -155,7 +161,7 @@ paths:
 
         **2. Checkout (f1/f4)** — `POST orders` (`cart → quotation`; snapshot harga/fee/zone; hold reserve bila COD).
 
-        **3. Pembayaran (f24)** — pilih `wallet | cod | dana_va | qris` → `prepare`; event `payment_confirmed`.
+        **3. Pembayaran (f24)** — pilih `qris | dana_balance | cod` → `prepare`; event `payment_confirmed`.
 
         **4. Merchant & batch (f12)** — `PATCH orders {status:'prepare'}` (accept) → `PATCH orders {courier_id}` (`courier_matched`).
 
@@ -2007,6 +2013,78 @@ paths:
         '200': { description: Diterima }
         '401': { $ref: '#/components/responses/Unauthorized' }
 
+  # ── PRD aktif `sa7tein-mvp-2026-10-11` (Supabase, deviasi ARC-01..13) ────────
+  /exchange-rates/latest:
+    get:
+      summary: Kurs JOD→IDR terbaru (PRD §16.2, OPEN-02)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base: { type: string, example: JOD }
+                  quote: { type: string, example: IDR }
+                  rate: { type: number, example: 23000 }
+                  effective_on: { type: string, format: date }
+                  source: { type: string }
+  /quota-packages:
+    get:
+      summary: Paket kuota order & kuota order COD (PRD §17, OPS-09)
+      responses:
+        '200': { description: Daftar paket kuota }
+  /quota-subscriptions:
+    get:
+      summary: Langganan kuota merchant aktif (PRD §17)
+      responses:
+        '200': { description: Daftar langganan; kuota tersedia = total - used - reserved }
+    post:
+      summary: Beli paket kuota (lewat QRIS atau saldo DANA merchant; transaction fee 1,5% untuk QRIS)
+      responses:
+        '201': { description: Langganan dibuat }
+  /marketing-programs:
+    get:
+      summary: Program marketing merchant & aplikator (ala Odoo, PRD §15, OPEN-23)
+      responses:
+        '200': { description: Daftar program; `is_stackable` menandai boleh digabung }
+    post:
+      summary: Merchant membuat program marketing sendiri
+      responses:
+        '201': { description: Program dibuat }
+  /dispute-rules:
+    get:
+      summary: Rule kompensasi & punishment yang dikelola ops (PRD §18, OPEN-17/18/19)
+      responses:
+        '200': { description: Daftar rule aktif }
+  /merchants/{id}/dispute-rules:
+    get:
+      summary: Rule yang dipilih merchant (multi-select, di-snapshot ke order)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        '200': { description: Daftar rule merchant }
+  /coverage-zones:
+    get:
+      summary: Coverage merchant (radius/polygon) + delivery fee (PRD §9.1, MER-04)
+      responses:
+        '200': { description: Daftar coverage zone }
+  /dispatch-assignments:
+    get:
+      summary: Assignment kurir partner Quick (reserve→approve/reject, PRD §9.3-9.5)
+      responses:
+        '200': { description: Daftar assignment }
+  /refunds:
+    get:
+      summary: Refund order (DANA atau bank BI-FAST untuk pending refund, PRD §16.6)
+      responses:
+        '200': { description: Daftar refund }
+    post:
+      summary: Customer mengisi bank + rekening untuk pending refund
+      responses:
+        '201': { description: Refund dibuat }
+
 components:
   securitySchemes:
     bearerAuth:
@@ -2362,7 +2440,7 @@ components:
                     variantId: { type: integer, format: int64 }
                     optionId: { type: integer, format: int64 }
               note: { type: ['string', 'null'], example: tanpa bawang }
-        paymentMethod: { type: string, enum: [wallet, cod, dana_va, qris] }
+        paymentMethod: { type: string, enum: [qris, dana_balance, cod] }
         promoCode: { type: ['string', 'null'] }
         tipJod: { type: number, default: 0 }
         orderNote: { type: ['string', 'null'] }
@@ -2411,7 +2489,7 @@ components:
         promoAmountJod: { type: number }
         totalJod: { type: number }
         zone: { $ref: '#/components/schemas/ZoneCode' }
-        paymentMethod: { type: string, enum: [wallet, cod, dana_va, qris] }
+        paymentMethod: { type: string, enum: [qris, dana_balance, cod] }
         paymentStatus: { type: string, enum: [unpaid, pending, paid, failed, refunded] }
         holdStatus:
           type: string
@@ -2693,7 +2771,7 @@ components:
         id: { type: integer, format: int64 }
         orderId: { type: integer, format: int64 }
         provider: { type: string, enum: [wallet, dana, none] }
-        method: { type: string, enum: [wallet, cod, dana_va, qris] }
+        method: { type: string, enum: [qris, dana_balance, cod] }
         amountJod: { type: number }
         amountIdr: { type: ['number', 'null'], description: Nilai settlement }
         externalId: { type: ['string', 'null'], description: ID transaksi di sisi provider }
@@ -2824,7 +2902,7 @@ components:
       type: object
       description: Katalog metode bayar (tabel payment_methods).
       properties:
-        key: { type: string, enum: [wallet, cod, dana_va, qris] }
+        key: { type: string, enum: [qris, dana_balance, cod] }
         label: { type: string }
         provider: { type: string, enum: [wallet, dana, none] }
         kind: { type: string, enum: [prepaid, postpaid] }
@@ -2990,8 +3068,8 @@ x-flows:
           - { actor: system, api: "(internal)", state: "-", note: "otp acak dibuat; fee 0,37 + ongkir" }
       - phase: "3. Payment (f24)"
         steps:
-          - { actor: customer, api: "PATCH /rest/v1/orders {payment_method}", state: "quotation → prepare", note: "wallet/cod/dana_va/qris; event payment_confirmed" }
-          - { actor: customer, api: "(dana_va/qris) bayar", state: "-", note: "VA otomatis / QRIS; wallet & COD tanpa antar-provider" }
+          - { actor: customer, api: "PATCH /rest/v1/orders {payment_method}", state: "quotation → prepare", note: "qris/dana_balance/cod; event payment_confirmed" }
+          - { actor: customer, api: "(qris/dana_balance) bayar", state: "-", note: "QRIS dinamis 30 menit / saldo DANA; COD hanya bila kuota COD tersedia" }
       - phase: "4. Merchant: accept & batch (f12)"
         steps:
           - { actor: merchant, api: "PATCH /rest/v1/orders {status:'prepare'}", state: "prepare", note: "target POST /orders/{id}/accept; validasi transisi aktif" }

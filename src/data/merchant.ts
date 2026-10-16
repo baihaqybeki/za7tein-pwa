@@ -98,28 +98,23 @@ export const merchantDeliveryConfig: MerchantDeliveryConfig = {
 }
 
 /**
- * Metode bayar PRD v2 — Saldo Sa7tein, COD, DANA Virtual Account, QRIS.
+ * Metode bayar PRD aktif (`sa7tein-mvp-2026-10-11` §16.2): QRIS, saldo DANA, COD.
  */
 export const PAYMENT_METHODS: PaymentMethod[] = [
   {
-    id: 'wallet',
-    label: 'Saldo Sa7tein',
-    description: 'Bayar dari saldo wallet Sa7tein — top-up lewat DANA (VA/QRIS).',
+    id: 'qris',
+    label: 'QRIS',
+    description: 'Scan QR dinamis (DANA, 30 menit) pakai aplikasi bank atau e-wallet apa pun. Dikenai transaction fee 1,5%.',
+  },
+  {
+    id: 'dana_balance',
+    label: 'Bayar pakai DANA',
+    description: 'Bayar dari saldo akun DANA. Tanpa transaction fee.',
   },
   {
     id: 'cod',
-    label: 'COD — Bayar di Tempat',
-    description: 'Saldo dipotong (hold) saat kurir match, settle setelah OTP.',
-  },
-  {
-    id: 'dana_va',
-    label: 'DANA Virtual Account',
-    description: 'Nomor VA dibuat otomatis; bayar dari m-banking atau e-wallet apa pun.',
-  },
-  {
-    id: 'qris',
-    label: 'QRIS',
-    description: 'Scan kode QR pakai aplikasi e-wallet atau m-banking apa pun.',
+    label: 'COD — Tunai',
+    description: 'Bayar tunai JOD. Hanya tersedia bila merchant punya kuota order COD.',
   },
 ]
 

@@ -208,8 +208,8 @@ export interface Card {
   image: string
 }
 
-/** Metode bayar PRD v2: `wallet` (top-up Xendit) + channel VA/QRIS. `cod` & `transfer` legacy. */
-export type PaymentMethodId = 'wallet' | 'cod' | 'dana_va' | 'qris'
+/** Metode bayar PRD aktif (`sa7tein-mvp-2026-10-11` §16.2): QRIS, saldo DANA, COD (COD wajib kuota). */
+export type PaymentMethodId = 'qris' | 'dana_balance' | 'cod'
 
 export interface PaymentMethod {
   id: PaymentMethodId

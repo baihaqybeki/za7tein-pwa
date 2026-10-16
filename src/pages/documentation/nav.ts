@@ -42,4 +42,5 @@ export const DOC_NAV: DocNavItem[] = [
   { num: '35', id: 'auth', label: 'Layar Masuk & Daftar' },
   { num: '36', id: 'changelog', label: 'Perbaikan Integrasi & CRUD' },
   { num: '37', id: 'app-polish', label: 'Perbaikan Bentuk App' },
+  { num: '38', id: 'prd-revision', label: 'Revisi PRD Aktif' },
 ]

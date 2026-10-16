@@ -465,7 +465,7 @@ export function orderStatusLabel(status: MerchantOrderStatus): string {
         Halaman <code className="doc-inline">/merchant/reviews</code> memberi
         pemilik toko membaca ulasan pembeli per hidangan dan membalasnya. Ini
         <strong> di luar PRD aktif</strong>: tidak ada requirement <code className="doc-inline">R-*</code>
-        di <code className="doc-inline">irbid-mvp-v2-2026-09-21</code> maupun
+        di <code className="doc-inline">irbid-mvp-v2-2026-09-21</code> (kini <code className="doc-inline">superseded</code>) maupun
         milestone <code className="doc-inline">M0–M11</code> di
         <code className="doc-inline">docs/product/prd/versions/irbid-mvp-v2-2026-09-21/milestones.md</code>
         yang menyebut ulasan atau respons pembeli. Karena itu item ini ditandai

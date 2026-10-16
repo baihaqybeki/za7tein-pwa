@@ -47,6 +47,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `31-sa7tein-mvp.sql` | **Pemetaan PRD aktif `sa7tein-mvp-2026-10-11`** — kurs (`effective_on`), kurir inhouse/partner, `orders.delivery_type`+`quota_kind_used`+komponen harga §16.3, batch cap 24, metode bayar `qris`/`dana_balance`/`cod`, `coverage_zones`, `dispatch_assignments`, `quota_packages`/`quota_subscriptions`, `marketing_programs`/`_rules`/`_rewards`, `dispute_rules`/`merchant_dispute_rules`/`punishments`, `refunds`, `enterprise_ledger`. Deviasi ARC-01..13 (Supabase, bukan Cloudflare/DO) ditandai UNRESOLVED. |
 | `30-payment-methods-dana.sql` | **Metode bayar order: Saldo/COD/DANA VA/QRIS** (transfer & Xendit dihapus) + katalog + enum. |
 | `29-remove-xendit-hours.sql` | **Hapus Xendit dari metode bayar order** (data→wallet, enum cod/transfer/wallet, katalog) + constraint jam operasional merchant. |
 | `28-search-merchants.sql` | **Pencarian merchant** — RPC `search_merchants(query, min_rating, price_min, price_max)` untuk filter nama/rating/harga di beranda. |

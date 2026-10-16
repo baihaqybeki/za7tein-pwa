@@ -3,8 +3,11 @@
 Dokumen perencanaan untuk diagram flow bisnis (archify). Peta arsitektur sudah jadi:
 `docs/design/app-map/`. **Status: flow F1–F24 terdaftar di `INDEX.json`** — F23 (`f23-customer-discovery`) masih `proposed` karena requirement PRD-nya belum ditulis; F24 (`f24-payment-methods`) baru (PO 2026-09-25) — lihat `INDEX.json` / `index.html`.
 
-Sumber: PRD aktif `irbid-mvp-v2-2026-09-21`
-(`docs/product/prd/versions/irbid-mvp-v2-2026-09-21/{source,analysis,milestones}.md`).
+Sumber: PRD aktif `sa7tein-mvp-2026-10-11`
+(`docs/product/prd/versions/sa7tein-mvp-2026-10-11/{analysis,milestones}.md`, `source.pdf`;
+keputusan `docs/product/prd/decision-sa7tein-mvp.md`). Revisi ini menggantikan `irbid-mvp-v2-2026-09-21`
+(2026-10-16). **CATATAN MIGRASI:** flow yang ada masih menggambarkan aturan PRD lama; pemetaan ke aturan
+marketplace/DANA/kuota PRD aktif berjalan bertahap mengikuti `milestones.md` M0–M14.
 Setiap flow wajib merujuk requirement `R-*` dan milestone. Item `UNRESOLVED` tetap
 ditandai `UNRESOLVED` di diagram — jangan diisi tebakan.
 

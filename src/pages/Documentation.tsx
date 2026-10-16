@@ -39,6 +39,7 @@ import { MotionIconsSection } from './documentation/sections/MotionIconsSection'
 import { AuthSection } from './documentation/sections/AuthSection'
 import { AppPolishSection } from './documentation/sections/AppPolishSection'
 import { ChangelogSection } from './documentation/sections/ChangelogSection'
+import { PrdRevisionSection } from './documentation/sections/PrdRevisionSection'
 
 const SECTIONS = [
   IntroductionSection,
@@ -78,6 +79,7 @@ const SECTIONS = [
   AuthSection,
   ChangelogSection,
   AppPolishSection,
+  PrdRevisionSection,
 ]
 
 // `SECTIONS` dan `DOC_NAV` (src/pages/documentation/nav.ts) dipakai berpasangan:

@@ -2,7 +2,7 @@
 
 `manifest.json` adalah satu-satunya penunjuk revisi aktif. Semua PDF disimpan di `versions/<id>/source.pdf`. **Label versi yang tercetak di PDF bukan identitas unik**: dua PDF saat ini sama-sama menyebut v1.1. Identitas repo memakai `id` unik, status, sumber, dan rantai `supersedes`.
 
-PRD aktif adalah `irbid-mvp-v2-2026-09-21`. Kode saat ini masih banyak mengikuti `radius-mvp-legacy`; jangan menyebut fitur lama sebagai requirement aktif hanya karena sudah ada di UI. Keputusan ini didokumentasikan di `decision-irbid-mvp.md`.
+PRD aktif adalah `sa7tein-mvp-2026-10-11` (marketplace Yordania, JOD, Regular/Quick, DANA, kuota langganan; backend tetap Supabase sebagai deviasi disetujui). Kode saat ini masih banyak mengikuti `radius-mvp-legacy`/`irbid-mvp-v2-2026-09-21`; jangan menyebut fitur lama sebagai requirement aktif hanya karena sudah ada di UI. Keputusan ini didokumentasikan di `decision-sa7tein-mvp.md`.
 
 ## Menambah PRD atau BRS
 

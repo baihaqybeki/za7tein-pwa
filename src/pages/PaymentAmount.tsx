@@ -42,7 +42,7 @@ export default function PaymentAmount() {
   const fee = address ? deliveryFeeFor(address) : 0
   const total = subtotal + fee + PLATFORM_FEE_CUSTOMER_IDR
   const method = PAYMENT_METHODS.find((m) => m.id === paymentId) ?? PAYMENT_METHODS[0]
-  const needsProof = method.id === 'dana_va'
+  const needsProof = false
   const walletAvailable = useAppSelector((s) => s.wallet.balance.available)
   const gated = needsTopUpGate(walletAvailable)
   /**

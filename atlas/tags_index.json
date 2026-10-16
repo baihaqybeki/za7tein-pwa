@@ -11237,6 +11237,134 @@
     {
       "id": "TASK-10285",
       "shard": 10
+    },
+    {
+      "id": "TASK-10301",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10302",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10303",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10304",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10305",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10306",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10307",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10308",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10309",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10310",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10311",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10312",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10313",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10314",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10315",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10316",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10317",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10318",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10319",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10320",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10321",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10322",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10323",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10324",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10325",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10326",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10327",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10328",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10329",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10330",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10331",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10332",
+      "shard": 10
     }
   ],
   "docs": [
@@ -13457,6 +13585,18 @@
     {
       "id": "TASK-10285",
       "shard": 10
+    },
+    {
+      "id": "TASK-10315",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10326",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10331",
+      "shard": 10
     }
   ],
   "scaffold": [
@@ -13757,6 +13897,10 @@
     {
       "id": "NEG-010",
       "shard": 6
+    },
+    {
+      "id": "DEC-1050",
+      "shard": 10
     }
   ],
   "catalog": [
@@ -13915,6 +14059,18 @@
     {
       "id": "DEC-1042",
       "shard": 9
+    },
+    {
+      "id": "PRD-002",
+      "shard": 10
+    },
+    {
+      "id": "DEC-1050",
+      "shard": 10
+    },
+    {
+      "id": "TASK-901",
+      "shard": 10
     }
   ],
   "versioning": [
@@ -13969,6 +14125,10 @@
     {
       "id": "DEC-1043",
       "shard": 9
+    },
+    {
+      "id": "TASK-901",
+      "shard": 10
     }
   ],
   "conformance": [
@@ -14657,6 +14817,10 @@
     {
       "id": "TASK-257",
       "shard": 1
+    },
+    {
+      "id": "TASK-901",
+      "shard": 10
     }
   ],
   "po-2026-09-22": [
@@ -15314,6 +15478,14 @@
     },
     {
       "id": "TASK-10220",
+      "shard": 10
+    },
+    {
+      "id": "DEC-1050",
+      "shard": 10
+    },
+    {
+      "id": "DOC-901",
       "shard": 10
     }
   ],
@@ -17995,6 +18167,10 @@
     {
       "id": "TASK-10190",
       "shard": 10
+    },
+    {
+      "id": "DOC-901",
+      "shard": 10
     }
   ],
   "append-only": [
@@ -18438,6 +18614,24 @@
   "qris": [
     {
       "id": "TASK-10290",
+      "shard": 10
+    }
+  ],
+  "intake": [
+    {
+      "id": "PRD-002",
+      "shard": 10
+    }
+  ],
+  "sa7tein-mvp-2026-10-11": [
+    {
+      "id": "PRD-002",
+      "shard": 10
+    }
+  ],
+  "mapping": [
+    {
+      "id": "DOC-901",
       "shard": 10
     }
   ]

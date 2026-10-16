@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "activeRevision": "irbid-mvp-v2-2026-09-21",
+  "activeRevision": "sa7tein-mvp-2026-10-11",
   "revisions": [
     {
       "id": "radius-mvp-legacy",
@@ -36,11 +36,12 @@
     {
       "id": "irbid-mvp-v2-2026-09-21",
       "documentVersion": "UNVERIFIED",
-      "status": "active",
+      "status": "superseded",
       "source": "versions/irbid-mvp-v2-2026-09-21/source.md",
       "sha256": "3f28ece0862c0b8bb03ce3d96864cfe6c2adce82b3371810ae245e9cd416f234",
       "originalFilename": "irbid-mvp-v2-2026-09-21.md",
       "supersedes": "irbid-mvp-2026-09-12",
+      "supersededBy": "sa7tein-mvp-2026-10-11",
       "decisionRecord": "versions/irbid-mvp-v2-2026-09-21/analysis.md",
       "milestonePlan": "versions/irbid-mvp-v2-2026-09-21/milestones.md"
     },
@@ -53,6 +54,17 @@
       "originalFilename": "brs-rating-review.md",
       "decisionRecord": "versions/rating-review-2026-09-22/analysis.md",
       "milestonePlan": "versions/rating-review-2026-09-22/milestones.md"
+    },
+    {
+      "id": "sa7tein-mvp-2026-10-11",
+      "documentVersion": "UNVERIFIED",
+      "status": "active",
+      "source": "versions/sa7tein-mvp-2026-10-11/source.pdf",
+      "sha256": "00427dec72749d6a67e8f3bedec7346ee00f44641d1a1e52c9869b0b45d7cd6c",
+      "originalFilename": "PRD sa7tein — Online Food Marketplace & Delivery (MVP) (1).pdf",
+      "supersedes": "irbid-mvp-v2-2026-09-21",
+      "decisionRecord": "versions/sa7tein-mvp-2026-10-11/analysis.md",
+      "milestonePlan": "versions/sa7tein-mvp-2026-10-11/milestones.md"
     }
   ]
 }

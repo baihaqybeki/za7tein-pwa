@@ -9,7 +9,7 @@ export function CourierDesignSection() {
         <code className="doc-inline">F13</code>{' '}
         (<code className="doc-inline">docs/design/flows/f13-courier-view/</code>) and
         milestones M4/M5 of the active PRD{' '}
-        <code className="doc-inline">irbid-mvp-v2-2026-09-21</code>. The brief is
+        <code className="doc-inline">sa7tein-mvp-2026-10-11</code>. The brief is
         "minimalis satu tangan": one column, one primary action per screen, no tables.
       </p>
       <h3 className="doc-h3">Two axes, one order</h3>

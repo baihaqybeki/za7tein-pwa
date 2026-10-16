@@ -7,7 +7,7 @@ export function IntroductionSection() {
         <strong style={{ color: 'var(--text-primary)' }}>
           Sa7tein
         </strong>
-         is a React 19 + Vite UI/UX showcase with mock data. Product authority lives in the PRD manifest; the current active revision is <code>irbid-mvp-v2-2026-09-21</code> (targeting the Irbid MVP), while some screens still reflect the earlier radius-based PRD.
+         is a React 19 + Vite UI/UX showcase with mock data. Product authority lives in the PRD manifest; the current active revision is <code>sa7tein-mvp-2026-10-11</code> (Jordan marketplace: JOD pricing, Regular/Quick delivery, DANA, quota subscriptions), while some screens still reflect the earlier Irbid/radius PRD. Backend is kept on Supabase as an approved deviation from the PRD's Cloudflare Workers/DO architecture.
       </p>
       <p className="doc-p">
         Product versions and milestone decisions: <code>docs/product/prd/manifest.json</code> and <code>docs/product/prd/</code>. Mandatory UI/UX rules: <code>docs/design/DNA.md</code>. Backend integration is documented as a future handoff, not implemented here.

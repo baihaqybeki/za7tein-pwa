@@ -140,7 +140,7 @@ function repairPersistedCart() {
       zonesOutdated ||
       cart.transferProof === undefined ||
       legacyItems ||
-      !['wallet', 'cod', 'dana_va', 'qris'].includes(cart.selectedPaymentId)
+      !['qris', 'dana_balance', 'cod'].includes(cart.selectedPaymentId)
 
     if (!needsRepair) return
 
@@ -160,9 +160,9 @@ function repairPersistedCart() {
       selectedAddressId: mockUser.addresses.some((a) => a.id === cart.selectedAddressId)
         ? cart.selectedAddressId
         : mockUser.addresses[0].id,
-      selectedPaymentId: ['wallet', 'cod', 'dana_va', 'qris'].includes(cart.selectedPaymentId)
+      selectedPaymentId: ['qris', 'dana_balance', 'cod'].includes(cart.selectedPaymentId)
         ? cart.selectedPaymentId
-        : 'wallet',
+        : 'dana_balance',
     })
     const meta = JSON.parse(outer._persist ?? '{}')
     outer._persist = JSON.stringify({ ...meta, version: 2 })

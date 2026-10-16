@@ -1,5 +1,5 @@
-// Metode bayar (PRD v2): saldo Sa7tein, COD, dan transfer manual legacy.
-import { ChevronLeft, CheckCircle2, Banknote, Landmark, QrCode, Wallet } from 'lucide-react'
+// Metode bayar PRD aktif (`sa7tein-mvp-2026-10-11` §16.2): QRIS, saldo DANA, COD.
+import { ChevronLeft, CheckCircle2, Banknote, QrCode, Wallet } from 'lucide-react'
 
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
@@ -11,10 +11,9 @@ import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { setPayment } from '../store/slices/cartSlice'
 
 const METHOD_ICONS: Record<string, typeof Wallet> = {
-  wallet: Wallet,
-  cod: Banknote,
-  dana_va: Landmark,
   qris: QrCode,
+  dana_balance: Wallet,
+  cod: Banknote,
 }
 
 export default function PaymentSelection() {
