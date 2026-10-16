@@ -3827,6 +3827,32 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/33-sa7tein-mvp-2.sql"
+    },
+    {
+      "id": "TASK-903",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:45:11",
+      "tags": [
+        "deploy",
+        "vercel",
+        "e2e",
+        "sa7tein-mvp-2026-10-11"
+      ],
+      "summary": "e2e API 18/18 PASS; wiring FE merchant browse; redeploy app sa7tein-pwa-five.vercel.app + api docs sa7tein-api.vercel.app (openapi 0.3.0-dra",
+      "conn": [
+        {
+          "id": "TASK-902",
+          "type": "relates",
+          "raw": "TASK-902:relates"
+        },
+        {
+          "id": "PRD-002",
+          "type": "relates",
+          "raw": "PRD-002:relates"
+        }
+      ]
     }
   ]
 }
