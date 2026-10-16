@@ -4599,6 +4599,63 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10404",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:01:20",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/41-payment-expiry-jobs.sql (+65) — write via tool: -- ========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/41-payment-expiry-jobs.sql"
+    },
+    {
+      "id": "TASK-10405",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:02:20",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat >> src/api/mvp.ts <<'EOF'\n\n// ── AP2.5/AP10.5 job (api-spec §17.6, §8) ─────────",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10406",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:02:43",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `41-payment-expiry-jobs.sql` | **AP2.5",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

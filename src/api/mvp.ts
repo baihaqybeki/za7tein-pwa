@@ -319,3 +319,11 @@ export function fetchAttributeValues(): Promise<DbAttributeValue[]> {
     query: { select: 'id,attribute_id,name,html_color,price_extra,sort_order', order: 'sort_order.asc' },
   })
 }
+
+// ── AP2.5/AP10.5 job (api-spec §17.6, §8) ────────────────────────────────────
+export function runCronJobs(): Promise<Record<string, number> | null> {
+  return dbRpc<Record<string, number>>('run_cron_jobs', {})
+}
+export function expireUnpaidOrders(): Promise<number | null> {
+  return dbRpc<number>('expire_unpaid_orders', {})
+}

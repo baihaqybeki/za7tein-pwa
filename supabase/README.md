@@ -47,6 +47,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `41-payment-expiry-jobs.sql` | **AP2.5/AP3.4/AP10.5** — `orders.payment_expires_at` (30 mnt) + `expire_unpaid_orders`; `quota_low_alerts`; `run_cron_jobs` (pintu job: expire + close_stale_chats + quota alert). |
 | `40-catalog-rating-dispute.sql` | **AP1.3/AP8/AP9.2** — `product_attributes`/`product_attribute_values`/`menu_attribute_lines` (+seed Ukuran & Level Pedas); RPC `submit_review`/`reply_review` + trigger `refresh_merchant_rating`; `open_dispute`/`resolve_dispute`/`appeal_dispute` (selaras enum disputes). |
 | `39-menu-categories.sql` | **Kategori menu = taksonomi ops (AP1.2)** — `menu_categories` + `menus.category_id` (FK) + backfill dari teks; RLS baca publik, tulis ops. |
 | `38-zones-master.sql` | **Master zona** — policy tulis ops pada `zones` + RPC `ops_upsert_zone(code,name,polygon,id)` (konsol SA menyimpan poligon hasil adjust di peta Leaflet). |
