@@ -69,8 +69,7 @@ export async function updateMyMerchant(patch: {
   }
 }
 
-/** Resolve `users.id` (bigint) dari sesi auth (uuid) — untuk RLS & push. */
-export async function resolveMyUserId(): Promise<number | null> {
+/** Resolve `users.id` (bigint) dari sesi auth (uuid) — untuk RLS & push. */export async function resolveMyUserId(): Promise<number | null> {
   const s = getCurrentSession()
   if (!s) return null
   const rows = await dbSelect<{ id: number }>('users', {
@@ -179,5 +178,36 @@ export async function pushNotificationRow(row: {
     body: row.body ?? null,
     sound: row.sound ?? 'default',
     audience: row.audience ?? null,
+  })
+}
+
+/** Master zona (tabel `zones`). `polygon` = array [[lat,lng], ...]. */
+export interface DbZone {
+  id: number
+  code: string
+  name: string
+  polygon: [number, number][]
+}
+
+/** Baca master zona (publik). */
+export function fetchZones(): Promise<DbZone[]> {
+  return dbSelect<DbZone>('zones', { query: { select: 'id,code,name,polygon', order: 'id.asc' } })
+}
+
+/**
+ * Simpan/perbarui master zona lewat RPC `ops_upsert_zone` (Super Admin).
+ * Mengembalikan id zona, atau null bila gagal.
+ */
+export async function upsertZone(input: {
+  id?: number
+  code: string
+  name: string
+  polygon: [number, number][]
+}): Promise<number | null> {
+  return dbRpc<number>('ops_upsert_zone', {
+    p_code: input.code,
+    p_name: input.name,
+    p_polygon: input.polygon,
+    p_id: input.id ?? null,
   })
 }

@@ -1,23 +1,22 @@
 import { RotateCcw, Save } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 import { SuperAdminShell } from '../components/layout/SuperAdminShell'
+import { isBackendConfigured } from '../api/config'
+import { fetchZones, upsertZone } from '../api/reference'
 import { zoneFor } from '../data/merchant'
 import { mockUser } from '../data/user'
 import {
   MERCHANT_KITCHEN,
-  kitchenRadiusUnits,
   masterZoneGeometry,
-  projectPoint,
   resolveCoverage,
-  unprojectPoint,
   zoneAreaKm2,
-  zoneView,
 } from '../data/zones'
+import { useLeafletZoneEditor } from '../hooks/useLeafletZoneEditor'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { revalidateAddress } from '../store/slices/cartSlice'
-import { resetZone, saveZone, updateZoneMeta } from '../store/slices/superAdminSlice'
+import { resetZone, saveZone, replaceZones, updateZoneMeta } from '../store/slices/superAdminSlice'
 import type { GeoPoint, ZoneGeometry, ZoneId } from '../types'
 
 type Vertex = GeoPoint
@@ -44,20 +43,38 @@ export default function SaZones() {
   const addresses = Array.isArray(storedAddresses) ? storedAddresses : mockUser.addresses
   const [draft, setDraft] = useState<Partial<Record<ZoneId, Vertex[]>>>({})
   const [selected, setSelected] = useState<{ zoneId: ZoneId; index: number } | null>(null)
-  const [dragging, setDragging] = useState<{ zoneId: ZoneId; index: number } | null>(null)
   const [meta, setMeta] = useState<Partial<Record<ZoneId, { label: string; note: string }>>>({})
+
+  // Muat master zona dari server (sumber kebenaran) bila tersedia; jika kosong
+  // tetap pakai bentuk awal dari `src/data/zones.ts`.
+  useEffect(() => {
+    if (!isBackendConfigured) return
+    let alive = true
+    fetchZones()
+      .then((rows) => {
+        if (!alive || !rows.length) return
+        dispatch(
+          replaceZones(
+            rows.map((zone) => ({
+              id: zone.code.toLowerCase() as ZoneId,
+              label: zone.name,
+              note: '',
+              vertices: zone.polygon.map(([lat, lng]) => ({ lat, lng })),
+            })),
+          ),
+        )
+      })
+      .catch(() => undefined)
+    return () => {
+      alive = false
+    }
+  }, [dispatch])
 
   /** Poligon yang sedang tampil: hasil geser kalau ada, kalau tidak yang tersimpan. */
   const effectiveZones: ZoneGeometry[] = zones.map((zone) =>
     draft[zone.id] ? { ...zone, vertices: draft[zone.id] as Vertex[] } : zone,
   )
   const verticesOf = (zone: ZoneGeometry) => zone.vertices
-
-  // Pandang dihitung dari poligon tersimpan + alamat demo supaya kanvas tidak
-  // ikut melompat setiap kali satu titik digeser.
-  const view = zoneView(zones, [MERCHANT_KITCHEN, ...addresses.map((a) => ({ lat: a.lat, lng: a.lng }))])
-  const kitchen = projectPoint(MERCHANT_KITCHEN, view)
-  const radius = kitchenRadiusUnits(view)
 
   const moveVertex = (zoneId: ZoneId, index: number, point: Vertex) => {
     const zone = zones.find((z) => z.id === zoneId)
@@ -67,13 +84,14 @@ export default function SaZones() {
     setDraft((prev) => ({ ...prev, [zoneId]: next }))
   }
 
-  const handlePointer = (event: React.PointerEvent<SVGSVGElement>) => {
-    if (!dragging) return
-    const rect = event.currentTarget.getBoundingClientRect()
-    const x = Math.min(100, Math.max(0, ((event.clientX - rect.left) / rect.width) * 100))
-    const y = Math.min(100, Math.max(0, ((event.clientY - rect.top) / rect.height) * 100))
-    moveVertex(dragging.zoneId, dragging.index, unprojectPoint({ x, y }, view))
-  }
+  // Peta Leaflet: geser titik poligon langsung di peta (OSM tiles).
+  useLeafletZoneEditor('sa-zone-map', effectiveZones, {
+    kitchen: MERCHANT_KITCHEN,
+    addresses: addresses.map((a) => ({ lat: a.lat, lng: a.lng })),
+    selected,
+    onVertexMove: (zoneId, index, point) => moveVertex(zoneId as ZoneId, index, point),
+    onVertexSelect: (zoneId, index) => setSelected({ zoneId: zoneId as ZoneId, index }),
+  })
 
   /**
    * Setelah poligon disimpan, alamat yang tersimpan divalidasi ulang terhadap
@@ -124,75 +142,12 @@ export default function SaZones() {
             </div>
           </div>
 
-          <svg
-            className="sa-canvas"
-            viewBox="0 0 100 100"
+          <div
+            id="sa-zone-map"
+            className="sa-canvas sa-canvas--leaflet"
             role="img"
-            aria-label="Kanvas zona Hijazi dan Syimali beserta dapur merchant dan alamat demo"
-            onPointerMove={handlePointer}
-            onPointerUp={() => setDragging(null)}
-            onPointerLeave={() => setDragging(null)}
-          >
-            <defs>
-              <pattern id="sa-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                <path d="M10 0H0V10" fill="none" stroke="var(--border)" strokeWidth="0.3" />
-              </pattern>
-            </defs>
-            <rect x="0" y="0" width="100" height="100" fill="url(#sa-grid)" />
-
-            <circle className="sa-canvas-ring" cx={kitchen.x} cy={kitchen.y} r={radius} />
-            <circle className="sa-canvas-kitchen" cx={kitchen.x} cy={kitchen.y} r={1.6} />
-
-            {effectiveZones.map((zone, zoneIndex) => {
-              const vertices = verticesOf(zone)
-              return (
-                <g key={zone.id}>
-                  <polygon
-                    className={`sa-canvas-zone sa-canvas-zone--${zoneIndex === 0 ? 'a' : 'b'}`}
-                    points={vertices
-                      .map((vertex) => {
-                        const point = projectPoint(vertex, view)
-                        return `${point.x},${point.y}`
-                      })
-                      .join(' ')}
-                  />
-                  {vertices.map((vertex, index) => {
-                    const point = projectPoint(vertex, view)
-                    return (
-                      <circle
-                        key={`${zone.id}-${index}`}
-                        className={`sa-canvas-vertex${
-                          selected?.zoneId === zone.id && selected.index === index ? ' is-selected' : ''
-                        }`}
-                        cx={point.x}
-                        cy={point.y}
-                        r={2.6}
-                        onPointerDown={(event) => {
-                          event.currentTarget.setPointerCapture(event.pointerId)
-                          setDragging({ zoneId: zone.id, index })
-                          setSelected({ zoneId: zone.id, index })
-                        }}
-                      />
-                    )
-                  })}
-                </g>
-              )
-            })}
-
-            {addresses.map((address) => {
-              const point = projectPoint({ lat: address.lat, lng: address.lng }, view)
-              const { zone } = verdictFor(address)
-              return (
-                <circle
-                  key={address.id}
-                  className={`sa-canvas-dot${zone ? ' is-inside' : ''}`}
-                  cx={point.x}
-                  cy={point.y}
-                  r={1.8}
-                />
-              )
-            })}
-          </svg>
+            aria-label="Peta master zona Hijazi dan Syimali beserta dapur merchant dan alamat demo"
+          />
 
           <ul className="sa-legend">
             <li>
@@ -328,7 +283,7 @@ export default function SaZones() {
                     type="button"
                     className="sa-btn sa-btn--primary"
                     disabled={!dirty}
-                    onClick={() => {
+                    onClick={async () => {
                       dispatch(saveZone({ id: zone.id, vertices }))
                       revalidateAll(effectiveZones)
                       setDraft((prev) => {
@@ -336,8 +291,14 @@ export default function SaZones() {
                         delete next[zone.id]
                         return next
                       })
+                      let backend = ''
+                      if (isBackendConfigured) {
+                        const polygon = vertices.map((v) => [v.lat, v.lng]) as [number, number][]
+                        const id = await upsertZone({ code: zone.label, name: zone.label, polygon })
+                        backend = id ? ' · tersimpan ke server' : ' · server gagal, tersimpan lokal'
+                      }
                       toast.success(
-                        `Poligon ${zone.label} disimpan, ${addresses.length} alamat demo divalidasi ulang`,
+                        `Poligon ${zone.label} disimpan, ${addresses.length} alamat demo divalidasi ulang${backend}`,
                       )
                     }}
                   >

@@ -47,6 +47,8 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `38-zones-master.sql` | **Master zona** — policy tulis ops pada `zones` + RPC `ops_upsert_zone(code,name,polygon,id)` (konsol SA menyimpan poligon hasil adjust di peta Leaflet). |
+| `37-storage-buckets.sql` | **Pastikan bucket Storage ada** (idempoten) — menu-images/merchant-photos/avatars. |
 | `36-sa7tein-live.sql` | **Auto-sort & live (M5/M11/M12)** — `auto_sort_batch` (nearest-neighbor, tanpa Google Routes), `send_chat_message`, `close_stale_chats`, realtime publikasi `dispatch_assignments`/`quota_subscriptions`/`refunds`/`disputes`/`chat_messages`. |
 | `35-sa7tein-complete.sql` | **Orkestrasi selesai/batal (M4/M7) + ops (M13)** — `complete_order` (consume quota + settlement + notif), `cancel_order` (release quota + refund), `ops_set_platform_params`, view `ops_kpis`. |
 | `34-sa7tein-order.sql` | **create_order (M3 capstone)** — harga §16.3 + kuota + diskon + snapshot rule + chat + notif dalam satu transaksi; **magic link (M1, stub)** `magic_links` + `request_magic_link`/`consume_magic_link`. |

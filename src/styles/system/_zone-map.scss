@@ -1,0 +1,25 @@
+/* ── Master zona di peta Leaflet (Super Admin) ───────────────────────────────
+ * `.sa-canvas` semula kanvas SVG rasio 1:1; saat dipakai sebagai kontainer
+ * Leaflet, override jadi tinggi tetap dan gestur peta aktif. Titik poligon
+ * digambar sebagai divIcon `.sa-vertex-marker`.
+ */
+.sa-canvas--leaflet {
+  aspect-ratio: auto;
+  height: 420px;
+  max-height: none;
+  touch-action: auto;
+}
+
+.sa-vertex-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 2px solid var(--sa7tein-orange);
+  box-shadow: inset 0 0 0 2px var(--surface);
+
+  &.is-selected {
+    background: var(--sa7tein-orange);
+    border-color: var(--orange-ink);
+  }
+}

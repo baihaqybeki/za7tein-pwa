@@ -4043,6 +4043,330 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "BUG-901",
+      "type": "bug",
+      "status": "fixed",
+      "date": "2026-10-16",
+      "time": "22:34:58",
+      "tags": [
+        "storage",
+        "merchant-profile",
+        "backend"
+      ],
+      "summary": "Bucket storage hilang di DB live -> unggah foto toko gagal. Buat ulang bucket + migrasi 37; FE MerchantSettings unggah foto + simpan photo v",
+      "conn": [
+        {
+          "id": "TASK-902",
+          "type": "relates",
+          "raw": "TASK-902:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10379",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:22:53",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/38-zones-master.sql (+48) — write via tool: -- ===============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/38-zones-master.sql"
+    },
+    {
+      "id": "TASK-10380",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:23:30",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useLeafletZoneEditor.ts (+126) — write via tool: ts: import { useEffect, useR",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useLeafletZoneEditor.ts"
+    },
+    {
+      "id": "TASK-10381",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:24:14",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx (+16/-13) — edit via tool: tsx: import { SuperAdminShell } from '",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx"
+    },
+    {
+      "id": "TASK-10382",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:25:12",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx (+6/-69) — edit via tool: tsx: <div",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx"
+    },
+    {
+      "id": "TASK-10383",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:26:02",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_zone-map.scss (+26) — write via tool: /* ── Master zona di peta Leaf",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/system/_zone-map.scss"
+    },
+    {
+      "id": "TASK-10384",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:26:07",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/_system.scss (+5/-2) — edit via tool: // Fitur customer baru (profil merchan",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/styles/_system.scss"
+    },
+    {
+      "id": "TASK-10385",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:26:22",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run lint 2>&1 | grep -E \"error\" | head; echo \"lint errors: $(npm run lint 2>&1 |",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10386",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:26:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useLeafletZoneEditor.ts (+2/-2) — edit via tool: ts: const mapRef = useRef<Le",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/hooks/useLeafletZoneEditor.ts"
+    },
+    {
+      "id": "TASK-10387",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:26:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx (+2/-2) — edit via tool: tsx: onVertexMove: (zoneId, index, point",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx"
+    },
+    {
+      "id": "TASK-10388",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:27:08",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run build 2>&1 | tail -6\necho \"lint errors: $(npm run lint 2>&1 | grep -cE 'erro",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10389",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:27:38",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/superAdminSlice.ts (+6/-2) — edit via tool: ts: /** Ganti seluruh daft",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/store/slices/superAdminSlice.ts"
+    },
+    {
+      "id": "TASK-10390",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:27:58",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx (+6/-6) — edit via tool: tsx: import { useEffect, useState } from",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx"
+    },
+    {
+      "id": "TASK-10391",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:28:04",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx (+1/-1) — edit via tool: tsx: import { resetZone, saveZone, repla",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/SaZones.tsx"
+    },
+    {
+      "id": "TASK-10392",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:28:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+4/-3) — edit via tool: tsx: 'Supabase RPC',",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-10393",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:28:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+3/-1) — edit via tool: | `38-zones-master.sql` | **Master zona*",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10394",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:30:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/legacy-debt.json (+5/-7) — edit via tool: \"src/components/ui/Sa7teinHeroPat",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/design/legacy-debt.json"
     }
   ]
 }

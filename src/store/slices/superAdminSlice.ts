@@ -103,6 +103,10 @@ const superAdminSlice = createSlice({
       if (!state.operators.some((operator) => operator.id === action.payload.id)) return
       state.csActorId = action.payload.id
     },
+    /** Ganti seluruh daftar zona (mis. hasil muat master zona dari server). */
+    replaceZones(state, action: PayloadAction<ZoneGeometry[]>) {
+      if (action.payload.length) state.zones = action.payload
+    },
     /** Simpan poligon zona hasil geser titik (master zona milik SA). */
     saveZone(state, action: PayloadAction<{ id: ZoneGeometry['id']; vertices: ZoneGeometry['vertices'] }>) {
       const zone = state.zones.find((z) => z.id === action.payload.id)
@@ -233,6 +237,7 @@ const superAdminSlice = createSlice({
 export const {
   setActiveOperator,
   setCsActor,
+  replaceZones,
   saveZone,
   resetZone,
   togglePermission,

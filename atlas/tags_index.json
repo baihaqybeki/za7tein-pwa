@@ -11549,6 +11549,70 @@
     {
       "id": "TASK-10378",
       "shard": 10
+    },
+    {
+      "id": "TASK-10379",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10380",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10381",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10382",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10383",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10384",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10385",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10386",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10387",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10388",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10389",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10390",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10391",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10392",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10393",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10394",
+      "shard": 10
     }
   ],
   "docs": [
@@ -13809,6 +13873,14 @@
     {
       "id": "TASK-10378",
       "shard": 10
+    },
+    {
+      "id": "TASK-10385",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10388",
+      "shard": 10
     }
   ],
   "scaffold": [
@@ -15710,6 +15782,10 @@
     },
     {
       "id": "TASK-902",
+      "shard": 10
+    },
+    {
+      "id": "BUG-901",
       "shard": 10
     }
   ],
@@ -18807,6 +18883,10 @@
     {
       "id": "TASK-10210",
       "shard": 10
+    },
+    {
+      "id": "BUG-901",
+      "shard": 10
     }
   ],
   "realtime": [
@@ -18876,6 +18956,12 @@
   "mapping": [
     {
       "id": "DOC-901",
+      "shard": 10
+    }
+  ],
+  "merchant-profile": [
+    {
+      "id": "BUG-901",
       "shard": 10
     }
   ]
