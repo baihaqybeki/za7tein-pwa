@@ -4679,6 +4679,63 @@
           "raw": "PRD-003:implements"
         }
       ]
+    },
+    {
+      "id": "TASK-10407",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:07:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/42-realtime-notes-ops.sql (+65) — write via tool: -- =========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/42-realtime-notes-ops.sql"
+    },
+    {
+      "id": "TASK-10408",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:08:06",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat >> src/api/mvp.ts <<'EOF'\n\n// ── AP7.2/AP7.3/AP10.2 (api-spec §4 G3/G9, §17.3.9)",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10409",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:08:19",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `42-realtime-notes-ops.sql` | **AP7.2/",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

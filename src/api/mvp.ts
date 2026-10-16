@@ -327,3 +327,32 @@ export function runCronJobs(): Promise<Record<string, number> | null> {
 export function expireUnpaidOrders(): Promise<number | null> {
   return dbRpc<number>('expire_unpaid_orders', {})
 }
+
+// ── AP7.2/AP7.3/AP10.2 (api-spec §4 G3/G9, §17.3.9) ─────────────────────────
+export function emitNotification(input: {
+  userId: number
+  kind: string
+  title: string
+  body?: string
+  audience?: string
+  orderId?: number | null
+}): Promise<number | null> {
+  return dbRpc<number>('emit_notification', {
+    p_user: input.userId,
+    p_kind: input.kind,
+    p_title: input.title,
+    p_body: input.body ?? null,
+    p_audience: input.audience ?? 'customer',
+    p_order: input.orderId ?? null,
+  })
+}
+
+export interface OpsRevenueDay {
+  day: string
+  orders_done: number
+  transaction_fee_jod: number | string
+  applicator_fee_jod: number | string
+}
+export function fetchOpsRevenueDaily(): Promise<OpsRevenueDay[]> {
+  return dbSelect<OpsRevenueDay>('ops_revenue_daily')
+}
