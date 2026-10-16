@@ -4869,6 +4869,27 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-quota-exit-runbook.md"
+    },
+    {
+      "id": "FEAT-904",
+      "type": "task",
+      "status": "open",
+      "date": "2026-10-17",
+      "time": "00:40:47",
+      "tags": [
+        "migration",
+        "quota",
+        "supabase",
+        "s3"
+      ],
+      "summary": "Milestone+runbook keluar dari kuota Supabase (M-Q0..M-Q8): migrasi DB/PostgREST/GoTrue/Realtime/Storage->S3/Edge/job, cutover+rollback. Dead",
+      "conn": [
+        {
+          "id": "DEC-1050",
+          "type": "relates",
+          "raw": "DEC-1050:relates"
+        }
+      ]
     }
   ]
 }
