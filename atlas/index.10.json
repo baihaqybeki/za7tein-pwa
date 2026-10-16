@@ -3212,6 +3212,101 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10338",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:07:48",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/33-sa7tein-mvp-2.sql (+135) — write via tool: -- =============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/33-sa7tein-mvp-2.sql"
+    },
+    {
+      "id": "TASK-10339",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:08:38",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+22/-7) — edit via tool: /rpc/check_coverage:",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10340",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:08:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `33-sa7tein-mvp-2.sql` | **Discovery/m",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10341",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:09:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts (+48/-3) — edit via tool: ts: export function checkCoverage(merchantId",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts"
+    },
+    {
+      "id": "TASK-10342",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:09:34",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnode -e \"require('js-yaml').load(require('fs').readFileSync('docs/backend/openapi.ya",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

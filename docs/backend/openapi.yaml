@@ -2132,6 +2132,21 @@ paths:
       summary: Cek coverage merchant terhadap titik (radius/polygon, §9.1)
       responses:
         '200': { description: boolean }
+  /rpc/browse_merchants:
+    post:
+      summary: Browse merchant dalam coverage + tag + sembunyi merchant tanpa kuota (§10, CUS-04..09)
+      responses:
+        '200': { description: Daftar merchant + distance_m + order_count }
+  /rpc/compute_discounts:
+    post:
+      summary: Hitung Dm & Da dari program marketing (§15, M8, OPEN-23)
+      responses:
+        '200': { description: '{ discount_merchant_jod, discount_applicator_jod }' }
+  /rpc/snapshot_dispute_rules:
+    post:
+      summary: Snapshot rule dispute merchant ke order (§18, M10)
+      responses:
+        '200': { description: OK }
 
 components:
   securitySchemes:

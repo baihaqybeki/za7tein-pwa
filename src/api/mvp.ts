@@ -99,3 +99,48 @@ export function createRefund(
 export function checkCoverage(merchantId: number, lat: number, lng: number): Promise<boolean | null> {
   return dbRpc<boolean>('check_coverage', { p_merchant: merchantId, p_lat: lat, p_lng: lng })
 }
+
+export interface BrowseMerchant {
+  id: number
+  store_name: string
+  description: string | null
+  photo: string | null
+  latitude: number | null
+  longitude: number | null
+  rating_avg: number | null
+  rating_count: number | null
+  store_status: string | null
+  distance_m: number | null
+  order_count: number
+}
+
+export function browseMerchants(params: {
+  lat?: number
+  lng?: number
+  tag?: string
+  q?: string
+  sort?: 'distance' | 'rating'
+  limit?: number
+} = {}): Promise<BrowseMerchant[]> {
+  return dbRpc<BrowseMerchant[]>('browse_merchants', {
+    p_lat: params.lat ?? null,
+    p_lng: params.lng ?? null,
+    p_tag: params.tag ?? null,
+    p_q: params.q ?? null,
+    p_sort: params.sort ?? 'distance',
+    p_limit: params.limit ?? 50,
+  }).then((rows) => rows ?? [])
+}
+
+export interface Discounts {
+  discount_merchant_jod: number
+  discount_applicator_jod: number
+}
+
+export function computeDiscounts(merchantId: number, subtotalJod: number): Promise<Discounts | null> {
+  return dbRpc<Discounts>('compute_discounts', { p_merchant: merchantId, p_subtotal_jod: subtotalJod })
+}
+
+export function snapshotDisputeRules(orderId: number): Promise<void> {
+  return dbRpc<void>('snapshot_dispute_rules', { p_order: orderId }).then(() => undefined)
+}
