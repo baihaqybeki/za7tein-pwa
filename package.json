@@ -19,7 +19,11 @@
     "prepare": "bash scripts/setup.sh",
     "atlas": "node \"$HOME/.config/opencode/skills/atlas-owner/scripts/atlas.mjs\"",
     "push:deploy": "supabase functions deploy send-push",
-    "push:send": "node scripts/send-push.mjs"
+    "push:send": "node scripts/send-push.mjs",
+    "db:verify-consume": "node scripts/db-verify.mjs verify-consume",
+    "db:remote-check": "node scripts/db-verify.mjs remote-check",
+    "db:link-auth": "node scripts/db-verify.mjs link-auth",
+    "db:e2e": "node scripts/db-verify.mjs e2e"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
