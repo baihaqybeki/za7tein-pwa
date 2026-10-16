@@ -4445,6 +4445,63 @@
           "raw": "PRD-002:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10397",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:51:21",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/39-menu-categories.sql (+44) — write via tool: -- ============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/39-menu-categories.sql"
+    },
+    {
+      "id": "TASK-10398",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:51:49",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat >> src/api/reference.ts <<'EOF'\n\n/** Kategori menu — taksonomi ops (DEC-88104, a",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10399",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "23:51:57",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `39-menu-categories.sql` | **Kategori ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

@@ -211,3 +211,19 @@ export async function upsertZone(input: {
     p_id: input.id ?? null,
   })
 }
+
+/** Kategori menu — taksonomi ops (DEC-88104, api-spec §17.3.6). Baca-saja di FE. */
+export interface DbMenuCategory {
+  id: number
+  label: string
+  slug: string
+  icon: string | null
+  sort_order: number
+  is_active: boolean
+}
+
+export function fetchMenuCategories(): Promise<DbMenuCategory[]> {
+  return dbSelect<DbMenuCategory>('menu_categories', {
+    query: { select: 'id,label,slug,icon,sort_order,is_active', order: 'sort_order.asc' },
+  })
+}
