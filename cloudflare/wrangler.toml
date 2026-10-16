@@ -1,23 +1,20 @@
-# Sa7tein — API Worker (target migrasi dari Supabase)
-# Isi id setelah `npx wrangler d1 create sa7tein` dsb.
+# Sa7tein — API Worker (target migrasi dari Supabase). Lihat docs/backend/MIGRATION-cloudflare.md.
 name = "sa7tein-api-cf"
 main = "src/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
+account_id = "2f0537d984cb5f631c32505e08fa0f66"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "sa7tein"
-# database_id = "REPLACE_WITH_D1_ID"
+[[d1_databases]]
+binding = "DB"
+database_name = "sa7tein"
+database_id = "323b5ff6-c7c2-443e-8f99-42b43effbe3d"
 
+[[kv_namespaces]]
+binding = "KV"
+id = "877bbe8a851142a6ae4b0fbeb1158ad6"
+
+# R2: aktifkan dulu di dashboard, lalu uncomment + isi bucket_name.
 # [[r2_buckets]]
 # binding = "R2"
 # bucket_name = "sa7tein"
-# preview_bucket_name = "sa7tein"
-
-# [[kv_namespaces]]
-# binding = "KV"
-# id = "REPLACE_WITH_KV_ID"
-
-# [triggers]
-# crons = ["*/1 * * * *"]

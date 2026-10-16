@@ -1,25 +1,20 @@
 # cloudflare/ — API Worker (target migrasi)
 
-Scaffold Worker untuk menggantikan Supabase (DB + REST + auth + realtime + storage).
-Rencana lengkap: `docs/backend/MIGRATION-cloudflare.md`.
+Ganti Supabase (DB + REST + auth + realtime + storage). Rencana: `docs/backend/MIGRATION-cloudflare.md`.
 
-## Setup (butuh kredensial Cloudflare)
-```bash
-npx wrangler login                       # atau set CLOUDFLARE_API_TOKEN
-npx wrangler d1 create sa7tein
-npx wrangler r2 bucket create sa7tein-menu-images
-npx wrangler r2 bucket create sa7tein-merchant-photos
-npx wrangler r2 bucket create sa7tein-avatars
-```
-Lalu isi `database_id`/`id` di `wrangler.toml` (bagian yang dikomentari).
+## Status (terpasang)
+- D1 `sa7tein` = `323b5ff6-c7c2-443e-8f99-42b43effbe3d` (skema `schema.sql` + seed `seed.sql` sudah diterapkan).
+- KV `sa7tein` = `877bbe8a851142a6ae4b0fbeb1158ad6`.
+- Akun = `2f0537d984cb5f631c32505e08fa0f66`.
+- Worker live: **https://sa7tein-api-cf.sa7tein-pwa.workers.dev** (`/health` → `{ok:true,db:"ok"}`).
+- ⏳ **R2 belum diaktifkan** di akun (error: "Please enable R2 through the Cloudflare Dashboard"); S3 endpoint + Access/Secret sudah disimpan di `.dev.vars` (gitignored).
 
-## Jalankan
+## Jalankan / deploy
 ```bash
-npm run cf:dev        # wrangler dev
+npm run cf:dev        # wrangler dev (butuh CLOUDFLARE_API_TOKEN)
 npm run cf:deploy     # wrangler deploy
-curl http://127.0.0.1:8787/health   # { ok, db }
 ```
 
-## Status
-- ✅ Scaffold + `/health` (uji binding D1/R2/KV).
-- ⏳ C1 skema → D1, C2 route `/rest/v1`+`/rpc`, C3 auth, C4 R2 presign, C5 realtime, C6 cron/queue.
+## Berikutnya (C1–C8)
+- C1 lanjut: konversi **seluruh** `supabase/*.sql` → `schema.sql` (fungsi → JS).
+- C2 route `/rest/v1/*` + `/rpc/*` (authz per peran di Worker), C3 auth, C4 R2 presign, C5 DO WebSocket, C6 Cron/Queue, C7 Access.

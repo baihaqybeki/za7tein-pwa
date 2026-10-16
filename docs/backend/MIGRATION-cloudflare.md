@@ -1,6 +1,6 @@
 # Rencana migrasi ke Cloudflare (dari Supabase)
 
-Status: PROPOSED. Pemicu: kuota Supabase (proyek dibatasi 21 Okt 2026). Target: **Cloudflare**
+Status: IN PROGRESS (C0 sebagian + C1 awal selesai; lihat cloudflare/README.md). Pemicu: kuota Supabase (proyek dibatasi 21 Okt 2026). Target: **Cloudflare**
 (selaras ARC-01..13 PRD aktif). Pasangan: `MIGRATION-quota-exit-milestones.md`.
 
 > Migrasi Postgres → Cloudflare **bukan lift-and-shift**: Cloudflare tak punya Postgres/RLS/PostgREST.
@@ -21,7 +21,8 @@ Status: PROPOSED. Pemicu: kuota Supabase (proyek dibatasi 21 Okt 2026). Target: 
 | Ops panel | **Cloudflare Access/Zero Trust** | ARC-10 |
 
 ## Fase (butuh kredensial)
-- **C0 Provision**: `npx wrangler login`; buat D1, R2 buckets (menu-images/merchant-photos/avatars),
+- **C0 Provision** ✅: akun `2f05…0f66`; D1 `sa7tein` + KV dibuat; Worker live `sa7tein-api-cf.sa7tein-pwa.workers.dev`. R2 ⏳ (aktifkan di dashboard).
+- **C0 Provision (asli)**: `npx wrangler login`; buat D1, R2 buckets (menu-images/merchant-photos/avatars),
   KV, Queue; catat id ke `cloudflare/wrangler.toml`.
 - **C1 Skema → D1**: konversi `supabase/*.sql` ke SQLite (DROP policy/RLS & plpgsql; ganti `bigserial`→`integer primary key autoincrement`;
   `timestamptz`→`text`/ISO; `numeric`→`real`; `json` tetap). Fungsi → JS di Worker.
