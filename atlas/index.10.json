@@ -4736,6 +4736,63 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10410",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:09:03",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/43-quota-partner-batch.sql (+54) — write via tool: -- ========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/43-quota-partner-batch.sql"
+    },
+    {
+      "id": "TASK-10411",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:09:41",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat >> src/api/mvp.ts <<'EOF'\n\n// ── AP3.2/AP6.1/AP4.2 (api-spec §17.3.5/§17.3.3/§17",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10412",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:09:52",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `43-quota-partner-batch.sql` | **AP3.2",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
     }
   ]
 }

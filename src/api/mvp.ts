@@ -356,3 +356,14 @@ export interface OpsRevenueDay {
 export function fetchOpsRevenueDaily(): Promise<OpsRevenueDay[]> {
   return dbSelect<OpsRevenueDay>('ops_revenue_daily')
 }
+
+// ── AP3.2/AP6.1/AP4.2 (api-spec §17.3.5/§17.3.3/§17.3.2) ────────────────────
+export function buyQuotaPackage(merchantId: number, packageId: number, method: 'qris' | 'dana_balance' = 'qris'): Promise<number | null> {
+  return dbRpc<number>('buy_quota_package', { p_merchant: merchantId, p_package: packageId, p_method: method })
+}
+export function setCourierStatus(courierId: number, status: 'offline' | 'available' | 'busy' | 'reserved'): Promise<void> {
+  return dbRpc<void>('set_courier_status', { p_courier: courierId, p_status: status }).then(() => undefined)
+}
+export function closeBatch(batchId: number): Promise<void> {
+  return dbRpc<void>('close_batch', { p_batch: batchId }).then(() => undefined)
+}
