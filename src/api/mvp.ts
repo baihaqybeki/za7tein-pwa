@@ -386,3 +386,18 @@ export function issueSp(input: {
     p_dispute: input.disputeId ?? null,
   })
 }
+
+// ── courier_type picklist (ops) ──────────────────────────────────────────────
+export interface DbCourierType {
+  id: number
+  code: string
+  label: string
+  sort_order: number
+  is_active: boolean
+}
+export function fetchCourierTypes(): Promise<DbCourierType[]> {
+  return dbSelect<DbCourierType>('courier_types', { query: { select: 'id,code,label,sort_order,is_active', order: 'sort_order.asc' } })
+}
+export function opsUpsertCourierType(code: string, label: string, sort = 0, active = true): Promise<number | null> {
+  return dbRpc<number>('ops_upsert_courier_type', { p_code: code, p_label: label, p_sort: sort, p_active: active })
+}
