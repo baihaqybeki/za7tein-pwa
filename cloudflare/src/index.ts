@@ -122,6 +122,8 @@ export default {
     const headers = cors(env)
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers })
     const res = await route(request, env)
+    // Jangan bangun ulang respons upgrade WebSocket (101) — `webSocket` hilang bila di-rebuild.
+    if (res.status === 101) return res
     const merged = new Headers(res.headers)
     for (const [k, v] of Object.entries(headers)) merged.set(k, v)
     return new Response(res.body, { status: res.status, headers: merged })
