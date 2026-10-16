@@ -90,13 +90,39 @@ export interface DbMerchantSearch {
   min_price_jod: number | string | null
 }
 
-/** Cari merchant (nama/rating/harga) lewat RPC `search_merchants`. */
+/** Cari merchant (nama/rating/harga) lewat RPC `search_merchants`.
+ *  Tanpa filter & tanpa kata kunci → pakai `browse_merchants` (coverage + kuota, PRD aktif). */
 export async function searchMerchants(params: {
   query?: string
   minRating?: number
   priceMin?: number
   priceMax?: number
 }): Promise<DbMerchantSearch[]> {
+  const browseMode =
+    !params.query?.trim() && params.minRating == null && params.priceMin == null && params.priceMax == null
+  if (browseMode) {
+    const rows = await dbRpc<
+      Array<{
+        id: number
+        store_name: string
+        photo: string | null
+        store_status: string
+        rating_avg: number | string
+        rating_count: number
+      }>
+    >('browse_merchants', { p_sort: 'rating', p_limit: 50 })
+    return (rows ?? []).map((r) => ({
+      id: r.id,
+      store_name: r.store_name,
+      photo: r.photo,
+      store_status: r.store_status,
+      rating_avg: r.rating_avg,
+      rating_count: r.rating_count,
+      open_time: null,
+      close_time: null,
+      min_price_jod: null,
+    }))
+  }
   const rows = await dbRpc<DbMerchantSearch[]>('search_merchants', {
     p_query: params.query ?? null,
     p_min_rating: params.minRating ?? null,

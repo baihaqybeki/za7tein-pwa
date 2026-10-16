@@ -43,7 +43,7 @@ create or replace function public.browse_merchants(
   latitude double precision, longitude double precision,
   rating_avg numeric, rating_count integer, store_status text,
   distance_m double precision, order_count bigint
-) language sql stable as $$
+) language sql stable security definer set search_path = public as $$
   select m.id, m.store_name, m.description, m.photo, m.latitude, m.longitude,
          m.rating_avg, m.rating_count, m.store_status,
          case when p_lat is not null and m.latitude is not null

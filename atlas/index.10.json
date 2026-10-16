@@ -3668,6 +3668,165 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-902",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:26:15",
+      "tags": [
+        "backend",
+        "supabase",
+        "rpc",
+        "sa7tein-mvp-2026-10-11"
+      ],
+      "summary": "Backend MVP M0-M13 ke Supabase: migrasi 31-36 + RPC (harga/kuota/settlement/batch/dispatch/marketing/dispute/chat/magic-link/create-complete",
+      "conn": [
+        {
+          "id": "PRD-002",
+          "type": "implements",
+          "raw": "PRD-002:implements"
+        },
+        {
+          "id": "DEC-1050",
+          "type": "implements",
+          "raw": "DEC-1050:implements"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10362",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:36:34",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/api-e2e.mjs (+162) — write via tool: // =====================================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/api-e2e.mjs"
+    },
+    {
+      "id": "TASK-10363",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:37:54",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/36-sa7tein-live.sql (+26/-16) — edit via tool: create or replace function publ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/36-sa7tein-live.sql"
+    },
+    {
+      "id": "TASK-10364",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:39:14",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts (+41/-15) — edit via tool: ts: /** Cari merchant (nama/rating/harg",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts"
+    },
+    {
+      "id": "TASK-10365",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:39:22",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx (+1/-1) — edit via tool: tsx: {showFilter ? (",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Home.tsx"
+    },
+    {
+      "id": "TASK-10366",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:39:33",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+11/-10) — edit via tool: tsx: const HERO_TAGS = [",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-10367",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:40:01",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run lint 2>&1 | grep -cE \"error:\"\nnpm run build 2>&1 | tail -3 passed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10368",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:40:50",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/33-sa7tein-mvp-2.sql (+6/-6) — edit via tool: ) returns table (",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/33-sa7tein-mvp-2.sql"
     }
   ]
 }

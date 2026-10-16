@@ -100,6 +100,7 @@ const HERO_TAGS = [
   'Redux Toolkit',
   'SCSS',
   'PWA',
+  'Supabase RPC',
   'Zod',
   'React Hook Form',
 ]

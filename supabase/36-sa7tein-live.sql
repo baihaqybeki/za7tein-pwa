@@ -51,16 +51,26 @@ end $$;
 create or replace function public.send_chat_message(
   p_order bigint, p_sender bigint, p_body text, p_image text default null
 ) returns bigint language plpgsql as $$
-declare v_chat bigint; v_channel text; v_id bigint;
+declare v_chat bigint; v_channel text; v_id bigint; v_cust bigint; v_merch bigint; v_cour bigint;
 begin
   select id into v_chat from public.chats where order_id = p_order order by id limit 1;
   if v_chat is null then raise exception 'chat untuk order % tidak ada', p_order; end if;
   if (select closed_at from public.chats where id = v_chat) is not null then
     raise exception 'chat sudah ditutup';
   end if;
-  v_channel := case when p_image is not null then 'image' else 'text' end;
+  select cu.user_id, mu.user_id, co.user_id into v_cust, v_merch, v_cour
+    from public.orders o
+    left join public.customers cu on cu.id = o.customer_id
+    left join public.merchants mu on mu.id = o.merchant_id
+    left join public.couriers co on co.id = o.courier_id
+    where o.id = p_order;
+  v_channel := case
+    when p_sender = v_cour then 'merchant-courier'
+    when p_sender = v_merch then 'customer-merchant'
+    else 'customer-merchant' end;
   insert into public.chat_messages (chat_id, sender_id, channel, body)
-    values (v_chat, p_sender, v_channel, coalesce(p_body, '')) returning id into v_id;
+    values (v_chat, p_sender, v_channel, case when p_image is not null then p_image else coalesce(p_body, '') end)
+    returning id into v_id;
   update public.chats set last_message = coalesce(p_body, '[gambar]'), last_at = now() where id = v_chat;
   return v_id;
 end $$;

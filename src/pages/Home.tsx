@@ -70,7 +70,7 @@ export default function Home() {
             ) : null}
           </div>
 
-          {showFilter && merchantQuery.trim() ? (
+          {showFilter ? (
             <ul className="merchant-search-results" role="list">
               {merchantResults.map((m) => (
                 <li key={m.id}>
