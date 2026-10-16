@@ -157,7 +157,7 @@ begin
   if not found then raise exception 'order % tidak ada', p_order; end if;
   select platform_fee_customer_jod, platform_fee_merchant_jod into pc, pm from public.platform_params where id;
 
-  merchant_amt := o.subtotal_jod - o.discount_merchant_jod;
+  merchant_amt := o.sub_total_jod - o.discount_merchant_jod;
   app_amt := pc - o.discount_applicator_jod;
   courier_amt := o.delivery_fee_jod;
 

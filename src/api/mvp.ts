@@ -1,4 +1,4 @@
-import { dbRpc } from './db'
+import { dbRpc, dbSelect } from './db'
 
 /**
  * Klien RPC logika bisnis PRD aktif `sa7tein-mvp-2026-10-11` (migrasi
@@ -181,4 +181,29 @@ export function requestMagicLink(email: string, role = 'customer'): Promise<stri
 
 export function consumeMagicLink(token: string): Promise<{ email: string; role: string } | null> {
   return dbRpc<{ email: string; role: string }>('consume_magic_link', { p_token: token })
+}
+
+/** Selesaikan order (M4/M7): consume quota + settlement + notif. */
+export function completeOrder(orderId: number): Promise<void> {
+  return dbRpc<void>('complete_order', { p_order: orderId }).then(() => undefined)
+}
+
+/** Batal/tolak order (M4/M7): release quota + refund bila sudah dibayar. */
+export function cancelOrder(orderId: number, by: string, reason = 'dibatalkan'): Promise<void> {
+  return dbRpc<void>('cancel_order', { p_order: orderId, p_by: by, p_reason: reason }).then(() => undefined)
+}
+
+export interface OpsKpis {
+  orders_active: number
+  orders_done: number
+  orders_canceled: number
+  gmv_jod: number
+  transaction_fee_jod: number
+  merchants_approved: number
+  couriers: number
+  refunds_pending: number
+}
+
+export function opsKpis(): Promise<OpsKpis[]> {
+  return dbSelect<OpsKpis>('ops_kpis')
 }

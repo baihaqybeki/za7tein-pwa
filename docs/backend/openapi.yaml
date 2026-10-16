@@ -2162,6 +2162,24 @@ paths:
       summary: Pakai magic link (ACC-01)
       responses:
         '200': { description: '{ email, role }' }
+  /rpc/complete_order:
+    post:
+      summary: Selesaikan order — consume quota + settlement + notif (M4/M7)
+      responses:
+        '200': { description: OK }
+  /rpc/cancel_order:
+    post:
+      summary: Batal/tolak order — release quota + refund bila sudah dibayar (M4/M7)
+      responses:
+        '200': { description: OK }
+  /rpc/ops_set_platform_params:
+    post:
+      summary: OPS atur platform fee/quick multiplier/transaction fee (M13, ops only)
+      responses:
+        '200': { description: OK }
+        '403': { description: bukan ops }
+  /ops-kpis:
+    get: { summary: KPI ringkas ops (view ops_kpis, M13), responses: { '200': { description: OK } } }
 
 components:
   securitySchemes:

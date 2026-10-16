@@ -3421,6 +3421,139 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10349",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:16:37",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/35-sa7tein-complete.sql (+77) — write via tool: -- ===========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/35-sa7tein-complete.sql"
+    },
+    {
+      "id": "TASK-10350",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:17:47",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/32-sa7tein-rpc.sql (+1/-1) — edit via tool: merchant_amt := o.sub_total_jod - ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/32-sa7tein-rpc.sql"
+    },
+    {
+      "id": "TASK-10351",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:17:56",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+25/-7) — edit via tool: /rpc/consume_magic_link:",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10352",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:18:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts (+28/-3) — edit via tool: ts: export function consumeMagicLink(token: ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts"
+    },
+    {
+      "id": "TASK-10353",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:18:28",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `35-sa7tein-complete.sql` | **Orkestra",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10354",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:19:32",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts (+3/-3) — edit via tool: ts: export function opsKpis(): Promise<OpsKp",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts"
+    },
+    {
+      "id": "TASK-10355",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:20:06",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run build 2>&1 | tail -3\nnpm run lint 2>&1 | grep -cE \"error:\" passed",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
