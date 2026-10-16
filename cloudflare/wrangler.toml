@@ -32,3 +32,10 @@ bucket_name = "sa7tein-merchant-photos"
 binding = "R2_AVATARS"
 bucket_name = "sa7tein-avatars"
 
+[[durable_objects.bindings]]
+name = "REALTIME"
+class_name = "RealtimeHub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RealtimeHub"]

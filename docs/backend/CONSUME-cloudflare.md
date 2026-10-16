@@ -54,12 +54,32 @@ Bucket: `menu-images`, `merchant-photos`, `avatars`.
 - `GET /media/avatars/<uid>/<file>` → isi berkas
 FE `uploadToBucket` cukup menembak URL ini (bukan Supabase Storage).
 
+## Auth (C3) — magic link + JWT
+```
+POST /auth/magic-link { "email":"cs@sa7tein.app", "role":"cs" }   → { ok, token }   # email stub
+POST /auth/verify     { "token":"<token>" }                        → { access_token, user }
+GET  /auth/me         (Authorization: Bearer <access_token>)       → { id, role, email }
+```
+JWT HS256, masa 24 jam. Kirim `Authorization: Bearer <access_token>` pada panggilan tulis.
+`/auth/v1/*` gaya Supabase **tidak** dilayani.
+
+## Authz (C3)
+- **RPC tulis** (create_order, complete_order, cancel_order, quota, batch, dispatch, refund, chat,
+  rating, dispute, buy_quota_package, dst.) → **wajib** JWT, selain itu `401`.
+- **RPC ops** (`issue_sp`, `ops_set_platform_params`) → peran `cs`/`superadmin`, selain itu `403`.
+- **RPC baca** (price_order, browse_merchants, compute_discounts, check_coverage, fx_rate_latest, …)
+  dan **REST read** → publik.
+
+## Realtime (C5)
+```
+ws://sa7tein-api-cf.sa7tein-pwa.workers.dev/ws?topic=orders
+```
+Durable Object `RealtimeHub` (WebSocket). Setiap RPC tulis sukses → broadcast `{type:'rpc',fn,at}` ke
+topic `orders`. Pesan `ping` → `pong`. FE ganti transport `src/api/realtime.ts` ke URL ini.
+
 ## Belum ada (FE jangan andalkan dulu)
-- **Auth**: tak ada GoTrue/JWT (login Supabase lama tak berlaku di Worker). `/auth/v1/*` **tidak** dilayani.
-- **Authz/RLS**: tak ada; semua endpoint terbuka (demo). Peran di Worker menyusul (C3).
-- **Realtime WS**: belum (C5).
 - **Pagination header** `Range/Content-Range`: pakai `limit`/`offset` saja.
-- **Realtime/push/job terjadwal**: `run_cron_jobs` dipanggil manual/DO (C6).
+- **Push fan-out & job terjadwal**: `run_cron_jobs` masih manual (C6); push (send-push) belum pindah.
 
 ## Data
 - D1 = **snapshot** dari Supabase (`scripts/migrate-supabase-to-d1.mjs`, 6434 baris). Untuk cutover,
