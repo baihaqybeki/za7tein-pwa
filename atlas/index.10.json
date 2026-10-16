@@ -4966,6 +4966,63 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/schema.sql"
+    },
+    {
+      "id": "TASK-10421",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:35:24",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/config.ts (+23/-7) — edit via tool: ts: export const SUPABASE_URL = env.VITE_SU",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/config.ts"
+    },
+    {
+      "id": "TASK-10422",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:35:51",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run build 2>&1 | tail -2; echo \"lint: $(npm run lint 2>&1 | grep -cE 'error:')\" ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10423",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:36:04",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-versioning.md (+46) — write via tool: # Versioning migrasi Supab",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-versioning.md"
     }
   ]
 }
