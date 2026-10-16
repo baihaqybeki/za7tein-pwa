@@ -1,12 +1,9 @@
 // Sa7tein API Worker — target migrasi dari Supabase (docs/backend/MIGRATION-cloudflare.md).
-// Kontrak dijaga+berversi agar FE berjalan paralel dengan Supabase
-// (docs/backend/MIGRATION-versioning.md). FE memanggil `…/rest/v1/rpc/<fn>` & `…/rest/v1/<tabel>`.
+// DB = D1 (SQLite). Kontrak `…/rest/v1/rpc/<fn>` & `…/rest/v1/<tabel>` (docs/backend/MIGRATION-versioning.md).
 import { handleRest, type RestEnv } from './rest'
 import { handleRpc, type RpcEnv } from './rpc'
-import { pg, type HyperdriveBinding } from './pg'
 
 export interface Env extends RestEnv, RpcEnv {
-  HYPERDRIVE: HyperdriveBinding
   KV: KVNamespace
   R2_MENU: R2Bucket
   R2_MERCHANT: R2Bucket
@@ -22,9 +19,7 @@ const BUCKETS = (env: Env): Record<string, R2Bucket> => ({
 })
 
 // `/v1/...` dan `/...` setara (kontrak stabil antar versi).
-function relPath(pathname: string): string {
-  return pathname.replace(/^\/v1(?=\/|$)/, '') || '/'
-}
+const relPath = (p: string): string => p.replace(/^\/v1(?=\/|$)/, '') || '/'
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -34,8 +29,7 @@ export default {
     if (path === '/health') {
       let db: string
       try {
-        const sql = pg(env.HYPERDRIVE)
-        await sql`select 1 as ok`
+        await env.DB.prepare('select 1 as ok').first()
         db = 'ok'
       } catch (error) {
         db = `error: ${error instanceof Error ? error.message : String(error)}`
@@ -46,7 +40,6 @@ export default {
       return Response.json({ api: env.API_VERSION, backend: env.BACKEND, schema: 'd1' })
     }
 
-    // PostgREST-compatible: /rest/v1/rpc/<fn> (POST) dan /rest/v1/<tabel> (GET).
     const rpc = path.match(/^\/rest\/v1\/rpc\/([a-z_]+)$/)
     if (rpc && request.method === 'POST') {
       const args = await request.json().catch(() => ({}))
@@ -57,7 +50,6 @@ export default {
       return handleRest(env, table[1], url.searchParams)
     }
 
-    // Media R2: GET (baca) / PUT (unggah). Authz unggah menyusul (C3).
     const media = path.match(/^\/media\/([^/]+)\/(.+)$/)
     if (media) {
       const bucket = BUCKETS(env)[media[1]]

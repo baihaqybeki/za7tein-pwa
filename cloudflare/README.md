@@ -9,10 +9,10 @@ Ganti Supabase (DB + REST + auth + realtime + storage). Rencana: `docs/backend/M
 - Worker live: **https://sa7tein-api-cf.sa7tein-pwa.workers.dev** (`/health` → `{ok:true,db:"ok"}`).
 - ⏳ **R2 belum diaktifkan** di akun (error: "Please enable R2 through the Cloudflare Dashboard"); S3 endpoint + Access/Secret sudah disimpan di `.dev.vars` (gitignored).
 
-> **DB via Hyperdrive.** Worker menyambung ke Postgres Supabase yang sama lewat Cloudflare Hyperdrive
-> (`HYPERDRIVE`, id `5f12b6b4ac0b4f8e961b6ec7158d2fbd`). **Penting:** origin harus koneksi **langsung**
-> (`db.<ref>.supabase.co:5432`), bukan pooler `:6543` — pooler membuat Hyperdrive menggantung.
-> Endpoint: `/rest/v1/<tabel>` (read) + `/rest/v1/rpc/<fn>` (memanggil fungsi Postgres `supabase/31-47`).
+> **DB = D1 (SQLite).** Skema `cloudflare/schema.sql` + seed `seed.sql`; data dari Supabase via
+> `scripts/migrate-supabase-to-d1.mjs`. Endpoint: `/rest/v1/<tabel>` (read) + `/rest/v1/rpc/<fn>`
+> (fungsi di-port ke JS di `cloudflare/src/rpc.ts`). Hyperdrive dicoba sebelumnya (query Postgres
+> langsung) dan **diganti** karena tujuan utama lepas dari Supabase + tanpa dependensi pooler.
 
 ## Jalankan / deploy
 ```bash
