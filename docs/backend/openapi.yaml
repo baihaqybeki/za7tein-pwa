@@ -2180,6 +2180,12 @@ paths:
         '403': { description: bukan ops }
   /ops-kpis:
     get: { summary: KPI ringkas ops (view ops_kpis, M13), responses: { '200': { description: OK } } }
+  /rpc/auto_sort_batch:
+    post: { summary: Auto-sort rute batch nearest-neighbor (§9.6, M5, tanpa Google Routes), responses: { '200': { description: '[order_id,...]' } } }
+  /rpc/send_chat_message:
+    post: { summary: Kirim pesan chat order (§20.1, M11), responses: { '201': { description: message_id } } }
+  /rpc/close_stale_chats:
+    post: { summary: Tutup chat lewat auto_close_at (§20.1, M11), responses: { '200': { description: jumlah ditutup } } }
 
 components:
   securitySchemes:

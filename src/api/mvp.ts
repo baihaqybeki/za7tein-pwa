@@ -207,3 +207,28 @@ export interface OpsKpis {
 export function opsKpis(): Promise<OpsKpis[]> {
   return dbSelect<OpsKpis>('ops_kpis')
 }
+
+/** Auto-sort rute batch (M5, nearest-neighbor tanpa Google Routes). */
+export function autoSortBatch(batchId: number): Promise<number[] | null> {
+  return dbRpc<number[]>('auto_sort_batch', { p_batch: batchId })
+}
+
+/** Kirim pesan chat order (M11; teks atau gambar). */
+export function sendChatMessage(
+  orderId: number,
+  senderId: number,
+  body: string,
+  imageUrl?: string,
+): Promise<number | null> {
+  return dbRpc<number>('send_chat_message', {
+    p_order: orderId,
+    p_sender: senderId,
+    p_body: body,
+    p_image: imageUrl ?? null,
+  })
+}
+
+/** Tutup chat yang melewati auto_close_at (M11). Mengembalikan jumlah yang ditutup. */
+export function closeStaleChats(): Promise<number | null> {
+  return dbRpc<number>('close_stale_chats', {})
+}

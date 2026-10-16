@@ -26,6 +26,12 @@ platform backend (Cloudflare Workers/DO vs tetap Supabase).
 | M14 PWA/native | ARC-11, L1/L2 | M3 | FE | React PWA zero-route; native pasca-MVP; kontrak identik | — | — | blocked |
 
 ## Catatan rencana
+- **Status implementasi backend (2026-10-16):** lapisan logika bisnis M0–M13 dipetakan ke Supabase
+  (migrasi `supabase/31`–`36` + RPC): kurs, kuota, harga §16.3, settlement §16.4, batch ≤24 + auto-sort,
+  dispatch Quick, marketing Dm/Da, dispute snapshot, chat, magic link, create/complete/cancel order,
+  ops params + KPI. Blocker eksternal (OPEN-01 DANA, ARC-12 Google/DANA, pengiriman email) **dilewati
+  sebagai state** — RPC menghitung & mencatat, tanpa layanan luar. Kontrak: `docs/backend/openapi.yaml`
+  0.3.0-draft + `src/api/mvp.ts`. FE masih mock; wiring layar menyusul.
 - Urutan M0→M4 adalah tulang punggung; M5/M6/M7/M8/M9 bisa paralel setelah M4 tapi semuanya bergantung DANA.
 - Rencana ini memakai ulang komponen UI/design system yang ada (AGENTS §12); yang diganti adalah kontrak backend.
 - Aktivasi mengubah `activeRevision`; wajib re-bind flow di `docs/design/flows/INDEX.json` pada commit yang sama.

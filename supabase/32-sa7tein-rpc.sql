@@ -187,10 +187,10 @@ declare v_merchant bigint; v_batch bigint; v_cnt int;
 begin
   select merchant_id into v_merchant from public.orders where id = p_order;
   select id into v_batch from public.batches
-    where merchant_id = v_merchant and courier_id = p_courier and status in ('open', 'assigned')
+    where merchant_id = v_merchant and courier_id = p_courier and status in ('prepare', 'waitingCourier', 'waitingDelivery', 'delivery')
     order by id desc limit 1;
   if v_batch is null then
-    insert into public.batches (merchant_id, courier_id, status) values (v_merchant, p_courier, 'assigned')
+    insert into public.batches (merchant_id, courier_id, status) values (v_merchant, p_courier, 'prepare')
     returning id into v_batch;
   end if;
   select count(*) into v_cnt from public.orders where batch_id = v_batch;
