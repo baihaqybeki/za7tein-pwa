@@ -1,8 +1,12 @@
 // Sa7tein API Worker — target migrasi dari Supabase (docs/backend/MIGRATION-cloudflare.md).
-// Kontrak dijaga agar FE bisa berjalan paralel dengan Supabase selama migrasi
-// (lihat docs/backend/MIGRATION-versioning.md).
-export interface Env {
-  DB: D1Database
+// Kontrak dijaga+berversi agar FE berjalan paralel dengan Supabase
+// (docs/backend/MIGRATION-versioning.md). FE memanggil `…/rest/v1/rpc/<fn>` & `…/rest/v1/<tabel>`.
+import { handleRest, type RestEnv } from './rest'
+import { handleRpc, type RpcEnv } from './rpc'
+import { pg, type HyperdriveBinding } from './pg'
+
+export interface Env extends RestEnv, RpcEnv {
+  HYPERDRIVE: HyperdriveBinding
   KV: KVNamespace
   R2_MENU: R2Bucket
   R2_MERCHANT: R2Bucket
@@ -17,32 +21,43 @@ const BUCKETS = (env: Env): Record<string, R2Bucket> => ({
   avatars: env.R2_AVATARS,
 })
 
-// `/v1/...` dan `/...` dianggap sama (kontrak stabil antar versi).
+// `/v1/...` dan `/...` setara (kontrak stabil antar versi).
 function relPath(pathname: string): string {
   return pathname.replace(/^\/v1(?=\/|$)/, '') || '/'
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const { pathname } = new URL(request.url)
-    const path = relPath(pathname)
+    const url = new URL(request.url)
+    const path = relPath(url.pathname)
 
     if (path === '/health') {
       let db: string
       try {
-        await env.DB.prepare('select 1 as ok').first()
+        const sql = pg(env.HYPERDRIVE)
+        await sql`select 1 as ok`
         db = 'ok'
       } catch (error) {
         db = `error: ${error instanceof Error ? error.message : String(error)}`
       }
       return Response.json({ ok: true, service: 'sa7tein-api-cf', backend: env.BACKEND, api: env.API_VERSION, db })
     }
-
     if (path === '/version') {
       return Response.json({ api: env.API_VERSION, backend: env.BACKEND, schema: 'd1' })
     }
 
-    // Media R2: GET (publik baca) / PUT (unggah). Authz unggah menyusul (C2/C3).
+    // PostgREST-compatible: /rest/v1/rpc/<fn> (POST) dan /rest/v1/<tabel> (GET).
+    const rpc = path.match(/^\/rest\/v1\/rpc\/([a-z_]+)$/)
+    if (rpc && request.method === 'POST') {
+      const args = await request.json().catch(() => ({}))
+      return handleRpc(env, rpc[1], args as Record<string, unknown>)
+    }
+    const table = path.match(/^\/rest\/v1\/([a-z_]+)$/)
+    if (table && request.method === 'GET') {
+      return handleRest(env, table[1], url.searchParams)
+    }
+
+    // Media R2: GET (baca) / PUT (unggah). Authz unggah menyusul (C3).
     const media = path.match(/^\/media\/([^/]+)\/(.+)$/)
     if (media) {
       const bucket = BUCKETS(env)[media[1]]

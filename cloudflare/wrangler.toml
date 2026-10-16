@@ -30,3 +30,7 @@ bucket_name = "sa7tein-merchant-photos"
 [[r2_buckets]]
 binding = "R2_AVATARS"
 bucket_name = "sa7tein-avatars"
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "5f12b6b4ac0b4f8e961b6ec7158d2fbd"

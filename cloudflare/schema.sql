@@ -96,3 +96,5 @@ CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items (order_id);
 CREATE INDEX IF NOT EXISTS idx_enterprise_ledger_order ON enterprise_ledger (order_id);
 CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications (user_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_chat ON chat_messages (chat_id);
+CREATE TABLE IF NOT EXISTS merchant_tags (id INTEGER PRIMARY KEY AUTOINCREMENT, merchant_id INTEGER, tag TEXT, proposed INTEGER DEFAULT 0, approved INTEGER DEFAULT 1, created_at TEXT DEFAULT (datetime('now')), UNIQUE (merchant_id, tag));
+CREATE INDEX IF NOT EXISTS idx_merchant_tags_merchant ON merchant_tags (merchant_id);

@@ -5023,6 +5023,120 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-versioning.md"
+    },
+    {
+      "id": "TASK-10424",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:41:19",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/migrate-supabase-to-d1.mjs (+101) — write via tool: // ========================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/migrate-supabase-to-d1.mjs"
+    },
+    {
+      "id": "TASK-10425",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:43:29",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rest.ts (+62) — write via tool: ts: // Sa7tein — subset PostgREST read d",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rest.ts"
+    },
+    {
+      "id": "TASK-10426",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:44:06",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts (+135) — write via tool: ts: // Sa7tein — RPC subset di atas D1 (",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts"
+    },
+    {
+      "id": "TASK-10427",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:45:11",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/index.ts (+82) — write via tool: ts: // Sa7tein API Worker — target migr",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/index.ts"
+    },
+    {
+      "id": "TASK-10428",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:59:33",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts (+1/-1) — edit via tool: ts: const named = entries.map(([k], i) =",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts"
+    },
+    {
+      "id": "TASK-10429",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "02:00:37",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts (+3/-3) — edit via tool: ts: const entries = Object.entries(args ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/rpc.ts"
     }
   ]
 }

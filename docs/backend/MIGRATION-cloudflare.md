@@ -1,6 +1,6 @@
 # Rencana migrasi ke Cloudflare (dari Supabase)
 
-Status: IN PROGRESS (C0 sebagian + C1 awal selesai; lihat cloudflare/README.md). Pemicu: kuota Supabase (proyek dibatasi 21 Okt 2026). Target: **Cloudflare**
+Status: IN PROGRESS — **DB lewat Hyperdrive** (Postgres tetap; Worker query fungsi existing). (C0 sebagian + C1 awal selesai; lihat cloudflare/README.md). Pemicu: kuota Supabase (proyek dibatasi 21 Okt 2026). Target: **Cloudflare**
 (selaras ARC-01..13 PRD aktif). Pasangan: `MIGRATION-quota-exit-milestones.md`.
 
 > Migrasi Postgres → Cloudflare **bukan lift-and-shift**: Cloudflare tak punya Postgres/RLS/PostgREST.
