@@ -47,6 +47,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `44-sp.sql` | **AP6.3** — `issue_sp` (ops-only) terbitkan SP/punishment + set kurir unavailable saat SP. |
 | `43-quota-partner-batch.sql` | **AP3.2/AP6.1/AP4.2** — `buy_quota_package` (QRIS +Ft 1,5%, ledger), `set_courier_status` (peta ke `availability`), `close_batch`. |
 | `42-realtime-notes-ops.sql` | **AP7.2/AP4.5/AP10.2/AP7.3** — publikasi realtime `notifications`+`checkpoints`(+orders/merchants/disputes/batches); `menus.note_enabled`+`order_items.note`; `emit_notification`; trigger `notify_cs_on_cancel`; view `ops_revenue_daily`. |
 | `41-payment-expiry-jobs.sql` | **AP2.5/AP3.4/AP10.5** — `orders.payment_expires_at` (30 mnt) + `expire_unpaid_orders`; `quota_low_alerts`; `run_cron_jobs` (pintu job: expire + close_stale_chats + quota alert). |

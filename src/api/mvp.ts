@@ -367,3 +367,22 @@ export function setCourierStatus(courierId: number, status: 'offline' | 'availab
 export function closeBatch(batchId: number): Promise<void> {
   return dbRpc<void>('close_batch', { p_batch: batchId }).then(() => undefined)
 }
+
+// ── AP6.3 SP/punishment (api-spec §17.3.3; ops-only) ─────────────────────────
+export function issueSp(input: {
+  subjectType: 'merchant' | 'courier' | 'customer'
+  subjectId: number
+  kind?: 'sp' | 'fine' | 'suspend'
+  level?: number
+  reason?: string
+  disputeId?: number | null
+}): Promise<number | null> {
+  return dbRpc<number>('issue_sp', {
+    p_subject_type: input.subjectType,
+    p_subject_id: input.subjectId,
+    p_kind: input.kind ?? 'sp',
+    p_level: input.level ?? 1,
+    p_reason: input.reason ?? null,
+    p_dispute: input.disputeId ?? null,
+  })
+}
