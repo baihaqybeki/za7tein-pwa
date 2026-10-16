@@ -9,6 +9,7 @@ account_id = "2f0537d984cb5f631c32505e08fa0f66"
 [vars]
 API_VERSION = "v2"
 BACKEND = "cloudflare"
+ALLOWED_ORIGIN = "*"
 
 [[d1_databases]]
 binding = "DB"
