@@ -4656,6 +4656,29 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "FEAT-903",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "00:03:41",
+      "tags": [
+        "backend",
+        "api-spec",
+        "ap1.3",
+        "ap8",
+        "ap9.2",
+        "ap2.5"
+      ],
+      "summary": "AP1.3 atribut katalog, AP8 rating, AP9.2 dispute, AP2.5 expiry+job+quota alert (migrasi 40,41) diterapkan+diuji.",
+      "conn": [
+        {
+          "id": "PRD-003",
+          "type": "implements",
+          "raw": "PRD-003:implements"
+        }
+      ]
     }
   ]
 }
