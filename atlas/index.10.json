@@ -3307,6 +3307,120 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10343",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:11:00",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/34-sa7tein-order.sql (+131) — write via tool: -- =============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/34-sa7tein-order.sql"
+    },
+    {
+      "id": "TASK-10344",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:14:16",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/34-sa7tein-order.sql (+132) — write via tool: -- =============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/34-sa7tein-order.sql"
+    },
+    {
+      "id": "TASK-10345",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:14:31",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+22/-7) — edit via tool: /rpc/snapshot_dispute_rules:",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10346",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:14:41",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts (+41/-3) — edit via tool: ts: export function snapshotDisputeRules(ord",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/mvp.ts"
+    },
+    {
+      "id": "TASK-10347",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:14:51",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md (+2/-1) — edit via tool: | `34-sa7tein-order.sql` | **create_orde",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/README.md"
+    },
+    {
+      "id": "TASK-10348",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "20:15:24",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnode -e \"require('js-yaml').load(require('fs').readFileSync('docs/backend/openapi.ya",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

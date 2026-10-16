@@ -2147,6 +2147,21 @@ paths:
       summary: Snapshot rule dispute merchant ke order (§18, M10)
       responses:
         '200': { description: OK }
+  /rpc/create_order:
+    post:
+      summary: Buat order lengkap (harga §16.3 + kuota + diskon + snapshot + chat + notif), M3
+      responses:
+        '201': { description: order_id }
+  /rpc/request_magic_link:
+    post:
+      summary: Minta magic link (ACC-01; stub — token dikembalikan sebagai state demo)
+      responses:
+        '200': { description: token }
+  /rpc/consume_magic_link:
+    post:
+      summary: Pakai magic link (ACC-01)
+      responses:
+        '200': { description: '{ email, role }' }
 
 components:
   securitySchemes:

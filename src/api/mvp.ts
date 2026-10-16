@@ -144,3 +144,41 @@ export function computeDiscounts(merchantId: number, subtotalJod: number): Promi
 export function snapshotDisputeRules(orderId: number): Promise<void> {
   return dbRpc<void>('snapshot_dispute_rules', { p_order: orderId }).then(() => undefined)
 }
+
+export interface CreateOrderItem {
+  menu_id: number
+  qty: number
+  unit_jod: number
+  name?: string
+  modifiers?: unknown[]
+}
+
+/** Buat order lengkap (M3 capstone). Mengembalikan order_id. */
+export function createOrder(input: {
+  customerId: number
+  merchantId: number
+  addressId: number
+  items: CreateOrderItem[]
+  deliveryType?: 'regular' | 'quick'
+  paymentMethod?: 'qris' | 'dana_balance' | 'cod'
+  note?: string
+}): Promise<number | null> {
+  return dbRpc<number>('create_order', {
+    p_customer: input.customerId,
+    p_merchant: input.merchantId,
+    p_address: input.addressId,
+    p_items: input.items,
+    p_delivery_type: input.deliveryType ?? 'regular',
+    p_payment_method: input.paymentMethod ?? 'qris',
+    p_note: input.note ?? null,
+  })
+}
+
+/** M1: magic link (stub — token dikembalikan sebagai state demo). */
+export function requestMagicLink(email: string, role = 'customer'): Promise<string | null> {
+  return dbRpc<string>('request_magic_link', { p_email: email, p_role: role })
+}
+
+export function consumeMagicLink(token: string): Promise<{ email: string; role: string } | null> {
+  return dbRpc<{ email: string; role: string }>('consume_magic_link', { p_token: token })
+}
