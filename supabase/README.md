@@ -47,6 +47,7 @@ percobaan "align ke draft" yang keliru. Sumber kebenaran schema = **`docs/backen
 | `24-hide-otp.sql` | **Sembunyikan `orders.otp`** dari anon/authenticated (grant SELECT per kolom kecuali `otp`); customer via RPC `my_order_otp`. |
 | `25-be-remainder.sql` | **Sisa BE** — SLA watcher + auto-settle (pg_cron), `resolve_coverage` RPC, seed `order_items`, FK promo→marketing. |
 | `26-storage.sql` | **Storage** — bucket menu-images/merchant-photos/avatars + RLS. |
+| `46-courier-type-ondemand.sql` | **picklist** — tambah `partner_ondemand` (Kurir partner on-demand) ke `courier_types`. |
 | `45-courier-types.sql` | **courier_type jadi picklist ops** — tabel `courier_types` (inhouse/partner) + FK `couriers.courier_type → courier_types.code` (ganti CHECK) + RPC `ops_upsert_courier_type`. |
 | `44-sp.sql` | **AP6.3** — `issue_sp` (ops-only) terbitkan SP/punishment + set kurir unavailable saat SP. |
 | `43-quota-partner-batch.sql` | **AP3.2/AP6.1/AP4.2** — `buy_quota_package` (QRIS +Ft 1,5%, ledger), `set_courier_status` (peta ke `availability`), `close_batch`. |
