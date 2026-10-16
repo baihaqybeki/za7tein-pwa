@@ -11165,6 +11165,18 @@
     {
       "id": "TASK-10416",
       "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "sa7tein": [
@@ -29919,6 +29931,18 @@
     {
       "id": "TASK-10416",
       "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "/users/vanviakingali/downloads/sa7tein-pwa/agents.md": [
@@ -37200,6 +37224,14 @@
     },
     {
       "id": "TASK-10412",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
       "shard": 10
     }
   ],
@@ -46483,6 +46515,18 @@
     {
       "id": "TASK-10416",
       "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "tool:": [
@@ -55652,6 +55696,18 @@
     },
     {
       "id": "TASK-10416",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
       "shard": 10
     }
   ],
@@ -66679,6 +66735,18 @@
     {
       "id": "TASK-10416",
       "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "task-147": [
@@ -69494,6 +69562,10 @@
     },
     {
       "id": "TASK-10416",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
       "shard": 10
     }
   ],
@@ -72329,6 +72401,10 @@
     {
       "id": "TASK-10391",
       "shard": 10
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
     }
   ],
   "task-149": [
@@ -72808,6 +72884,10 @@
     },
     {
       "id": "TASK-10416",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
       "shard": 10
     }
   ],
@@ -76154,6 +76234,10 @@
     },
     {
       "id": "TASK-10415",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
       "shard": 10
     }
   ],
@@ -127211,6 +127295,10 @@
     {
       "id": "TASK-1076",
       "shard": 2
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
     }
   ],
   "flow": [
@@ -129729,6 +129817,10 @@
     {
       "id": "TASK-10211",
       "shard": 10
+    },
+    {
+      "id": "TASK-10418",
+      "shard": 10
     }
   ],
   "task-1122": [
@@ -130942,6 +131034,10 @@
     },
     {
       "id": "TASK-10384",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10419",
       "shard": 10
     }
   ],
@@ -145008,6 +145104,10 @@
     },
     {
       "id": "FEAT-904",
+      "shard": 10
+    },
+    {
+      "id": "TASK-10418",
       "shard": 10
     }
   ],
@@ -190497,6 +190597,10 @@
     {
       "id": "TASK-10370",
       "shard": 10
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "\"docs:serve\":": [
@@ -190513,6 +190617,10 @@
     {
       "id": "TASK-9306",
       "shard": 9
+    },
+    {
+      "id": "TASK-10419",
+      "shard": 10
     }
   ],
   "scripts/serve-docs.m": [
@@ -193329,6 +193437,10 @@
     {
       "id": "TASK-9424",
       "shard": 9
+    },
+    {
+      "id": "TASK-10417",
+      "shard": 10
     }
   ],
   "\"command\":": [
@@ -201330,6 +201442,66 @@
   "feat-904": [
     {
       "id": "FEAT-904",
+      "shard": 10
+    }
+  ],
+  "(+30/-15)": [
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    }
+  ],
+  "\"supabase\":": [
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    }
+  ],
+  "task-10417": [
+    {
+      "id": "TASK-10417",
+      "shard": 10
+    }
+  ],
+  "/users/muhammadbaihaqy/downloads/za7tein-pwa/docs/backend/migration-cloudflare.md": [
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    }
+  ],
+  "cloud": [
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    }
+  ],
+  "task-10418": [
+    {
+      "id": "TASK-10418",
+      "shard": 10
+    }
+  ],
+  "\"db:e2e\":": [
+    {
+      "id": "TASK-10419",
+      "shard": 10
+    }
+  ],
+  "scripts/db-verify.mjs": [
+    {
+      "id": "TASK-10419",
+      "shard": 10
+    }
+  ],
+  "e2": [
+    {
+      "id": "TASK-10419",
+      "shard": 10
+    }
+  ],
+  "task-10419": [
+    {
+      "id": "TASK-10419",
       "shard": 10
     }
   ]

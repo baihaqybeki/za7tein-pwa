@@ -23,7 +23,10 @@
     "db:verify-consume": "node scripts/db-verify.mjs verify-consume",
     "db:remote-check": "node scripts/db-verify.mjs remote-check",
     "db:link-auth": "node scripts/db-verify.mjs link-auth",
-    "db:e2e": "node scripts/db-verify.mjs e2e"
+    "db:e2e": "node scripts/db-verify.mjs e2e",
+    "cf:login": "wrangler login",
+    "cf:dev": "wrangler dev -c cloudflare/wrangler.toml",
+    "cf:deploy": "wrangler deploy -c cloudflare/wrangler.toml"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

@@ -1,0 +1,23 @@
+# Sa7tein — API Worker (target migrasi dari Supabase)
+# Isi id setelah `npx wrangler d1 create sa7tein` dsb.
+name = "sa7tein-api-cf"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "sa7tein"
+# database_id = "REPLACE_WITH_D1_ID"
+
+# [[r2_buckets]]
+# binding = "R2"
+# bucket_name = "sa7tein"
+# preview_bucket_name = "sa7tein"
+
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "REPLACE_WITH_KV_ID"
+
+# [triggers]
+# crons = ["*/1 * * * *"]

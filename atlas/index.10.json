@@ -4890,6 +4890,63 @@
           "raw": "DEC-1050:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10417",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:09:22",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/.config/opencode/opencode.json (+30/-15) — edit via tool: \"supabase\": {",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/.config/opencode/opencode.json"
+    },
+    {
+      "id": "TASK-10418",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:10:18",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-cloudflare.md (+56) — write via tool: # Rencana migrasi ke Cloud",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/MIGRATION-cloudflare.md"
+    },
+    {
+      "id": "TASK-10419",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-17",
+      "time": "01:10:53",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/package.json (+5/-2) — edit via tool: \"db:e2e\": \"node scripts/db-verify.mjs e2",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/package.json"
     }
   ]
 }
