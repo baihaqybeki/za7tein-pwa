@@ -51,6 +51,7 @@ export async function updateMyMerchant(patch: {
   store_name?: string
   store_phone?: string
   store_address?: string
+  photo?: string
   open_time?: string
   close_time?: string
   store_status?: string

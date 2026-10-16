@@ -3929,6 +3929,120 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/scripts/db-verify.mjs"
+    },
+    {
+      "id": "TASK-10373",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:32:05",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/37-storage-buckets.sql (+18) — write via tool: -- ============================",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/supabase/37-storage-buckets.sql"
+    },
+    {
+      "id": "TASK-10374",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:32:31",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts (+9/-8) — edit via tool: ts: export async function updateMyMerchan",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/reference.ts"
+    },
+    {
+      "id": "TASK-10375",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:32:39",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantSettings.tsx (+4/-2) — edit via tool: tsx: import { isBackendConfigur",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantSettings.tsx"
+    },
+    {
+      "id": "TASK-10376",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:33:01",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantSettings.tsx (+8/-7) — edit via tool: tsx: const ok = await updateMyM",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/MerchantSettings.tsx"
+    },
+    {
+      "id": "TASK-10377",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:33:09",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx (+4/-3) — edit via tool: tsx: 'PWA',",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/pages/Documentation.tsx"
+    },
+    {
+      "id": "TASK-10378",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-16",
+      "time": "22:33:27",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\nnpm run lint 2>&1 | grep -E \"error:\" | head; echo \"lint errors: $(npm run lint 2>&1 ",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

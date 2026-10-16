@@ -11,7 +11,9 @@ import { ConfirmSheet } from '../components/ui/ConfirmSheet'
 import { InstallAppCard } from '../components/ui/InstallAppCard'
 import { useLeafletMap } from '../hooks/useLeafletMap'
 import { isBackendConfigured } from '../api/config'
+import { getCurrentSession } from '../api/auth'
 import { updateMyMerchant } from '../api/reference'
+import { uploadToBucket } from '../api/storage'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { money } from '../data/currency'
 import { mockMerchant } from '../data/merchant'
@@ -49,11 +51,13 @@ export default function MerchantSettings() {
   // URL objek yang sedang dipakai; dilepas saat diganti / dihapus / unmount
   // supaya blob tidak menumpuk.
   const logoUrlRef = useRef<string | null>(null)
+  // URL foto toko hasil unggahan ke Storage (bukan blob lokal) — ikut disimpan ke backend.
+  const [logoRemote, setLogoRemote] = useState<string | null>(null)
   useEffect(() => () => { if (logoUrlRef.current) URL.revokeObjectURL(logoUrlRef.current) }, [])
 
-  // Pratinjau lokal dari berkas yang dipilih. Tidak ada unggahan sungguhan —
-  // repo ini front-end saja (AGENTS.md §1).
-  const onLogoPick = (event: ChangeEvent<HTMLInputElement>) => {
+  // Unggah foto toko ke bucket `merchant-photos` bila backend aktif & ada sesi
+  // (RLS storage: folder = auth.uid()). Tanpa sesi → pratinjau lokal.
+  const onLogoPick = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
     const error = imageFileError(file)
@@ -62,9 +66,27 @@ export default function MerchantSettings() {
       event.target.value = ''
       return
     }
+    if (isBackendConfigured) {
+      const session = getCurrentSession()
+      if (session) {
+        const url = await uploadToBucket('merchant-photos', file, session.userId)
+        if (url) {
+          if (logoUrlRef.current) {
+            URL.revokeObjectURL(logoUrlRef.current)
+            logoUrlRef.current = null
+          }
+          setLogoRemote(url)
+          dispatch(setMerchantLogo(url))
+          toast.success('Foto toko diunggah — tekan Simpan')
+          return
+        }
+        toast.error('Gagal mengunggah foto; memakai pratinjau lokal')
+      }
+    }
     if (logoUrlRef.current) URL.revokeObjectURL(logoUrlRef.current)
     const url = URL.createObjectURL(file)
     logoUrlRef.current = url
+    setLogoRemote(null)
     dispatch(setMerchantLogo(url))
     toast.success('Foto toko diperbarui')
   }
@@ -74,6 +96,7 @@ export default function MerchantSettings() {
       URL.revokeObjectURL(logoUrlRef.current)
       logoUrlRef.current = null
     }
+    setLogoRemote(null)
     dispatch(removeMerchantLogo())
     toast.success('Foto toko dihapus')
   }
@@ -121,6 +144,7 @@ export default function MerchantSettings() {
         store_name: data.name,
         store_phone: data.phone,
         store_address: data.address,
+        ...(logoRemote ? { photo: logoRemote } : {}),
         open_time: hours.open,
         close_time: hours.close,
       })

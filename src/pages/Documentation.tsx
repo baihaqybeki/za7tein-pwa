@@ -101,6 +101,7 @@ const HERO_TAGS = [
   'SCSS',
   'PWA',
   'Supabase RPC',
+  'Supabase Storage',
   'Zod',
   'React Hook Form',
 ]
