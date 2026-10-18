@@ -3,7 +3,7 @@ openapi: 3.1.0
 info:
   title: Sa7tein API — Marketplace MVP
   x-prd-revision: sa7tein-mvp-2026-10-11
-  version: 0.3.0-draft
+  version: 0.4.0-draft
   summary: Kontrak REST + Realtime untuk marketplace pesan-antar Sa7tein (Jordan, harga JOD, transaksi IDR).
   description: |
     **Status: DRAFT.** Dibuat lebih awal dari milestone M1 (ERD final) supaya bentuk kontrak
@@ -18,6 +18,11 @@ info:
     DANA, kuota langganan). Backend tetap **Supabase** — deviasi disetujui dari Cloudflare Workers/DO
     (ARC-01..13, ditandai `UNRESOLVED`). Peta: `docs/backend/PRD-MAPPING-sa7tein-mvp.md`, migrasi
     `supabase/31-sa7tein-mvp.sql`. Metode bayar: `qris | dana_balance | cod`.
+
+    **Backend migrasi (2026-10):** Cloudflare Worker + **D1 (SQLite)** + **R2**. Kontrak FE:
+    `docs/backend/CONSUME-cloudflare.md`. Endpoint Cloudflare (`/auth/*`, `/rest/v1/*`, `/media/*`,
+    `/ws`, `/health`, `/version`) didokumentasikan di bagian bawah; kontrak lama Supabase tetap ada
+    selama paralel (`docs/backend/MIGRATION-versioning.md`).
 
     Aturan yang mengikat kontrak ini:
 
@@ -85,7 +90,11 @@ servers:
   # tombol Authorize di atas -> apikey = anon key (Supabase: Settings -> API),
   # bearer = access_token hasil login. Detail: docs/backend/CONSUME.md.
   - url: https://dwzxtnfesmpobnepilhl.supabase.co/rest/v1
-    description: LIVE — Supabase PostgREST (butuh apikey; JWT untuk data privat)
+    description: LIVE (lama) — Supabase PostgREST (butuh apikey; JWT untuk data privat)
+
+  # Backend migrasi: Cloudflare Worker + D1 (SQLite) + R2.
+  - url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev
+    description: 'LIVE — Cloudflare Worker (D1 + R2). Kontrak: docs/backend/CONSUME-cloudflare.md'
 
   # Rencana, BUKAN host aktif: DNS-nya belum ada sampai gateway REST sendiri
   # dibangun. Jangan dipakai untuk Try it out (akan gagal "could not resolve host").
@@ -2186,6 +2195,107 @@ paths:
     post: { summary: Kirim pesan chat order (§20.1, M11), responses: { '201': { description: message_id } } }
   /rpc/close_stale_chats:
     post: { summary: Tutup chat lewat auto_close_at (§20.1, M11), responses: { '200': { description: jumlah ditutup } } }
+
+  # ── Cloudflare Worker (D1 + R2) ────────────────────────────────────────────
+  /health:
+    get:
+      tags: [Cloudflare]
+      summary: Health Worker + D1
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      responses:
+        '200': { description: '{ ok, backend, api, db }' }
+  /version:
+    get:
+      tags: [Cloudflare]
+      summary: Versi API/backend
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      responses:
+        '200': { description: '{ api:"v2", backend:"cloudflare", schema:"d1" }' }
+  /auth/magic-link:
+    post:
+      tags: [Cloudflare, Auth]
+      summary: Kirim magic link (stub — token dikembalikan)
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+                role: { type: string, enum: [customer, merchant, courier_inhouse, courier_partner, ops] }
+      responses:
+        '200': { description: '{ ok, token }' }
+  /auth/verify:
+    post:
+      tags: [Cloudflare, Auth]
+      summary: Tukar magic-link token -> JWT (Bearer)
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object, required: [token], properties: { token: { type: string } } }
+      responses:
+        '200': { description: '{ access_token, token_type, user }' }
+        '400': { description: token invalid/kedaluwarsa/terpakai }
+  /rest/v1/{table}:
+    get:
+      tags: [Cloudflare]
+      summary: Baca tabel (subset PostgREST di D1)
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      parameters:
+        - { name: table, in: path, required: true, schema: { type: string } }
+        - { name: select, in: query, schema: { type: string } }
+        - { name: order, in: query, schema: { type: string, example: 'rating_avg.desc' } }
+        - { name: limit, in: query, schema: { type: integer, default: 100 } }
+        - { name: offset, in: query, schema: { type: integer, default: 0 } }
+      responses:
+        '200': { description: array baris }
+  /rest/v1/rpc/{fn}:
+    post:
+      tags: [Cloudflare]
+      summary: Panggil RPC (POST JSON) — daftar fn lihat CONSUME-cloudflare
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      parameters:
+        - { name: fn, in: path, required: true, schema: { type: string } }
+      requestBody:
+        content: { application/json: { schema: { type: object } } }
+      responses:
+        '200': { description: hasil }
+        '401': { description: 'RPC tulis tanpa JWT' }
+        '403': { description: 'RPC ops tanpa peran cs/superadmin' }
+        '501': { description: 'fn belum diimplementasikan' }
+  /media/{bucket}/{key}:
+    parameters:
+      - { name: bucket, in: path, required: true, schema: { type: string, enum: [menu-images, merchant-photos, avatars] } }
+      - { name: key, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [Cloudflare]
+      summary: Baca objek R2
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      responses:
+        '200': { description: berkas }
+        '404': { description: not found }
+    put:
+      tags: [Cloudflare]
+      summary: Unggah objek R2 (body = file)
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      requestBody: { content: { application/octet-stream: { schema: { type: string, format: binary } } } }
+      responses:
+        '201': { description: '{ ok, key, bucket }' }
+  /ws:
+    get:
+      tags: [Cloudflare]
+      summary: WebSocket realtime (Upgrade) — Durable Object
+      description: '`wss://…/ws?topic=orders`. Broadcast `{type:"rpc",fn,at}` setelah RPC tulis sukses.'
+      servers: [{ url: https://sa7tein-api-cf.sa7tein-pwa.workers.dev }]
+      parameters:
+        - { name: topic, in: query, schema: { type: string, default: orders } }
+      responses:
+        '101': { description: Switching Protocols }
 
 components:
   securitySchemes:

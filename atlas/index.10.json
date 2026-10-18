@@ -5251,6 +5251,44 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/cloudflare/src/index.ts"
+    },
+    {
+      "id": "TASK-10436",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-18",
+      "time": "12:07:26",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+11/-7) — edit via tool: - url: https://dwzxtnfesmpobnepilhl",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10437",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-18",
+      "time": "12:09:40",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml (+1/-10) — edit via tool: /rest/v1/{table}:",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
     }
   ]
 }
