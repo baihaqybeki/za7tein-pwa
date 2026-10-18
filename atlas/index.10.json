@@ -5289,6 +5289,44 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/openapi.yaml"
+    },
+    {
+      "id": "TASK-10438",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-18",
+      "time": "12:36:51",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/CONSUME.md (+35/-20) — edit via tool: # Konsumsi Database — untuk frontend",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/CONSUME.md"
+    },
+    {
+      "id": "TASK-10439",
+      "type": "task",
+      "status": "done",
+      "date": "2026-10-18",
+      "time": "12:37:01",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/CONSUME.md (+6/-2) — edit via tool: `db:verify-consume` membuat satu order",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/CONSUME.md"
     }
   ]
 }

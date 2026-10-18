@@ -1,5 +1,10 @@
 # Konsumsi Database — untuk frontend baru
 
+> **Status (2026-10):** backend utama kini **Cloudflare Worker + D1 (SQLite) + R2**.
+> Kontrak & cara konsumsi terbaru ada di **`docs/backend/CONSUME-cloudflare.md`**.
+> Dokumen ini mempertahankan detail **Supabase (legacy/paralel)** selama migrasi
+> (`docs/backend/MIGRATION-versioning.md`). Untuk FE baru, ikuti dokumen Cloudflare.
+
 Target pembaca: siapa pun yang membangun frontend baru (mis. `za7tein-pwa`) di atas database
 Sa7tein. Database **sudah live** dan sudah diuji bisa dikonsumsi — dokumen ini menjelaskan caranya,
 apa yang boleh/tidak boleh, dan apa yang belum diputuskan.
@@ -10,6 +15,16 @@ Batas yang belum diputuskan: `docs/backend/M6-ADAPTER.md` §9–§10.
 ---
 
 ## 1. Koneksi
+
+Dua backend hidup berdampingan selama migrasi:
+
+| Backend | Base | Status |
+|---|---|---|
+| **Cloudflare Worker** (D1 + R2) | `https://sa7tein-api-cf.sa7tein-pwa.workers.dev` | **utama** — lihat `CONSUME-cloudflare.md` |
+| Supabase PostgREST | `https://dwzxtnfesmpobnepilhl.supabase.co` | legacy/paralel |
+
+Bagian rest dokumen ini menggambarkan **Supabase**. Untuk Cloudflare: `/rest/v1/<tabel>`,
+`/rest/v1/rpc/<fn>`, `/auth/*`, `/media/<bucket>/<key>`, `/ws`.
 
 Tidak ada server backend terpisah. **PostgREST + Realtime bawaan Supabase** adalah API-nya.
 
@@ -130,3 +145,7 @@ npm run db:verify-consume  # tulis + baca lintas peran + RLS + realtime, ke CLOU
 
 `db:verify-consume` membuat satu order uji lalu **menghapusnya lagi**, jadi DB tidak ditinggalkan
 kotor. Jalankan setiap kali skema/policy berubah.
+
+> Script di atas menembak **Supabase** (via `SUPABASE_URL` + service role). Untuk backend Cloudflare,
+> verifikasi lewat `/health`, `POST /rest/v1/rpc/<fn>`, dan `scripts/migrate-supabase-to-d1.mjs`
+> (lihat `CONSUME-cloudflare.md`).
