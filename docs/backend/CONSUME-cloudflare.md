@@ -90,3 +90,32 @@ topic `orders`. Pesan `ping` → `pong`. FE ganti transport `src/api/realtime.ts
 ```
 CLOUDFLARE_API_TOKEN=... CLOUDFLARE_ACCOUNT_ID=... npm run cf:deploy
 ```
+
+---
+
+## Update 2026-10-18 — respons feedback FE
+
+Diimplementasikan (kode), **menunggu deploy** (token Cloudflare dibatasi IP):
+- **Tabel hilang** ditambah: `payout_accounts`, `payment_methods` (+seed qris/dana_balance/cod),
+  `platform_profit`, `profit_withdrawals` (`cloudflare/schema.sql`).
+- **Tulis generik**: `POST/PATCH/DELETE /rest/v1/{table}` — wajib `Authorization: Bearer <JWT>`;
+  authz per baris (`user_id`/`merchant_id`/`customer_id`/`courier_id`; ops bypass);
+  `Prefer: return=representation` mengembalikan baris; `DELETE`/`PATCH` tanpa representation → `204`.
+- **Embed**: `select=…,users(phone)` (customers/couriers), `menus(name)` (order_items),
+  `merchants(…)`/`customers(…)` (orders).
+- **Count**: `Prefer: count=exact` → header `Content-Range: 0-9/35`.
+- **RPC baru**: `my_order_otp` (`p_order_id`, customer pemilik/ops → string|null),
+  `verify_order_otp` (`p_order_id`,`p_code` → boolean; set `otp_verified` + checkpoint),
+  `courier_orders` (Bearer kurir → `CourierTask[]`), `ops_set_platform_params` (ops).
+- **Auth**: `PATCH /auth/me` (`name/avatar/email/phone`).
+- **Media**: `PUT/POST` wajib JWT; `DELETE /media/{bucket}/{key}` ditambah; `GET` tetap publik.
+- **Realtime**: setiap tulis tabel menyiarkan `{type:'insert|update|delete', table, at}` ke topic
+  `=<table>`; RPC tulis tetap `{type:'rpc',fn,at}` ke topic `orders`.
+
+RPC baca yang tetap publik: `price_order`, `compute_discounts`, `browse_merchants`, `search_merchants`,
+`check_coverage`, `fx_rate_latest`. `check_coverage` **memang** boolean (bukan objek).
+
+Deploy (setelah token/IP dibuka):
+```
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… npm run cf:deploy
+```

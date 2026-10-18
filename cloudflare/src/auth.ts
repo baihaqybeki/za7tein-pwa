@@ -75,6 +75,16 @@ export async function handleAuth(env: AuthEnv, path: string, request: Request): 
     const access = await signJwt({ sub, role, email: row.email, exp: Math.floor(Date.now() / 1000) + 86400 }, env.JWT_SECRET)
     return Response.json({ access_token: access, token_type: 'bearer', user: { id: sub, role, email: row.email } })
   }
+  if (path === '/auth/me' && request.method === 'PATCH') {
+    const id = await identity(request, env)
+    if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })
+    const body = (await request.json().catch(() => ({}))) as Record<string, unknown>
+    const cols = ['name', 'avatar', 'email', 'phone'].filter((c) => c in body)
+    if (!cols.length) return Response.json({ message: 'tidak ada field yang diubah' }, { status: 400 })
+    await env.DB.prepare(`UPDATE users SET ${cols.map((c) => `${c} = ?`).join(', ')} WHERE id = ?`).bind(...cols.map((c) => body[c]), id.id).run()
+    const user = await env.DB.prepare('SELECT id, role, email, phone, name, avatar FROM users WHERE id = ?').bind(id.id).first()
+    return Response.json(user)
+  }
   if (path === '/auth/me' && request.method === 'GET') {
     const id = await identity(request, env)
     if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })

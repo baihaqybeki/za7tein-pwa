@@ -4,6 +4,8 @@ export interface RpcEnv {
 }
 
 type Args = Record<string, unknown>
+export interface RpcIdentity { id: number; role: string }
+const isOpsId = (id?: RpcIdentity | null): boolean => Boolean(id && ['cs', 'superadmin'].includes(id.role))
 const num = (v: unknown): number => (v === null || v === undefined || v === '' ? 0 : Number(v))
 const now = (): string => new Date().toISOString()
 const code = (): string => `SA-${Math.random().toString(36).slice(2, 10).toUpperCase()}`
@@ -299,7 +301,43 @@ async function quotaLowAlerts(env: RpcEnv) {
   return (results ?? []).length
 }
 
-const R: Record<string, (e: RpcEnv, a: Args) => Promise<unknown>> = {
+
+async function myOrderOtp(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const o = await env.DB.prepare('SELECT o.otp, o.customer_id, cu.user_id cu FROM orders o LEFT JOIN customers cu ON cu.id=o.customer_id WHERE o.id=?').bind(num(a.p_order_id)).first<Record<string, unknown>>()
+  if (!o) return null
+  if (!id || (!isOpsId(id) && Number(o.cu) !== id.id)) throw new Error('forbidden')
+  return o.otp ?? null
+}
+async function verifyOrderOtp(env: RpcEnv, a: Args) {
+  const o = await env.DB.prepare('SELECT otp FROM orders WHERE id=?').bind(num(a.p_order_id)).first<{ otp: string | null }>()
+  if (!o) return false
+  if (String(o.otp) !== String(a.p_code)) return false
+  await env.DB.prepare('UPDATE orders SET otp_verified=1 WHERE id=?').bind(num(a.p_order_id)).run()
+  await env.DB.prepare("INSERT INTO checkpoints (order_id,kind) VALUES (?, 'otp_verified')").bind(num(a.p_order_id)).run()
+  return true
+}
+async function courierOrders(env: RpcEnv, _a: Args, id?: RpcIdentity | null) {
+  if (!id) return []
+  const c = await env.DB.prepare('SELECT id FROM couriers WHERE user_id=? LIMIT 1').bind(id.id).first<{ id: number }>()
+  if (!c) return []
+  const { results } = await env.DB.prepare(
+    `SELECT o.id,o.code,o.status,o.customer_id,cu.name customer_name,cu_user.phone customer_phone,o.zone_code,a.full_address,a.address address_line,a.floor,a.unit,o.total_jod,o.payment_method,o.tip_jod,o.otp_verified,
+       (SELECT at FROM checkpoints cp WHERE cp.order_id=o.id ORDER BY cp.id DESC LIMIT 1) checkpoint_at
+     FROM orders o LEFT JOIN customers cu ON cu.id=o.customer_id LEFT JOIN users cu_user ON cu_user.id=cu.user_id LEFT JOIN addresses a ON a.id=o.delivery_address_id
+     WHERE o.courier_id=? AND o.status IN ('waitingCourier','waitingDelivery','delivery') ORDER BY o.id DESC`).bind(c.id).all<Record<string, unknown>>()
+  const out: Record<string, unknown>[] = []
+  for (const r of results ?? []) {
+    const items = await env.DB.prepare('SELECT name,qty,line_total_jod,modifiers FROM order_items WHERE order_id=?').bind(r.id).all()
+    out.push({ ...r, distance_m: null, items: items.results ?? [] })
+  }
+  return out
+}
+async function opsSetParams(env: RpcEnv, a: Args) {
+  await env.DB.prepare('UPDATE platform_params SET platform_fee_customer_jod=COALESCE(?,platform_fee_customer_jod), platform_fee_merchant_jod=COALESCE(?,platform_fee_merchant_jod), quick_multiplier=COALESCE(?,quick_multiplier), updated_at=? WHERE id=1')
+    .bind(a.p_fee_customer ?? null, a.p_fee_merchant ?? null, a.p_quick_multiplier ?? null, now()).run()
+}
+
+const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise<unknown>> = {
   fx_rate_latest: (e) => q(e).fx().then((r) => r?.rate ?? null),
   price_order: priceOrder, compute_discounts: computeDiscounts, check_coverage: checkCoverage,
   browse_merchants: browseMerchants, search_merchants: searchMerchants,
@@ -310,16 +348,17 @@ const R: Record<string, (e: RpcEnv, a: Args) => Promise<unknown>> = {
   buy_quota_package: buyQuotaPackage, set_courier_status: setCourierStatus, close_batch: closeBatch, issue_sp: issueSp,
   submit_review: submitReview, reply_review: replyReview, open_dispute: openDispute, resolve_dispute: resolveDispute, appeal_dispute: appealDispute,
   snapshot_dispute_rules: snapshotDisputeRules, emit_notification: emitNotification,
+  my_order_otp: myOrderOtp, verify_order_otp: verifyOrderOtp, courier_orders: courierOrders, ops_set_platform_params: opsSetParams,
   request_magic_link: requestMagicLink, consume_magic_link: consumeMagicLink,
   expire_unpaid_orders: expireUnpaidOrders, quota_low_alerts: quotaLowAlerts,
   run_cron_jobs: async (e) => ({ expired_orders: await expireUnpaidOrders(e), stale_chats: await closeStaleChats(e), quota_alerts: await quotaLowAlerts(e) }),
 }
 
-export async function handleRpc(env: RpcEnv, fn: string, args: Args): Promise<Response> {
+export async function handleRpc(env: RpcEnv, fn: string, args: Args, id?: RpcIdentity | null): Promise<Response> {
   const h = R[fn]
   if (!h) return Response.json({ message: `rpc ${fn} belum diimplementasikan` }, { status: 501 })
   try {
-    return Response.json(await h(env, args ?? {}))
+    return Response.json(await h(env, args ?? {}, id))
   } catch (error) {
     return Response.json({ message: String(error) }, { status: 400 })
   }

@@ -1,6 +1,6 @@
 // Sa7tein API Worker (backend) — D1 + R2. Kontrak: docs/backend/CONSUME-cloudflare.md.
-// C3 auth (JWT HS256 + magic link) · C5 realtime (Durable Object WebSocket).
-import { handleRest, type RestEnv } from './rest'
+// C3 auth (JWT) · C5 realtime (DO) · tulis generik + authz + embed + count.
+import { handleRest, type RestEnv, type RestIdentity } from './rest'
 import { handleRpc, type RpcEnv } from './rpc'
 import { handleAuth, identity, type AuthEnv } from './auth'
 import { RealtimeHub } from './realtime'
@@ -26,12 +26,12 @@ const BUCKETS = (env: Env): Record<string, R2Bucket> => ({
 
 const relPath = (p: string): string => p.replace(/^\/v1(?=\/|$)/, '') || '/'
 
-// RPC yang mengubah data → wajib login (C3). Ops-only → peran cs/superadmin.
 const WRITE_RPCS = new Set([
   'reserve_quota', 'consume_quota', 'release_quota', 'create_order', 'complete_order', 'cancel_order',
   'assign_batch', 'dispatch_partner', 'respond_assignment', 'create_refund', 'send_chat_message',
   'buy_quota_package', 'set_courier_status', 'close_batch', 'submit_review', 'reply_review',
   'open_dispute', 'resolve_dispute', 'appeal_dispute', 'snapshot_dispute_rules', 'emit_notification',
+  'my_order_otp', 'verify_order_otp',
 ])
 const OPS_RPCS = new Set(['issue_sp', 'ops_set_platform_params'])
 
@@ -57,6 +57,7 @@ async function broadcast(env: Env, topic: string, payload: unknown): Promise<voi
 async function route(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url)
   const path = relPath(url.pathname)
+  const prefer = request.headers.get('prefer') ?? ''
 
   if (path === '/health') {
     let db: string
@@ -72,11 +73,9 @@ async function route(request: Request, env: Env): Promise<Response> {
 
   if (path.startsWith('/auth/')) return handleAuth(env, path, request)
 
-  // Realtime: WebSocket ke Durable Object.
   if (path === '/ws') {
     const topic = url.searchParams.get('topic') ?? 'orders'
-    const stub = env.REALTIME.get(env.REALTIME.idFromName(topic))
-    return stub.fetch(request)
+    return env.REALTIME.get(env.REALTIME.idFromName(topic)).fetch(request)
   }
 
   const rpc = path.match(/^\/rest\/v1\/rpc\/([a-z_]+)$/)
@@ -86,12 +85,30 @@ async function route(request: Request, env: Env): Promise<Response> {
     if (WRITE_RPCS.has(fn) && !id) return Response.json({ message: 'unauthorized — login dulu' }, { status: 401 })
     if (OPS_RPCS.has(fn) && !(id && ['cs', 'superadmin'].includes(id.role))) return Response.json({ message: 'forbidden — ops only' }, { status: 403 })
     const args = await request.json().catch(() => ({}))
-    const res = await handleRpc(env, fn, args as Record<string, unknown>)
+    const res = await handleRpc(env, fn, args as Record<string, unknown>, id)
     if (WRITE_RPCS.has(fn) && res.status < 400) await broadcast(env, 'orders', { type: 'rpc', fn, at: Date.now() })
     return res
   }
+
   const table = path.match(/^\/rest\/v1\/([a-z_]+)$/)
-  if (table && request.method === 'GET') return handleRest(env, table[1], url.searchParams)
+  if (table) {
+    const tbl = table[1]
+    const countExact = prefer.includes('count=exact')
+    if (request.method === 'GET') return handleRest(env, tbl, url.searchParams, undefined, countExact)
+    if (['POST', 'PATCH', 'DELETE'].includes(request.method)) {
+      const id = await identity(request, env)
+      if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })
+      const body = request.method === 'DELETE' ? null : await request.json().catch(() => ({}))
+      const res = await handleRest(env, tbl, url.searchParams, {
+        method: request.method as 'POST' | 'PATCH' | 'DELETE',
+        body,
+        identity: id as RestIdentity,
+        prefer,
+      })
+      if (res.status < 400) await broadcast(env, tbl, { type: request.method.toLowerCase(), table: tbl, at: Date.now() })
+      return res
+    }
+  }
 
   const media = path.match(/^\/media\/([^/]+)\/(.+)$/)
   if (media) {
@@ -106,10 +123,16 @@ async function route(request: Request, env: Env): Promise<Response> {
       headers.set('etag', object.httpEtag)
       return new Response(object.body, { headers })
     }
+    const id = await identity(request, env)
+    if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })
     if (request.method === 'PUT' || request.method === 'POST') {
       const contentType = request.headers.get('content-type') ?? 'application/octet-stream'
       await bucket.put(key, request.body, { httpMetadata: { contentType } })
       return Response.json({ ok: true, key, bucket: media[1] }, { status: 201 })
+    }
+    if (request.method === 'DELETE') {
+      await bucket.delete(key)
+      return new Response(null, { status: 204 })
     }
     return new Response('method not allowed', { status: 405 })
   }
@@ -122,7 +145,6 @@ export default {
     const headers = cors(env)
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers })
     const res = await route(request, env)
-    // Jangan bangun ulang respons upgrade WebSocket (101) — `webSocket` hilang bila di-rebuild.
     if (res.status === 101) return res
     const merged = new Headers(res.headers)
     for (const [k, v] of Object.entries(headers)) merged.set(k, v)

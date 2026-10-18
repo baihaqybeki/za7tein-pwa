@@ -98,3 +98,7 @@ CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications (user_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_chat ON chat_messages (chat_id);
 CREATE TABLE IF NOT EXISTS merchant_tags (id INTEGER PRIMARY KEY AUTOINCREMENT, merchant_id INTEGER, tag TEXT, proposed INTEGER DEFAULT 0, approved INTEGER DEFAULT 1, created_at TEXT DEFAULT (datetime('now')), UNIQUE (merchant_id, tag));
 CREATE INDEX IF NOT EXISTS idx_merchant_tags_merchant ON merchant_tags (merchant_id);
+CREATE TABLE IF NOT EXISTS payout_accounts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, kind TEXT DEFAULT 'bank', bank_name TEXT, account_number TEXT, account_holder TEXT, is_primary INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS payment_methods (key TEXT PRIMARY KEY, label TEXT, provider TEXT, kind TEXT, fee_jod REAL DEFAULT 0, description TEXT, active INTEGER DEFAULT 1, sort_order INTEGER DEFAULT 0);
+CREATE TABLE IF NOT EXISTS platform_profit (id INTEGER PRIMARY KEY AUTOINCREMENT, period TEXT, amount_jod REAL DEFAULT 0, withdrawn_jod REAL DEFAULT 0, updated_at TEXT DEFAULT (datetime('now')));
+CREATE TABLE IF NOT EXISTS profit_withdrawals (id INTEGER PRIMARY KEY AUTOINCREMENT, amount_jod REAL, status TEXT DEFAULT 'pending', requested_by INTEGER, created_at TEXT DEFAULT (datetime('now')));
