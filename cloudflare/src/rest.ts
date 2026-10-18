@@ -31,7 +31,8 @@ function parseSelect(select: string): { cols: string; embeds: { rel: string; col
     if (m) embeds.push({ rel: m[1], cols: m[2] })
     else if (t) flat.push(t)
   }
-  return { cols: flat.length ? flat.map(ident).join(',') : '*', embeds }
+  const cols = flat.length === 0 || (flat.length === 1 && flat[0] === '*') ? '*' : flat.map(ident).join(',')
+  return { cols, embeds }
 }
 
 function whereClause(params: URLSearchParams): { clause: string; binds: unknown[] } {

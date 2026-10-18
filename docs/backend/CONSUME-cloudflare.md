@@ -95,7 +95,7 @@ CLOUDFLARE_API_TOKEN=... CLOUDFLARE_ACCOUNT_ID=... npm run cf:deploy
 
 ## Update 2026-10-18 — respons feedback FE
 
-Diimplementasikan (kode), **menunggu deploy** (token Cloudflare dibatasi IP):
+Diimplementasikan **dan DIDEploy 2026-10-18** (token baru). Hasil repro FE:
 - **Tabel hilang** ditambah: `payout_accounts`, `payment_methods` (+seed qris/dana_balance/cod),
   `platform_profit`, `profit_withdrawals` (`cloudflare/schema.sql`).
 - **Tulis generik**: `POST/PATCH/DELETE /rest/v1/{table}` — wajib `Authorization: Bearer <JWT>`;
@@ -115,7 +115,6 @@ Diimplementasikan (kode), **menunggu deploy** (token Cloudflare dibatasi IP):
 RPC baca yang tetap publik: `price_order`, `compute_discounts`, `browse_merchants`, `search_merchants`,
 `check_coverage`, `fx_rate_latest`. `check_coverage` **memang** boolean (bukan objek).
 
-Deploy (setelah token/IP dibuka):
-```
-CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… npm run cf:deploy
-```
+Verifikasi (2026-10-18, live): tabel hilang → `200`; tulis tanpa JWT → `401`, dengan JWT `201/200/204`;
+`my_order_otp`/`courier_orders`/`ops_set_platform_params` → `200`; embed → `200`;
+`Prefer: count=exact` → `Content-Range`; media PUT tanpa JWT `401`, dengan JWT `201`, DELETE `204`.
