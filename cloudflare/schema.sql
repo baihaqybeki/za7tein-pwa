@@ -102,3 +102,17 @@ CREATE TABLE IF NOT EXISTS payout_accounts (id INTEGER PRIMARY KEY AUTOINCREMENT
 CREATE TABLE IF NOT EXISTS payment_methods (key TEXT PRIMARY KEY, label TEXT, provider TEXT, kind TEXT, fee_jod REAL DEFAULT 0, description TEXT, active INTEGER DEFAULT 1, sort_order INTEGER DEFAULT 0);
 CREATE TABLE IF NOT EXISTS platform_profit (id INTEGER PRIMARY KEY AUTOINCREMENT, period TEXT, amount_jod REAL DEFAULT 0, withdrawn_jod REAL DEFAULT 0, updated_at TEXT DEFAULT (datetime('now')));
 CREATE TABLE IF NOT EXISTS profit_withdrawals (id INTEGER PRIMARY KEY AUTOINCREMENT, amount_jod REAL, status TEXT DEFAULT 'pending', requested_by INTEGER, created_at TEXT DEFAULT (datetime('now')));
+CREATE INDEX IF NOT EXISTS idx_notifications_audience ON notifications(audience, created_at);
+CREATE INDEX IF NOT EXISTS idx_notifications_order ON notifications(order_id);
+CREATE INDEX IF NOT EXISTS idx_notifications_read ON notifications(read);
+CREATE INDEX IF NOT EXISTS idx_rating_merchant ON rating_reviews(merchant_id);
+CREATE INDEX IF NOT EXISTS idx_rating_menu ON rating_reviews(menu_id);
+CREATE INDEX IF NOT EXISTS idx_rating_order ON rating_reviews(order_id);
+CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
+CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at);
+CREATE INDEX IF NOT EXISTS idx_menus_category ON menus(category);
+CREATE INDEX IF NOT EXISTS idx_marketing_code ON marketing(code);
+CREATE INDEX IF NOT EXISTS idx_quota_merchant ON quota_subscriptions(merchant_id, kind, status);
+CREATE INDEX IF NOT EXISTS idx_checkpoints_order ON checkpoints(order_id);
+CREATE INDEX IF NOT EXISTS idx_coverage_merchant ON coverage_zones(merchant_id, active);
+CREATE INDEX IF NOT EXISTS idx_merchant_tags_tag ON merchant_tags(merchant_id, tag);

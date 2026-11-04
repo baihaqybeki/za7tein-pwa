@@ -34,6 +34,7 @@ const WRITE_RPCS = new Set([
   'my_order_otp', 'verify_order_otp',
 ])
 const OPS_RPCS = new Set(['issue_sp', 'ops_set_platform_params'])
+const READ_RPCS = new Set(['fx_rate_latest', 'price_order', 'compute_discounts', 'check_coverage', 'browse_merchants', 'search_merchants'])
 
 function cors(env: Env): Record<string, string> {
   return {
@@ -54,12 +55,16 @@ async function broadcast(env: Env, topic: string, payload: unknown): Promise<voi
   }
 }
 
-async function route(request: Request, env: Env): Promise<Response> {
+async function route(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url)
   const path = relPath(url.pathname)
   const prefer = request.headers.get('prefer') ?? ''
 
   if (path === '/health') {
+    const cache = caches.default
+    const key = new Request('https://cache.internal/health')
+    const hit = await cache.match(key)
+    if (hit) return hit
     let db: string
     try {
       await env.DB.prepare('select 1 as ok').first()
@@ -67,7 +72,11 @@ async function route(request: Request, env: Env): Promise<Response> {
     } catch (error) {
       db = `error: ${error instanceof Error ? error.message : String(error)}`
     }
-    return Response.json({ ok: true, service: 'sa7tein-api-cf', backend: env.BACKEND, api: env.API_VERSION, db })
+    const res = Response.json({ ok: true, service: 'sa7tein-api-cf', backend: env.BACKEND, api: env.API_VERSION, db })
+    const copy = new Response(res.body, res)
+    copy.headers.set('cache-control', 'public, max-age=60')
+    ctx.waitUntil(cache.put(key, copy.clone()))
+    return copy
   }
   if (path === '/version') return Response.json({ api: env.API_VERSION, backend: env.BACKEND, schema: 'd1' })
 
@@ -84,8 +93,22 @@ async function route(request: Request, env: Env): Promise<Response> {
     const id = await identity(request, env)
     if (WRITE_RPCS.has(fn) && !id) return Response.json({ message: 'unauthorized — login dulu' }, { status: 401 })
     if (OPS_RPCS.has(fn) && !(id && ['cs', 'superadmin'].includes(id.role))) return Response.json({ message: 'forbidden — ops only' }, { status: 403 })
-    const args = await request.json().catch(() => ({}))
-    const res = await handleRpc(env, fn, args as Record<string, unknown>, id)
+    const args = (await request.json().catch(() => ({}))) as Record<string, unknown>
+    if (READ_RPCS.has(fn)) {
+      const cache = caches.default
+      const key = new Request(`https://cache.internal/rpc/${fn}?a=${encodeURIComponent(JSON.stringify(args))}`)
+      const hit = await cache.match(key)
+      if (hit) return hit
+      const res = await handleRpc(env, fn, args, id)
+      if (res.ok) {
+        const copy = new Response(res.body, res)
+        copy.headers.set('cache-control', 'public, max-age=30, stale-while-revalidate=60')
+        ctx.waitUntil(cache.put(key, copy.clone()))
+        return copy
+      }
+      return res
+    }
+    const res = await handleRpc(env, fn, args, id)
     if (WRITE_RPCS.has(fn) && res.status < 400) await broadcast(env, 'orders', { type: 'rpc', fn, at: Date.now() })
     return res
   }
@@ -94,7 +117,20 @@ async function route(request: Request, env: Env): Promise<Response> {
   if (table) {
     const tbl = table[1]
     const countExact = prefer.includes('count=exact')
-    if (request.method === 'GET') return handleRest(env, tbl, url.searchParams, undefined, countExact)
+    if (request.method === 'GET') {
+      const cache = caches.default
+      const cacheKey = new Request(url.toString(), { method: 'GET' })
+      const hit = await cache.match(cacheKey)
+      if (hit) return hit
+      const res = await handleRest(env, tbl, url.searchParams, undefined, countExact)
+      if (res.ok) {
+        const copy = new Response(res.body, res)
+        copy.headers.set('cache-control', 'public, max-age=60, stale-while-revalidate=120')
+        ctx.waitUntil(cache.put(cacheKey, copy.clone()))
+        return copy
+      }
+      return res
+    }
     if (['POST', 'PATCH', 'DELETE'].includes(request.method)) {
       const id = await identity(request, env)
       if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })
@@ -116,12 +152,19 @@ async function route(request: Request, env: Env): Promise<Response> {
     if (!bucket) return new Response('unknown bucket', { status: 404 })
     const key = decodeURIComponent(media[2])
     if (request.method === 'GET') {
+      const cache = caches.default
+      const cacheKey = new Request(request.url, { method: 'GET' })
+      const hit = await cache.match(cacheKey)
+      if (hit) return hit
       const object = await bucket.get(key)
       if (!object) return new Response('not found', { status: 404 })
       const headers = new Headers()
       object.writeHttpMetadata(headers)
       headers.set('etag', object.httpEtag)
-      return new Response(object.body, { headers })
+      headers.set('cache-control', 'public, max-age=86400, immutable')
+      const res = new Response(object.body, { headers })
+      ctx.waitUntil(cache.put(cacheKey, res.clone()))
+      return res
     }
     const id = await identity(request, env)
     if (!id) return Response.json({ message: 'unauthorized' }, { status: 401 })
@@ -141,10 +184,10 @@ async function route(request: Request, env: Env): Promise<Response> {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const headers = cors(env)
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers })
-    const res = await route(request, env)
+    const res = await route(request, env, ctx)
     if (res.status === 101) return res
     const merged = new Headers(res.headers)
     for (const [k, v] of Object.entries(headers)) merged.set(k, v)
