@@ -31,6 +31,8 @@ import type {
 } from '../../types'
 
 interface MerchantState {
+  /** id merchant di backend (numerik atau string mock). Null = belum ter-resolve. */
+  id: string
   orders: MerchantOrder[]
   /** Batch pengantaran (gabungan order) — state machine F12. */
   batches: OrderBatch[]
@@ -72,6 +74,7 @@ interface MerchantState {
 }
 
 const initialState: MerchantState = {
+  id: mockMerchant.id,
   orders: seedOrders,
   batches: seedBatches,
   couriers: mockCouriers,
@@ -107,6 +110,31 @@ const merchantSlice = createSlice({
   name: 'merchant',
   initialState,
   reducers: {
+    /** Isi identitas merchant hasil resolve dari backend setelah login. */
+    setMerchantIdentity(
+      state,
+      action: PayloadAction<{
+        id: string | number
+        name: string
+        phone?: string
+        address?: string
+        photo?: string
+        lat?: number
+        lng?: number
+        openTime?: string
+        closeTime?: string
+      }>,
+    ) {
+      state.id = String(action.payload.id)
+      state.storeName = action.payload.name
+      if (action.payload.phone) state.storePhone = action.payload.phone
+      if (action.payload.address) state.storeAddress = action.payload.address
+      if (action.payload.photo) state.logo = action.payload.photo
+      if (action.payload.lat != null) state.storeLat = action.payload.lat
+      if (action.payload.lng != null) state.storeLng = action.payload.lng
+      if (action.payload.openTime) state.storeOpenTime = action.payload.openTime
+      if (action.payload.closeTime) state.storeCloseTime = action.payload.closeTime
+    },
     toggleActive(state) {
       state.isActive = !state.isActive
     },
@@ -324,6 +352,7 @@ const merchantSlice = createSlice({
 })
 
 export const {
+  setMerchantIdentity,
   toggleActive,
   setOrderStatus,
   setCookMinutes,

@@ -101,6 +101,7 @@ const HERO_TAGS = [
   'SCSS',
   'PWA',
   'Supabase RPC',
+  'Cloudflare Worker',
   'Supabase Storage',
   'Leaflet',
   'Zod',

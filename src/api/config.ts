@@ -17,7 +17,8 @@ export const API_SPEC_URL = env.VITE_API_SPEC_URL ?? 'https://sa7tein-api.vercel
  * `supabase` (default, PostgREST lama) atau `cloudflare` (Worker `VITE_CF_API_URL`).
  */
 export const DATA_SOURCE = env.VITE_DATA_SOURCE ?? 'supabase'
-export const CF_API_URL = env.VITE_CF_API_URL
+export const CF_API_URL =
+  env.VITE_CF_API_URL ?? 'https://sa7tein-api-cf.sa7tein-pwa.workers.dev'
 
 /** Backend (PostgREST) siap dipakai? */
 export const isBackendConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY)

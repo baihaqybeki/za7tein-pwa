@@ -14,6 +14,7 @@ import { isBackendConfigured } from '../api/config'
 import { getCurrentSession } from '../api/auth'
 import { updateMyMerchant } from '../api/reference'
 import { uploadToBucket } from '../api/storage'
+import { clearCfToken } from '../api/merchantSession'
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { money } from '../data/currency'
 import { mockMerchant } from '../data/merchant'
@@ -161,6 +162,7 @@ export default function MerchantSettings() {
   // Konfirmasi lewat BottomSheet karena ini aksi yang membuang sesi, dan
   // akibatnya ditulis apa adanya supaya tidak mengejutkan.
   const confirmSignOut = () => {
+    clearCfToken()
     dispatch(logout())
     setSignOutOpen(false)
     toast.success('Kamu sudah keluar dari akun toko')

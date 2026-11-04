@@ -7,11 +7,19 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { signInWithPassword } from '../api/auth'
 import { isBackendConfigured } from '../api/config'
+import {
+  clearCfToken,
+  isWorkerConfigured,
+  resolveSupabaseMerchant,
+  resolveWorkerMerchant,
+  workerSignIn,
+} from '../api/merchantSession'
 import { AuthLayout } from '../components/ui/AuthLayout'
 import { AUTH_PHOTO, AUTH_ROLE_LABEL } from '../data/auth'
 import { useAppDispatch } from '../hooks/useAppStore'
 import { merchantSignInSchema, type MerchantSignInFormData } from '../lib/schemas'
 import { signIn } from '../store/slices/authSlice'
+import { setMerchantIdentity } from '../store/slices/merchantSlice'
 
 export default function MerchantSignIn() {
   const navigate = useNavigate()
@@ -24,19 +32,68 @@ export default function MerchantSignIn() {
   } = useForm<MerchantSignInFormData>({ resolver: zodResolver(merchantSignInSchema) })
 
   const onSubmit = async (data: MerchantSignInFormData) => {
-    // Bila backend dikonfigurasi, autentikasi nyata ke Supabase Auth.
+    // 1) Worker (Cloudflare): magic-link + resolve merchant milik akun.
+    if (isWorkerConfigured()) {
+      const ok = await workerSignIn(data.email)
+      if (!ok) {
+        toast.error('Gagal masuk. Periksa email merchant Anda.')
+        return
+      }
+      const merchant = await resolveWorkerMerchant()
+      if (!merchant) {
+        clearCfToken()
+        toast.error('Akun ini tidak terhubung ke merchant mana pun.')
+        return
+      }
+      dispatch(
+        setMerchantIdentity({
+          id: merchant.id,
+          name: merchant.store_name,
+          phone: merchant.store_phone ?? undefined,
+          address: merchant.store_address ?? undefined,
+          photo: merchant.photo ?? undefined,
+          lat: merchant.latitude ?? undefined,
+          lng: merchant.longitude ?? undefined,
+          openTime: merchant.open_time?.slice(0, 5),
+          closeTime: merchant.close_time?.slice(0, 5),
+        }),
+      )
+      dispatch(signIn('/merchant'))
+      toast.success(`Masuk: ${merchant.store_name}`)
+      navigate('/')
+      return
+    }
+    // 2) Supabase (legacy): password + resolve merchant milik akun.
     if (isBackendConfigured) {
       const session = await signInWithPassword(data.email, data.password)
       if (!session) {
         toast.error('Email atau kata sandi salah')
         return
       }
+      const merchant = await resolveSupabaseMerchant()
+      if (!merchant) {
+        toast.error('Akun ini tidak terhubung ke merchant mana pun.')
+        return
+      }
+      dispatch(
+        setMerchantIdentity({
+          id: merchant.id,
+          name: merchant.store_name,
+          phone: merchant.store_phone ?? undefined,
+          address: merchant.store_address ?? undefined,
+          photo: merchant.photo ?? undefined,
+          lat: merchant.latitude ?? undefined,
+          lng: merchant.longitude ?? undefined,
+          openTime: merchant.open_time?.slice(0, 5),
+          closeTime: merchant.close_time?.slice(0, 5),
+        }),
+      )
       dispatch(signIn('/merchant'))
-      toast.success('Masuk sebagai merchant (Supabase Auth)')
+      toast.success(`Masuk: ${merchant.store_name}`)
       navigate('/')
       return
     }
-    // Mode demo (tanpa env backend).
+    // 3) Mode demo (tanpa env backend).
     dispatch(signIn('/merchant'))
     toast.success('Mode demo: masuk sebagai merchant')
     navigate('/')
