@@ -1,0 +1,18 @@
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/nasi.jpg' WHERE name IN ('Nasi','Nasi Putih') AND merchant_id IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn'));
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/telur.jpg' WHERE name='Telur' AND merchant_id IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn'));
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/ayam.jpg' WHERE name IN ('Kulit','Ayam Saja') AND merchant_id IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn'));
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/kuah.jpg' WHERE name='Kuah' AND merchant_id IN (SELECT id FROM merchants WHERE store_name='Waroeng Nusantara');
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/sambal-merah.jpg' WHERE name='Sambal' AND merchant_id IN (SELECT id FROM merchants WHERE store_name='Waroeng Nusantara');
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/sambal-merah.jpg' WHERE name='Sambal Ijo/Merah' AND merchant_id IN (SELECT id FROM merchants WHERE store_name='Bangjak Kitchen Reborn');
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/terong.jpg' WHERE name IN ('Terong Crispy','Terong / Sambal Terong') AND merchant_id IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn'));
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/nasgor.jpg' WHERE name='Nasgor Aja' AND merchant_id IN (SELECT id FROM merchants WHERE store_name='Bangjak Kitchen Reborn');
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/es-teh.jpg' WHERE name='Es Teh';
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/es-kopi.jpg' WHERE name IN ('Es Kopi','Es Kopi Susu');
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/thai-tea.jpg' WHERE name='Thai Tea';
+UPDATE menus SET image='https://sa7tein-api-cf.sa7tein-pwa.workers.dev/media/menu-images/shared/green-tea.jpg' WHERE name='Green Tea';
+DELETE FROM menus WHERE merchant_id NOT IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit'));
+DELETE FROM coverage_zones WHERE merchant_id NOT IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit'));
+DELETE FROM merchant_tags WHERE merchant_id NOT IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit'));
+DELETE FROM quota_subscriptions WHERE merchant_id NOT IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit'));
+DELETE FROM marketing_programs WHERE merchant_id IS NOT NULL AND merchant_id NOT IN (SELECT id FROM merchants WHERE store_name IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit'));
+DELETE FROM merchants WHERE store_name NOT IN ('Waroeng Nusantara','Bangjak Kitchen Reborn','Warung Langit');
