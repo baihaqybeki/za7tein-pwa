@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { CATEGORIES, MENU_LOW_STOCK_THRESHOLD, countLowStock, countOutOfStock } from '../data/catalog'
 import { money } from '../data/merchant'
 import { imageFileError } from '../lib/image'
+import { resolveBackendMerchantId, syncMenuCreate, syncMenuDelete, syncMenuUpdate } from '../api/menuSync'
 import { merchantMenuItemSchema, type MerchantMenuItemFormData } from '../lib/schemas'
 import { addMenuItem, removeMenuItem, setStock, toggleAvailable, updateMenuItem } from '../store/slices/catalogSlice'
 import type { MenuItem } from '../types'
@@ -25,6 +26,14 @@ export default function MerchantMenu() {
   const { items } = useCatalog()
   const isActive = useAppSelector((state) => state.merchant.isActive)
   const storeName = useAppSelector((state) => state.merchant.storeName)
+  const storeId = useAppSelector((state) => state.merchant.id)
+  /** Petakan merchant mock (mis. am-1) ke merchant backend lalu sinkronkan CRUD. */
+  const sync = (fn: (merchantId: number) => Promise<boolean>) => {
+    void (async () => {
+      const mid = await resolveBackendMerchantId(storeId, storeName)
+      if (mid) await fn(mid)
+    })()
+  }
 
   const lowCount = countLowStock(items)
   const outCount = countOutOfStock(items)
@@ -67,7 +76,11 @@ export default function MerchantMenu() {
   }
 
   const saveStock = () => {
-    if (stockItem) dispatch(setStock({ id: stockItem.id, stock: stockDraft }))
+    if (stockItem) {
+      dispatch(setStock({ id: stockItem.id, stock: stockDraft }))
+      const item = stockItem
+      sync((mid) => syncMenuUpdate(mid, item.name, { stock: stockDraft }))
+    }
     closeStock()
   }
 
@@ -116,7 +129,7 @@ export default function MerchantMenu() {
 
   const onSubmit = (data: MerchantMenuItemFormData) => {
     if (sheetMode === 'edit' && editing) {
-      dispatch(updateMenuItem({
+      const patch = {
         ...editing,
         name: data.name,
         price: data.price,
@@ -124,9 +137,11 @@ export default function MerchantMenu() {
         stock: data.stock,
         image: formImage || editing.image,
         description: data.description ?? editing.description,
-      }))
+      }
+      dispatch(updateMenuItem(patch))
+      sync((mid) => syncMenuUpdate(mid, editing.name, patch))
     } else {
-      dispatch(addMenuItem({
+      const created: MenuItem = {
         id: crypto.randomUUID(),
         name: data.name,
         price: data.price,
@@ -139,7 +154,9 @@ export default function MerchantMenu() {
         deliveryTime: '20-30 min',
         distance: '1.2 km',
         available: true,
-      }))
+      }
+      dispatch(addMenuItem(created))
+      sync((mid) => syncMenuCreate(mid, created))
     }
     closeSheet()
   }
@@ -429,7 +446,11 @@ export default function MerchantMenu() {
         body={`${deleteItem?.name ?? ''} akan hilang dari daftar merchant dan menu pelanggan.`}
         confirmLabel="Hapus item"
         onConfirm={() => {
-          if (deleteItem) dispatch(removeMenuItem(deleteItem.id))
+          if (deleteItem) {
+            dispatch(removeMenuItem(deleteItem.id))
+            const item = deleteItem
+            sync((mid) => syncMenuDelete(mid, item.name))
+          }
           setDeleteItem(null)
         }}
         onClose={() => setDeleteItem(null)}
@@ -443,6 +464,8 @@ export default function MerchantMenu() {
         onConfirm={() => {
           if (hideTarget) {
             dispatch(toggleAvailable(hideTarget.id))
+            const item = hideTarget
+            sync((mid) => syncMenuUpdate(mid, item.name, { available: false }))
             toast.success(`${hideTarget.name} disembunyikan dari menu`)
           }
           setHideTarget(null)

@@ -102,6 +102,7 @@ const HERO_TAGS = [
   'PWA',
   'Supabase RPC',
   'Cloudflare Worker',
+  'Menu Sync',
   'Supabase Storage',
   'Leaflet',
   'Zod',

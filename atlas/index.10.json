@@ -5441,6 +5441,44 @@
           "raw": "FEAT-001:relates"
         }
       ]
+    },
+    {
+      "id": "TASK-10446",
+      "type": "task",
+      "status": "done",
+      "date": "2026-11-04",
+      "time": "12:33:38",
+      "tags": [
+        "auto"
+      ],
+      "summary": "change: /Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/menuSync.ts (+110) — write via tool: ts: /**",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ],
+      "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/src/api/menuSync.ts"
+    },
+    {
+      "id": "TASK-10447",
+      "type": "task",
+      "status": "done",
+      "date": "2026-11-04",
+      "time": "12:34:46",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/pages/MerchantMenu.tsx'\ns=open(p).read()\ns=s.replace(\"import",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }
