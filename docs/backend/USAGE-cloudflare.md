@@ -43,3 +43,12 @@ GraphQL `https://api.cloudflare.com/client/v4/graphql`:
 `workersInvocationsAdaptive { sum { requests } }`,
 `d1AnalyticsAdaptiveGroups { sum { readQueries writeQueries rowsRead rowsWritten } }`,
 `r2OperationsAdaptiveGroups { sum { requests } dimensions { actionType } }`.
+
+## Catatan R2 public (r2.dev) — 2026-11-05
+- Managed domain r2.dev diaktifkan untuk ketiga bucket, tetapi di jaringan operator ini
+  `pub-*.r2.dev` **diblokir ISP** (DNS di-resolve ke `internetpositif.id`), sehingga tidak bisa
+  dipakai. URL media dikembalikan ke proxy Worker `/media/...` (yang berfungsi + ter-cache).
+- Untuk benar-benar mem-bypass Worker, pasang **custom domain** pada bucket R2 (domain sendiri di
+  Cloudflare), bukan r2.dev.
+- Hapus konfigurasi **Hyperdrive** via dashboard (token saat ini tidak berizin `hyperdrive:edit`);
+  Worker sudah tidak memakainya.
