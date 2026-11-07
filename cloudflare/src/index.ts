@@ -31,9 +31,9 @@ const WRITE_RPCS = new Set([
   'assign_batch', 'auto_sort_batch', 'close_batch', 'start_batch', 'dispatch_partner', 'respond_assignment', 'create_refund', 'send_chat_message',
   'buy_quota_package', 'set_courier_status', 'close_batch', 'submit_review', 'reply_review',
   'open_dispute', 'resolve_dispute', 'appeal_dispute', 'snapshot_dispute_rules', 'emit_notification',
-  'my_order_otp', 'verify_order_otp', 'update_courier_location',
+  'my_order_otp', 'verify_order_otp', 'update_courier_location', 'pay_order', 'accept_order', 'reject_order', 'pickup_order', 'arrive_order',
 ])
-const AUTH_RPCS = new Set(['courier_location'])
+const AUTH_RPCS = new Set(['courier_location', 'order_journey'])
 const OPS_RPCS = new Set(['issue_sp', 'ops_set_platform_params'])
 const READ_RPCS = new Set(['fx_rate_latest', 'price_order', 'compute_discounts', 'check_coverage', 'browse_merchants', 'search_merchants'])
 

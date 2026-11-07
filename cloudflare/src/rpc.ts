@@ -110,6 +110,21 @@ async function releaseQuota(env: RpcEnv, a: Args) {
   await env.DB.prepare(`UPDATE quota_subscriptions SET quota_reserved=MAX(quota_reserved-1,0) WHERE id=(SELECT id FROM quota_subscriptions WHERE merchant_id=? AND kind=? AND status='active' ORDER BY id LIMIT 1)`).bind(num(a.p_merchant), a.p_kind).run()
 }
 
+
+// ── journey helpers ─────────────────────────────────────────────────────────
+async function party(env: RpcEnv, orderId: number) {
+  return env.DB.prepare(`SELECT o.code,o.status,o.customer_id,o.merchant_id,o.courier_id,cu.user_id cu,mu.user_id mu,co.user_id coid
+    FROM orders o LEFT JOIN customers cu ON cu.id=o.customer_id LEFT JOIN merchants mu ON mu.id=o.merchant_id
+    LEFT JOIN couriers co ON co.id=o.courier_id WHERE o.id=?`).bind(orderId).first<Record<string, number | string>>()
+}
+async function hist(env: RpcEnv, orderId: number, fromS: string | null, toS: string, actor?: number | null) {
+  await env.DB.prepare('INSERT INTO order_status_history (order_id,from_status,to_status,actor_id,at) VALUES (?,?,?,?,?)').bind(orderId, fromS, toS, actor ?? null, now()).run()
+}
+async function notify(env: RpcEnv, userId: number | null | undefined, kind: string, title: string, body: string, audience: string, orderId: number) {
+  if (!userId) return
+  await env.DB.prepare('INSERT INTO notifications (user_id,kind,title,body,audience,order_id) VALUES (?,?,?,?,?,?)').bind(userId, kind, title, body, audience, orderId).run()
+}
+
 async function createOrder(env: RpcEnv, a: Args) {
   const addr = await env.DB.prepare('SELECT latitude, longitude FROM addresses WHERE id=?').bind(num(a.p_address)).first<{ latitude: number; longitude: number }>()
   if (!addr) throw new Error('alamat tidak ada')
@@ -122,10 +137,13 @@ async function createOrder(env: RpcEnv, a: Args) {
   const c = code()
   const expires = new Date(Date.now() + 30 * 60000).toISOString()
   const res = await env.DB.prepare(
-    `INSERT INTO orders (code,status,customer_id,merchant_id,delivery_address_id,sub_total_jod,delivery_fee_jod,platform_fee_jod,total_jod,total_idr,payment_method,payment_status,delivery_type,quota_kind_used,rate_locked,transaction_fee_jod,transaction_fee_idr,rounding_up_idr,platform_fee_customer_jod,platform_fee_merchant_jod,discount_merchant_jod,discount_applicator_jod,order_note,refund_status,payment_expires_at)
-     VALUES (?, 'prepare', ?, ?, ?, ?, ?, ?, ?, ?, ?, 'unpaid', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'none', ?)`,
-  ).bind(c, num(a.p_customer), num(a.p_merchant), num(a.p_address), price.subtotal_jod, price.delivery_fee_jod, price.platform_fee_customer_jod, price.total_jod, price.total_idr, a.p_payment_method ?? 'qris', a.p_delivery_type ?? 'regular', kind, price.rate_locked, price.transaction_fee_jod, price.transaction_fee_idr, price.rounding_up_idr, price.platform_fee_customer_jod, price.platform_fee_merchant_jod, disc.discount_merchant_jod, disc.discount_applicator_jod, a.p_note ?? null, expires).run()
+    `INSERT INTO orders (code,status,customer_id,merchant_id,delivery_address_id,sub_total_jod,delivery_fee_jod,platform_fee_jod,total_jod,total_idr,payment_method,payment_status,delivery_type,quota_kind_used,rate_locked,transaction_fee_jod,transaction_fee_idr,rounding_up_idr,platform_fee_customer_jod,platform_fee_merchant_jod,discount_merchant_jod,discount_applicator_jod,order_note,refund_status,payment_expires_at,placed_at)
+     VALUES (?, 'quotation', ?, ?, ?, ?, ?, ?, ?, ?, ?, 'unpaid', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'none', ?, ?)`,
+  ).bind(c, num(a.p_customer), num(a.p_merchant), num(a.p_address), price.subtotal_jod, price.delivery_fee_jod, price.platform_fee_customer_jod, price.total_jod, price.total_idr, a.p_payment_method ?? 'qris', a.p_delivery_type ?? 'regular', kind, price.rate_locked, price.transaction_fee_jod, price.transaction_fee_idr, price.rounding_up_idr, price.platform_fee_customer_jod, price.platform_fee_merchant_jod, disc.discount_merchant_jod, disc.discount_applicator_jod, a.p_note ?? null, expires, now()).run()
   const id = res.meta.last_row_id
+  const buf = new Uint32Array(1); crypto.getRandomValues(buf)
+  await env.DB.prepare('INSERT OR REPLACE INTO order_otps (order_id,code,created_at) VALUES (?,?,?)').bind(id, String(1000 + (buf[0] % 9000)), now()).run()
+  await hist(env, id, null, 'quotation', num(a.p_customer) || null)
   for (const i of items) await env.DB.prepare('INSERT INTO order_items (order_id,menu_id,name,qty,unit_price_jod,line_total_jod) VALUES (?,?,?,?,?,?)').bind(id, num(i.menu_id), i.name ?? '', num(i.qty), num(i.unit_jod), num(i.unit_jod) * num(i.qty)).run()
   const ch = await env.DB.prepare('INSERT INTO chats (order_id,auto_close_at) VALUES (?,?)').bind(id, new Date(Date.now() + 86400000).toISOString()).run()
   const chatId = ch.meta.last_row_id
@@ -149,6 +167,11 @@ async function completeOrder(env: RpcEnv, a: Args) {
   for (const [party, amt, type] of [['merchant', merAmt, 'payout'], ['courier', num(o.delivery_fee_jod), 'payout'], ['applicator', appAmt, 'fee']] as [string, number, string][]) {
     await env.DB.prepare('INSERT OR IGNORE INTO enterprise_ledger (order_id,entry_type,party,amount_jod,amount_idr,idempotency_key) VALUES (?,?,?,?,0,?)').bind(num(a.p_order), type, party, amt, `settle:${a.p_order}:${party}`).run()
   }
+  const p = await party(env, num(a.p_order))
+  await hist(env, num(a.p_order), String(o.status), 'done', null)
+  await notify(env, p?.cu, 'order', 'Pesanan selesai', String(p?.code ?? ''), 'customer', num(a.p_order))
+  await notify(env, p?.mu, 'order', 'Pesanan selesai', String(p?.code ?? ''), 'merchant', num(a.p_order))
+  await notify(env, p?.coid, 'order', 'Pesanan selesai', String(p?.code ?? ''), 'courier', num(a.p_order))
 }
 async function cancelOrder(env: RpcEnv, a: Args) {
   const o = await env.DB.prepare('SELECT merchant_id, quota_kind_used, payment_status, total_idr FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
@@ -192,6 +215,11 @@ async function assignBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
 
   await env.DB.prepare("UPDATE orders SET batch_id=?, courier_id=?, status='waitingCourier' WHERE id=?").bind(batch, courier.id, num(a.p_order)).run()
   await refreshBatch(env, batch)
+  const p = await party(env, num(a.p_order))
+  await hist(env, num(a.p_order), order.status, 'waitingCourier', id?.id ?? null)
+  await notify(env, p?.cu, 'order', 'Kurir ditugaskan', `${p?.code} · batch ${batch}`, 'customer', num(a.p_order))
+  await notify(env, p?.mu, 'order', 'Kurir ditugaskan', String(p?.code ?? ''), 'merchant', num(a.p_order))
+  await notify(env, p?.coid, 'courier', 'Tugas batch baru', String(p?.code ?? ''), 'courier', num(a.p_order))
   return batch
 }
 
@@ -221,6 +249,12 @@ async function startBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   if (!cnt) throw new Error('batch kosong')
   await env.DB.prepare("UPDATE batches SET status='delivery' WHERE id=?").bind(num(a.p_batch)).run()
   await env.DB.prepare("UPDATE orders SET status='delivery' WHERE batch_id=?").bind(num(a.p_batch)).run()
+  const rows = (await env.DB.prepare('SELECT id FROM orders WHERE batch_id=?').bind(num(a.p_batch)).all<{id:number}>()).results ?? []
+  for (const r of rows) {
+    const p = await party(env, r.id)
+    await hist(env, r.id, 'waitingCourier', 'delivery', id?.id ?? null)
+    await notify(env, p?.cu, 'order', 'Kurir berangkat', String(p?.code ?? ''), 'customer', r.id)
+  }
   return { batch: num(a.p_batch), orders: cnt }
 }
 
@@ -354,14 +388,19 @@ async function myOrderOtp(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   const o = await env.DB.prepare('SELECT o.otp, o.customer_id, cu.user_id cu FROM orders o LEFT JOIN customers cu ON cu.id=o.customer_id WHERE o.id=?').bind(num(a.p_order_id)).first<Record<string, unknown>>()
   if (!o) return null
   if (!id || (!isOpsId(id) && Number(o.cu) !== id.id)) throw new Error('forbidden')
-  return o.otp ?? null
+  const r = await env.DB.prepare('SELECT code FROM order_otps WHERE order_id=?').bind(num(a.p_order_id)).first<{ code: string | null }>()
+  return r?.code ?? (o.otp as string | null) ?? null
 }
 async function verifyOrderOtp(env: RpcEnv, a: Args) {
-  const o = await env.DB.prepare('SELECT otp FROM orders WHERE id=?').bind(num(a.p_order_id)).first<{ otp: string | null }>()
+  const o = await env.DB.prepare('SELECT otp,status FROM orders WHERE id=?').bind(num(a.p_order_id)).first<{ otp: string | null; status: string }>()
   if (!o) return false
-  if (String(o.otp) !== String(a.p_code)) return false
+  const r = await env.DB.prepare('SELECT code FROM order_otps WHERE order_id=?').bind(num(a.p_order_id)).first<{ code: string | null }>()
+  const expected = r?.code ?? o.otp
+  if (!expected || !a.p_code) return false
+  if (String(expected) !== String(a.p_code)) return false
   await env.DB.prepare('UPDATE orders SET otp_verified=1 WHERE id=?').bind(num(a.p_order_id)).run()
   await env.DB.prepare("INSERT INTO checkpoints (order_id,kind) VALUES (?, 'otp_verified')").bind(num(a.p_order_id)).run()
+  if (o.status !== 'done') await completeOrder(env, { p_order: a.p_order_id })
   return true
 }
 async function courierOrders(env: RpcEnv, _a: Args, id?: RpcIdentity | null) {
@@ -415,12 +454,88 @@ async function courierLocation(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   return { ...c, age_ms: ageMs, stale: ageMs > 120000 }
 }
 
+
+async function payOrder(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const o = await env.DB.prepare('SELECT code,status,payment_status,total_jod FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  if (o.payment_status === 'paid') return { ok: true, already: true }
+  const method = a.p_method ?? null
+  await env.DB.prepare("UPDATE orders SET payment_status='paid', paid_at=?, payment_method=COALESCE(?,payment_method) WHERE id=?").bind(now(), method, num(a.p_order)).run()
+  await env.DB.prepare("INSERT INTO payments (order_id,method,provider,amount_jod,status) VALUES (?,?,?,?,'paid')").bind(num(a.p_order), method ?? 'qris', 'dana', o.total_jod).run()
+  const to = String(o.status)
+  const p = await party(env, num(a.p_order))
+  await notify(env, p?.cu, 'payment', 'Pembayaran diterima', String(o.code), 'customer', num(a.p_order))
+  await notify(env, p?.mu, 'order', 'Order dibayar', String(o.code), 'merchant', num(a.p_order))
+  return { ok: true, status: to }
+}
+async function acceptOrder(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const o = await env.DB.prepare('SELECT status,merchant_id,code,cook_minutes FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  await assertMerchantOwner(env, num(o.merchant_id), id)
+  if (!['quotation', 'prepare'].includes(String(o.status))) throw new Error(`order status ${o.status} tidak bisa di-accept`)
+  const cook = num(a.p_cook_minutes) || num(o.cook_minutes) || 15
+  await env.DB.prepare("UPDATE orders SET status='prepare', cook_minutes=? WHERE id=?").bind(cook, num(a.p_order)).run()
+  const p = await party(env, num(a.p_order))
+  await hist(env, num(a.p_order), String(o.status), 'prepare', id?.id ?? null)
+  await notify(env, p?.cu, 'order', 'Order diterima merchant', `${o.code} · ±${cook} mnt`, 'customer', num(a.p_order))
+  return { ok: true, cook_minutes: cook }
+}
+async function rejectOrder(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const o = await env.DB.prepare('SELECT status,merchant_id,code,quota_kind_used FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  await assertMerchantOwner(env, num(o.merchant_id), id)
+  if (['done', 'canceled'].includes(String(o.status))) throw new Error('order sudah selesai')
+  await releaseQuota(env, { p_merchant: o.merchant_id, p_kind: o.quota_kind_used })
+  await env.DB.prepare("UPDATE orders SET status='canceled', cancel_by='merchant', cancel_reason=? WHERE id=?").bind(a.p_reason ?? 'ditolak merchant', num(a.p_order)).run()
+  const p = await party(env, num(a.p_order))
+  await hist(env, num(a.p_order), String(o.status), 'canceled', id?.id ?? null)
+  await notify(env, p?.cu, 'order', 'Pesanan ditolak merchant', String(o.code), 'customer', num(a.p_order))
+  return { ok: true }
+}
+async function pickupOrder(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const o = await env.DB.prepare('SELECT status,merchant_id,code FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  await env.DB.prepare("UPDATE orders SET status='delivery' WHERE id=?").bind(num(a.p_order)).run()
+  await env.DB.prepare("INSERT INTO checkpoints (order_id,kind,latitude,longitude,at) VALUES (?,'picked_up',?,?,?)").bind(num(a.p_order), a.p_lat ?? null, a.p_lng ?? null, now()).run()
+  const p = await party(env, num(a.p_order))
+  if (String(o.status) !== 'delivery') await hist(env, num(a.p_order), String(o.status), 'delivery', id?.id ?? null)
+  await notify(env, p?.cu, 'order', 'Pesanan diambil kurir', String(o.code), 'customer', num(a.p_order))
+  await notify(env, p?.mu, 'order', 'Pesanan diambil kurir', String(o.code), 'merchant', num(a.p_order))
+  return { ok: true }
+}
+async function arriveOrder(env: RpcEnv, a: Args) {
+  const o = await env.DB.prepare('SELECT code FROM orders WHERE id=?').bind(num(a.p_order)).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  await env.DB.prepare("INSERT INTO checkpoints (order_id,kind,latitude,longitude,at) VALUES (?,'arrived',?,?,?)").bind(num(a.p_order), a.p_lat ?? null, a.p_lng ?? null, now()).run()
+  const p = await party(env, num(a.p_order))
+  await notify(env, p?.cu, 'courier', 'Kurir tiba', String(o.code), 'customer', num(a.p_order))
+  return { ok: true }
+}
+async function orderJourney(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const orderId = num(a.p_order_id)
+  const o = await env.DB.prepare('SELECT * FROM orders WHERE id=?').bind(orderId).first<Record<string, unknown>>()
+  if (!o) throw new Error('order tidak ada')
+  const p = await party(env, orderId)
+  let allowed = isOpsId(id)
+  if (!allowed && id) allowed = [p?.cu, p?.mu, p?.coid].includes(id.id)
+  if (!allowed) throw new Error('forbidden')
+  const items = (await env.DB.prepare('SELECT * FROM order_items WHERE order_id=? ORDER BY id').bind(orderId).all()).results ?? []
+  const history = (await env.DB.prepare('SELECT * FROM order_status_history WHERE order_id=? ORDER BY at, id').bind(orderId).all()).results ?? []
+  const checkpoints = (await env.DB.prepare('SELECT * FROM checkpoints WHERE order_id=? ORDER BY at, id').bind(orderId).all()).results ?? []
+  const notifications = (await env.DB.prepare('SELECT * FROM notifications WHERE order_id=? ORDER BY created_at, id').bind(orderId).all()).results ?? []
+  const payments = (await env.DB.prepare('SELECT * FROM payments WHERE order_id=? ORDER BY id').bind(orderId).all()).results ?? []
+  const courier = o.courier_id ? await env.DB.prepare('SELECT id,name,latitude,longitude,last_seen_at FROM couriers WHERE id=?').bind(o.courier_id).first() : null
+  const chat = await env.DB.prepare('SELECT * FROM chats WHERE order_id=? ORDER BY id LIMIT 1').bind(orderId).first()
+  return { order: o, items, history, checkpoints, notifications, payments, courier, chat }
+}
+
 const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise<unknown>> = {
   fx_rate_latest: (e) => q(e).fx().then((r) => r?.rate ?? null),
   price_order: priceOrder, compute_discounts: computeDiscounts, check_coverage: checkCoverage,
   browse_merchants: browseMerchants, search_merchants: searchMerchants,
   reserve_quota: reserveQuota, consume_quota: consumeQuota, release_quota: releaseQuota,
   create_order: createOrder, complete_order: completeOrder, cancel_order: cancelOrder,
+  pay_order: payOrder, accept_order: acceptOrder, reject_order: rejectOrder, pickup_order: pickupOrder, arrive_order: arriveOrder, order_journey: orderJourney,
   assign_batch: assignBatch,  start_batch: startBatch,
  auto_sort_batch: autoSortBatch, dispatch_partner: dispatchPartner, respond_assignment: respondAssignment,
   create_refund: createRefund, send_chat_message: sendChatMessage, close_stale_chats: closeStaleChats,

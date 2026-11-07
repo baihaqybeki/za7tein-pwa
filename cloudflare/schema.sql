@@ -116,3 +116,4 @@ CREATE INDEX IF NOT EXISTS idx_quota_merchant ON quota_subscriptions(merchant_id
 CREATE INDEX IF NOT EXISTS idx_checkpoints_order ON checkpoints(order_id);
 CREATE INDEX IF NOT EXISTS idx_coverage_merchant ON coverage_zones(merchant_id, active);
 CREATE INDEX IF NOT EXISTS idx_merchant_tags_tag ON merchant_tags(merchant_id, tag);
+CREATE TABLE IF NOT EXISTS order_otps (order_id INTEGER PRIMARY KEY, code TEXT, created_at TEXT DEFAULT (datetime('now')));
