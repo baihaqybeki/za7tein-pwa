@@ -158,21 +158,50 @@ async function cancelOrder(env: RpcEnv, a: Args) {
   if (o.payment_status === 'paid' && num(o.total_idr) > 0) await createRefund(env, { p_order: a.p_order, p_method: 'dana', p_amount_idr: o.total_idr })
 }
 
-async function assignBatch(env: RpcEnv, a: Args) {
-  const order = await env.DB.prepare('SELECT merchant_id, batch_id FROM orders WHERE id=?').bind(num(a.p_order)).first<{ merchant_id: number; batch_id: number | null }>()
+async function assertMerchantOwner(env: RpcEnv, merchantId: number, id?: RpcIdentity | null) {
+  if (!id) throw new Error('unauthorized')
+  if (isOpsId(id)) return
+  const m = await env.DB.prepare('SELECT user_id FROM merchants WHERE id=?').bind(merchantId).first<{ user_id: number | null }>()
+  if (!m || Number(m.user_id) !== id.id) throw new Error('forbidden')
+}
+
+async function refreshBatch(env: RpcEnv, batchId: number) {
+  const cnt = (await env.DB.prepare('SELECT COUNT(*) c FROM orders WHERE batch_id=?').bind(batchId).first<{ c: number }>())?.c ?? 0
+  const etaDelivery = 300 + 120 * cnt
+  await env.DB.prepare('UPDATE batches SET order_count=?, eta_prepare_seconds=COALESCE(eta_prepare_seconds,600), eta_delivery_seconds=? WHERE id=?').bind(cnt, etaDelivery, batchId).run()
+  return cnt
+}
+
+async function assignBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const order = await env.DB.prepare('SELECT merchant_id, batch_id, delivery_type, status FROM orders WHERE id=?').bind(num(a.p_order)).first<{ merchant_id: number; batch_id: number | null; delivery_type: string; status: string }>()
   if (!order) throw new Error('order tidak ada')
-  let batch = (await env.DB.prepare("SELECT id FROM batches WHERE merchant_id=? AND courier_id=? AND status IN ('prepare','waitingCourier','waitingDelivery','delivery') ORDER BY id DESC LIMIT 1").bind(order.merchant_id, num(a.p_courier)).first<{ id: number }>())?.id
-  if (!batch) batch = (await env.DB.prepare("INSERT INTO batches (merchant_id,courier_id,status) VALUES (?,?,'prepare')").bind(order.merchant_id, num(a.p_courier)).run()).meta.last_row_id
+  await assertMerchantOwner(env, order.merchant_id, id)
+  if (order.delivery_type !== 'regular') throw new Error('batch hanya untuk order Regular')
+  if (order.batch_id != null) throw new Error('order sudah berada di batch')
+
+  const courier = await env.DB.prepare('SELECT id, merchant_id, courier_type FROM couriers WHERE id=?').bind(num(a.p_courier)).first<{ id: number; merchant_id: number | null; courier_type: string }>()
+  if (!courier) throw new Error('kurir tidak ada')
+  if (courier.courier_type !== 'inhouse') throw new Error('batch hanya untuk kurir inhouse')
+  if (courier.merchant_id != null && Number(courier.merchant_id) !== order.merchant_id) throw new Error('kurir bukan milik merchant ini')
+  if (!['prepare'].includes(order.status)) throw new Error(`order status ${order.status} tidak bisa di-batch (harus accepted/prepare)`)
+
+  let batch = (await env.DB.prepare("SELECT id FROM batches WHERE merchant_id=? AND courier_id=? AND status IN ('prepare','waitingCourier','waitingDelivery','delivery') ORDER BY id DESC LIMIT 1").bind(order.merchant_id, courier.id).first<{ id: number }>())?.id
+  if (!batch) batch = (await env.DB.prepare("INSERT INTO batches (merchant_id,courier_id,status,eta_prepare_seconds,eta_delivery_seconds) VALUES (?,?,'prepare',600,420)").bind(order.merchant_id, courier.id).run()).meta.last_row_id
   const cnt = (await env.DB.prepare('SELECT COUNT(*) c FROM orders WHERE batch_id=?').bind(batch).first<{ c: number }>())?.c ?? 0
   if (cnt >= 24) throw new Error('batch penuh (24)')
-  await env.DB.prepare('UPDATE orders SET batch_id=?, courier_id=? WHERE id=?').bind(batch, num(a.p_courier), num(a.p_order)).run()
+
+  await env.DB.prepare("UPDATE orders SET batch_id=?, courier_id=?, status='waitingCourier' WHERE id=?").bind(batch, courier.id, num(a.p_order)).run()
+  await refreshBatch(env, batch)
   return batch
 }
-async function autoSortBatch(env: RpcEnv, a: Args) {
+
+async function autoSortBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   const b = await env.DB.prepare('SELECT b.merchant_id, m.latitude mlat, m.longitude mlng FROM batches b JOIN merchants m ON m.id=b.merchant_id WHERE b.id=?').bind(num(a.p_batch)).first<{ merchant_id: number; mlat: number; mlng: number }>()
   if (!b) return []
+  await assertMerchantOwner(env, b.merchant_id, id)
   const { results } = await env.DB.prepare('SELECT o.id, a.latitude lat, a.longitude lng FROM orders o JOIN addresses a ON a.id=o.delivery_address_id WHERE o.batch_id=?').bind(num(a.p_batch)).all<{ id: number; lat: number; lng: number }>()
   const pts = (results ?? []).filter((p) => p.lat != null)
+  if (pts.length > 25) throw new Error('auto-sort maks 25 titik')
   const route: number[] = []
   let clat = b.mlat, clng = b.mlng
   while (pts.length) {
@@ -183,6 +212,26 @@ async function autoSortBatch(env: RpcEnv, a: Args) {
   await env.DB.prepare('UPDATE batches SET route=? WHERE id=?').bind(JSON.stringify(route), num(a.p_batch)).run()
   return route
 }
+
+async function startBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const b = await env.DB.prepare('SELECT merchant_id FROM batches WHERE id=?').bind(num(a.p_batch)).first<{ merchant_id: number }>()
+  if (!b) throw new Error('batch tidak ada')
+  await assertMerchantOwner(env, b.merchant_id, id)
+  const cnt = (await env.DB.prepare('SELECT COUNT(*) c FROM orders WHERE batch_id=?').bind(num(a.p_batch)).first<{ c: number }>())?.c ?? 0
+  if (!cnt) throw new Error('batch kosong')
+  await env.DB.prepare("UPDATE batches SET status='delivery' WHERE id=?").bind(num(a.p_batch)).run()
+  await env.DB.prepare("UPDATE orders SET status='delivery' WHERE batch_id=?").bind(num(a.p_batch)).run()
+  return { batch: num(a.p_batch), orders: cnt }
+}
+
+async function closeBatch(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  const b = await env.DB.prepare('SELECT merchant_id, status FROM batches WHERE id=?').bind(num(a.p_batch)).first<{ merchant_id: number; status: string }>()
+  if (!b) throw new Error('batch tidak ada')
+  await assertMerchantOwner(env, b.merchant_id, id)
+  if (b.status === 'delivery') throw new Error('batch sedang berjalan; selesaikan order')
+  await env.DB.prepare("UPDATE batches SET status='closed' WHERE id=?").bind(num(a.p_batch)).run()
+}
+
 async function dispatchPartner(env: RpcEnv, a: Args) {
   const c = await env.DB.prepare("SELECT id FROM couriers WHERE courier_type IN ('partner','partner_ondemand') AND availability='available' ORDER BY active_order_count ASC, id ASC LIMIT 1").first<{ id: number }>()
   if (!c) return null
@@ -230,7 +279,6 @@ async function setCourierStatus(env: RpcEnv, a: Args) {
   const map: Record<string, string> = { offline: 'unavailable', reserved: 'busy' }
   await env.DB.prepare('UPDATE couriers SET availability=? WHERE id=?').bind(map[String(a.p_status)] ?? a.p_status, num(a.p_courier)).run()
 }
-async function closeBatch(env: RpcEnv, a: Args) { await env.DB.prepare("UPDATE batches SET status='closed' WHERE id=?").bind(num(a.p_batch)).run() }
 async function issueSp(env: RpcEnv, a: Args) {
   const res = await env.DB.prepare('INSERT INTO punishments (subject_type,subject_id,kind,level,reason,dispute_id) VALUES (?,?,?,?,?,?)').bind(a.p_subject_type, num(a.p_subject_id), a.p_kind ?? 'sp', num(a.p_level) || 1, a.p_reason ?? null, a.p_dispute ?? null).run()
   if (a.p_subject_type === 'courier' && (a.p_kind ?? 'sp') === 'sp') await env.DB.prepare("UPDATE couriers SET availability='unavailable' WHERE id=?").bind(num(a.p_subject_id)).run()
@@ -373,7 +421,8 @@ const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise
   browse_merchants: browseMerchants, search_merchants: searchMerchants,
   reserve_quota: reserveQuota, consume_quota: consumeQuota, release_quota: releaseQuota,
   create_order: createOrder, complete_order: completeOrder, cancel_order: cancelOrder,
-  assign_batch: assignBatch, auto_sort_batch: autoSortBatch, dispatch_partner: dispatchPartner, respond_assignment: respondAssignment,
+  assign_batch: assignBatch,  start_batch: startBatch,
+ auto_sort_batch: autoSortBatch, dispatch_partner: dispatchPartner, respond_assignment: respondAssignment,
   create_refund: createRefund, send_chat_message: sendChatMessage, close_stale_chats: closeStaleChats,
   buy_quota_package: buyQuotaPackage, set_courier_status: setCourierStatus, close_batch: closeBatch, issue_sp: issueSp,
   submit_review: submitReview, reply_review: replyReview, open_dispute: openDispute, resolve_dispute: resolveDispute, appeal_dispute: appealDispute,

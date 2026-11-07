@@ -28,7 +28,7 @@ const relPath = (p: string): string => p.replace(/^\/v1(?=\/|$)/, '') || '/'
 
 const WRITE_RPCS = new Set([
   'reserve_quota', 'consume_quota', 'release_quota', 'create_order', 'complete_order', 'cancel_order',
-  'assign_batch', 'dispatch_partner', 'respond_assignment', 'create_refund', 'send_chat_message',
+  'assign_batch', 'auto_sort_batch', 'close_batch', 'start_batch', 'dispatch_partner', 'respond_assignment', 'create_refund', 'send_chat_message',
   'buy_quota_package', 'set_courier_status', 'close_batch', 'submit_review', 'reply_review',
   'open_dispute', 'resolve_dispute', 'appeal_dispute', 'snapshot_dispute_rules', 'emit_notification',
   'my_order_otp', 'verify_order_otp', 'update_courier_location',
