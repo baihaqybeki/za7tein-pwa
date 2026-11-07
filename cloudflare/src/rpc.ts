@@ -391,6 +391,8 @@ export async function handleRpc(env: RpcEnv, fn: string, args: Args, id?: RpcIde
   try {
     return Response.json(await h(env, args ?? {}, id))
   } catch (error) {
-    return Response.json({ message: String(error) }, { status: 400 })
+    const msg = error instanceof Error ? error.message : String(error)
+    const status = /does not exist/.test(msg) ? 501 : /forbidden/.test(msg) ? 403 : /unauthorized/.test(msg) ? 401 : 400
+    return Response.json({ message: msg }, { status })
   }
 }
