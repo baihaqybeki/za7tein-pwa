@@ -31,8 +31,9 @@ const WRITE_RPCS = new Set([
   'assign_batch', 'dispatch_partner', 'respond_assignment', 'create_refund', 'send_chat_message',
   'buy_quota_package', 'set_courier_status', 'close_batch', 'submit_review', 'reply_review',
   'open_dispute', 'resolve_dispute', 'appeal_dispute', 'snapshot_dispute_rules', 'emit_notification',
-  'my_order_otp', 'verify_order_otp',
+  'my_order_otp', 'verify_order_otp', 'update_courier_location',
 ])
+const AUTH_RPCS = new Set(['courier_location'])
 const OPS_RPCS = new Set(['issue_sp', 'ops_set_platform_params'])
 const READ_RPCS = new Set(['fx_rate_latest', 'price_order', 'compute_discounts', 'check_coverage', 'browse_merchants', 'search_merchants'])
 
@@ -91,7 +92,7 @@ async function route(request: Request, env: Env, ctx: ExecutionContext): Promise
   if (rpc && request.method === 'POST') {
     const fn = rpc[1]
     const id = await identity(request, env)
-    if (WRITE_RPCS.has(fn) && !id) return Response.json({ message: 'unauthorized — login dulu' }, { status: 401 })
+    if ((WRITE_RPCS.has(fn) || AUTH_RPCS.has(fn)) && !id) return Response.json({ message: 'unauthorized — login dulu' }, { status: 401 })
     if (OPS_RPCS.has(fn) && !(id && ['cs', 'superadmin'].includes(id.role))) return Response.json({ message: 'forbidden — ops only' }, { status: 403 })
     const args = (await request.json().catch(() => ({}))) as Record<string, unknown>
     if (READ_RPCS.has(fn)) {

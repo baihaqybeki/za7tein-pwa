@@ -337,6 +337,36 @@ async function opsSetParams(env: RpcEnv, a: Args) {
     .bind(a.p_fee_customer ?? null, a.p_fee_merchant ?? null, a.p_quick_multiplier ?? null, now()).run()
 }
 
+
+async function updateCourierLocation(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  if (!id) throw new Error('unauthorized')
+  const c = await env.DB.prepare('SELECT id FROM couriers WHERE user_id=? LIMIT 1').bind(id.id).first<{ id: number }>()
+  if (!c) throw new Error('bukan kurir')
+  const lat = num(a.p_lat), lng = num(a.p_lng)
+  if (!lat || !lng) throw new Error('lat/lng wajib')
+  const at = now()
+  await env.DB.prepare('UPDATE couriers SET latitude=?, longitude=?, last_seen_at=? WHERE id=?').bind(lat, lng, at, c.id).run()
+  return { courier_id: c.id, latitude: lat, longitude: lng, last_seen_at: at }
+}
+async function courierLocation(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
+  if (!id) throw new Error('unauthorized')
+  const o = await env.DB.prepare('SELECT courier_id, customer_id, merchant_id FROM orders WHERE id=?').bind(num(a.p_order_id)).first<Record<string, number>>()
+  if (!o?.courier_id) return null
+  // peserta: ops, customer pemilik, merchant pemilik, atau kurir terkait
+  let allowed = isOpsId(id)
+  if (!allowed) {
+    const cust = await env.DB.prepare('SELECT user_id FROM customers WHERE id=?').bind(o.customer_id).first<{ user_id: number }>()
+    const mer = await env.DB.prepare('SELECT user_id FROM merchants WHERE id=?').bind(o.merchant_id).first<{ user_id: number }>()
+    const cou = await env.DB.prepare('SELECT user_id FROM couriers WHERE id=?').bind(o.courier_id).first<{ user_id: number }>()
+    allowed = [cust?.user_id, mer?.user_id, cou?.user_id].includes(id.id)
+  }
+  if (!allowed) throw new Error('forbidden')
+  const c = await env.DB.prepare('SELECT id,name,latitude,longitude,last_seen_at FROM couriers WHERE id=?').bind(o.courier_id).first<{ id: number; name: string; latitude: number | null; longitude: number | null; last_seen_at: string | null }>()
+  if (!c) return null
+  const ageMs = c.last_seen_at ? Date.now() - new Date(c.last_seen_at).getTime() : Infinity
+  return { ...c, age_ms: ageMs, stale: ageMs > 120000 }
+}
+
 const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise<unknown>> = {
   fx_rate_latest: (e) => q(e).fx().then((r) => r?.rate ?? null),
   price_order: priceOrder, compute_discounts: computeDiscounts, check_coverage: checkCoverage,
@@ -349,6 +379,7 @@ const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise
   submit_review: submitReview, reply_review: replyReview, open_dispute: openDispute, resolve_dispute: resolveDispute, appeal_dispute: appealDispute,
   snapshot_dispute_rules: snapshotDisputeRules, emit_notification: emitNotification,
   my_order_otp: myOrderOtp, verify_order_otp: verifyOrderOtp, courier_orders: courierOrders, ops_set_platform_params: opsSetParams,
+  update_courier_location: updateCourierLocation, courier_location: courierLocation,
   request_magic_link: requestMagicLink, consume_magic_link: consumeMagicLink,
   expire_unpaid_orders: expireUnpaidOrders, quota_low_alerts: quotaLowAlerts,
   run_cron_jobs: async (e) => ({ expired_orders: await expireUnpaidOrders(e), stale_chats: await closeStaleChats(e), quota_alerts: await quotaLowAlerts(e) }),

@@ -103,6 +103,7 @@ const HERO_TAGS = [
   'Supabase RPC',
   'Cloudflare Worker',
   'Menu Sync',
+  'Live Location',
   'Supabase Storage',
   'Leaflet',
   'Zod',
