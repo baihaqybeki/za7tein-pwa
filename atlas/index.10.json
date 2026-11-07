@@ -5517,6 +5517,44 @@
         }
       ],
       "loc": "/Users/muhammadbaihaqy/Downloads/za7tein-pwa/docs/backend/LIVE-LOCATION.md"
+    },
+    {
+      "id": "TASK-10450",
+      "type": "task",
+      "status": "done",
+      "date": "2026-11-07",
+      "time": "20:31:46",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\npython3 - <<'PY'\np='src/components/OrderStageScreen.tsx'\ns=open(p).read()\ns=s.replac",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
+    },
+    {
+      "id": "TASK-10451",
+      "type": "task",
+      "status": "done",
+      "date": "2026-11-07",
+      "time": "20:34:09",
+      "tags": [
+        "auto",
+        "verify"
+      ],
+      "summary": "verify: cd /Users/muhammadbaihaqy/Downloads/za7tein-pwa\ncat > src/hooks/useOrderJourney.ts <<'TS'\nimport { useEffect, useState } from 'react",
+      "conn": [
+        {
+          "id": "FEAT-001",
+          "type": "relates",
+          "raw": "FEAT-001:relates"
+        }
+      ]
     }
   ]
 }

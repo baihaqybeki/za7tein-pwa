@@ -27,6 +27,8 @@ import {
 import { useAppDispatch, useAppSelector } from '../hooks/useAppStore'
 import { useLeafletMap } from '../hooks/useLeafletMap'
 import { useTick } from '../hooks/useTick'
+import { useOrderJourney } from '../hooks/useOrderJourney'
+import { OrderJourneyPanel } from './OrderJourneyPanel'
 import {
   advanceDelivery,
   cancelOrder,
@@ -115,6 +117,8 @@ export default function OrderStageScreen({ stage: fixedStage }: Props) {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [params] = useSearchParams()
+  const orderParam = params.get('order')
+  const journey = useOrderJourney(orderParam)
   const rawStage = useAppSelector((s) => s.cart.orderStage)
   const addresses = useAppSelector((s) => s.cart.addresses)
   const selectedAddressId = useAppSelector((s) => s.cart.selectedAddressId)
@@ -158,9 +162,15 @@ export default function OrderStageScreen({ stage: fixedStage }: Props) {
     !!v && ORDER_STAGES.some((s) => s.id === v)
 
   const override = params.get('stage')
-  const stage: OrderStage = sah(override)
-    ? override
-    : fixedStage ?? (sah(rawStage) ? rawStage : 'dimasak')
+  const mockStage: OrderStage = sah(override) ? override : fixedStage ?? (sah(rawStage) ? rawStage : 'dimasak')
+  const stageFromServer = (status: string): OrderStage => {
+    const st = status.toLowerCase()
+    if (st === 'waitingcourier') return 'diterima'
+    if (st === 'delivery') return 'diantar'
+    if (st === 'done') return 'tiba'
+    return 'dimasak'
+  }
+  const stage: OrderStage = journey ? stageFromServer(journey.order.status) : mockStage
 
   // Pengantaran satu-satunya tahap di mana peta memang layak dominan.
   const isDelivery = stage === 'diantar'
@@ -268,11 +278,13 @@ export default function OrderStageScreen({ stage: fixedStage }: Props) {
             </button>
             <div className="track-header-text">
               <h1 className="track-title">Pesanan</h1>
-              <span className="track-ref">#{mockOrder.code}</span>
+              <span className="track-ref">#{journey?.order.code ?? mockOrder.code}</span>
             </div>
           </header>
 
           {isDelivery ? mapBlock : null}
+
+          {journey ? <OrderJourneyPanel journey={journey} /> : null}
 
           <section className="track-status" aria-live="polite">
             <p className="track-status-label">{copy.label}</p>

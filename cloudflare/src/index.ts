@@ -33,7 +33,7 @@ const WRITE_RPCS = new Set([
   'open_dispute', 'resolve_dispute', 'appeal_dispute', 'snapshot_dispute_rules', 'emit_notification',
   'my_order_otp', 'verify_order_otp', 'update_courier_location', 'pay_order', 'accept_order', 'reject_order', 'pickup_order', 'arrive_order',
 ])
-const AUTH_RPCS = new Set(['courier_location', 'order_journey'])
+const AUTH_RPCS = new Set(['courier_location'])
 const OPS_RPCS = new Set(['issue_sp', 'ops_set_platform_params'])
 const READ_RPCS = new Set(['fx_rate_latest', 'price_order', 'compute_discounts', 'check_coverage', 'browse_merchants', 'search_merchants'])
 

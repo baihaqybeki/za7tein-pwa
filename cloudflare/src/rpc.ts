@@ -516,7 +516,7 @@ async function orderJourney(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   const o = await env.DB.prepare('SELECT * FROM orders WHERE id=?').bind(orderId).first<Record<string, unknown>>()
   if (!o) throw new Error('order tidak ada')
   const p = await party(env, orderId)
-  let allowed = isOpsId(id)
+  let allowed = !id || isOpsId(id) // demo: tanpa sesi Worker tetap boleh baca; bila ada sesi, cek peserta
   if (!allowed && id) allowed = [p?.cu, p?.mu, p?.coid].includes(id.id)
   if (!allowed) throw new Error('forbidden')
   const items = (await env.DB.prepare('SELECT * FROM order_items WHERE order_id=? ORDER BY id').bind(orderId).all()).results ?? []
@@ -526,7 +526,9 @@ async function orderJourney(env: RpcEnv, a: Args, id?: RpcIdentity | null) {
   const payments = (await env.DB.prepare('SELECT * FROM payments WHERE order_id=? ORDER BY id').bind(orderId).all()).results ?? []
   const courier = o.courier_id ? await env.DB.prepare('SELECT id,name,latitude,longitude,last_seen_at FROM couriers WHERE id=?').bind(o.courier_id).first() : null
   const chat = await env.DB.prepare('SELECT * FROM chats WHERE order_id=? ORDER BY id LIMIT 1').bind(orderId).first()
-  return { order: o, items, history, checkpoints, notifications, payments, courier, chat }
+  const { otp: _legacyOtp, ...orderSafe } = o as Record<string, unknown>
+  void _legacyOtp
+  return { order: orderSafe, items, history, checkpoints, notifications, payments, courier, chat }
 }
 
 const R: Record<string, (e: RpcEnv, a: Args, id?: RpcIdentity | null) => Promise<unknown>> = {

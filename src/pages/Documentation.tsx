@@ -104,6 +104,7 @@ const HERO_TAGS = [
   'Cloudflare Worker',
   'Menu Sync',
   'Live Location',
+  'Order Journey',
   'Supabase Storage',
   'Leaflet',
   'Zod',
